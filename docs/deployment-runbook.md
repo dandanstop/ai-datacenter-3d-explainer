@@ -101,11 +101,13 @@ After deployment, verify:
 
 ## 5. Production URL Follow-Up
 
-Current SEO files use this production URL:
+Current SEO files use this production URL for the AI data center explainer:
 
 ```text
-https://dandanstop.me/
+https://dandanstop.me/datacenter-3d
 ```
+
+The root domain `https://dandanstop.me/` is reserved for the future DanDanStop main site and should not redirect to this explainer.
 
 If the production domain changes, update:
 
@@ -113,7 +115,7 @@ If the production domain changes, update:
 - `sitemap.xml`
 - Any future production documentation references
 
-`index.html` normalizes canonical, `og:url`, `og:image`, `twitter:image`, and JSON-LD URL fields at runtime based on the current origin.
+`vercel.json` rewrites `/datacenter-3d` to `/index.html`. `index.html` normalizes canonical, `og:url`, `og:image`, `twitter:image`, and JSON-LD URL fields at runtime based on the production explainer path.
 
 ## 6. Future Versioning
 

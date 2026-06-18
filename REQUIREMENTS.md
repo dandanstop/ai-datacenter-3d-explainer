@@ -312,6 +312,9 @@ Current static SEO/GEO text layer:
 Remaining SEO/GEO recommendations:
 
 - Production domain: `https://dandanstop.me/`.
+- Production canonical path for this explainer: `https://dandanstop.me/datacenter-3d`.
+- Root domain `/` is reserved for the future DanDanStop main site and should not redirect to this explainer.
+- Vercel rewrites `/datacenter-3d` to the current static `index.html`; static assets continue to load from root paths such as `/app.js`, `/styles.css`, `/audio/...`, and `/vendor/...`.
 - If production multilingual SEO becomes important, move from one JavaScript-switched URL to language-specific URLs with canonical and hreflang.
 - Consider a visible below-the-fold editorial reading section if the page evolves from an immersive demo into a content hub.
 
@@ -448,7 +451,8 @@ These should be decided before a production launch:
 ### Phase 3: Production SEO
 
 - Add production canonical URL.
-- Confirm production URL in `robots.txt` and `sitemap.xml` remains `https://dandanstop.me/`.
+- Confirm production URL in `sitemap.xml` remains `https://dandanstop.me/datacenter-3d`.
+- Confirm `robots.txt` points to `https://dandanstop.me/sitemap.xml`.
 - Replace `og-image.png` with a designed social image if needed.
 - Add hreflang if using separate language URLs.
 - Validate with Google Rich Results Test and PageSpeed Insights.

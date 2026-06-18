@@ -22,7 +22,9 @@ Current strengths:
 
 Current risks and remaining work:
 
-- `robots.txt` and `sitemap.xml` use `https://dandanstop.me/` as the production URL.
+- `robots.txt` points to `https://dandanstop.me/sitemap.xml`.
+- `sitemap.xml` lists `https://dandanstop.me/datacenter-3d` as the production URL for this explainer.
+- The root domain `https://dandanstop.me/` is reserved for the future main site and should not redirect to this explainer.
 - `og-image.png` is generated from the current page. It can be replaced with a custom designed 1200x630 social image later.
 - Multilingual UX currently uses one JavaScript-switched URL. This is good for the current interactive demo but not ideal for multilingual SEO. A production multilingual version should use language-specific URLs such as `/en/`, `/zh/`, `/ko/`, and `/ja/` with self-canonical and reciprocal hreflang.
 - The 3D experience relies on JavaScript and canvas, so important explanatory text should also exist as real HTML.
@@ -233,7 +235,7 @@ Use these checks after About or SEO changes:
 
 Recommended next implementation items:
 
-1. Confirm `robots.txt` / `sitemap.xml` still point to `https://dandanstop.me/`.
+1. Confirm `robots.txt` points to `https://dandanstop.me/sitemap.xml` and `sitemap.xml` lists `https://dandanstop.me/datacenter-3d`.
 2. Replace `og-image.png` with a custom designed 1200x630 image if needed.
 3. Decide whether static SEO/GEO text should become a visible below-the-fold reading section.
 4. If production multilingual SEO is required, implement language-specific URLs plus canonical and hreflang.

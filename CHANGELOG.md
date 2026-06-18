@@ -11,6 +11,8 @@ All notable changes to this project are documented here.
 - Updated Contact mail link to `mailto:hello@dandanstop.me`.
 - Updated SEO author/creator metadata and sitemap modified date.
 - Updated production SEO references to `https://dandanstop.me/`.
+- Moved the explainer canonical URL to `https://dandanstop.me/datacenter-3d` while reserving the root domain for the future main site.
+- Added a Vercel rewrite from `/datacenter-3d` to the current static `index.html`.
 
 ## [1.0.0] - 2026-06-17
 
@@ -49,4 +51,4 @@ All notable changes to this project are documented here.
 ### Deployment Notes
 
 - Static site intended for Vercel deployment.
-- Production URL: `https://dandanstop.me/`.
+- Production URL: `https://dandanstop.me/datacenter-3d`.

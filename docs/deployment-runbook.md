@@ -115,7 +115,7 @@ If the production domain changes, update:
 - `sitemap.xml`
 - Any future production documentation references
 
-`vercel.json` rewrites `/datacenter-3d` to `/index.html`. `index.html` normalizes canonical, `og:url`, `og:image`, `twitter:image`, and JSON-LD URL fields at runtime based on the production explainer path.
+`vercel.json` rewrites `/datacenter-3d` to the static app root. `index.html` normalizes canonical, `og:url`, `og:image`, `twitter:image`, and JSON-LD URL fields at runtime based on the production explainer path.
 
 ## 6. Future Versioning
 

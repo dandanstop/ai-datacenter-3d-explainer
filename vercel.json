@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/datacenter-3d",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ]
 }

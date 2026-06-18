@@ -1284,6 +1284,20 @@ body.is-file-protocol .file-warning {
     grid-template-columns: 1fr;
   }
 
+  .stage {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  #sceneCanvas {
+    flex: 0 0 min(58dvh, 520px);
+    height: min(58dvh, 520px);
+    min-height: 360px;
+  }
+
   .scene-label {
     display: none;
   }
@@ -1295,16 +1309,15 @@ body.is-file-protocol .file-warning {
   }
 
   .hud.bottom-left {
-    right: 12px;
-    bottom: 12px;
-    left: 12px;
+    position: static;
+    margin: 10px 12px 0;
   }
 
   .audio-dock {
-    right: 12px;
-    bottom: 78px;
-    left: 12px;
+    position: static;
+    margin: 10px 12px 0;
     grid-template-columns: auto minmax(0, 1fr);
+    max-width: none;
   }
 
   .transcript-toggle {
@@ -1312,10 +1325,10 @@ body.is-file-protocol .file-warning {
   }
 
   .transcript-panel {
-    right: 12px;
-    bottom: 166px;
-    left: 12px;
+    position: static;
+    margin: 10px 12px 0;
     width: auto;
+    max-height: 38dvh;
   }
 
   .analysis-drawer,

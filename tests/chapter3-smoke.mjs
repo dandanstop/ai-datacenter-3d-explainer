@@ -3,6 +3,8 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { chromium } = require("playwright");
 
+const url = process.env.APP_URL || "http://127.0.0.1:8123/";
+
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -16,7 +18,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 960 } });
 const pageErrors = [];
 page.on("pageerror", (error) => pageErrors.push(String(error.message || error)));
 
-await page.goto("http://127.0.0.1:8123/", { waitUntil: "load", timeout: 15000 });
+await page.goto(url, { waitUntil: "load", timeout: 15000 });
 await page.waitForTimeout(1000);
 await page.click('[data-chapter="chapter3"]');
 await page.waitForTimeout(900);
@@ -50,9 +52,7 @@ await page.waitForTimeout(600);
 const insightState = await page.evaluate(() => ({
   activeMode: document.querySelector(".mode-button.is-active")?.dataset.mode || "",
   rightHidden: document.querySelector("#rightPanel")?.getAttribute("aria-hidden") === "true",
-  supplierHeading: document.querySelector("#supplierHeading")?.textContent?.trim() || "",
   riskHeading: document.querySelector("#riskHeading")?.textContent?.trim() || "",
-  supplierText: document.querySelector("#supplierList")?.textContent || "",
   labels: [...document.querySelectorAll(".scene-label")]
     .filter((el) => getComputedStyle(el).display !== "none" && getComputedStyle(el).opacity !== "0")
     .map((el) => el.textContent.trim())
@@ -60,11 +60,23 @@ const insightState = await page.evaluate(() => ({
 
 assert(insightState.activeMode === "infrastructure", "Infrastructure mode should become active.");
 assert(!insightState.rightHidden, "Insight panel should reveal after selecting a Chapter 3 mode.");
-assert(/Value-chain|價值鏈|밸류체인|バリューチェーン/i.test(insightState.supplierHeading), "Value-chain role heading should render.");
 assert(/Key finding|關鍵|핵심|重要/.test(insightState.riskHeading), "Key finding heading should render.");
-assert(/Intel|AMD|NVDA|Microsoft|MSFT|Snowflake|Datadog/.test(insightState.supplierText), "Company and ticker examples should render.");
 assert(insightState.labels.some((label) => /Laptop|Command Window|Agent|Workflow|Task Running|工作流|任務執行中/.test(label)), "Chapter 3 scene labels should render.");
 
+await page.click("#analysisOpen");
+await page.waitForTimeout(300);
+const analysisState = await page.evaluate(() => ({
+  hidden: document.querySelector("#analysisDrawer")?.hidden || false,
+  supplierHeading: document.querySelector("#analysisSupplierHeading")?.textContent?.trim() || "",
+  supplierText: document.querySelector("#analysisSupplierList")?.textContent || ""
+}));
+
+assert(!analysisState.hidden, "Full analysis drawer should open.");
+assert(/Value-chain|價值鏈|가치사슬|バリューチェーン/i.test(analysisState.supplierHeading), "Value-chain role heading should render in full analysis.");
+assert(/Intel|AMD|NVDA|Microsoft|MSFT|Snowflake|Datadog/.test(analysisState.supplierText), "Company and ticker examples should render in full analysis.");
+
+await page.click("#analysisClose");
+await page.waitForTimeout(250);
 await page.click("#languageMenuButton");
 await page.click('[data-lang="zh"]');
 await page.waitForTimeout(300);

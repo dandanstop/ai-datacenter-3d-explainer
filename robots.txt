@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ai-datacenter-3d.vercel.app/sitemap.xml
+Sitemap: https://dandanstop.me/sitemap.xml

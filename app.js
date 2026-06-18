@@ -164,10 +164,10 @@ const uiText = {
     closeAnalysis: "關閉",
     aboutLink: "關於作者",
     aboutEyebrow: "關於",
-    aboutTitle: "策展與製作：\nDaniel Chen",
-    aboutDescription: "這個互動式 3D 解說專案，描繪 AI 資料中心基礎設施如何從 GPU 需求，演變成橫跨電力、冷卻、算力設備、網路、營運平台、workload 與 Agentic AI 工作流的系統性重組。",
-    aboutBuilder: "我是一位 product builder 與 growth marketer，喜歡把好的想法轉化成讓人真正喜愛的產品。",
-    aboutFocus: "我的關注很單純：把複雜技術轉化成清楚、有吸引力的客戶價值。從產品 0→1，到跨區域、跨市場的成長擴張。",
+    aboutTitle: "策展與製作：\nDanDanStop",
+    aboutDescription: "嗨，DanDanStop 這個名字，其實是我給自己的內部警示：「DanDan，別再因為研究新科技而熬整晚了！」",
+    aboutBuilder: "這裡是我的個人科技實驗室，也是靈感基地。我用「快速行動、持續迭代」的敏捷心態，親自測試最新 AI 工具與 MarTech 實驗。",
+    aboutFocus: "我會把這些第一手觀察整理給你，讓新科技變得更容易理解，也更能啟發下一步行動。",
     aboutAudience: "很樂意交流想法、討論創新，或探索新的合作機會，歡迎聯繫。😎",
     aboutUpdated: "最後更新：2026 年 6 月",
     aboutContact: "Contact"
@@ -199,10 +199,10 @@ const uiText = {
     closeAnalysis: "Close",
     aboutLink: "About",
     aboutEyebrow: "About",
-    aboutTitle: "Curated by\nDaniel Chen",
-    aboutDescription: "This interactive 3D explainer maps how AI data center infrastructure is evolving from GPU demand into a broader system-level transformation across power, cooling, compute equipment, networking, operations platforms, workloads, and agentic AI workflows.",
-    aboutBuilder: "I’m a product builder and growth marketer who enjoys transforming great ideas into products people love.",
-    aboutFocus: "My focus is simple: turn complex technology into clear, compelling customer value. From taking products from 0→1 to scaling them across regions and markets.",
+    aboutTitle: "Curated by\nDanDanStop",
+    aboutDescription: "Hi, the name DanDanStop is actually an internal warning to myself: \"DanDan, stop me from pulling another all-nighter geeking out over new tech!\"",
+    aboutBuilder: "This is my personal tech lab and hub for inspiration, driven by a \"move fast and iterate\" agile mindset.",
+    aboutFocus: "I’m always hands-on, testing the latest AI tools and MarTech experiments just for you.",
     aboutAudience: "Always happy to exchange ideas, discuss innovation, or explore new opportunities—feel free to get in touch. 😎",
     aboutUpdated: "Last updated: June 2026",
     aboutContact: "Contact"
@@ -234,10 +234,10 @@ const uiText = {
     closeAnalysis: "닫기",
     aboutLink: "소개",
     aboutEyebrow: "소개",
-    aboutTitle: "기획 및 제작:\nDaniel Chen",
-    aboutDescription: "이 인터랙티브 3D 해설은 AI 데이터센터 인프라가 GPU 수요에서 출발해 전력, 냉각, 컴퓨팅 장비, 네트워크, 운영 플랫폼, 워크로드, Agentic AI 워크플로를 아우르는 더 큰 시스템 차원의 전환으로 진화하는 과정을 보여줍니다.",
-    aboutBuilder: "저는 좋은 아이디어를 사람들이 사랑하는 제품으로 바꾸는 일을 즐기는 product builder이자 growth marketer입니다.",
-    aboutFocus: "제가 집중하는 일은 단순합니다. 복잡한 기술을 명확하고 설득력 있는 고객 가치로 바꾸는 것. 제품을 0→1로 만들고, 여러 지역과 시장으로 확장하는 일까지 포함합니다.",
+    aboutTitle: "기획 및 제작:\nDanDanStop",
+    aboutDescription: "안녕하세요. DanDanStop이라는 이름은 사실 저 자신에게 보내는 내부 경고입니다. \"DanDan, 새 기술에 빠져 또 밤새우는 건 이제 그만!\"",
+    aboutBuilder: "이곳은 제 개인 테크 랩이자 영감의 허브입니다. \"빠르게 움직이고 계속 반복한다\"는 애자일 마인드로 최신 AI 도구와 MarTech 실험을 직접 테스트합니다.",
+    aboutFocus: "그 과정에서 얻은 첫 손의 관찰을 여러분에게 전해, 새로운 기술을 더 쉽게 이해하고 다음 행동으로 이어갈 수 있게 합니다.",
     aboutAudience: "아이디어를 나누고, 혁신을 논의하거나, 새로운 기회를 함께 탐색하는 대화를 언제나 환영합니다. 편하게 연락 주세요. 😎",
     aboutUpdated: "마지막 업데이트: 2026년 6월",
     aboutContact: "Contact"
@@ -269,10 +269,10 @@ const uiText = {
     closeAnalysis: "閉じる",
     aboutLink: "このサイトについて",
     aboutEyebrow: "概要",
-    aboutTitle: "企画・制作：\nDaniel Chen",
-    aboutDescription: "このインタラクティブな 3D 解説は、AI データセンターインフラが GPU 需要から、電力、冷却、計算設備、ネットワーク、運用基盤、ワークロード、Agentic AI ワークフローを含む、より大きなシステム変革へ進化している様子を示します。",
-    aboutBuilder: "私は、優れたアイデアを人々に愛されるプロダクトへ変えることを楽しむ product builder であり growth marketer です。",
-    aboutFocus: "私の関心はシンプルです。複雑なテクノロジーを、明確で魅力的な顧客価値へ変えること。プロダクトを 0→1 で立ち上げ、地域や市場をまたいで拡大することまで含みます。",
+    aboutTitle: "企画・制作：\nDanDanStop",
+    aboutDescription: "こんにちは。DanDanStop という名前は、実は自分への内なる警告です。「DanDan、新しいテクノロジーに夢中になって、また徹夜するのはそろそろやめよう！」",
+    aboutBuilder: "ここは私の個人的なテックラボであり、インスピレーションのハブです。「素早く動き、改善を重ねる」アジャイルな姿勢で、最新の AI ツールや MarTech の実験を実際に手を動かして試しています。",
+    aboutFocus: "その一次体験から得た気づきを共有し、新しいテクノロジーをより理解しやすく、次の行動につながるものにしていきます。",
     aboutAudience: "アイデア交換、イノベーションについての議論、新しい機会の探索をいつでも歓迎しています。お気軽にご連絡ください。😎",
     aboutUpdated: "最終更新：2026年6月",
     aboutContact: "Contact"
@@ -2466,7 +2466,7 @@ function updateStaticText() {
   aboutAudience.textContent = t("aboutAudience");
   aboutUpdated.textContent = t("aboutUpdated");
   aboutContact.textContent = t("aboutContact");
-  aboutContact.href = "mailto:diren.chen@gmail.com";
+  aboutContact.href = "mailto:hello@dandanstop.me";
   aboutClose.textContent = t("closeAnalysis");
   aboutClose.setAttribute("aria-label", t("closeAnalysis"));
   document.querySelectorAll(".language-button").forEach((button) => {

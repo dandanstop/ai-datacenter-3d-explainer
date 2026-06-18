@@ -1,7 +1,7 @@
 # AI Data Center Value Chain 3D Explainer Requirements
 
 Status: current implementation baseline  
-Last updated: 2026-06-17  
+Last updated: 2026-06-19  
 Local preview URL: http://127.0.0.1:8124/  
 Primary files: `index.html`, `styles.css`, `app.js`, `vendor/`
 
@@ -119,12 +119,12 @@ Current About requirements:
   - Korean: `소개`
   - Japanese: `このサイトについて`
 - Drawer title renders as two lines:
-  - English: `Curated by` / `Daniel Chen`
-  - Traditional Chinese: `策展與製作：` / `Daniel Chen`
-  - Korean: `기획 및 제작:` / `Daniel Chen`
-  - Japanese: `企画・制作：` / `Daniel Chen`
+  - English: `Curated by` / `DanDanStop`
+  - Traditional Chinese: `策展與製作：` / `DanDanStop`
+  - Korean: `기획 및 제작:` / `DanDanStop`
+  - Japanese: `企画・制作：` / `DanDanStop`
 - Contact link text: `Contact`
-- Contact link target: `mailto:diren.chen@gmail.com`
+- Contact link target: `mailto:hello@dandanstop.me`
 - About text is localized in English, Traditional Chinese, Korean, and Japanese.
 - Author metadata is represented in JSON-LD through `author`, `creator`, and `dateModified`.
 
@@ -280,9 +280,9 @@ Current JSON-LD:
 - Type: `WebPage` and `LearningResource`.
 - Topic: AI data center value chain.
 - Audience: investors, analysts, semiconductor professionals, AI infrastructure teams.
-- `author`: Daniel Chen.
-- `creator`: Daniel Chen.
-- `dateModified`: 2026-06-17.
+- `author`: DanDanStop.
+- `creator`: DanDanStop.
+- `dateModified`: 2026-06-19.
 - `hasPart`: nine items:
   - Chapter 1 learning resource.
   - Chapter 2 learning resource.
@@ -311,7 +311,7 @@ Current static SEO/GEO text layer:
 
 Remaining SEO/GEO recommendations:
 
-- Confirm the final production domain after Vercel deployment and update `robots.txt` / `sitemap.xml` if the generated URL differs from `https://ai-datacenter-3d.vercel.app/`.
+- Production domain: `https://dandanstop.me/`.
 - If production multilingual SEO becomes important, move from one JavaScript-switched URL to language-specific URLs with canonical and hreflang.
 - Consider a visible below-the-fold editorial reading section if the page evolves from an immersive demo into a content hub.
 
@@ -406,7 +406,7 @@ The current baseline should pass the following checks:
 - Six layer cards are visible in the left panel.
 - About link opens and closes the About drawer.
 - About title renders as two lines.
-- Contact link points to `mailto:diren.chen@gmail.com`.
+- Contact link points to `mailto:hello@dandanstop.me`.
 - Language switching updates H1, intro, layer labels, insight text, and document title.
 - Desktop left panel has no visible scrollbar and fits at 1280x720.
 - Network Interconnect metric cards do not overflow.
@@ -448,7 +448,7 @@ These should be decided before a production launch:
 ### Phase 3: Production SEO
 
 - Add production canonical URL.
-- Confirm or update production URL in `robots.txt` and `sitemap.xml`.
+- Confirm production URL in `robots.txt` and `sitemap.xml` remains `https://dandanstop.me/`.
 - Replace `og-image.png` with a designed social image if needed.
 - Add hreflang if using separate language URLs.
 - Validate with Google Rich Results Test and PageSpeed Insights.

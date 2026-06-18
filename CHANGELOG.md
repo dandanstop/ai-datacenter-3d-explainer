@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here.
 
+## [Unreleased] - 2026-06-19
+
+### Changed
+
+- Updated About identity from `Daniel Chen` to `DanDanStop`.
+- Rewrote About copy as a personal tech lab introduction across English, Traditional Chinese, Korean, and Japanese.
+- Updated Contact mail link to `mailto:hello@dandanstop.me`.
+- Updated SEO author/creator metadata and sitemap modified date.
+- Updated production SEO references to `https://dandanstop.me/`.
+
 ## [1.0.0] - 2026-06-17
 
 ### Added
@@ -26,8 +36,8 @@ All notable changes to this project are documented here.
 - Default local preview port standardized to `8124`.
 - Direct `file://` opens redirect to `http://127.0.0.1:8124/`.
 - Desktop left-panel card spacing improved for Chapter 1, Chapter 2, and Chapter 3.
-- About title now renders as two lines with `Daniel Chen` on the second line.
-- Contact link changed to `mailto:diren.chen@gmail.com`.
+- About title now renders as two lines with `DanDanStop` on the second line.
+- Contact link changed to `mailto:hello@dandanstop.me`.
 
 ### Fixed
 
@@ -39,5 +49,4 @@ All notable changes to this project are documented here.
 ### Deployment Notes
 
 - Static site intended for Vercel deployment.
-- Recommended production URL placeholder: `https://ai-datacenter-3d.vercel.app/`.
-- If Vercel assigns a different production URL, update `robots.txt`, `sitemap.xml`, and any production SEO references.
+- Production URL: `https://dandanstop.me/`.

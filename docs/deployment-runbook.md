@@ -92,7 +92,7 @@ After deployment, verify:
 - Chapter 1, Chapter 2, and Chapter 3 switch correctly.
 - Language menu works.
 - Audio files load.
-- About drawer opens and Contact points to `mailto:diren.chen@gmail.com`.
+- About drawer opens and Contact points to `mailto:hello@dandanstop.me`.
 - `/robots.txt` returns 200.
 - `/sitemap.xml` returns 200.
 - `/og-image.png` returns 200.
@@ -101,13 +101,13 @@ After deployment, verify:
 
 ## 5. Production URL Follow-Up
 
-Current SEO files assume this production URL:
+Current SEO files use this production URL:
 
 ```text
-https://ai-datacenter-3d.vercel.app/
+https://dandanstop.me/
 ```
 
-If Vercel gives a different production URL, update:
+If the production domain changes, update:
 
 - `robots.txt`
 - `sitemap.xml`

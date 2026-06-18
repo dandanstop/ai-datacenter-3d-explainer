@@ -18,6 +18,7 @@ Current strengths:
 - Open Graph and Twitter Card metadata exist.
 - `robots` meta is set to `index, follow`.
 - JSON-LD is present and parseable.
+- GA4 tracking is installed with project-level event parameters.
 - The page renders successfully over the local HTTP server.
 
 Current risks and remaining work:
@@ -28,6 +29,26 @@ Current risks and remaining work:
 - `og-image.png` is generated from the current page. It can be replaced with a custom designed 1200x630 social image later.
 - Multilingual UX currently uses one JavaScript-switched URL. This is good for the current interactive demo but not ideal for multilingual SEO. A production multilingual version should use language-specific URLs such as `/en/`, `/zh/`, `/ko/`, and `/ja/` with self-canonical and reciprocal hreflang.
 - The 3D experience relies on JavaScript and canvas, so important explanatory text should also exist as real HTML.
+
+## Analytics Notes
+
+GA4 Measurement ID:
+
+```text
+G-2CJ15FLWPY
+```
+
+Project-level event parameters:
+
+```text
+project_slug = datacenter-3d
+project_name = AI Data Center 3D Explainer
+page_path = /datacenter-3d
+```
+
+Tracked custom events include `project_view`, `chapter_select`, `layer_select`, `mode_select`, `model_select`, `language_select`, `audio_play`, `transcript_open`, `analysis_open`, `about_open`, and `contact_click`.
+
+Recommended GA4 custom dimensions: `project_slug`, `project_name`, `chapter_id`, `language`, `segment_id`, and `interaction_source`.
 
 ## Implemented SEO/GEO Updates
 

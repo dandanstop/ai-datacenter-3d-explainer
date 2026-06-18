@@ -274,6 +274,40 @@ Current implemented SEO foundation:
 - About author and contact metadata
 - `robots.txt`
 - `sitemap.xml`
+- Google Analytics 4 tracking tag and project-level events
+
+## 10.1 Analytics Requirements
+
+GA4 is installed through Measurement ID `G-2CJ15FLWPY`. The implementation uses one site-level GA4 property and separates projects through event parameters.
+
+Current project analytics identity:
+
+- `project_slug`: `datacenter-3d`
+- `project_name`: `AI Data Center 3D Explainer`
+- `page_path`: `/datacenter-3d`
+
+Tracked events:
+
+- `project_view`: initial project exposure.
+- `chapter_select`: user changes Chapter 1, Chapter 2, or Chapter 3.
+- `layer_select`: user selects a Chapter 1 value-chain layer from the menu or 3D model.
+- `mode_select`: user selects a Chapter 2 or Chapter 3 mode from the menu.
+- `model_select`: user clicks a Chapter 2 or Chapter 3 3D model node.
+- `language_select`: user changes language.
+- `audio_play`: user starts audio from the player or by clicking a 3D model node that triggers audio.
+- `transcript_open`: user opens the transcript panel.
+- `analysis_open`: user opens the full analysis drawer.
+- `about_open`: user opens the About drawer.
+- `contact_click`: user clicks the Contact mail link.
+
+Recommended GA4 custom dimensions:
+
+- `project_slug`
+- `project_name`
+- `chapter_id`
+- `language`
+- `segment_id`
+- `interaction_source`
 
 Current JSON-LD:
 

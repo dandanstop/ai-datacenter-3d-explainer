@@ -957,6 +957,35 @@ const staticTextEls = {
   riskHeading: document.querySelector("#riskHeading")
 };
 
+const analyticsProject = Object.freeze({
+  project_slug: "datacenter-3d",
+  project_name: "AI Data Center 3D Explainer"
+});
+
+function activeSegmentForTracking() {
+  if (activeChapter === "chapter1") return selectedId;
+  if (activeChapter === "chapter3") return activeChapter3SegmentId;
+  return activeSegmentId;
+}
+
+function trackEvent(eventName, params = {}) {
+  if (typeof window.gtag !== "function") return;
+  window.gtag("event", eventName, {
+    ...analyticsProject,
+    chapter_id: activeChapter,
+    language: activeLang,
+    page_path: "/datacenter-3d",
+    ...params
+  });
+}
+
+function trackAudioPlay() {
+  trackEvent("audio_play", {
+    segment_id: activeSegmentForTracking(),
+    audio_type: activeAudioSource() ? "file" : "speech_synthesis"
+  });
+}
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x080b0f);
 scene.fog = new THREE.Fog(0x080b0f, 18, 48);
@@ -2507,6 +2536,12 @@ function hydrateUi() {
       button.addEventListener("click", () => {
         revealInsights();
         selectChapter3Mode(mode.id, true);
+        trackEvent("mode_select", {
+          chapter_id: "chapter3",
+          mode_id: mode.id,
+          mode_name: mode.name,
+          interaction_source: "menu"
+        });
       });
       modeList.appendChild(button);
     });
@@ -2542,6 +2577,12 @@ function hydrateUi() {
       button.addEventListener("click", () => {
         revealInsights();
         selectChapter2Mode(mode.id, true);
+        trackEvent("mode_select", {
+          chapter_id: "chapter2",
+          mode_id: mode.id,
+          mode_name: mode.name,
+          interaction_source: "menu"
+        });
       });
       modeList.appendChild(button);
     });
@@ -2587,6 +2628,12 @@ function hydrateUi() {
     button.addEventListener("click", () => {
       revealInsights();
       selectLayer(layer.id);
+      trackEvent("layer_select", {
+        chapter_id: "chapter1",
+        layer_id: layer.id,
+        layer_name: localizedLayer(layer).name,
+        interaction_source: "menu"
+      });
     });
     layerList.appendChild(button);
 
@@ -2734,6 +2781,7 @@ function focusChapter3Node(nodeId) {
   revealInsights();
   updateChapter3Insight();
   playAudioBriefing();
+  trackAudioPlay();
   const group = chapter3GroupByNode.get(nodeId);
   if (group) controls.target.lerp(new THREE.Vector3(group.position.x, group.position.y + 0.35, group.position.z), 0.58);
 }
@@ -2761,6 +2809,7 @@ function focusChapter2Node(nodeId) {
   revealInsights();
   updateChapter2Insight();
   playAudioBriefing();
+  trackAudioPlay();
   const group = chapter2GroupByNode.get(nodeId);
   if (group) controls.target.lerp(new THREE.Vector3(group.position.x, group.position.y + 0.45, group.position.z), 0.58);
 }
@@ -2961,16 +3010,40 @@ function pointerDown(event) {
   });
   if (activeChapter === "chapter3") {
     const nodeId = hit?.object?.userData.nodeId;
-    if (nodeId) focusChapter3Node(nodeId);
+    if (nodeId) {
+      focusChapter3Node(nodeId);
+      trackEvent("model_select", {
+        chapter_id: "chapter3",
+        node_id: nodeId,
+        mode_id: selectedChapter3Mode,
+        interaction_source: "model"
+      });
+    }
     return;
   }
   if (activeChapter === "chapter2") {
     const nodeId = hit?.object?.userData.nodeId;
-    if (nodeId) focusChapter2Node(nodeId);
+    if (nodeId) {
+      focusChapter2Node(nodeId);
+      trackEvent("model_select", {
+        chapter_id: "chapter2",
+        node_id: nodeId,
+        mode_id: selectedMode,
+        interaction_source: "model"
+      });
+    }
     return;
   }
   const hitId = hit?.object?.userData.layerId;
-  if (hitId) selectLayer(hitId);
+  if (hitId) {
+    selectLayer(hitId);
+    trackEvent("layer_select", {
+      chapter_id: "chapter1",
+      layer_id: hitId,
+      layer_name: localizedLayer(layers.find((item) => item.id === hitId)).name,
+      interaction_source: "model"
+    });
+  }
 }
 
 function interpolatePath(points, progress) {
@@ -3174,6 +3247,9 @@ languageTabs.addEventListener("click", (event) => {
   } else {
     selectLayer(selectedId);
   }
+  trackEvent("language_select", {
+    language: activeLang
+  });
 });
 
 languageMenuButton.addEventListener("click", () => {
@@ -3188,19 +3264,37 @@ document.addEventListener("click", (event) => {
 chapterTabs.addEventListener("click", (event) => {
   const button = event.target.closest("[data-chapter]");
   if (!button) return;
+  const previousChapter = activeChapter;
   selectChapter(button.dataset.chapter);
+  if (previousChapter !== activeChapter) {
+    trackEvent("chapter_select", {
+      chapter_id: activeChapter,
+      previous_chapter_id: previousChapter
+    });
+  }
 });
 
 analysisOpen.addEventListener("click", () => {
   revealInsights();
   openAnalysisDrawer();
+  trackEvent("analysis_open", {
+    segment_id: activeSegmentForTracking()
+  });
 });
 
 analysisClose.addEventListener("click", closeAnalysisDrawer);
 analysisScrim.addEventListener("click", closeAnalysisDrawer);
-aboutOpen.addEventListener("click", openAboutDrawer);
+aboutOpen.addEventListener("click", () => {
+  openAboutDrawer();
+  trackEvent("about_open");
+});
 aboutClose.addEventListener("click", closeAboutDrawer);
 aboutScrim.addEventListener("click", closeAboutDrawer);
+aboutContact.addEventListener("click", () => {
+  trackEvent("contact_click", {
+    contact_method: "email"
+  });
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
@@ -3210,7 +3304,10 @@ document.addEventListener("keydown", (event) => {
 
 audioToggle.addEventListener("click", () => {
   if (audioPlaying) stopAudioBriefing();
-  else playAudioBriefing();
+  else {
+    playAudioBriefing();
+    trackAudioPlay();
+  }
 });
 
 transcriptToggle.addEventListener("click", () => {
@@ -3219,6 +3316,11 @@ transcriptToggle.addEventListener("click", () => {
   transcriptPanel.hidden = isOpen;
   transcriptToggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
   updateAudioDock();
+  if (!isOpen) {
+    trackEvent("transcript_open", {
+      segment_id: activeSegmentForTracking()
+    });
+  }
 });
 
 audioPlayer.addEventListener("ended", () => {
@@ -3241,4 +3343,7 @@ hydrateUi();
 applyColorScheme(activeScheme);
 resize();
 selectLayer("compute");
+trackEvent("project_view", {
+  segment_id: activeSegmentForTracking()
+});
 animate();

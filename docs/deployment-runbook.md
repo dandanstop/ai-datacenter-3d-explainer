@@ -79,7 +79,13 @@ The existing `vercel.json` uses:
 ```json
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/datacenter-3d",
+      "destination": "/"
+    }
+  ]
 }
 ```
 
@@ -98,6 +104,8 @@ After deployment, verify:
 - `/og-image.png` returns 200.
 - JSON-LD parses successfully.
 - `og:image` and `twitter:image` resolve to the production domain.
+- GA4 base tag uses Measurement ID `G-2CJ15FLWPY`.
+- GA4 custom events include `project_slug = datacenter-3d`.
 
 ## 5. Production URL Follow-Up
 

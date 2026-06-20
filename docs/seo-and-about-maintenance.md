@@ -111,6 +111,11 @@ Schema:
 
 - About author identity is also reflected in JSON-LD through `author` and `creator`.
 
+Profile icon:
+
+- File: `/assets/dandan-stop-profile-amber.png`
+- Placement: About drawer header beside the title.
+
 ## About Copy
 
 ### English
@@ -131,13 +136,13 @@ DanDanStop
 Body:
 
 ```text
-Hi, the name DanDanStop is actually an internal warning to myself: "DanDan, stop me from pulling another all-nighter geeking out over new tech!"
+Hi - DanDanStop is basically a note-to-self: "DanDan, stop before this turns into another all-nighter geeking out over new tech."
 
-This is my personal tech lab and hub for inspiration, driven by a "move fast and iterate" agile mindset.
+This is my personal tech lab and inspiration hub, built around a simple mindset: move fast, stay curious, and keep iterating.
 
-I’m always hands-on, testing the latest AI tools and MarTech experiments just for you.
+I’m usually hands-on, testing the latest AI tools, MarTech ideas, and little experiments just for fun.
 
-Always happy to exchange ideas, discuss innovation, or explore new opportunities—feel free to get in touch. 😎
+If something here sparks an idea, let’s talk. I’m always happy to swap thoughts on innovation, creative technology, and what might be worth building next.
 
 Last updated: June 2026
 
@@ -162,13 +167,13 @@ DanDanStop
 Body:
 
 ```text
-嗨，DanDanStop 這個名字，其實是我給自己的內部警示：「DanDan，別再因為研究新科技而熬整晚了！」
+Hi - DanDanStop 基本上是我給自己的提醒：「DanDan，在又因為研究新科技熬成通宵之前，先停一下。」
 
-這裡是我的個人科技實驗室，也是靈感基地。我用「快速行動、持續迭代」的敏捷心態，親自測試最新 AI 工具與 MarTech 實驗。
+這裡是我的個人科技實驗室與靈感基地，核心心態很簡單：快速行動、保持好奇、持續迭代。
 
-我會把這些第一手觀察整理給你，讓新科技變得更容易理解，也更能啟發下一步行動。
+我通常會親自動手測試最新 AI 工具、MarTech 想法，還有一些只是因為好玩而做的小實驗。
 
-很樂意交流想法、討論創新，或探索新的合作機會，歡迎聯繫。😎
+如果這裡的內容激發了你的想法，歡迎聊聊。我一直很樂意交流創新、創意科技，以及下一個值得打造的東西。
 
 最後更新：2026 年 6 月
 
@@ -193,13 +198,13 @@ DanDanStop
 Body:
 
 ```text
-안녕하세요. DanDanStop이라는 이름은 사실 저 자신에게 보내는 내부 경고입니다. "DanDan, 새 기술에 빠져 또 밤새우는 건 이제 그만!"
+Hi - DanDanStop은 사실 저 자신에게 보내는 메모입니다. "DanDan, 새 기술에 빠져 또 밤새우기 전에 멈추자."
 
-이곳은 제 개인 테크 랩이자 영감의 허브입니다. "빠르게 움직이고 계속 반복한다"는 애자일 마인드로 최신 AI 도구와 MarTech 실험을 직접 테스트합니다.
+이곳은 제 개인 테크 랩이자 영감의 허브입니다. 빠르게 움직이고, 호기심을 유지하며, 계속 반복한다는 단순한 마음가짐으로 운영합니다.
 
-그 과정에서 얻은 첫 손의 관찰을 여러분에게 전해, 새로운 기술을 더 쉽게 이해하고 다음 행동으로 이어갈 수 있게 합니다.
+저는 보통 직접 손을 움직여 최신 AI 도구, MarTech 아이디어, 그리고 재미로 해보는 작은 실험들을 테스트합니다.
 
-아이디어를 나누고, 혁신을 논의하거나, 새로운 기회를 함께 탐색하는 대화를 언제나 환영합니다. 편하게 연락 주세요. 😎
+이곳의 어떤 내용이 아이디어를 떠올리게 했다면 함께 이야기해요. 혁신, 크리에이티브 테크놀로지, 그리고 다음에 만들어볼 만한 것에 대해 생각을 나누는 일을 늘 환영합니다.
 
 마지막 업데이트: 2026년 6월
 
@@ -224,13 +229,13 @@ DanDanStop
 Body:
 
 ```text
-こんにちは。DanDanStop という名前は、実は自分への内なる警告です。「DanDan、新しいテクノロジーに夢中になって、また徹夜するのはそろそろやめよう！」
+Hi - DanDanStop は、基本的には自分へのメモです。「DanDan、新しいテクノロジーに夢中になって、また徹夜になる前に止まろう。」
 
-ここは私の個人的なテックラボであり、インスピレーションのハブです。「素早く動き、改善を重ねる」アジャイルな姿勢で、最新の AI ツールや MarTech の実験を実際に手を動かして試しています。
+ここは私の個人的なテックラボであり、インスピレーションのハブです。素早く動き、好奇心を持ち続け、改善を重ねるというシンプルな姿勢でつくっています。
 
-その一次体験から得た気づきを共有し、新しいテクノロジーをより理解しやすく、次の行動につながるものにしていきます。
+私は普段、最新の AI ツール、MarTech のアイデア、そして純粋に楽しい小さな実験を、実際に手を動かして試しています。
 
-アイデア交換、イノベーションについての議論、新しい機会の探索をいつでも歓迎しています。お気軽にご連絡ください。😎
+ここにある何かがアイデアのきっかけになったなら、ぜひ話しましょう。イノベーション、クリエイティブテクノロジー、そして次に何をつくる価値があるのかについて、考えを交換するのはいつでも歓迎です。
 
 最終更新：2026年6月
 

@@ -971,6 +971,24 @@ body.is-file-protocol .file-warning {
   border-bottom: 1px solid var(--line);
 }
 
+.about-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+
+.about-avatar {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  border: 1px solid rgba(255, 183, 35, 0.24);
+  border-radius: 14px;
+  background: #050607;
+  object-fit: cover;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
 .about-drawer-header h2 {
   margin: 0;
   color: var(--text);
@@ -1340,6 +1358,13 @@ body.is-file-protocol .file-warning {
   .analysis-drawer-header h2,
   .about-drawer-header h2 {
     font-size: 24px;
+  }
+
+  .about-avatar {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+    border-radius: 12px;
   }
 
   .analysis-body,

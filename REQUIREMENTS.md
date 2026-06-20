@@ -125,6 +125,7 @@ Current About requirements:
   - Japanese: `企画・制作：` / `DanDanStop`
 - Contact link text: `Contact`
 - Contact link target: `mailto:hello@dandanstop.me`
+- About profile icon: `/assets/dandan-stop-profile-amber.png`
 - About text is localized in English, Traditional Chinese, Korean, and Japanese.
 - Author metadata is represented in JSON-LD through `author`, `creator`, and `dateModified`.
 
@@ -418,6 +419,8 @@ ai-datacenter-3d/
   index.html              HTML shell, SEO tags, JSON-LD, main layout, About drawer, noscript summary, SEO text layer
   styles.css              Layout, responsive design, reveal states, panels, cards, About drawer
   app.js                  Data, translations, Three.js scene, model creation, interactions, About content
+  assets/
+    dandan-stop-profile-amber.png  About drawer profile icon
   vendor/
     three.module.min.js   Vendored Three.js module
     three.core.min.js     Vendored Three.js core

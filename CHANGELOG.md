@@ -14,6 +14,7 @@ All notable changes to this project are documented here.
 - Moved the explainer canonical URL to `https://dandanstop.me/datacenter-3d` while reserving the root domain for the future main site.
 - Added a Vercel rewrite from `/datacenter-3d` to the current static app root.
 - Added GA4 tracking for the `datacenter-3d` project with project-level event parameters.
+- Updated About copy and added the amber DanDanStop profile icon.
 
 ## [1.0.0] - 2026-06-17
 

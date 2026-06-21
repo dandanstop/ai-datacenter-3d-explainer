@@ -6,12 +6,12 @@ const modelId = "eleven_multilingual_v2";
 const outputFormat = "mp3_44100_128";
 
 const segments = [
-  { id: "power", heading: "01 Power & Grid" },
-  { id: "cooling", heading: "02 Cooling Systems" },
-  { id: "compute", heading: "03 Compute Equipment" },
-  { id: "network", heading: "04 Network Interconnect" },
-  { id: "site", heading: "05 Site & Construction" },
-  { id: "ops", heading: "06 Operations & Platform" }
+  { id: "power", heading: "01 Power & Energy Backbone" },
+  { id: "cooling", heading: "02 Cooling & Heat Removal" },
+  { id: "compute", heading: "03 Compute & AI Chips" },
+  { id: "network", heading: "04 Networking & Data Movement" },
+  { id: "site", heading: "05 Campus & Buildout" },
+  { id: "ops", heading: "06 Cloud & AI Operations" }
 ];
 
 function loadEnv(text) {

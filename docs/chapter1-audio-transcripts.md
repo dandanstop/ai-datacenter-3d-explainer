@@ -6,110 +6,110 @@ Tone: editorial, analytical, calm, and suitable for investors, technology analys
 
 Suggested pacing: each segment is written for roughly 20 to 30 seconds at a calm narration speed.
 
-## 01 Power & Grid / 電力與電網
+## 01 Power & Energy Backbone / 電力與能源骨幹
 
 ### zh
 
-AI 資料中心的第一個瓶頸，往往不是 GPU，而是電力。一座 AI 園區需要數十到上百 MW，建案就會從 IT 採購，變成電網工程。變壓器、開關設備、UPS、備援電源與併網時程，決定算力能不能真的上線。關鍵觀察是：AI 基礎設施的擴張速度，受限於可取得的電力容量與電網穩定度。
+AI 在成為算力故事之前，首先是一個電力故事。在 GPU 開始訓練模型或服務使用者之前，電力必須先進站、降壓、穩定，並能在故障時持續供應。這就是為什麼變電站、開關設備、UPS、備援發電與併網條件如此重要。未來訊號是：誰能更快取得穩定可交付的電力容量，誰就更有機會率先擴張 AI 園區。
 
 ### en
 
-The first bottleneck in an AI data center is often not the GPU. It is power. When an AI campus needs tens or even hundreds of megawatts, the project becomes a grid infrastructure challenge. Transformers, switchgear, UPS systems, backup power, and interconnection timelines decide when compute can actually go online. The key finding: AI infrastructure growth is constrained by available power and grid reliability.
+Before AI becomes a compute story, it begins as a power story. Before GPUs can train a model or serve a user, electricity has to arrive, step down, stabilize, and survive failure. That is why substations, switchgear, UPS systems, backup generation, and grid access matter so much. Future signal: the operators who secure dependable power capacity first will often scale first.
 
 ### ko
 
-AI 데이터센터의 첫 번째 병목은 GPU가 아니라 전력인 경우가 많습니다. 하나의 AI 캠퍼스가 수십에서 수백 MW를 요구하면, 프로젝트는 IT 구매가 아니라 전력망 인프라 문제가 됩니다. 변압기, 스위치기어, UPS, 예비 전원, 계통 연결 일정이 실제 컴퓨팅 가동 시점을 결정합니다. 핵심은 AI 인프라 확장 속도가 확보 가능한 전력과 전력망 안정성에 의해 제한된다는 점입니다.
+AI는 컴퓨트 이야기가 되기 전에 먼저 전력 이야기로 시작됩니다. GPU가 모델을 학습하거나 사용자를 서비스하기 전에 전기는 먼저 들어오고, 전압이 낮춰지고, 안정화되며, 장애 상황에서도 유지되어야 합니다. 그래서 변전, 스위치기어, UPS, 백업 전원, 계통 접속이 매우 중요합니다. 미래 신호는 안정적인 전력 용량을 더 빨리 확보하는 운영자가 먼저 확장할 가능성이 크다는 점입니다.
 
 ### ja
 
-AI データセンターの最初のボトルネックは、GPU ではなく電力であることが少なくありません。AI キャンパスが数十から数百 MW を必要とすると、案件は IT 調達ではなく電力網インフラの課題になります。変圧器、開閉装置、UPS、バックアップ電源、系統接続の時期が、計算能力を実際に稼働できるかを左右します。重要なのは、AI インフラの成長速度が、利用可能な電力と電力網の安定性に制約されることです。
+AI はコンピュートの物語になる前に、まず電力の物語として始まります。GPU がモデルを学習したりユーザーに応答したりする前に、電気はまず届き、降圧され、安定化され、障害時にも維持されなければなりません。だからこそ、変電、開閉装置、UPS、バックアップ電源、系統接続が重要です。今後のシグナルは、安定した電力容量をより早く確保できる事業者ほど先に拡張しやすいという点です。
 
-## 02 Cooling Systems / 冷卻系統
+## 02 Cooling & Heat Removal / 冷卻與散熱系統
 
 ### zh
 
-第二層是冷卻。AI 伺服器讓機櫃功率密度快速提高，傳統風冷開始接近極限。散熱不再只是機房空調，而是從 GPU 晶片、液冷板、CDU、泵浦、冷水主機到冷卻塔的完整路徑。關鍵觀察是：冷卻效率、接頭可靠度、水質與用水壓力，會直接影響 GPU 叢集的可用率與營運成本。
+更多電力，只有在熱能能順利離開系統時，才會真正變成更多算力。當機櫃密度持續升高，熱必須從晶片移入冷板與液冷迴路，再流向泵浦、冷水主機與散熱設備。這一層決定部署密度、穩定性、用水與能效。未來訊號是：液冷正從進階配置走向預設設計。
 
 ### en
 
-The second layer is cooling. AI servers are pushing rack power density higher, and traditional air cooling is approaching its limits. Thermal management is no longer just room air conditioning. It is a full heat path from the GPU chip to cold plates, CDUs, pumps, chillers, and cooling towers. The key finding: cooling efficiency, connector reliability, water quality, and water availability directly shape cluster uptime and operating cost.
+Cooling decides whether rising electrical load can become sustained AI performance. As rack density rises, heat has to leave the chip, move through cold plates and liquid loops, and reach pumps, chillers, and heat rejection systems. This layer shapes density, uptime, water use, and energy efficiency. Future signal: liquid cooling is moving from advanced option toward default design.
 
 ### ko
 
-두 번째 층은 냉각입니다. AI 서버는 랙 전력 밀도를 빠르게 높이고 있으며, 전통적인 공랭 방식은 한계에 가까워지고 있습니다. 열 관리는 더 이상 단순한 전산실 공조가 아닙니다. GPU 칩에서 콜드 플레이트, CDU, 펌프, 칠러, 냉각탑으로 이어지는 전체 열 경로입니다. 핵심은 냉각 효율, 접속부 신뢰성, 수질, 물 사용 압력이 클러스터 가동률과 운영비에 직접 영향을 준다는 점입니다.
+더 많은 전력은 열이 시스템 밖으로 빠져나갈 수 있을 때만 더 많은 컴퓨트가 됩니다. 랙 밀도가 높아질수록 열은 칩에서 콜드 플레이트와 액체 루프를 거쳐 펌프, 칠러, 방열 장비로 이동해야 합니다. 이 층은 배치 밀도, 안정성, 물 사용, 에너지 효율을 결정합니다. 미래 신호는 액체 냉각이 고급 옵션에서 기본 설계로 이동하고 있다는 점입니다.
 
 ### ja
 
-第 2 の層は冷却です。AI サーバーはラックの電力密度を急速に高めており、従来の空冷は限界に近づいています。熱管理は、もはや機械室の空調だけではありません。GPU チップからコールドプレート、CDU、ポンプ、チラー、冷却塔まで続く熱の経路全体です。重要なのは、冷却効率、接続部の信頼性、水質、水利用の制約が、クラスターの稼働率と運用コストを直接左右することです。
+より多くの電力は、熱がきちんとシステムの外へ逃げられるときにだけ、より多くの計算能力になります。ラック密度が上がるほど、熱はチップからコールドプレートと液冷ループを通り、ポンプ、チラー、放熱設備へ移動しなければなりません。この層は、配備密度、安定性、水利用、エネルギー効率を左右します。今後のシグナルは、液冷が特別なオプションから標準設計へ移りつつあることです。
 
-## 03 Compute Equipment / 算力設備
+## 03 Compute & AI Chips / 算力設備與 AI 晶片
 
 ### zh
 
-第三層是算力設備，也是資本支出最密集的核心。但這裡不只是一張 GPU。真正的系統包含 GPU、HBM、先進封裝、伺服器主板、電源、散熱、機櫃與整機測試。關鍵觀察是：算力供給是多條供應鏈同時協作的結果。瓶頸可能出現在晶片，也可能出現在記憶體、封裝、良率或整櫃交付。
+一張 GPU 並不等於一套 AI 系統。只有當記憶體、封裝、供電、散熱與整櫃整合同時到位時，它才真正有用。實際上，算力供給是一條高度協作的製造鏈。未來訊號是：HBM、封裝產能與整櫃交付速度，會和晶片 headline 一樣重要。
 
 ### en
 
-The third layer is compute equipment, the most capital-intensive part of the AI data center. But this is not just about a GPU. The real system includes GPUs, HBM, advanced packaging, server boards, power, cooling, racks, and system-level testing. The key finding: compute supply depends on several supply chains working together. The bottleneck may sit in chips, memory, packaging, yield, or rack-scale delivery.
+The real unit of AI capacity is not a GPU. It is a fully integrated system. A working AI node depends on HBM, advanced packaging, power delivery, cooling, and rack-level integration arriving together. In practice, compute supply is a coordinated manufacturing chain. Future signal: HBM, packaging capacity, and rack-scale delivery will matter as much as chip headlines.
 
 ### ko
 
-세 번째 층은 컴퓨팅 장비이며, AI 데이터센터에서 가장 자본 집약적인 핵심입니다. 하지만 이것은 GPU 한 장의 문제가 아닙니다. 실제 시스템은 GPU, HBM, 첨단 패키징, 서버 보드, 전원, 냉각, 랙, 그리고 시스템 테스트로 구성됩니다. 핵심은 컴퓨팅 공급이 여러 공급망의 동시 협업 결과라는 점입니다. 병목은 칩, 메모리, 패키징, 수율, 또는 랙 단위 납품에서 발생할 수 있습니다.
+GPU 한 장이 곧 AI 시스템은 아닙니다. 메모리, 패키징, 전력 설계, 냉각, 랙 단위 통합이 함께 도착해야 비로소 유용해집니다. 실제로 컴퓨트 공급은 조율된 제조 체인입니다. 미래 신호는 HBM, 패키징 용량, 랙 단위 인도가 칩 헤드라인만큼 중요해진다는 점입니다.
 
 ### ja
 
-第 3 の層は計算設備であり、AI データセンターの中で最も資本集約的な中核です。しかし、これは GPU だけの話ではありません。実際のシステムには、GPU、HBM、先端パッケージング、サーバーボード、電源、冷却、ラック、システムテストが含まれます。重要なのは、計算能力の供給が複数のサプライチェーンの連携によって成り立つことです。ボトルネックは、チップ、メモリ、パッケージング、歩留まり、またはラック単位の納入に現れます。
+GPU 1 枚だけでは AI システムにはなりません。メモリ、パッケージング、電力設計、冷却、ラック単位の統合がそろって初めて役に立ちます。実際には、コンピュート供給は協調された製造チェーンです。今後のシグナルは、HBM、パッケージング能力、ラック単位の納入が、チップの見出しと同じくらい重要になることです。
 
-## 04 Network Interconnect / 網路互連
+## 04 Networking & Data Movement / 網路互連與資料搬運
 
 ### zh
 
-第四層是網路互連。大型 AI 訓練不是把 GPU 堆在一起就好，GPU 之間還需要低延遲、高頻寬的資料交換。交換器、NIC、DPU、光模組、光纖與拓樸設計，都會影響叢集利用率。關鍵觀察是：AI 訓練叢集本質上是網路化的算力系統，延遲與封包效率會變成算力效率的一部分。
+算力決定能力上限，但資料搬運決定多台機器能否成為同一套系統。無論訓練還是推論，交換器、NIC、光模組、光纖與拓樸，都會決定系統同步與交換上下文的速度。這一層決定理論算力有多少能真正轉成可用效能。未來訊號是：當模型系統更加分散，光互連與網路效率會更直接定義可用效能。
 
 ### en
 
-The fourth layer is network interconnect. Large AI training is not simply a pile of GPUs. GPUs need low-latency, high-bandwidth data exchange with one another. Switches, NICs, DPUs, optical modules, fiber, and topology all affect cluster utilization. The key finding: an AI training cluster is a networked compute system, where latency and packet efficiency become part of compute efficiency.
+In AI infrastructure, data movement is what turns many machines into one working system. During training and inference, switches, NICs, optics, fiber, and topology decide how quickly systems can synchronize and exchange context. This layer determines how much theoretical compute becomes real performance. Future signal: as model systems become more distributed, optical interconnect and network efficiency will increasingly define usable performance.
 
 ### ko
 
-네 번째 층은 네트워크 인터커넥트입니다. 대규모 AI 훈련은 GPU를 많이 쌓는 것만으로 충분하지 않습니다. GPU 사이에는 낮은 지연시간과 높은 대역폭의 데이터 교환이 필요합니다. 스위치, NIC, DPU, 광모듈, 광섬유, 토폴로지가 모두 클러스터 이용률에 영향을 줍니다. 핵심은 AI 훈련 클러스터가 네트워크화된 컴퓨팅 시스템이며, 지연시간과 패킷 효율이 곧 컴퓨팅 효율의 일부가 된다는 점입니다.
+컴퓨트가 능력의 상한을 정한다면, 데이터 이동은 많은 장비를 하나의 시스템으로 묶습니다. 훈련과 추론 모두에서 스위치, NIC, 광모듈, 광섬유, 토폴로지는 시스템 동기화와 컨텍스트 교환 속도를 결정합니다. 이 층은 이론상의 컴퓨트가 실제 성능으로 얼마나 전환되는지를 좌우합니다. 미래 신호는 모델 시스템이 더 분산될수록 광 인터커넥트와 네트워크 효율이 실제 성능을 규정하게 된다는 점입니다.
 
 ### ja
 
-第 4 の層はネットワーク相互接続です。大規模な AI 学習は、GPU を積み上げるだけでは成立しません。GPU 同士には、低遅延で高帯域のデータ交換が必要です。スイッチ、NIC、DPU、光モジュール、光ファイバー、トポロジーの設計が、クラスター利用率に影響します。重要なのは、AI 学習クラスターがネットワーク化された計算システムであり、遅延とパケット効率が計算効率の一部になることです。
+コンピュートが能力の上限を決めるなら、データ移動は多くの装置を一つのシステムへまとめます。学習でも推論でも、スイッチ、NIC、光モジュール、光ファイバー、トポロジーが、どれだけ速く同期し文脈をやり取りできるかを決めます。この層は、理論上の計算力がどれだけ実効性能へ変わるかを左右します。今後のシグナルは、モデルシステムが分散するほど、光相互接続とネットワーク効率が実効性能を左右することです。
 
-## 05 Site & Construction / 土地與建築
+## 05 Campus & Buildout / 園區建設與交付
 
 ### zh
 
-第五層是土地與建築。資料中心不是可以快速複製的軟體，而是多年期的重資產基礎建設。一座 AI 園區能不能落地，取決於土地、電力距離、水資源、環評、法規、施工能力與客戶合約。關鍵觀察是：真正的供給不是土地面積，而是可被批准、可施工、可供電、可冷卻，並能準時交付的容量。
+AI 熱潮可以在新聞標題裡快速升溫，但真實容量仍然以基礎設施的速度前進。土地、審批、電網接入、水資源、施工與交付時程，都會決定需求何時變成真正容量。這也是為什麼資料中心供給，不能只看土地大小。未來訊號是：真正稀缺的資產，會是已獲批准、可施工、可供電、可冷卻的就緒容量。
 
 ### en
 
-The fifth layer is site and construction. A data center is not software that can be copied instantly. It is multi-year, heavy infrastructure. Whether an AI campus can be built depends on land, power distance, water, permitting, regulation, construction capacity, and customer contracts. The key finding: real supply is not land area. It is approved, buildable, powered, cooled, and deliverable capacity.
+The AI boom may move fast in headlines, but physical capacity still moves at infrastructure speed. Land, permitting, grid access, water, construction, and delivery schedules all shape when demand becomes real capacity. This is why data center supply cannot be measured by acreage alone. Future signal: the scarce asset will be fully permitted, power-ready, buildable capacity.
 
 ### ko
 
-다섯 번째 층은 부지와 건설입니다. 데이터센터는 즉시 복제할 수 있는 소프트웨어가 아니라, 수년에 걸친 중자산 인프라입니다. AI 캠퍼스가 실제로 지어질 수 있는지는 토지, 전력 접근성, 물, 인허가, 규제, 시공 능력, 고객 계약에 달려 있습니다. 핵심은 진짜 공급이 토지 면적이 아니라 승인되고, 지을 수 있고, 전력을 공급받고, 냉각 가능하며, 제때 납품 가능한 용량이라는 점입니다.
+AI 붐은 헤드라인에서는 빠르게 움직일 수 있지만, 실제 용량은 여전히 인프라의 속도로 움직입니다. 토지, 인허가, 계통 접속, 물, 시공, 납기 일정이 수요가 언제 실제 용량이 되는지를 결정합니다. 그래서 데이터센터 공급은 단순한 면적으로 측정할 수 없습니다. 미래 신호는 완전한 인허가와 전력 준비가 끝난 건설 가능 용량이 가장 희소한 자산이 된다는 점입니다.
 
 ### ja
 
-第 5 の層は用地と建設です。データセンターはすぐに複製できるソフトウェアではなく、数年単位の重いインフラです。AI キャンパスを実際に建設できるかは、土地、電力への距離、水資源、許認可、規制、施工能力、顧客契約に左右されます。重要なのは、本当の供給が土地面積ではなく、承認され、建設でき、電力と冷却を確保し、期限内に引き渡せる容量であることです。
+AI ブームは見出しでは速く進んでも、実際の容量は依然としてインフラの速度でしか動きません。土地、許認可、系統接続、水、建設、納期が、需要がいつ本当の容量になるかを決めます。だからデータセンター供給は、面積だけでは測れません。今後のシグナルは、許認可が完了し、電力準備が整った建設可能容量こそが最も希少な資産になることです。
 
-## 06 Operations & Platform / 營運與平台
+## 06 Cloud & AI Operations / 雲端與 AI 營運
 
 ### zh
 
-第六層是營運與平台。基礎設施只有被調度、計費、監控、維護與治理之後，才會變成真正可銷售的算力服務。這一層把 GPU、機房、網路與能源，轉成雲端 GPU、訓練平台與推論服務。關鍵觀察是：當硬體供給增加，差異化會從誰有卡，轉向誰能把卡穩定、合規、高利用率地交付給客戶。
+擁有 GPU，並不等於能把 AI 交付成值得信任的產品。基礎設施只有在能被營運、治理並持續維持可用時，才會真正變成服務。長期來看，營運品質對客戶信任的影響，會和硬體規格一樣重要。未來訊號是：差異化正轉向利用率、推論效率、治理能力與服務可靠度。
 
 ### en
 
-The sixth layer is operations and platform. Infrastructure becomes a sellable compute service only after it can be scheduled, billed, monitored, maintained, and governed. This layer turns GPUs, facilities, networks, and energy into GPU cloud, training platforms, and inference services. The key finding: as hardware supply expands, differentiation shifts from who has GPUs to who can deliver them reliably, compliantly, and at high utilization.
+Infrastructure becomes a product only when it can be operated, governed, and trusted. This layer turns hardware into services that developers and enterprises can actually use. Over time, operational quality shapes customer trust as much as hardware specs do. Future signal: differentiation is shifting toward utilization, inference efficiency, governance, and service reliability.
 
 ### ko
 
-여섯 번째 층은 운영과 플랫폼입니다. 인프라는 스케줄링, 과금, 모니터링, 유지보수, 거버넌스를 거친 뒤에야 판매 가능한 컴퓨팅 서비스가 됩니다. 이 층은 GPU, 시설, 네트워크, 에너지를 GPU 클라우드, 훈련 플랫폼, 추론 서비스로 전환합니다. 핵심은 하드웨어 공급이 늘어날수록 차별화가 누가 GPU를 보유했는가에서, 누가 안정적이고 규정을 준수하며 높은 이용률로 제공할 수 있는가로 이동한다는 점입니다.
+GPU를 보유하는 것과 신뢰할 수 있는 AI 제품을 제공하는 것은 같은 일이 아닙니다. 인프라는 운영되고, 거버넌스가 적용되며, 지속적으로 신뢰될 수 있을 때 비로소 제품이 됩니다. 이 층은 하드웨어를 개발자와 기업이 실제로 사용할 수 있는 서비스로 바꿉니다. 시간이 갈수록 운영 품질은 하드웨어 사양만큼 고객 신뢰를 좌우합니다. 미래 신호는 차별화가 이용률, 추론 효율, 거버넌스, 서비스 신뢰성으로 이동하고 있다는 점입니다.
 
 ### ja
 
-第 6 の層は運用とプラットフォームです。インフラは、スケジューリング、課金、監視、保守、ガバナンスができて初めて販売可能な計算サービスになります。この層は、GPU、施設、ネットワーク、エネルギーを、GPU クラウド、学習プラットフォーム、推論サービスへ変換します。重要なのは、ハードウェア供給が増えるほど、差別化が GPU を持っているかではなく、安定的に、コンプライアンスを満たし、高い利用率で提供できるかへ移ることです。
+GPU を持っていることと、信頼できる AI 製品を届けられることは同じではありません。インフラは、運用され、統制され、継続的に信頼できて初めて製品になります。この層は、ハードウェアを開発者や企業が実際に使えるサービスへ変えます。時間が経つほど、運用品質はハードウェア仕様と同じくらい顧客の信頼を左右します。今後のシグナルは、差別化が利用率、推論効率、ガバナンス、サービス信頼性へ移っていることです。

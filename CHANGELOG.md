@@ -2,10 +2,22 @@
 
 All notable changes to this project are documented here.
 
-## [Unreleased] - 2026-06-19
+## [Unreleased] - 2026-06-21
 
 ### Changed
 
+- Reframed Chapter 1 from an investment-style value-chain view into an educational infrastructure explainer organized around function, operating principle, role, and future signals.
+- Renamed the six Chapter 1 layers to `Power & Energy Backbone`, `Cooling & Heat Removal`, `Compute & AI Chips`, `Networking & Data Movement`, `Campus & Buildout`, and `Cloud & AI Operations`.
+- Replaced Chapter 1 `Value-chain roles` copy with `Who builds this layer` and linked representative companies to their official websites.
+- Added a Chapter 1 `Future signal` section plus a `Signals to watch` module inside the full analysis drawer.
+- Updated Chapter 1 intro and static SEO text to match the new educational framing.
+- Expanded `Compute & AI Chips` to include at least three representative companies for both `Foundry and advanced packaging` and `High-bandwidth memory reference`.
+- Expanded the other Chapter 1 `Who builds this layer` groups so power, cooling, networking, campus, and operations each include broader representative company coverage with official links.
+- Added a low-profile Chapter 1 `Learn more` section in the analysis drawer with official external reading links for each infrastructure layer.
+- Rewrote Chapter 1 metric-card labels across languages to be more educational and explanatory for general AI readers.
+- Updated Chapter 1 multilingual audio transcripts, TTS extraction headings, and cache-busted audio asset URLs so narration now matches the new educational layer framing.
+- Rebranded the project header and metadata around `Compute to Grid`, replacing the previous Chapter 1 hero title with `The AI Race Now Runs Through Power, Cooling, and the Grid`.
+- Refined Chapter 1 educational copy across languages so each layer now reads more clearly as a teaching unit focused on function, principle, and future signal rather than only constraints or bottlenecks.
 - Updated About identity from `Daniel Chen` to `DanDanStop`.
 - Rewrote About copy as a personal tech lab introduction across English, Traditional Chinese, Korean, and Japanese.
 - Updated Contact mail link to `mailto:hello@dandanstop.me`.
@@ -15,6 +27,22 @@ All notable changes to this project are documented here.
 - Added a Vercel rewrite from `/datacenter-3d` to the current static app root.
 - Added GA4 tracking for the `datacenter-3d` project with project-level event parameters.
 - Updated About copy and added the amber DanDanStop profile icon.
+- Refined Chapter 1 default desktop composition so the first frame shows a full AI campus overview instead of immediately pushing into a single focused layer.
+- Softened Chapter 1 focus behavior so zoom, lift, dimming, and scale emphasis now feel more editorial and less demo-like.
+- Added desktop mouse-wheel layer switching for Chapter 1.
+- Shifted Chapter 1 interaction sequencing so layer focus only begins after real user intent.
+- Evolved Chapter 1 desktop navigation into a compact rail with low-friction scanning and a persistent stage summary.
+- Simplified the mobile first viewport so the 3D model gets more space before long copy appears.
+- Added the compact mobile stage chip (`C1/C2/C3`) beside the language control to hide chapter switching and Chapter 1 utilities until requested.
+- Moved Chapter 1 mobile exploration to a fixed bottom layer dock with an active summary card and closeable mobile insight sheet.
+- Reduced mobile visual weight for `Exploded view`, `Reset`, and chapter switching by moving them behind expandable controls instead of showing everything at load.
+- Added a low-profile `Updates` link beside `About`, opening a lightweight project-updates drawer with recent maintenance highlights in English, Traditional Chinese, Korean, and Japanese.
+
+### Fixed
+
+- Fixed a Chapter 1 runtime initialization-order bug that could prevent the 3D scene from rendering in the browser.
+- Fixed Chapter 1 drag-to-rotate feeling by pausing camera assist while orbiting, separating click from drag intent, delaying auto-rotate resume, tuning OrbitControls damping, and disabling pan.
+- Replaced static `vercel.json` with programmatic `vercel.mjs` so Vercel preview deployments now return `X-Robots-Tag: noindex, nofollow` while production keeps normal indexability.
 
 ## [1.0.0] - 2026-06-17
 

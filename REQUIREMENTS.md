@@ -1,8 +1,9 @@
 # AI Data Center Value Chain 3D Explainer Requirements
 
 Status: current implementation baseline  
-Last updated: 2026-06-19  
-Local preview URL: http://127.0.0.1:8124/  
+Last updated: 2026-06-21  
+Default local server URL: http://127.0.0.1:8124/  
+Recent validation URL: http://127.0.0.1:8128/  
 Primary files: `index.html`, `styles.css`, `app.js`, `vendor/`
 
 ## 1. Project Purpose
@@ -15,7 +16,9 @@ AI compute growth is not only a GPU demand cycle. Workloads, system architecture
 
 Primary English H1:
 
-From GPUs to the Grid: The AI Compute Race Enters Its Infrastructure Era
+Compute to Grid
+
+The AI Race Now Runs Through Power, Cooling, and the Grid
 
 Primary Chinese H1:
 
@@ -25,10 +28,12 @@ Primary Chinese H1:
 
 The page opens in an immersive desktop layout:
 
-- Left panel: title, intro, language selector, six value-chain layer controls, reset, exploded-view slider.
+- Left panel: title, short intro, chapter switch, compact six-layer navigation rail, exploded-view control, reset link, and low-profile About link.
 - Center stage: interactive Three.js 3D exploded model.
+- Global top-right control: sticky language menu rendered as a compact `EN / 中文 / 한국어 / 日本語` trigger.
 - Right insight panel: hidden on initial load to keep the first view focused on the 3D model.
 - Progressive reveal: the right insight panel appears after the user interacts with the model or controls.
+- Mobile layout: brand-led hero header, compact `C1/C2/C3` stage chip, active-layer summary card, fixed bottom layer dock, and expandable mobile insight sheet.
 
 The current design intentionally prioritizes:
 
@@ -56,26 +61,29 @@ Audience expectations:
 - Infrastructure context beyond GPU headlines.
 - Visual explanation that is richer than a static article.
 - Dense but readable professional UI.
+- Cross-device navigation that keeps the 3D model as the first reading surface.
 
 ## 4. Information Architecture
 
-The value chain is organized into six layers:
+The Chapter 1 infrastructure stack is organized into six educational layers:
 
-1. Power & Grid
-2. Cooling Systems
-3. Compute Equipment
-4. Network Interconnect
-5. Site & Construction
-6. Operations & Platform
+1. Power & Energy Backbone
+2. Cooling & Heat Removal
+3. Compute & AI Chips
+4. Networking & Data Movement
+5. Campus & Buildout
+6. Cloud & AI Operations
 
 Default state:
 
 - Default language: English.
-- Default active layer: Compute Equipment 03.
+- Default active layer data: `03 Compute`.
+- Default Chapter 1 opening camera: whole-campus overview, not a close-up of the compute layer.
 - Default 3D setting: exploded view at 72%.
 - Auto-rotation: always enabled.
 - Flow animation: always enabled.
 - Right insight panel: hidden until interaction.
+- Layer focus camera and subtle scale emphasis begin only after the user interacts.
 
 ## 5. Layout Requirements
 
@@ -106,6 +114,8 @@ Desktop left-panel refinements:
 - Compact vertical density.
 - Keep additional spacing below the language selector before the six layer cards.
 - Keep at least 10px spacing between the chapter selector and the visible card list in Chapter 1, Chapter 2, and Chapter 3.
+- Keep the layer rail compact by default; inactive Chapter 1 items should not read like content cards.
+- Keep `Reset` as a low-visual-weight text link rather than a button.
 
 ### About Drawer
 
@@ -129,6 +139,13 @@ Current About requirements:
 - About text is localized in English, Traditional Chinese, Korean, and Japanese.
 - Author metadata is represented in JSON-LD through `author`, `creator`, and `dateModified`.
 
+Low-priority project freshness signal:
+
+- A low-visual-weight `Updates` text link sits alongside the `About` entry in the left panel.
+- `Updates` opens a lightweight drawer rather than navigating away from the experience.
+- The drawer summarizes a few recent product changes in English, Traditional Chinese, Korean, and Japanese.
+- The updates drawer should remain secondary to the 3D experience and must not compete with the main hero or insight hierarchy.
+
 Verified desktop sizes:
 
 - 1440x900: no left-panel scrolling required.
@@ -142,8 +159,22 @@ At narrower viewports:
 - Body scrolling is enabled.
 - Right insight panel is hidden before interaction.
 - Stage height uses a mobile-friendly viewport height.
-- Language selector becomes two columns on small screens.
 - Metric cards become one column.
+
+Current mobile navigation requirements:
+
+- Brand `Compute to Grid` must stay at the top-left as the strongest identity marker.
+- The language trigger stays at the top-right.
+- A compact stage chip sits to the left of the language trigger and shows `C1`, `C2`, or `C3`.
+- Tapping the stage chip reveals chapter switching plus Chapter 1 utilities such as `Exploded view` and `Reset`.
+- The long intro paragraph is hidden on the first mobile viewport to preserve 3D area.
+- The active layer summary card appears above the bottom dock and shows:
+  - layer number and short name
+  - one-line role summary
+- The six-layer dock is fixed near the bottom of the screen and keeps the currently active label visible.
+- Mobile insight content is collapsed by default and expands only after user intent.
+- When mobile insight expands, a close icon appears in the top-right corner of the sheet.
+- About remains low-profile and secondary to the 3D stage.
 
 ## 6. Interaction Requirements
 
@@ -155,6 +186,7 @@ The right insight panel must reveal after any of the following:
 - Clicking a 3D model component.
 - Clicking any left-panel layer button.
 - Adjusting the exploded-view slider.
+- On desktop Chapter 1, using the mouse wheel on the stage cycles between the six layers.
 
 After reveal:
 
@@ -166,9 +198,18 @@ After reveal:
 
 Reset behavior:
 
-- Reset button returns camera to the default view.
-- Reset button returns active layer to Compute Equipment 03.
+- Reset button returns the camera to the whole-campus default view.
+- Reset button returns active layer selection to `03 Compute`.
 - Reset button returns exploded view to 72%.
+- Reset button clears Chapter 1 focus mode so the next view is a broad infrastructure overview again.
+
+Chapter 1 interaction refinements:
+
+- Drag-to-rotate should feel like a dedicated 3D viewer, not a click target.
+- Model focus selection must trigger only on a true click or tap, not at drag start.
+- While the user is rotating the model, camera assist lerps must pause.
+- Auto-rotation should pause during manual orbit and resume only after a short delay.
+- Cursor state should remain predictable: `grab`, `grabbing`, or `pointer` depending on interaction state.
 
 ## 7. 3D Model Requirements
 
@@ -202,27 +243,46 @@ Layer model examples:
 - Active or hovered layer uses stronger emissive intensity.
 - Labels are overlaid in 2D and track 3D layer positions.
 - Clicking model components should focus/select the corresponding layer.
+- Initial Chapter 1 framing should show the full AI campus, including building base, compute stacks, cooling, power, networking, and operations layers in one readable composition.
+- After interaction, Chapter 1 camera focus should feel subtle and editorial rather than aggressive:
+  - selected layer scale target around `1.04`
+  - hovered layer scale target around `1.01`
+  - non-selected layers remain close to full scale
+- Chapter 1 drag orbit should pause auto-rotate and focus assist, then resume gently after idle.
+- Chapter 1 pan is disabled to keep the interaction centered on rotate + zoom.
 
 ## 8. Content Requirements
 
-Each layer must provide:
+Each Chapter 1 layer must provide:
 
 - Layer name.
 - Layer role/subtitle.
 - Signal sentence shown in the 3D HUD.
-- Insight lead paragraph.
-- Supplier/company list with real companies and ticker symbols where available.
+- Insight lead paragraph that explains the layer's function.
+- `How it works` summary copy.
+- `Who builds this layer` list with representative real companies linked to official websites.
 - Four metric cards.
-- Industry context / key observation paragraph.
+- Metric cards should read like explanatory teaching cues, not only raw KPI labels.
+- `Future signal` paragraph explaining what may reshape that layer next.
+- A shared `Signals to watch` module in the analysis drawer for broader Chapter 1 monitoring themes.
+- Layer copy should read like a high-quality educational explainer: simple enough for motivated general readers, but still precise enough for analysts and infrastructure professionals.
+- A low-profile `Learn more` link list in the analysis drawer that points to official external reading sources for the selected layer.
+
+Content tone requirements for Chapter 1:
+
+- Avoid explicit investment language such as winners, beneficiaries, or bottlenecks as the primary framing.
+- Prefer educational framing built around function, principle, role, and future signal.
+- Company references should read like reference builders and ecosystem examples, not stock recommendations.
+- External reading links should prefer official company or platform sources over secondary summaries.
 
 Current layer examples:
 
-- Power & Grid: Schneider Electric, Eaton, ABB, Siemens Energy, Vertiv, Caterpillar, Cummins, GE Vernova, Quanta Services, NextEra Energy, Duke Energy, Constellation Energy.
-- Cooling Systems: Vertiv, Schneider Electric, Johnson Controls, Trane, Carrier, Modine, nVent, Daikin, Delta Electronics, CoolIT, Asetek, Xylem.
-- Compute Equipment: NVIDIA, AMD, Broadcom, Marvell, TSMC, ASML, Applied Materials, Lam Research, SK hynix, Micron, Samsung, Super Micro Computer, Dell, HPE, Quanta, Wiwynn, Foxconn.
-- Network Interconnect: Arista, Cisco, NVIDIA Networking, Broadcom, Marvell, Intel, Coherent, Lumentum, Fabrinet, Innolight, Amphenol, TE Connectivity, Molex.
-- Site & Construction: Equinix, Digital Realty, GDS, NEXTDC, Keppel DC REIT, NTT Data, KDDI, Quanta Services, AECOM, Jacobs, Fluor, Vantage Data Centers, QTS, CyrusOne, DataBank.
-- Operations & Platform: Amazon, Microsoft, Alphabet, Oracle, Meta, CoreWeave, Nebius, Lambda, Crusoe, Snowflake, Datadog, ServiceNow, Cloudflare, Databricks, Palo Alto Networks, CrowdStrike, Zscaler, Okta.
+- Power & Energy Backbone: Schneider Electric, Eaton, ABB, Vertiv, Cummins, Caterpillar, GE Vernova, and Siemens Energy as representative official references across electrical architecture, backup power, and grid infrastructure.
+- Cooling & Heat Removal: Vertiv, Schneider Electric, Delta Electronics, Trane Technologies, Johnson Controls, Carrier, and Daikin as representative references for liquid cooling and HVAC infrastructure.
+- Compute & AI Chips: NVIDIA and AMD for accelerators; TSMC, Intel Foundry, and Amkor for foundry and advanced packaging; Micron, SK hynix, and Samsung Semiconductor for high-bandwidth memory references.
+- Networking & Data Movement: Arista Networks, Cisco, NVIDIA, Broadcom, Marvell, Coherent, Lumentum, and Cloudflare as representative references across switching, optics, and delivery networks.
+- Campus & Buildout: Equinix, Digital Realty, DataBank, NTT DATA, and QTS as representative references for campus delivery and managed infrastructure.
+- Cloud & AI Operations: Microsoft Azure, AWS, Google Cloud, CoreWeave, Lambda, Crusoe, Cloudflare, Datadog, and Palo Alto Networks as representative references across cloud operations and AI service delivery.
 
 ## 9. Multilingual Requirements
 
@@ -235,13 +295,14 @@ Supported languages:
 
 Language selector behavior:
 
-- Located in the left panel.
+- Located in a sticky global menu at the top-right of the viewport.
 - Does not navigate to a new URL in the current implementation.
 - Updates visible UI text, layer labels, insight content, document title, and HTML lang attribute.
 
 Current H1 translations:
 
-- English: From GPUs to the Grid: The AI Compute Race Enters Its Infrastructure Era
+- Brand: Compute to Grid
+- English: The AI Race Now Runs Through Power, Cooling, and the Grid
 - Traditional Chinese: 從 GPU 到電網：AI 算力競賽進入基礎設施時代
 - Korean: GPU에서 전력망까지: AI 컴퓨팅 경쟁은 인프라 시대로 진입했다
 - Japanese: GPU から電力網へ：AI コンピュート競争はインフラの時代へ
@@ -276,6 +337,7 @@ Current implemented SEO foundation:
 - `robots.txt`
 - `sitemap.xml`
 - Google Analytics 4 tracking tag and project-level events
+- Preview deployment protection through `X-Robots-Tag: noindex, nofollow`
 
 ## 10.1 Analytics Requirements
 
@@ -348,6 +410,7 @@ Remaining SEO/GEO recommendations:
 
 - Production domain: `https://dandanstop.me/`.
 - Production canonical path for this explainer: `https://dandanstop.me/datacenter-3d`.
+- Vercel preview deployments should not be indexable; current config sends `X-Robots-Tag: noindex, nofollow` on preview only.
 - Root domain `/` is reserved for the future DanDanStop main site and should not redirect to this explainer.
 - Vercel rewrites `/datacenter-3d` to the current static app root; static assets continue to load from root paths such as `/app.js`, `/styles.css`, `/audio/...`, and `/vendor/...`.
 - If production multilingual SEO becomes important, move from one JavaScript-switched URL to language-specific URLs with canonical and hreflang.
@@ -399,10 +462,16 @@ cd /Users/daniel/Projects/Stocks/ai-datacenter-3d
 python3 -m http.server 8124
 ```
 
-Preview URL:
+Default preview URL:
 
 ```text
 http://127.0.0.1:8124/
+```
+
+Recent alternate preview URL used during validation:
+
+```text
+http://127.0.0.1:8128/
 ```
 
 Direct file open behavior:
@@ -425,6 +494,7 @@ ai-datacenter-3d/
     three.module.min.js   Vendored Three.js module
     three.core.min.js     Vendored Three.js core
     OrbitControls.js      Camera interaction controls
+  vercel.mjs             Vercel routing config with preview-only noindex header
 ```
 
 Note:
@@ -435,20 +505,25 @@ There is currently a `.app.js.swp` file in the folder. It appears to be an edito
 
 The current baseline should pass the following checks:
 
-- Page loads at `http://127.0.0.1:8124/`.
+- Page loads at `http://127.0.0.1:8124/` and can also be validated on alternate local ports such as `8128`.
 - Direct `file://` open redirects to the local HTTP server.
 - Default language is English.
-- Default selected layer is Compute Equipment 03.
+- Default selected Chapter 1 layer data is `03 Compute`.
+- Default Chapter 1 opening camera shows the whole AI campus before any layer focus begins.
 - Initial desktop view hides the right insight panel.
 - First interaction reveals the right insight panel.
 - Auto-rotation is enabled after load.
 - Flow animation is enabled after load.
-- Six layer cards are visible in the left panel.
+- Six compact Chapter 1 rail items are visible in the left panel.
+- Desktop mouse wheel can cycle Chapter 1 layers when the pointer is over the stage.
+- Desktop drag-to-rotate feels smooth and does not immediately trigger unwanted focus clicks.
+- During drag orbit, auto-rotate and camera assist pause and resume only after a short idle delay.
 - About link opens and closes the About drawer.
 - About title renders as two lines.
 - Contact link points to `mailto:hello@dandanstop.me`.
 - Language switching updates H1, intro, layer labels, insight text, and document title.
 - Desktop left panel has no visible scrollbar and fits at 1280x720.
+- Mobile first viewport prioritizes 3D area, with the chapter chip + language trigger at the top and the six-layer dock fixed near the bottom.
 - Network Interconnect metric cards do not overflow.
 - SEO tags exist in rendered DOM.
 - JSON-LD parses successfully and includes nine `hasPart` items.
@@ -527,7 +602,8 @@ Source of truth: generated from `app.js` current `uiText`, base layer data, and 
 #### English (en)
 
 - HTML lang: en
-- Page title / H1: From GPUs to the Grid: The AI Compute Race Enters Its Infrastructure Era
+- Brand name: Compute to Grid
+- Page title / H1: The AI Race Now Runs Through Power, Cooling, and the Grid
 - Intro: Explore power, cooling, GPU servers, networking, sites, and operations through an interactive 3D value-chain model.
 - Language label: Language
 - Reset button: Reset

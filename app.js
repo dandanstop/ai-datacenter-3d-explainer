@@ -1,6 +1,61 @@
 import * as THREE from "three";
 import { OrbitControls } from "./vendor/OrbitControls.js";
 
+const referenceCompanies = {
+  schneider: { name: "Schneider Electric", url: "https://www.se.com/ww/en/" },
+  eaton: { name: "Eaton", url: "https://www.eaton.com/us/en-us.html" },
+  abb: { name: "ABB", url: "https://www.abb.com/global/en" },
+  vertiv: { name: "Vertiv", url: "https://www.vertiv.com/en-us/" },
+  gevernova: { name: "GE Vernova", url: "https://www.gevernova.com/" },
+  siemensEnergy: { name: "Siemens Energy", url: "https://www.siemens-energy.com/global/en/home.html" },
+  caterpillar: { name: "Caterpillar", url: "https://www.caterpillar.com/" },
+  cummins: { name: "Cummins", url: "https://www.cummins.com/" },
+  trane: { name: "Trane Technologies", url: "https://www.tranetechnologies.com/en/index.html" },
+  jci: { name: "Johnson Controls", url: "https://www.johnsoncontrols.com/" },
+  carrier: { name: "Carrier", url: "https://www.carrier.com/us/en/commercial/" },
+  daikin: { name: "Daikin", url: "https://www.daikin.com/" },
+  delta: { name: "Delta Electronics", url: "https://www.deltaww.com/en-US/index" },
+  nvidia: { name: "NVIDIA", url: "https://www.nvidia.com/en-us/data-center/" },
+  amd: { name: "AMD", url: "https://www.amd.com/en.html" },
+  tsmc: { name: "TSMC", url: "https://www.tsmc.com/english" },
+  micron: { name: "Micron", url: "https://www.micron.com/" },
+  intelFoundry: { name: "Intel Foundry", url: "https://www.intel.com/content/www/us/en/foundry/overview.html" },
+  amkor: { name: "Amkor", url: "https://amkor.com/" },
+  samsungSemi: { name: "Samsung Semiconductor", url: "https://semiconductor.samsung.com/" },
+  skhynix: { name: "SK hynix", url: "https://www.skhynix.com/" },
+  arista: { name: "Arista Networks", url: "https://www.arista.com/en/" },
+  cisco: { name: "Cisco", url: "https://www.cisco.com/" },
+  broadcom: { name: "Broadcom", url: "https://www.broadcom.com/" },
+  marvell: { name: "Marvell", url: "https://www.marvell.com/" },
+  coherent: { name: "Coherent", url: "https://www.coherent.com/" },
+  lumentum: { name: "Lumentum", url: "https://www.lumentum.com/en" },
+  cloudflare: { name: "Cloudflare", url: "https://www.cloudflare.com/" },
+  equinix: { name: "Equinix", url: "https://www.equinix.com/" },
+  digitalrealty: { name: "Digital Realty", url: "https://www.digitalrealty.com/" },
+  databank: { name: "DataBank", url: "https://www.databank.com/" },
+  qts: { name: "QTS", url: "https://qtsdatacenters.com/" },
+  nttdata: { name: "NTT DATA", url: "https://www.nttdata.com/global/en/" },
+  azure: { name: "Microsoft Azure", url: "https://azure.microsoft.com/en-us" },
+  aws: { name: "AWS", url: "https://aws.amazon.com/" },
+  googleCloud: { name: "Google Cloud", url: "https://cloud.google.com/" },
+  coreweave: { name: "CoreWeave", url: "https://www.coreweave.com/" },
+  lambda: { name: "Lambda", url: "https://lambda.ai/" },
+  crusoe: { name: "Crusoe", url: "https://www.crusoe.ai/" },
+  datadog: { name: "Datadog", url: "https://www.datadoghq.com/" },
+  paloalto: { name: "Palo Alto Networks", url: "https://www.paloaltonetworks.com/" },
+  oracleCloud: { name: "Oracle Cloud", url: "https://www.oracle.com/cloud/" }
+};
+
+function companyLink(id, label = referenceCompanies[id]?.name) {
+  const company = referenceCompanies[id];
+  if (!company) return label;
+  return `<a href="${company.url}" target="_blank" rel="noreferrer">${label}</a>`;
+}
+
+function externalLink(label, url) {
+  return `<a href="${url}" target="_blank" rel="noreferrer">${label}</a>`;
+}
+
 const layers = [
   {
     id: "power",
@@ -16,10 +71,10 @@ const layers = [
       "能源與公用事業夥伴：NextEra Energy (NEE)、Duke Energy (DUK)、Constellation Energy (CEG)"
     ],
     metrics: [
-      ["30-150MW", "單一 AI 園區常見電力級距"],
-      ["N+1", "關鍵電力設備備援架構"],
-      ["18-36M", "大型併網與設備交期風險"],
-      ["PUE", "能源效率與營運成本核心指標"]
+      ["30-150MW", "一座 AI 園區通常需要多少可交付電力"],
+      ["N+1", "如何避免單一電力設備故障造成停機"],
+      ["18-36M", "為什麼變壓器與併網時程會拖慢上線"],
+      ["PUE", "多少電力真正轉成可用算力而不是損耗"]
     ],
     risk: "AI 資料中心的需求從 GPU 採購延伸到電力供給，常見瓶頸是變壓器、開關設備、併網審批與長期電價合約。教育性觀察：資料中心真正的可交付容量通常不是土地面積，而是可取得的 MW、電網穩定度、備援設計與用電成本；因此電力設備商、EPC 與公用事業會成為 AI 基礎建設週期的重要受益環節。",
     color: 0xffc34d
@@ -38,10 +93,10 @@ const layers = [
       "泵浦、閥件與水處理：Xylem (XYL)、Pentair (PNR)、Watts Water (WTS)"
     ],
     metrics: [
-      ["40-120kW", "AI 機櫃功率密度區間"],
-      ["Liquid", "高階 GPU 叢集主要升級方向"],
-      ["WUE", "水資源壓力評估指標"],
-      ["Delta T", "冷卻迴路效率關鍵變數"]
+      ["40-120kW", "高密度 AI 機櫃可能產生多少熱負載"],
+      ["Liquid", "為什麼液冷正逐漸取代傳統風冷"],
+      ["WUE", "這套冷卻方式會帶來多少用水壓力"],
+      ["Delta T", "熱能是否被有效帶離晶片與機櫃"]
     ],
     risk: "AI 機櫃功率密度提高後，風冷會面臨氣流、噪音與能耗限制，液冷、CDU、冷板、快接頭與水處理的重要性上升。教育性觀察：冷卻不是單一零件，而是從晶片熱源、伺服器內部液冷板、機櫃歧管、CDU、冷水主機到冷卻塔的完整熱路徑；任何接頭漏液、泵浦故障或水質問題都可能影響叢集可用率。",
     color: 0x22b8ff
@@ -60,10 +115,10 @@ const layers = [
       "AI Server/ODM 與整機：Super Micro Computer (SMCI)、Dell (DELL)、HPE (HPE)、Quanta (2382.TW)、Wiwynn (6669.TW)、Foxconn (2317.TW)"
     ],
     metrics: [
-      ["60-75%", "AI 資料中心 CapEx 常由 IT 設備主導"],
-      ["HBM", "GPU 供給的高敏感零組件"],
-      ["Rack-scale", "新一代整櫃交付模式"],
-      ["Yield", "封裝良率牽動出貨節奏"]
+      ["60-75%", "為什麼大部分資本支出都集中在算力硬體"],
+      ["HBM", "為什麼記憶體頻寬幾乎和 GPU 數量一樣重要"],
+      ["Rack-scale", "為什麼交付單位正從零件走向整櫃系統"],
+      ["Yield", "封裝良率如何影響真正可出貨的算力"]
     ],
     risk: "算力層是 AI 資料中心 CapEx 的核心，但瓶頸不只在 GPU。教育性觀察：一台 AI 伺服器同時依賴 GPU、HBM、先進封裝、PCB、電源、散熱、機櫃與整機測試；只看 GPU 訂單容易忽略 HBM 供給、CoWoS/先進封裝產能、伺服器良率與 rack-scale 交付節奏。真正的產業鏈分析要把晶片、封裝、記憶體與 ODM 同時串起來看。",
     color: 0x19d3ff
@@ -82,10 +137,10 @@ const layers = [
       "連接器、線纜與高速介面：Amphenol (APH)、TE Connectivity (TEL)、Molex (Koch private)"
     ],
     metrics: [
-      ["400G/800G", "AI 叢集主流高速互連"],
-      ["East-West", "GPU 叢集主要流量型態"],
-      ["Latency", "訓練效率敏感指標"],
-      ["Topology", "Clos/Fat-tree 影響擴充性"]
+      ["400G/800G", "加速器之間需要多快的資料傳輸速度"],
+      ["East-West", "為什麼大部分流量都在資料中心內部移動"],
+      ["Latency", "為什麼慢一點的連線就會浪費昂貴 GPU 時間"],
+      ["Topology", "網路設計如何決定叢集能放大到多大"]
     ],
     risk: "大模型訓練不是把 GPU 堆在一起就好，GPU 之間需要大量東西向流量。教育性觀察：當叢集從數千顆 GPU 擴到數萬顆 GPU，交換器 radix、光模組速率、拓樸設計、NIC/DPU 與 congestion control 會決定有效利用率；同樣 GPU 數量下，網路延遲與封包丟失可能讓訓練效率差很多。",
     color: 0x76ff7a
@@ -104,10 +159,10 @@ const layers = [
       "私有大型平台：Vantage Data Centers、QTS、CyrusOne、DataBank"
     ],
     metrics: [
-      ["24-48M", "大型園區從規劃到上線的常見週期"],
-      ["MW/acre", "土地使用效率與密度衡量"],
-      ["Permits", "審批是隱形交付瓶頸"],
-      ["Tier", "可靠度與冗餘設計標準"]
+      ["24-48M", "大型資料中心園區通常要多久才能正式上線"],
+      ["MW/acre", "同一塊土地可以承載多少可用電力密度"],
+      ["Permits", "為什麼審批流程常常比施工本身更慢"],
+      ["Tier", "機房承諾的可靠度如何反映在設計標準上"]
     ],
     risk: "資料中心供給不是即時商品，而是多年期基礎建設專案。教育性觀察：一個園區能不能上線，取決於土地、電力、水資源、環評、稅務誘因、施工人力、消防安規與客戶預租合約。相同的 AI 需求，在不同區域會因併網速度與地方政策而產生完全不同的供給曲線。",
     color: 0xc6cbd2
@@ -126,10 +181,10 @@ const layers = [
       "資安與合規：Palo Alto Networks (PANW)、CrowdStrike (CRWD)、Zscaler (ZS)、Okta (OKTA)"
     ],
     metrics: [
-      ["SLA", "企業客戶採購核心條款"],
-      ["Utilization", "算力租賃毛利關鍵"],
-      ["Inference", "需求逐步從訓練擴展至推論"],
-      ["Security", "主權資料與合規需求"]
+      ["SLA", "企業客戶真正購買的是什麼服務保證"],
+      ["Utilization", "營運商如何把 GPU 存量轉成實際收入"],
+      ["Inference", "需求為何正從訓練轉向長期服務推論"],
+      ["Security", "當 AI 接觸真實資料時為何治理變成核心"]
     ],
     risk: "營運平台把硬體轉換成可被客戶使用、計費與治理的算力服務。教育性觀察：長期競爭力不只來自擁有 GPU，而是來自利用率、排程效率、模型工具鏈、資料安全、SLA、客戶合約年限與能源成本管理。當硬體供給變多，差異化會從『誰有卡』逐步轉向『誰能把卡穩定、高利用率、合規地賣給客戶』。",
     color: 0xff6b9a
@@ -139,8 +194,10 @@ const layers = [
 const uiText = {
   zh: {
     htmlLang: "zh-Hant",
-    pageTitle: "從 GPU 到電網：AI 算力競賽進入基礎設施時代",
-    introText: "從電力、冷卻、GPU 伺服器、網路到營運服務，點選任一層級查看價值鏈角色與投資觀察。",
+    brandName: "Compute to Grid",
+    browserTitle: "Compute to Grid | AI 競賽，現在穿越電力、冷卻與電網",
+    pageTitle: "AI 競賽，現在穿越電力、冷卻與電網",
+    introText: "透過互動式 3D 模型，理解電力、冷卻、算力、網路、園區建設與營運如何共同構成 AI 資料中心。",
     languageLabel: "語言",
     reset: "Reset",
     resetTitle: "重置視角",
@@ -149,11 +206,17 @@ const uiText = {
     fileWarningText: "直接開啟 index.html 時瀏覽器會封鎖 3D 模組。若沒有自動跳轉，請開啟 http://127.0.0.1:8124/。",
     hintDrag: "拖曳旋轉",
     hintZoom: "滾輪縮放",
+    hintWheelLayer: "滾輪切換層級",
     hintClick: "點選聚焦",
     insightRevealPrompt: "與 3D 模型互動後，將顯示此層級的產業洞察。",
     insightTitle: "洞察",
     supplierHeading: "價值鏈角色",
     riskHeading: "關鍵觀察",
+    chapter1SummaryHeading: "運作原理",
+    chapter1BuildersHeading: "誰在打造這一層",
+    chapter1FutureHeading: "未來訊號",
+    chapter1SignalsHeading: "值得持續關注的訊號",
+    chapter1LearnMoreHeading: "延伸閱讀",
     layerListLabel: "產業鏈層級",
     audioLabel: "語音導覽",
     play: "播放",
@@ -170,12 +233,25 @@ const uiText = {
     aboutFocus: "我通常會親自動手測試最新 AI 工具、MarTech 想法，還有一些只是因為好玩而做的小實驗。",
     aboutAudience: "如果這裡的內容激發了你的想法，歡迎聊聊。我一直很樂意交流創新、創意科技，以及下一個值得打造的東西。",
     aboutUpdated: "最後更新：2026 年 6 月",
-    aboutContact: "Contact"
+    aboutContact: "Contact",
+    updatesLink: "更新紀錄",
+    updatesEyebrow: "更新紀錄",
+    updatesTitle: "近期更新",
+    updatesUpdated: "更新時間：2026 年 6 月",
+    updatesDescription: "第一版於 2026 年 6 月推出。之後持續以低調但重要的方式優化內容、導覽與互動細節。",
+    updatesItems: [
+      "重新整理 Chapter 1 導覽，讓 3D 模型更容易先被理解",
+      "調整手機版 dock 與 stage chip，讓首屏更聚焦在模型本身",
+      "優化 3D 旋轉手感，讓拖曳互動更順暢自然",
+      "補強 SEO 與 metadata，讓內容更容易被發現與持續索引"
+    ]
   },
   en: {
     htmlLang: "en",
-    pageTitle: "From GPUs to the Grid: The AI Compute Race Enters Its Infrastructure Era",
-    introText: "Explore power, cooling, GPU servers, networking, sites, and operations through an interactive 3D value-chain model.",
+    brandName: "Compute to Grid",
+    browserTitle: "Compute to Grid | The AI Race Now Runs Through Power, Cooling, and the Grid",
+    pageTitle: "The AI Race Now Runs Through Power, Cooling, and the Grid",
+    introText: "Explore how power, cooling, compute, networking, sites, and operations work together inside AI data center infrastructure.",
     languageLabel: "Language",
     reset: "Reset",
     resetTitle: "Reset view",
@@ -184,11 +260,17 @@ const uiText = {
     fileWarningText: "Opening index.html directly blocks the 3D module. If the redirect does not happen, open http://127.0.0.1:8124/.",
     hintDrag: "Drag to rotate",
     hintZoom: "Wheel to zoom",
+    hintWheelLayer: "Wheel to switch layers",
     hintClick: "Click to focus",
     insightRevealPrompt: "Interact with the 3D model to reveal this layer's insight.",
     insightTitle: "Insight",
     supplierHeading: "Value-chain roles",
     riskHeading: "Key finding",
+    chapter1SummaryHeading: "How it works",
+    chapter1BuildersHeading: "Who builds this layer",
+    chapter1FutureHeading: "Future signal",
+    chapter1SignalsHeading: "Signals to watch",
+    chapter1LearnMoreHeading: "Learn more",
     layerListLabel: "Value-chain layers",
     audioLabel: "Audio briefing",
     play: "Play",
@@ -205,12 +287,25 @@ const uiText = {
     aboutFocus: "I’m usually hands-on, testing the latest AI tools, MarTech ideas, and little experiments just for fun.",
     aboutAudience: "If something here sparks an idea, let’s talk. I’m always happy to swap thoughts on innovation, creative technology, and what might be worth building next.",
     aboutUpdated: "Last updated: June 2026",
-    aboutContact: "Contact"
+    aboutContact: "Contact",
+    updatesLink: "Updates",
+    updatesEyebrow: "Updates",
+    updatesTitle: "Recent updates",
+    updatesUpdated: "Updated: June 2026",
+    updatesDescription: "Version 1 launched in June 2026. Since then, the project has continued to evolve through small but meaningful upgrades to content, navigation, and interaction design.",
+    updatesItems: [
+      "Refined Chapter 1 navigation so the 3D model is easier to understand at first glance",
+      "Improved the mobile dock and stage chip to keep the first screen focused on the model",
+      "Smoothed 3D rotation behavior so drag interactions feel calmer and more natural",
+      "Strengthened SEO and metadata foundations so the explainer is easier to discover and revisit"
+    ]
   },
   ko: {
     htmlLang: "ko",
-    pageTitle: "GPU에서 전력망까지: AI 컴퓨팅 경쟁은 인프라 시대로 진입했다",
-    introText: "전력, 냉각, GPU 서버, 네트워크, 부지, 운영 플랫폼을 인터랙티브 3D 밸류체인 모델로 살펴보세요.",
+    brandName: "Compute to Grid",
+    browserTitle: "Compute to Grid | 이제 AI 경쟁은 전력, 냉각, 전력망을 통해 전개된다",
+    pageTitle: "이제 AI 경쟁은 전력, 냉각, 전력망을 통해 전개된다",
+    introText: "인터랙티브 3D 모델을 통해 전력, 냉각, 컴퓨트, 네트워크, 캠퍼스 구축, 운영이 어떻게 AI 데이터센터를 이루는지 살펴보세요.",
     languageLabel: "언어",
     reset: "초기화",
     resetTitle: "시점 초기화",
@@ -219,11 +314,17 @@ const uiText = {
     fileWarningText: "index.html을 직접 열면 브라우저가 3D 모듈을 차단합니다. 자동 이동이 되지 않으면 http://127.0.0.1:8124/ 을 여세요.",
     hintDrag: "드래그 회전",
     hintZoom: "휠 확대",
+    hintWheelLayer: "휠로 레이어 전환",
     hintClick: "클릭 포커스",
     insightRevealPrompt: "3D 모델과 상호작용하면 이 레이어의 인사이트가 표시됩니다.",
     insightTitle: "인사이트",
     supplierHeading: "밸류체인 역할",
     riskHeading: "산업 배경",
+    chapter1SummaryHeading: "작동 원리",
+    chapter1BuildersHeading: "누가 이 레이어를 만드는가",
+    chapter1FutureHeading: "미래 신호",
+    chapter1SignalsHeading: "계속 지켜볼 신호",
+    chapter1LearnMoreHeading: "더 읽어보기",
     layerListLabel: "밸류체인 레이어",
     audioLabel: "오디오 브리핑",
     play: "재생",
@@ -240,12 +341,25 @@ const uiText = {
     aboutFocus: "저는 보통 직접 손을 움직여 최신 AI 도구, MarTech 아이디어, 그리고 재미로 해보는 작은 실험들을 테스트합니다.",
     aboutAudience: "이곳의 어떤 내용이 아이디어를 떠올리게 했다면 함께 이야기해요. 혁신, 크리에이티브 테크놀로지, 그리고 다음에 만들어볼 만한 것에 대해 생각을 나누는 일을 늘 환영합니다.",
     aboutUpdated: "마지막 업데이트: 2026년 6월",
-    aboutContact: "Contact"
+    aboutContact: "Contact",
+    updatesLink: "업데이트",
+    updatesEyebrow: "업데이트",
+    updatesTitle: "최근 업데이트",
+    updatesUpdated: "업데이트: 2026년 6월",
+    updatesDescription: "Version 1은 2026년 6월에 공개되었습니다. 그 이후로도 콘텐츠, 내비게이션, 인터랙션을 중심으로 작지만 의미 있는 개선을 계속 더해왔습니다.",
+    updatesItems: [
+      "3D 모델을 처음부터 더 쉽게 이해할 수 있도록 Chapter 1 내비게이션을 다듬었습니다",
+      "첫 화면이 모델에 더 집중되도록 모바일 dock과 stage chip을 개선했습니다",
+      "드래그 회전이 더 차분하고 자연스럽게 느껴지도록 3D 인터랙션을 부드럽게 조정했습니다",
+      "더 잘 발견되고 다시 찾아오게 만들 수 있도록 SEO 및 메타데이터 기반을 보강했습니다"
+    ]
   },
   ja: {
     htmlLang: "ja",
-    pageTitle: "GPU から電力網へ：AI コンピュート競争はインフラの時代へ",
-    introText: "電力、冷却、GPU サーバー、ネットワーク、用地、運用基盤を、インタラクティブな 3D バリューチェーンモデルで確認できます。",
+    brandName: "Compute to Grid",
+    browserTitle: "Compute to Grid | AI 競争はいま、電力、冷却、そして電力網を通って進む",
+    pageTitle: "AI 競争はいま、電力、冷却、そして電力網を通って進む",
+    introText: "インタラクティブな 3D モデルで、電力、冷却、コンピュート、ネットワーク、キャンパス建設、運用がどのように AI データセンターを構成するのかを確認できます。",
     languageLabel: "言語",
     reset: "リセット",
     resetTitle: "視点をリセット",
@@ -254,11 +368,17 @@ const uiText = {
     fileWarningText: "index.html を直接開くとブラウザが 3D モジュールをブロックします。自動で移動しない場合は http://127.0.0.1:8124/ を開いてください。",
     hintDrag: "ドラッグで回転",
     hintZoom: "ホイールでズーム",
+    hintWheelLayer: "ホイールでレイヤー切替",
     hintClick: "クリックでフォーカス",
     insightRevealPrompt: "3D モデルを操作すると、この層のインサイトが表示されます。",
     insightTitle: "インサイト",
     supplierHeading: "バリューチェーンの役割",
     riskHeading: "産業背景",
+    chapter1SummaryHeading: "仕組み",
+    chapter1BuildersHeading: "このレイヤーをつくるのは誰か",
+    chapter1FutureHeading: "未来シグナル",
+    chapter1SignalsHeading: "継続して見るべきシグナル",
+    chapter1LearnMoreHeading: "さらに読む",
     layerListLabel: "バリューチェーン層",
     audioLabel: "音声ブリーフィング",
     play: "再生",
@@ -275,7 +395,18 @@ const uiText = {
     aboutFocus: "私は普段、最新の AI ツール、MarTech のアイデア、そして純粋に楽しい小さな実験を、実際に手を動かして試しています。",
     aboutAudience: "ここにある何かがアイデアのきっかけになったなら、ぜひ話しましょう。イノベーション、クリエイティブテクノロジー、そして次に何をつくる価値があるのかについて、考えを交換するのはいつでも歓迎です。",
     aboutUpdated: "最終更新：2026年6月",
-    aboutContact: "Contact"
+    aboutContact: "Contact",
+    updatesLink: "更新情報",
+    updatesEyebrow: "更新情報",
+    updatesTitle: "最近の更新",
+    updatesUpdated: "更新日：2026年6月",
+    updatesDescription: "Version 1 は 2026年6月に公開しました。その後も、コンテンツ、導線、インタラクションを中心に、小さくても意味のある改善を積み重ねています。",
+    updatesItems: [
+      "最初の一目で 3D モデルを理解しやすくなるよう、Chapter 1 の導線を整えました",
+      "最初の画面がモデル中心になるよう、モバイルの dock と stage chip を見直しました",
+      "ドラッグ操作がより落ち着いて自然に感じられるよう、3D 回転挙動を調整しました",
+      "より見つけやすく、再訪しやすくするために、SEO とメタデータの基盤を強化しました"
+    ]
   }
 };
 
@@ -292,7 +423,7 @@ const layerTranslations = {
         "Power EPC and interconnection: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)",
         "Energy and utility partners: NextEra Energy (NEE), Duke Energy (DUK), Constellation Energy (CEG)"
       ],
-      metrics: [["30-150MW", "Common power range for one AI campus"], ["N+1", "Redundancy design for critical power"], ["18-36M", "Grid and equipment lead-time risk"], ["PUE", "Core energy-efficiency metric"]],
+      metrics: [["30-150MW", "How much deliverable power one AI campus may need"], ["N+1", "How operators avoid a single power failure taking the site down"], ["18-36M", "Why transformers and grid lead times can delay launch"], ["PUE", "How much electricity becomes useful compute instead of overhead"]],
       risk: "AI demand increasingly depends on power delivery, not only GPU procurement. The key constraints are transformers, switchgear, grid approvals, and long-term power contracts. A practical way to read this layer is to ask how many megawatts can actually be delivered, at what reliability level, and at what cost."
     },
     cooling: {
@@ -306,7 +437,7 @@ const layerTranslations = {
         "Liquid cooling components: Delta Electronics (2308.TW), CoolIT Systems (private), Asetek (ASTK.CO)",
         "Pumps, valves, and water treatment: Xylem (XYL), Pentair (PNR), Watts Water (WTS)"
       ],
-      metrics: [["40-120kW", "AI rack power-density range"], ["Liquid", "Preferred path for high-end GPU clusters"], ["WUE", "Water-usage effectiveness"], ["Delta T", "Efficiency variable for cooling loops"]],
+      metrics: [["40-120kW", "How much heat a high-density AI rack may need to shed"], ["Liquid", "Why direct liquid cooling is replacing air at the high end"], ["WUE", "How much water stress the cooling design may create"], ["Delta T", "Whether the thermal loop is removing heat efficiently"]],
       risk: "Cooling is a full thermal path: chip heat source, cold plate, rack manifold, CDU, chiller, and cooling tower. Any failure in quick connectors, pumps, or water quality can reduce cluster availability, so reliability engineering matters as much as capacity."
     },
     compute: {
@@ -320,7 +451,7 @@ const layerTranslations = {
         "HBM and memory: SK hynix (000660.KS), Micron (MU), Samsung Electronics (005930.KS)",
         "AI server/ODM and systems: Super Micro Computer (SMCI), Dell (DELL), HPE (HPE), Quanta (2382.TW), Wiwynn (6669.TW), Foxconn (2317.TW)"
       ],
-      metrics: [["60-75%", "AI data center CapEx is often led by IT equipment"], ["HBM", "High-sensitivity GPU bottleneck"], ["Rack-scale", "Next-generation delivery model"], ["Yield", "Packaging yield affects shipment timing"]],
+      metrics: [["60-75%", "Why compute hardware dominates capital spending"], ["HBM", "Why memory bandwidth matters almost as much as GPU count"], ["Rack-scale", "Why delivery is shifting from parts to full systems"], ["Yield", "How packaging success turns into real shipped capacity"]],
       risk: "Compute bottlenecks are not limited to GPUs. A server also depends on HBM, advanced packaging, PCB, power, thermal design, rack integration, and testing. Strong analysis connects silicon, memory, packaging, and ODM delivery rather than reading GPU orders alone."
     },
     network: {
@@ -334,7 +465,7 @@ const layerTranslations = {
         "Optical modules and photonics: Coherent (COHR), Lumentum (LITE), Fabrinet (FN), Innolight (300308.SZ)",
         "Connectors, cables, and high-speed interfaces: Amphenol (APH), TE Connectivity (TEL), Molex (Koch private)"
       ],
-      metrics: [["400G/800G", "Mainstream high-speed AI interconnect"], ["East-West", "Dominant traffic pattern in GPU clusters"], ["Latency", "Sensitive driver of training efficiency"], ["Topology", "Clos/Fat-tree affects scalability"]],
+      metrics: [["400G/800G", "How fast data has to move between accelerators"], ["East-West", "Why most traffic stays inside the data hall"], ["Latency", "Why slower links waste expensive GPU time"], ["Topology", "How network design shapes usable cluster scale"]],
       risk: "Large training clusters are networked systems, not just piles of GPUs. As clusters scale, switch radix, optics speed, topology, NIC/DPU design, and congestion control can explain why two sites with similar GPU counts deliver very different effective throughput."
     },
     site: {
@@ -348,7 +479,7 @@ const layerTranslations = {
         "Civil, electrical, mechanical EPC: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)",
         "Private large-scale platforms: Vantage Data Centers, QTS, CyrusOne, DataBank"
       ],
-      metrics: [["24-48M", "Typical cycle from planning to go-live"], ["MW/acre", "Land-use density indicator"], ["Permits", "Hidden delivery bottleneck"], ["Tier", "Reliability and redundancy standard"]],
+      metrics: [["24-48M", "How long a large campus often takes to go live"], ["MW/acre", "How much power a site can concentrate on one footprint"], ["Permits", "Why approvals often gate real supply"], ["Tier", "How reliability promises map to facility design"]],
       risk: "Data center supply is not instant capacity; it is a multi-year infrastructure pipeline. Land, grid access, water, environmental review, tax incentives, labor, fire codes, and pre-lease contracts all determine when capacity becomes real."
     },
     ops: {
@@ -362,25 +493,510 @@ const layerTranslations = {
         "Data, MLOps, and observability: Snowflake (SNOW), Datadog (DDOG), ServiceNow (NOW), Cloudflare (NET), Databricks (private)",
         "Security and compliance: Palo Alto Networks (PANW), CrowdStrike (CRWD), Zscaler (ZS), Okta (OKTA)"
       ],
-      metrics: [["SLA", "Core enterprise contract term"], ["Utilization", "Key driver of GPU rental margin"], ["Inference", "Demand expands from training to inference"], ["Security", "Sovereign data and compliance need"]],
+      metrics: [["SLA", "What enterprise buyers actually expect the service to guarantee"], ["Utilization", "How operators turn GPU inventory into revenue"], ["Inference", "Why demand shifts from building models to serving them"], ["Security", "Why governance matters once AI touches real data"]],
       risk: "Operations turn hardware into governed, billable compute. Long-term advantage comes from utilization, scheduling efficiency, model tooling, data security, SLA quality, contract duration, and energy-cost management."
     }
   },
   ko: {
-    power: { name: "전력 및 전력망", role: "전력회사, 변전소, UPS, PDU", signal: "전력 확보와 계통 접속 일정은 대형 AI 데이터센터의 첫 번째 병목입니다.", lede: "AI 클러스터는 데이터센터를 IT 프로젝트가 아니라 전력 인프라 프로젝트로 바꿉니다.", suppliers: ["전력망 장비: Schneider Electric (SU.PA), Eaton (ETN), ABB (ABBN.SW/ABB), Siemens Energy (ENR.DE)", "백업 전원과 핵심 인프라: Vertiv (VRT), Caterpillar (CAT), Cummins (CMI), GE Vernova (GEV)", "전력 EPC와 계통 접속: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "에너지 및 유틸리티 파트너: NextEra Energy (NEE), Duke Energy (DUK), Constellation Energy (CEG)"], metrics: [["30-150MW", "단일 AI 캠퍼스의 일반 전력 범위"], ["N+1", "핵심 전력 이중화 구조"], ["18-36M", "계통 및 장비 리드타임 리스크"], ["PUE", "에너지 효율 핵심 지표"]], risk: "AI 수요는 GPU 조달뿐 아니라 실제 전력 공급 능력에 좌우됩니다. 변압기, 스위치기어, 계통 승인, 장기 전력계약을 함께 봐야 실제 가동 가능 용량을 이해할 수 있습니다." },
-    cooling: { name: "냉각 시스템", role: "칠러, CDU, 콜드플레이트, 냉각탑", signal: "GPU 열밀도 상승은 콜드플레이트, CDU, 펌프, 냉각탑 업그레이드를 촉진합니다.", lede: "AI 랙 밀도가 높아지며 공랭에서 하이브리드 및 액체냉각으로 이동하고 있습니다.", suppliers: ["데이터센터 열관리: Vertiv (VRT), Schneider Electric (SU.PA), Johnson Controls (JCI), Trane Technologies (TT)", "칠러/HVAC/열교환: Carrier Global (CARR), Modine (MOD), nVent Electric (NVT), Daikin (6367.T)", "액체냉각 부품: Delta Electronics (2308.TW), CoolIT Systems (private), Asetek (ASTK.CO)", "펌프/밸브/수처리: Xylem (XYL), Pentair (PNR), Watts Water (WTS)"], metrics: [["40-120kW", "AI 랙 전력밀도 범위"], ["Liquid", "고성능 GPU 클러스터 방향"], ["WUE", "물 사용 효율"], ["Delta T", "냉각 루프 효율 변수"]], risk: "냉각은 칩, 콜드플레이트, 랙 매니폴드, CDU, 칠러, 냉각탑으로 이어지는 열 경로입니다. 커넥터 누수, 펌프 고장, 수질 문제는 클러스터 가용률에 직접 영향을 줄 수 있습니다." },
-    compute: { name: "컴퓨팅 장비", role: "GPU, HBM, 첨단 패키징, AI 서버", signal: "GPU 공급, 첨단 패키징, 랙 단위 서버 납품이 구축 속도를 결정합니다.", lede: "컴퓨팅 계층은 GPU, HBM, 패키징, 서버 보드, 전원, 랙, 시스템 통합으로 구성됩니다.", suppliers: ["AI 가속기와 플랫폼: NVIDIA (NVDA), AMD (AMD), Broadcom (AVGO), Marvell (MRVL)", "파운드리/장비/첨단 패키징: TSMC (TSM/2330.TW), ASML (ASML), Applied Materials (AMAT), Lam Research (LRCX)", "HBM 및 메모리: SK hynix (000660.KS), Micron (MU), Samsung Electronics (005930.KS)", "AI 서버/ODM: Super Micro Computer (SMCI), Dell (DELL), HPE (HPE), Quanta (2382.TW), Wiwynn (6669.TW), Foxconn (2317.TW)"], metrics: [["60-75%", "AI 데이터센터 CapEx는 IT 장비가 주도"], ["HBM", "GPU 공급의 민감 병목"], ["Rack-scale", "차세대 납품 방식"], ["Yield", "패키징 수율이 출하를 좌우"]], risk: "컴퓨팅 병목은 GPU에만 있지 않습니다. HBM, 첨단 패키징, PCB, 전원, 냉각, 랙 통합, 테스트를 함께 봐야 실제 납품 속도를 이해할 수 있습니다." },
-    network: { name: "네트워크 인터커넥트", role: "스위치, NIC, 광모듈, 광섬유", signal: "훈련 클러스터 병목은 동서 트래픽과 광 인터커넥트에서 자주 발생합니다.", lede: "대형 모델 훈련은 저지연·고대역폭 GPU 간 연결이 필요합니다.", suppliers: ["데이터센터 스위치: Arista Networks (ANET), Cisco (CSCO), NVIDIA Networking (NVDA)", "네트워크 칩/DPU/NIC: Broadcom (AVGO), Marvell (MRVL), Intel (INTC), NVIDIA (NVDA)", "광모듈 및 포토닉스: Coherent (COHR), Lumentum (LITE), Fabrinet (FN), Innolight (300308.SZ)", "커넥터/케이블/고속 인터페이스: Amphenol (APH), TE Connectivity (TEL), Molex (Koch private)"], metrics: [["400G/800G", "AI 고속 인터커넥트"], ["East-West", "GPU 클러스터 주요 트래픽"], ["Latency", "훈련 효율 민감 변수"], ["Topology", "확장성 결정 요인"]], risk: "대형 훈련 클러스터는 GPU 더미가 아니라 네트워크 시스템입니다. 스위치, 광모듈, 토폴로지, NIC/DPU, 혼잡 제어가 실제 처리량을 좌우합니다." },
-    site: { name: "부지 및 건설", role: "토지, 수자원, 시설, EPC", signal: "건설 가능한 토지, 물, 전력 거리, 시공 능력이 공급 속도를 결정합니다.", lede: "데이터센터는 토지, 토목, 전기/기계, 소방, 보안, 인허가가 결합된 중자산 인프라입니다.", suppliers: ["데이터센터 REITs/개발사: Equinix (EQIX), Digital Realty (DLR), GDS Holdings (GDS/9698.HK), NEXTDC (NXT.AX)", "지역/주권 클라우드 운영사: Keppel DC REIT (AJBU.SI), NTT Data (9613.T), KDDI (9433.T)", "토목/전기/기계 EPC: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "민간 대형 플랫폼: Vantage Data Centers, QTS, CyrusOne, DataBank"], metrics: [["24-48M", "계획부터 가동까지의 일반 주기"], ["MW/acre", "토지 사용 밀도"], ["Permits", "숨은 납품 병목"], ["Tier", "신뢰성 및 이중화 기준"]], risk: "데이터센터 공급은 즉시 생기는 용량이 아니라 다년 인프라 파이프라인입니다. 토지, 전력, 물, 환경심사, 세제 혜택, 인력, 소방 규정, 선임대 계약이 모두 중요합니다." },
-    ops: { name: "운영 및 플랫폼", role: "클라우드, 코로케이션, MLOps, 모니터링, 보안", signal: "실제 상품은 건물이 아니라 스케줄링·과금·모니터링 가능한 컴퓨팅 서비스입니다.", lede: "운영 계층은 인프라를 GPU 클라우드, 훈련 플랫폼, 추론 서비스, 관리형 솔루션으로 전환합니다.", suppliers: ["하이퍼스케일러와 클라우드: Amazon (AMZN), Microsoft (MSFT), Alphabet (GOOGL), Oracle (ORCL), Meta (META)", "GPU 클라우드와 AI 인프라: CoreWeave (CRWV), Nebius (NBIS), Lambda (private), Crusoe (private)", "데이터/MLOps/가시성: Snowflake (SNOW), Datadog (DDOG), ServiceNow (NOW), Cloudflare (NET), Databricks (private)", "보안 및 컴플라이언스: Palo Alto Networks (PANW), CrowdStrike (CRWD), Zscaler (ZS), Okta (OKTA)"], metrics: [["SLA", "기업 계약 핵심 조건"], ["Utilization", "GPU 임대 수익성 변수"], ["Inference", "훈련에서 추론으로 수요 확대"], ["Security", "주권 데이터와 규제 요구"]], risk: "운영 플랫폼은 하드웨어를 과금 가능한 서비스로 바꿉니다. 장기 경쟁력은 GPU 보유량보다 이용률, 스케줄링, 도구 생태계, 보안, SLA, 전력비 관리에서 나옵니다." }
+    power: { name: "전력 및 전력망", role: "전력회사, 변전소, UPS, PDU", signal: "전력 확보와 계통 접속 일정은 대형 AI 데이터센터의 첫 번째 병목입니다.", lede: "AI 클러스터는 데이터센터를 IT 프로젝트가 아니라 전력 인프라 프로젝트로 바꿉니다.", suppliers: ["전력망 장비: Schneider Electric (SU.PA), Eaton (ETN), ABB (ABBN.SW/ABB), Siemens Energy (ENR.DE)", "백업 전원과 핵심 인프라: Vertiv (VRT), Caterpillar (CAT), Cummins (CMI), GE Vernova (GEV)", "전력 EPC와 계통 접속: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "에너지 및 유틸리티 파트너: NextEra Energy (NEE), Duke Energy (DUK), Constellation Energy (CEG)"], metrics: [["30-150MW", "하나의 AI 캠퍼스가 실제로 필요로 하는 전력 규모"], ["N+1", "전력 장비 한 대가 고장나도 멈추지 않게 하는 방법"], ["18-36M", "변압기와 계통 일정이 왜 개시를 늦추는가"], ["PUE", "전기가 손실이 아닌 실제 컴퓨트로 얼마나 전환되는가"]], risk: "AI 수요는 GPU 조달뿐 아니라 실제 전력 공급 능력에 좌우됩니다. 변압기, 스위치기어, 계통 승인, 장기 전력계약을 함께 봐야 실제 가동 가능 용량을 이해할 수 있습니다." },
+    cooling: { name: "냉각 시스템", role: "칠러, CDU, 콜드플레이트, 냉각탑", signal: "GPU 열밀도 상승은 콜드플레이트, CDU, 펌프, 냉각탑 업그레이드를 촉진합니다.", lede: "AI 랙 밀도가 높아지며 공랭에서 하이브리드 및 액체냉각으로 이동하고 있습니다.", suppliers: ["데이터센터 열관리: Vertiv (VRT), Schneider Electric (SU.PA), Johnson Controls (JCI), Trane Technologies (TT)", "칠러/HVAC/열교환: Carrier Global (CARR), Modine (MOD), nVent Electric (NVT), Daikin (6367.T)", "액체냉각 부품: Delta Electronics (2308.TW), CoolIT Systems (private), Asetek (ASTK.CO)", "펌프/밸브/수처리: Xylem (XYL), Pentair (PNR), Watts Water (WTS)"], metrics: [["40-120kW", "고밀도 AI 랙이 처리해야 하는 열부하 규모"], ["Liquid", "왜 액체 냉각이 공랭을 대체하기 시작하는가"], ["WUE", "이 냉각 방식이 만드는 물 사용 압력"], ["Delta T", "열이 칩과 랙에서 효율적으로 빠져나가는가"]], risk: "냉각은 칩, 콜드플레이트, 랙 매니폴드, CDU, 칠러, 냉각탑으로 이어지는 열 경로입니다. 커넥터 누수, 펌프 고장, 수질 문제는 클러스터 가용률에 직접 영향을 줄 수 있습니다." },
+    compute: { name: "컴퓨팅 장비", role: "GPU, HBM, 첨단 패키징, AI 서버", signal: "GPU 공급, 첨단 패키징, 랙 단위 서버 납품이 구축 속도를 결정합니다.", lede: "컴퓨팅 계층은 GPU, HBM, 패키징, 서버 보드, 전원, 랙, 시스템 통합으로 구성됩니다.", suppliers: ["AI 가속기와 플랫폼: NVIDIA (NVDA), AMD (AMD), Broadcom (AVGO), Marvell (MRVL)", "파운드리/장비/첨단 패키징: TSMC (TSM/2330.TW), ASML (ASML), Applied Materials (AMAT), Lam Research (LRCX)", "HBM 및 메모리: SK hynix (000660.KS), Micron (MU), Samsung Electronics (005930.KS)", "AI 서버/ODM: Super Micro Computer (SMCI), Dell (DELL), HPE (HPE), Quanta (2382.TW), Wiwynn (6669.TW), Foxconn (2317.TW)"], metrics: [["60-75%", "왜 자본지출의 대부분이 컴퓨트 하드웨어에 집중되는가"], ["HBM", "왜 메모리 대역폭이 GPU 수만큼 중요한가"], ["Rack-scale", "왜 납품 단위가 부품에서 완성 시스템으로 이동하는가"], ["Yield", "패키징 수율이 실제 출하 가능한 용량을 어떻게 바꾸는가"]], risk: "컴퓨팅 병목은 GPU에만 있지 않습니다. HBM, 첨단 패키징, PCB, 전원, 냉각, 랙 통합, 테스트를 함께 봐야 실제 납품 속도를 이해할 수 있습니다." },
+    network: { name: "네트워크 인터커넥트", role: "스위치, NIC, 광모듈, 광섬유", signal: "훈련 클러스터 병목은 동서 트래픽과 광 인터커넥트에서 자주 발생합니다.", lede: "대형 모델 훈련은 저지연·고대역폭 GPU 간 연결이 필요합니다.", suppliers: ["데이터센터 스위치: Arista Networks (ANET), Cisco (CSCO), NVIDIA Networking (NVDA)", "네트워크 칩/DPU/NIC: Broadcom (AVGO), Marvell (MRVL), Intel (INTC), NVIDIA (NVDA)", "광모듈 및 포토닉스: Coherent (COHR), Lumentum (LITE), Fabrinet (FN), Innolight (300308.SZ)", "커넥터/케이블/고속 인터페이스: Amphenol (APH), TE Connectivity (TEL), Molex (Koch private)"], metrics: [["400G/800G", "가속기 사이에 필요한 데이터 이동 속도"], ["East-West", "왜 대부분의 트래픽이 데이터센터 내부에서 움직이는가"], ["Latency", "왜 느린 링크가 비싼 GPU 시간을 낭비하는가"], ["Topology", "네트워크 설계가 클러스터 확장 한계를 어떻게 정하는가"]], risk: "대형 훈련 클러스터는 GPU 더미가 아니라 네트워크 시스템입니다. 스위치, 광모듈, 토폴로지, NIC/DPU, 혼잡 제어가 실제 처리량을 좌우합니다." },
+    site: { name: "부지 및 건설", role: "토지, 수자원, 시설, EPC", signal: "건설 가능한 토지, 물, 전력 거리, 시공 능력이 공급 속도를 결정합니다.", lede: "데이터센터는 토지, 토목, 전기/기계, 소방, 보안, 인허가가 결합된 중자산 인프라입니다.", suppliers: ["데이터센터 REITs/개발사: Equinix (EQIX), Digital Realty (DLR), GDS Holdings (GDS/9698.HK), NEXTDC (NXT.AX)", "지역/주권 클라우드 운영사: Keppel DC REIT (AJBU.SI), NTT Data (9613.T), KDDI (9433.T)", "토목/전기/기계 EPC: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "민간 대형 플랫폼: Vantage Data Centers, QTS, CyrusOne, DataBank"], metrics: [["24-48M", "대형 캠퍼스가 실제 가동까지 걸리는 시간"], ["MW/acre", "한 부지에 얼마나 많은 전력을 밀집시킬 수 있는가"], ["Permits", "왜 인허가가 실제 공급을 늦추는가"], ["Tier", "신뢰성 약속이 설계 기준에 어떻게 반영되는가"]], risk: "데이터센터 공급은 즉시 생기는 용량이 아니라 다년 인프라 파이프라인입니다. 토지, 전력, 물, 환경심사, 세제 혜택, 인력, 소방 규정, 선임대 계약이 모두 중요합니다." },
+    ops: { name: "운영 및 플랫폼", role: "클라우드, 코로케이션, MLOps, 모니터링, 보안", signal: "실제 상품은 건물이 아니라 스케줄링·과금·모니터링 가능한 컴퓨팅 서비스입니다.", lede: "운영 계층은 인프라를 GPU 클라우드, 훈련 플랫폼, 추론 서비스, 관리형 솔루션으로 전환합니다.", suppliers: ["하이퍼스케일러와 클라우드: Amazon (AMZN), Microsoft (MSFT), Alphabet (GOOGL), Oracle (ORCL), Meta (META)", "GPU 클라우드와 AI 인프라: CoreWeave (CRWV), Nebius (NBIS), Lambda (private), Crusoe (private)", "데이터/MLOps/가시성: Snowflake (SNOW), Datadog (DDOG), ServiceNow (NOW), Cloudflare (NET), Databricks (private)", "보안 및 컴플라이언스: Palo Alto Networks (PANW), CrowdStrike (CRWD), Zscaler (ZS), Okta (OKTA)"], metrics: [["SLA", "기업 고객이 실제로 기대하는 서비스 보장"], ["Utilization", "운영사가 GPU 재고를 어떻게 수익으로 바꾸는가"], ["Inference", "왜 수요가 학습에서 서비스 추론으로 이동하는가"], ["Security", "AI가 실제 데이터를 다룰 때 왜 거버넌스가 핵심이 되는가"]], risk: "운영 플랫폼은 하드웨어를 과금 가능한 서비스로 바꿉니다. 장기 경쟁력은 GPU 보유량보다 이용률, 스케줄링, 도구 생태계, 보안, SLA, 전력비 관리에서 나옵니다." }
   },
   ja: {
-    power: { name: "電力・電力網", role: "電力会社、変電所、UPS、PDU", signal: "電力確保と系統接続の時期が、大型 AI データセンターの最初の制約になります。", lede: "AI クラスターはデータセンターを IT プロジェクトから電力インフラプロジェクトへ変えます。", suppliers: ["電力網・電気設備: Schneider Electric (SU.PA), Eaton (ETN), ABB (ABBN.SW/ABB), Siemens Energy (ENR.DE)", "バックアップ電源と重要インフラ: Vertiv (VRT), Caterpillar (CAT), Cummins (CMI), GE Vernova (GEV)", "電力 EPC と系統接続: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "エネルギー・公益事業パートナー: NextEra Energy (NEE), Duke Energy (DUK), Constellation Energy (CEG)"], metrics: [["30-150MW", "AI キャンパスの一般的な電力規模"], ["N+1", "重要電源の冗長設計"], ["18-36M", "系統・設備リードタイムリスク"], ["PUE", "エネルギー効率の中核指標"]], risk: "AI 需要は GPU 調達だけでなく、実際に供給できる電力に左右されます。変圧器、開閉装置、系統承認、長期電力契約を確認することで、実稼働可能な容量を理解できます。" },
-    cooling: { name: "冷却システム", role: "チラー、CDU、冷却板、冷却塔", signal: "GPU の熱密度上昇により、冷却板、CDU、ポンプ、冷却塔の更新が進みます。", lede: "AI ラック密度の上昇により、空冷からハイブリッド冷却・液冷へ移行しています。", suppliers: ["データセンター熱管理: Vertiv (VRT), Schneider Electric (SU.PA), Johnson Controls (JCI), Trane Technologies (TT)", "チラー/HVAC/熱交換: Carrier Global (CARR), Modine (MOD), nVent Electric (NVT), Daikin (6367.T)", "液冷部品: Delta Electronics (2308.TW), CoolIT Systems (private), Asetek (ASTK.CO)", "ポンプ/バルブ/水処理: Xylem (XYL), Pentair (PNR), Watts Water (WTS)"], metrics: [["40-120kW", "AI ラックの電力密度範囲"], ["Liquid", "高性能 GPU クラスターの方向性"], ["WUE", "水使用効率"], ["Delta T", "冷却ループ効率の変数"]], risk: "冷却はチップ、冷却板、ラックマニホールド、CDU、チラー、冷却塔まで続く熱経路です。コネクタ漏れ、ポンプ故障、水質問題はクラスター稼働率に直結します。" },
-    compute: { name: "計算設備", role: "GPU、HBM、先端パッケージング、AI サーバー", signal: "GPU 供給、先端パッケージング、ラック単位の納入が構築速度を決めます。", lede: "計算層は GPU、HBM、先端パッケージング、サーバーボード、電源、ラック、統合テストで構成されます。", suppliers: ["AI アクセラレーターとプラットフォーム: NVIDIA (NVDA), AMD (AMD), Broadcom (AVGO), Marvell (MRVL)", "ファウンドリ/装置/先端パッケージング: TSMC (TSM/2330.TW), ASML (ASML), Applied Materials (AMAT), Lam Research (LRCX)", "HBM とメモリ: SK hynix (000660.KS), Micron (MU), Samsung Electronics (005930.KS)", "AI サーバー/ODM: Super Micro Computer (SMCI), Dell (DELL), HPE (HPE), Quanta (2382.TW), Wiwynn (6669.TW), Foxconn (2317.TW)"], metrics: [["60-75%", "AI データセンター CapEx は IT 機器が主導"], ["HBM", "GPU 供給の敏感な制約"], ["Rack-scale", "次世代納入モデル"], ["Yield", "パッケージング歩留まりが出荷を左右"]], risk: "計算設備の制約は GPU だけではありません。HBM、先端パッケージング、PCB、電源、冷却、ラック統合、テストを同時に見る必要があります。" },
-    network: { name: "ネットワーク相互接続", role: "スイッチ、NIC、光モジュール、光ファイバー", signal: "学習クラスターの制約は東西トラフィックと光接続に現れやすいです。", lede: "大規模モデル学習には低遅延・高帯域の GPU 間接続が必要です。", suppliers: ["データセンタースイッチ: Arista Networks (ANET), Cisco (CSCO), NVIDIA Networking (NVDA)", "ネットワークチップ/DPU/NIC: Broadcom (AVGO), Marvell (MRVL), Intel (INTC), NVIDIA (NVDA)", "光モジュールとフォトニクス: Coherent (COHR), Lumentum (LITE), Fabrinet (FN), Innolight (300308.SZ)", "コネクタ/ケーブル/高速インターフェース: Amphenol (APH), TE Connectivity (TEL), Molex (Koch private)"], metrics: [["400G/800G", "AI 高速相互接続"], ["East-West", "GPU クラスターの主要トラフィック"], ["Latency", "学習効率に敏感な要素"], ["Topology", "拡張性を左右する設計"]], risk: "大規模学習クラスターは GPU の集合ではなくネットワークシステムです。スイッチ、光モジュール、トポロジー、NIC/DPU、輻輳制御が実効スループットを左右します。" },
-    site: { name: "用地・建設", role: "土地、水利、施設、EPC", signal: "建設可能な土地、水、電力距離、施工能力が供給速度を決めます。", lede: "データセンターは土地、土木、電気・機械、消防、セキュリティ、許認可を含む重資産インフラです。", suppliers: ["データセンター REIT/開発会社: Equinix (EQIX), Digital Realty (DLR), GDS Holdings (GDS/9698.HK), NEXTDC (NXT.AX)", "地域・主権クラウド事業者: Keppel DC REIT (AJBU.SI), NTT Data (9613.T), KDDI (9433.T)", "土木/電気/機械 EPC: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "民間大型プラットフォーム: Vantage Data Centers, QTS, CyrusOne, DataBank"], metrics: [["24-48M", "計画から稼働までの一般的期間"], ["MW/acre", "土地利用密度"], ["Permits", "隠れた納入制約"], ["Tier", "信頼性と冗長性の標準"]], risk: "データセンター供給は即時容量ではなく、複数年のインフラパイプラインです。土地、電力、水、環境審査、税制、人材、消防規制、事前リース契約が重要です。" },
-    ops: { name: "運用・プラットフォーム", role: "クラウド、コロケーション、MLOps、監視、セキュリティ", signal: "実際の商品は建物ではなく、配分・課金・監視できる計算サービスです。", lede: "運用層はインフラを GPU クラウド、学習基盤、推論サービス、マネージドソリューションへ変換します。", suppliers: ["ハイパースケーラーとクラウド: Amazon (AMZN), Microsoft (MSFT), Alphabet (GOOGL), Oracle (ORCL), Meta (META)", "GPU クラウドと AI インフラ: CoreWeave (CRWV), Nebius (NBIS), Lambda (private), Crusoe (private)", "データ/MLOps/可観測性: Snowflake (SNOW), Datadog (DDOG), ServiceNow (NOW), Cloudflare (NET), Databricks (private)", "セキュリティとコンプライアンス: Palo Alto Networks (PANW), CrowdStrike (CRWD), Zscaler (ZS), Okta (OKTA)"], metrics: [["SLA", "企業契約の中核条件"], ["Utilization", "GPU レンタル収益性の鍵"], ["Inference", "学習から推論へ需要拡大"], ["Security", "主権データと規制要件"]], risk: "運用プラットフォームはハードウェアを課金可能なサービスに変えます。長期優位性は GPU 保有量だけでなく、利用率、スケジューリング、ツール、セキュリティ、SLA、電力コスト管理から生まれます。" }
+    power: { name: "電力・電力網", role: "電力会社、変電所、UPS、PDU", signal: "電力確保と系統接続の時期が、大型 AI データセンターの最初の制約になります。", lede: "AI クラスターはデータセンターを IT プロジェクトから電力インフラプロジェクトへ変えます。", suppliers: ["電力網・電気設備: Schneider Electric (SU.PA), Eaton (ETN), ABB (ABBN.SW/ABB), Siemens Energy (ENR.DE)", "バックアップ電源と重要インフラ: Vertiv (VRT), Caterpillar (CAT), Cummins (CMI), GE Vernova (GEV)", "電力 EPC と系統接続: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "エネルギー・公益事業パートナー: NextEra Energy (NEE), Duke Energy (DUK), Constellation Energy (CEG)"], metrics: [["30-150MW", "1 つの AI キャンパスが実際に必要とする電力規模"], ["N+1", "電源設備 1 台の故障で止まらないための考え方"], ["18-36M", "変圧器や系統接続が立ち上げを遅らせる理由"], ["PUE", "電力が損失ではなく計算にどれだけ変わるか"]], risk: "AI 需要は GPU 調達だけでなく、実際に供給できる電力に左右されます。変圧器、開閉装置、系統承認、長期電力契約を確認することで、実稼働可能な容量を理解できます。" },
+    cooling: { name: "冷却システム", role: "チラー、CDU、冷却板、冷却塔", signal: "GPU の熱密度上昇により、冷却板、CDU、ポンプ、冷却塔の更新が進みます。", lede: "AI ラック密度の上昇により、空冷からハイブリッド冷却・液冷へ移行しています。", suppliers: ["データセンター熱管理: Vertiv (VRT), Schneider Electric (SU.PA), Johnson Controls (JCI), Trane Technologies (TT)", "チラー/HVAC/熱交換: Carrier Global (CARR), Modine (MOD), nVent Electric (NVT), Daikin (6367.T)", "液冷部品: Delta Electronics (2308.TW), CoolIT Systems (private), Asetek (ASTK.CO)", "ポンプ/バルブ/水処理: Xylem (XYL), Pentair (PNR), Watts Water (WTS)"], metrics: [["40-120kW", "高密度 AI ラックが処理すべき熱負荷の大きさ"], ["Liquid", "なぜ液冷が高密度領域で空冷を置き換えるのか"], ["WUE", "この冷却方式が生む水利用の負荷"], ["Delta T", "熱がチップやラックから効率よく抜けているか"]], risk: "冷却はチップ、冷却板、ラックマニホールド、CDU、チラー、冷却塔まで続く熱経路です。コネクタ漏れ、ポンプ故障、水質問題はクラスター稼働率に直結します。" },
+    compute: { name: "計算設備", role: "GPU、HBM、先端パッケージング、AI サーバー", signal: "GPU 供給、先端パッケージング、ラック単位の納入が構築速度を決めます。", lede: "計算層は GPU、HBM、先端パッケージング、サーバーボード、電源、ラック、統合テストで構成されます。", suppliers: ["AI アクセラレーターとプラットフォーム: NVIDIA (NVDA), AMD (AMD), Broadcom (AVGO), Marvell (MRVL)", "ファウンドリ/装置/先端パッケージング: TSMC (TSM/2330.TW), ASML (ASML), Applied Materials (AMAT), Lam Research (LRCX)", "HBM とメモリ: SK hynix (000660.KS), Micron (MU), Samsung Electronics (005930.KS)", "AI サーバー/ODM: Super Micro Computer (SMCI), Dell (DELL), HPE (HPE), Quanta (2382.TW), Wiwynn (6669.TW), Foxconn (2317.TW)"], metrics: [["60-75%", "なぜ資本支出の大半が計算ハードウェアに向かうのか"], ["HBM", "なぜメモリ帯域が GPU 数と同じくらい重要なのか"], ["Rack-scale", "なぜ納入単位が部品から完成システムへ移るのか"], ["Yield", "パッケージング歩留まりが実際の出荷能力をどう左右するか"]], risk: "計算設備の制約は GPU だけではありません。HBM、先端パッケージング、PCB、電源、冷却、ラック統合、テストを同時に見る必要があります。" },
+    network: { name: "ネットワーク相互接続", role: "スイッチ、NIC、光モジュール、光ファイバー", signal: "学習クラスターの制約は東西トラフィックと光接続に現れやすいです。", lede: "大規模モデル学習には低遅延・高帯域の GPU 間接続が必要です。", suppliers: ["データセンタースイッチ: Arista Networks (ANET), Cisco (CSCO), NVIDIA Networking (NVDA)", "ネットワークチップ/DPU/NIC: Broadcom (AVGO), Marvell (MRVL), Intel (INTC), NVIDIA (NVDA)", "光モジュールとフォトニクス: Coherent (COHR), Lumentum (LITE), Fabrinet (FN), Innolight (300308.SZ)", "コネクタ/ケーブル/高速インターフェース: Amphenol (APH), TE Connectivity (TEL), Molex (Koch private)"], metrics: [["400G/800G", "アクセラレータ間で必要になるデータ移動速度"], ["East-West", "なぜトラフィックの大半がデータセンター内部を流れるのか"], ["Latency", "なぜ遅いリンクが高価な GPU 時間を無駄にするのか"], ["Topology", "ネットワーク設計がクラスター拡張の上限を決める仕組み"]], risk: "大規模学習クラスターは GPU の集合ではなくネットワークシステムです。スイッチ、光モジュール、トポロジー、NIC/DPU、輻輳制御が実効スループットを左右します。" },
+    site: { name: "用地・建設", role: "土地、水利、施設、EPC", signal: "建設可能な土地、水、電力距離、施工能力が供給速度を決めます。", lede: "データセンターは土地、土木、電気・機械、消防、セキュリティ、許認可を含む重資産インフラです。", suppliers: ["データセンター REIT/開発会社: Equinix (EQIX), Digital Realty (DLR), GDS Holdings (GDS/9698.HK), NEXTDC (NXT.AX)", "地域・主権クラウド事業者: Keppel DC REIT (AJBU.SI), NTT Data (9613.T), KDDI (9433.T)", "土木/電気/機械 EPC: Quanta Services (PWR), AECOM (ACM), Jacobs (J), Fluor (FLR)", "民間大型プラットフォーム: Vantage Data Centers, QTS, CyrusOne, DataBank"], metrics: [["24-48M", "大規模キャンパスが本稼働するまでにかかる時間"], ["MW/acre", "同じ敷地にどれだけの電力密度を載せられるか"], ["Permits", "なぜ許認可が実際の供給を止めるのか"], ["Tier", "信頼性の約束が設計基準にどう表れるか"]], risk: "データセンター供給は即時容量ではなく、複数年のインフラパイプラインです。土地、電力、水、環境審査、税制、人材、消防規制、事前リース契約が重要です。" },
+    ops: { name: "運用・プラットフォーム", role: "クラウド、コロケーション、MLOps、監視、セキュリティ", signal: "実際の商品は建物ではなく、配分・課金・監視できる計算サービスです。", lede: "運用層はインフラを GPU クラウド、学習基盤、推論サービス、マネージドソリューションへ変換します。", suppliers: ["ハイパースケーラーとクラウド: Amazon (AMZN), Microsoft (MSFT), Alphabet (GOOGL), Oracle (ORCL), Meta (META)", "GPU クラウドと AI インフラ: CoreWeave (CRWV), Nebius (NBIS), Lambda (private), Crusoe (private)", "データ/MLOps/可観測性: Snowflake (SNOW), Datadog (DDOG), ServiceNow (NOW), Cloudflare (NET), Databricks (private)", "セキュリティとコンプライアンス: Palo Alto Networks (PANW), CrowdStrike (CRWD), Zscaler (ZS), Okta (OKTA)"], metrics: [["SLA", "企業顧客が本当に求めるサービス保証とは何か"], ["Utilization", "運営側が GPU 在庫をどう収益化するか"], ["Inference", "なぜ需要が学習から提供フェーズへ移るのか"], ["Security", "AI が実データに触れるとき統制が中核になる理由"]], risk: "運用プラットフォームはハードウェアを課金可能なサービスに変えます。長期優位性は GPU 保有量だけでなく、利用率、スケジューリング、ツール、セキュリティ、SLA、電力コスト管理から生まれます。" }
+  }
+};
+
+const chapter1EducationalCopy = {
+  zh: {
+    power: {
+      name: "電力與能源骨幹",
+      role: "讓任何 AI 系統能真正啟動的穩定供電層",
+      signal: "未來訊號：未來的領先者，往往是那些能更快取得可靠 MW、併網資格與彈性備援能力的營運方。",
+      lede: "AI 在成為算力故事之前，首先是一個電力故事。",
+      how: "在 GPU 開始訓練模型或服務使用者之前，電力必須先進站、降壓、穩定，並能在故障時持續供應。電流會依序經過變電站、開關設備、UPS、配電系統與備援發電，再送到機櫃與伺服器。當 AI 園區擴張到數十甚至上百 MW 規模時，電力不再只是背景設施，而會直接成為時程、成本與擴張速度的核心限制。",
+      future: "接下來值得觀察的是併網速度、更高電壓的園區內配電、現地發電、長時間備援，以及公用事業是否會把 AI 負載視為不同於傳統資料中心的新型用電需求。",
+      builders: [
+        `<strong>電力與配電骨幹</strong><span>${companyLink("schneider")}、${companyLink("eaton")}、${companyLink("abb")}</span>`,
+        `<strong>關鍵電力與備援系統</strong><span>${companyLink("vertiv")}、${companyLink("cummins")}、${companyLink("caterpillar")}</span>`,
+        `<strong>發電與電網升級參考</strong><span>${companyLink("gevernova")}、${companyLink("siemensEnergy")}、${companyLink("abb")}</span>`
+      ]
+    },
+    cooling: {
+      name: "冷卻與散熱系統",
+      role: "把上升中的功率密度轉成可持續算力時間的熱管理層",
+      signal: "未來訊號：液冷正從進階配置走向標準做法，散熱能力會直接決定能否部署更高密度的 AI 機櫃。",
+      lede: "更多電力，只有在熱能能順利離開系統時，才會真正變成更多算力。",
+      how: "AI 晶片把電力轉成運算，也同時轉成大量熱能。當機櫃密度持續升高，冷卻就不再只是機房空調夠不夠，而是整條熱路徑能否順利工作。熱必須從晶片移入冷板與液冷迴路，再流向 CDU、泵浦、冷水主機與散熱設備。這代表冷卻不只是為了避免停機，它也會直接影響部署密度、用水、能效、維運設計與未來擴張上限。",
+      future: "接下來值得觀察的是液冷走向預設配置、直冷到晶片設計、接頭可靠度、漏液偵測、混合式熱管理架構，以及地方水電條件對高密度部署的壓力。",
+      builders: [
+        `<strong>資料中心液冷與熱管理</strong><span>${companyLink("vertiv")}、${companyLink("schneider")}、${companyLink("delta")}</span>`,
+        `<strong>大型冷凍空調與熱交換</strong><span>${companyLink("trane")}、${companyLink("jci")}、${companyLink("carrier")}</span>`,
+        `<strong>全球 HVAC 與冷卻設備參考</strong><span>${companyLink("daikin")}、${companyLink("carrier")}、${companyLink("trane")}</span>`
+      ]
+    },
+    compute: {
+      name: "算力設備與 AI 晶片",
+      role: "把晶片、記憶體與系統設計轉成可用 AI 容量的整合層",
+      signal: "未來訊號：真正決定擴張速度的，往往不只是 GPU 出貨量，而是 HBM、先進封裝與整櫃系統何時能一起到位。",
+      lede: "一張 GPU 並不等於一套 AI 系統。只有當記憶體、封裝與整合一起到位時，它才真正有用。",
+      how: "算力是 AI 基礎設施裡最容易被看見的一層，但它從來不只是晶片故事。一個能運作的 AI 節點，同時依賴 GPU、HBM、先進封裝、主板、供電、散熱、韌體與整櫃系統整合。實際上，AI 建置速度常常不是由處理器 headline 決定，而是由整條供應鏈中最慢的那一段決定。",
+      future: "接下來值得關注的是 HBM 擴產、先進封裝能力提升、整櫃系統交付、自研 AI 晶片、低功耗推論硬體，以及訓練系統與推論系統之間越來越明顯的分化。",
+      builders: [
+        `<strong>AI 加速器平台</strong><span>${companyLink("nvidia")}、${companyLink("amd")}</span>`,
+        `<strong>晶圓代工與先進封裝</strong><span>${companyLink("tsmc")}、${companyLink("intelFoundry")}、${companyLink("amkor")}</span>`,
+        `<strong>高頻寬記憶體參考</strong><span>${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}</span>`
+      ]
+    },
+    network: {
+      name: "網路互連與資料搬運",
+      role: "讓多台機器能像同一套 AI 系統那樣協同運作的資料通道",
+      signal: "未來訊號：叢集越大，光互連、拓樸設計與流量控制就越可能成為有效算力的真正上限。",
+      lede: "算力決定能力上限，但網路決定整個叢集能否真正一起思考。",
+      how: "大型 AI 系統不會因為放進更多處理器就自動變強，而是要靠資料能否足夠快速地在整個叢集中流動。訓練時，加速器要持續交換梯度與參數；推論時，請求、檢索與回應也會跨越多個節點。交換器、NIC、光模組、光纖與拓樸設計，決定了理論算力有多少能真正轉成可用效能。",
+      future: "接下來值得觀察的是更高速的光互連、AI 優化乙太網、壅塞控制、更加緊密的光電整合，以及推論型工作負載對低延遲資料路徑的需求。",
+      builders: [
+        `<strong>資料中心交換與路由</strong><span>${companyLink("arista")}、${companyLink("cisco")}、${companyLink("nvidia")}</span>`,
+        `<strong>網路晶片與資料搬運</strong><span>${companyLink("broadcom")}、${companyLink("marvell")}、${companyLink("cloudflare")}</span>`,
+        `<strong>光互連與高速傳輸</strong><span>${companyLink("coherent")}、${companyLink("lumentum")}、${companyLink("broadcom")}</span>`
+      ]
+    },
+    site: {
+      name: "園區建設與交付",
+      role: "把土地、公用資源與施工能力轉成真實容量的落地層",
+      signal: "未來訊號：誰能同時協調土地、電力、水、施工與審批，誰就更可能掌握下一波 AI 容量供給。",
+      lede: "AI 需求可以一夜之間被宣布，但真實容量往往要花上數年才能建成。",
+      how: "資料中心園區是數位野心碰上實體時程的地方。容量只有在土地控制、許可、電網接入、水資源規劃、土建、機電、消防與試運轉全部到位後，才會變成現實。這些都是長週期、強烈依賴地方條件的決策，所以市場上宣布的 AI 擴張，常常與真正上線的容量活在不同時間軸上。",
+      future: "接下來值得觀察的是各地審批速度、預鑄模組化園區、水資源壓力、資料主權帶動的在地部署，以及大型客戶是否會用長期預租合約提前鎖定稀缺容量。",
+      builders: [
+        `<strong>大型資料中心園區與互連基地</strong><span>${companyLink("equinix")}、${companyLink("digitalrealty")}、${companyLink("databank")}</span>`,
+        `<strong>區域交付與代管服務參考</strong><span>${companyLink("nttdata")}、${companyLink("qts")}、${companyLink("databank")}</span>`
+      ]
+    },
+    ops: {
+      name: "雲端與 AI 營運",
+      role: "把基礎設施變成企業敢用的服務層",
+      signal: "未來訊號：當硬體越來越容易比較，差異化會轉向利用率、推論效率、治理能力與服務品質。",
+      lede: "擁有 GPU，並不等於能把 AI 交付成值得信任的產品。",
+      how: "即使一棟機房裡已經裝滿硬體，也還不等於可以被企業直接使用的服務。仍然需要有人排程工作、計量用量、保護資料、監控系統、修補故障、支援客戶，並兌現服務承諾。這一層真正做的，是把底層硬體轉成企業敢採用、敢依賴的 AI 平台、GPU 雲與推論服務。長期來看，營運品質和硬體規模一樣重要。",
+      future: "接下來值得觀察的是推論收入比重上升、成本導向的編排、治理工具、主權要求，以及記憶體效率與尾端延遲控制如何成為 AI 服務交付的核心競爭力。",
+      builders: [
+        `<strong>超大規模 AI 雲平台</strong><span>${companyLink("azure")}、${companyLink("aws")}、${companyLink("googleCloud")}</span>`,
+        `<strong>專用 GPU 雲與 AI 基礎設施</strong><span>${companyLink("coreweave")}、${companyLink("lambda")}、${companyLink("crusoe")}</span>`,
+        `<strong>觀測、安全與雲端營運</strong><span>${companyLink("cloudflare")}、${companyLink("datadog")}、${companyLink("paloalto")}</span>`
+      ]
+    }
+  },
+  en: {
+    power: {
+      name: "Power & Energy Backbone",
+      role: "The layer that delivers stable electricity before any AI system can run",
+      signal: "Future signal: the next capacity leaders may be the operators who secure reliable megawatts, interconnection rights, and flexible backup power first.",
+      lede: "AI starts as an electricity problem before it becomes a computing problem.",
+      how: "Before a GPU can train a model or serve a user, power has to arrive, step down, stabilize, and survive failure. Electricity moves through substations, switchgear, UPS systems, distribution gear, and backup generation before it reaches the rack. As AI campuses expand into tens or even hundreds of megawatts, power stops being background infrastructure and becomes a central constraint on timing, cost, and scale.",
+      future: "Watch grid interconnection speed, higher-voltage campus design, on-site generation, long-duration backup, and whether utilities begin pricing AI load differently from conventional data center demand.",
+      builders: [
+        `<strong>Grid and electrical architecture</strong><span>${companyLink("schneider")}, ${companyLink("eaton")}, ${companyLink("abb")}</span>`,
+        `<strong>Critical power and backup systems</strong><span>${companyLink("vertiv")}, ${companyLink("cummins")}, ${companyLink("caterpillar")}</span>`,
+        `<strong>Generation and grid modernization reference</strong><span>${companyLink("gevernova")}, ${companyLink("siemensEnergy")}, ${companyLink("abb")}</span>`
+      ]
+    },
+    cooling: {
+      name: "Cooling & Heat Removal",
+      role: "The thermal layer that turns rising power density into usable compute time",
+      signal: "Future signal: liquid cooling is shifting from advanced configuration to standard practice, and thermal design will increasingly set rack-density limits.",
+      lede: "More power only becomes more compute if the heat can leave the system.",
+      how: "AI chips convert electricity into both computation and heat. As rack density rises, cooling becomes a full thermal path rather than a room-level facility feature. Heat has to move from the chip into cold plates, liquid loops, pumps, CDU systems, chillers, and heat rejection equipment. That means cooling is not just about uptime. It shapes density, water use, energy efficiency, maintenance design, and the practical limits of future deployment.",
+      future: "Watch liquid cooling move toward default adoption, along with direct-to-chip design, connector reliability, leak detection, hybrid thermal architectures, and local pressure on water and power resources.",
+      builders: [
+        `<strong>Data center liquid cooling and thermal systems</strong><span>${companyLink("vertiv")}, ${companyLink("schneider")}, ${companyLink("delta")}</span>`,
+        `<strong>Large-scale chillers and HVAC infrastructure</strong><span>${companyLink("trane")}, ${companyLink("jci")}, ${companyLink("carrier")}</span>`,
+        `<strong>Global HVAC and cooling reference</strong><span>${companyLink("daikin")}, ${companyLink("carrier")}, ${companyLink("trane")}</span>`
+      ]
+    },
+    compute: {
+      name: "Compute & AI Chips",
+      role: "The layer that turns chips, memory, and system design into usable AI capacity",
+      signal: "Future signal: expansion speed is often set not by headline GPU demand alone, but by when HBM, advanced packaging, and rack-scale systems arrive together.",
+      lede: "A GPU alone is not an AI system. It becomes useful only when memory, packaging, and integration arrive with it.",
+      how: "Compute is the most visible layer in AI infrastructure, but it is never just a chip story. A working AI node depends on GPUs, HBM, advanced packaging, boards, power delivery, cooling, firmware, and rack-level system integration arriving together. In practice, the speed of AI buildout is often determined by the slowest linked part of that chain, not by processor headlines alone.",
+      future: "Watch HBM scaling, advanced-packaging expansion, rack-scale system delivery, custom AI silicon, lower-power inference hardware, and the growing split between systems optimized for training and systems optimized for serving.",
+      builders: [
+        `<strong>AI accelerator platforms</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}</span>`,
+        `<strong>Foundry and advanced packaging</strong><span>${companyLink("tsmc")}, ${companyLink("intelFoundry")}, ${companyLink("amkor")}</span>`,
+        `<strong>High-bandwidth memory reference</strong><span>${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}</span>`
+      ]
+    },
+    network: {
+      name: "Networking & Data Movement",
+      role: "The data path that lets separate machines behave like one AI system",
+      signal: "Future signal: the larger the cluster gets, the more optics, topology, and traffic control define the ceiling on usable compute.",
+      lede: "Compute creates capability, but networks decide how well a cluster can think together.",
+      how: "Large AI systems do not become powerful simply by adding more processors. They become useful when data can move fast enough for the whole cluster to coordinate. During training, accelerators repeatedly exchange gradients and parameters. During inference, requests, retrieval calls, and responses move across multiple nodes. Switches, NICs, optics, fiber, and topology determine how much theoretical compute becomes real performance.",
+      future: "Watch faster optical fabrics, AI-optimized Ethernet, congestion control, tighter photonic integration, and lower-latency data paths built for inference-heavy workloads.",
+      builders: [
+        `<strong>Data center switching and routing</strong><span>${companyLink("arista")}, ${companyLink("cisco")}, ${companyLink("nvidia")}</span>`,
+        `<strong>Network silicon and data movement</strong><span>${companyLink("broadcom")}, ${companyLink("marvell")}, ${companyLink("cloudflare")}</span>`,
+        `<strong>Optical links and high-speed transport</strong><span>${companyLink("coherent")}, ${companyLink("lumentum")}, ${companyLink("broadcom")}</span>`
+      ]
+    },
+    site: {
+      name: "Campus & Buildout",
+      role: "The layer that turns approved land, utilities, and construction into real capacity",
+      signal: "Future signal: the next wave of supply will favor operators who can coordinate land, power, water, construction, and permitting at the same time.",
+      lede: "AI demand can be announced overnight. Real capacity takes years to build.",
+      how: "A data center campus is where digital ambition meets physical delay. Capacity becomes real only when land control, permits, grid access, water planning, civil works, mechanical and electrical systems, fire safety, and commissioning all line up. These are long-cycle decisions shaped by local rules and local infrastructure. That is why announced AI expansion and actual online capacity often move on very different timelines.",
+      future: "Watch regional permitting speed, prefab campus delivery, water scrutiny, sovereignty-driven local deployment, and long-term pre-lease agreements used to secure scarce capacity before it comes online.",
+      builders: [
+        `<strong>Global colocation and interconnection campuses</strong><span>${companyLink("equinix")}, ${companyLink("digitalrealty")}, ${companyLink("databank")}</span>`,
+        `<strong>Regional delivery and managed infrastructure reference</strong><span>${companyLink("nttdata")}, ${companyLink("qts")}, ${companyLink("databank")}</span>`
+      ]
+    },
+    ops: {
+      name: "Cloud & AI Operations",
+      role: "The layer that turns infrastructure into a service customers can trust",
+      signal: "Future signal: as hardware becomes easier to compare, advantage may shift toward utilization, inference efficiency, governance, and service quality.",
+      lede: "Owning GPUs is not the same as delivering AI as a dependable product.",
+      how: "A building full of hardware is still not a usable service. Someone has to schedule workloads, meter usage, secure data, monitor systems, patch failures, support customers, and uphold service-level commitments. This is the layer that turns physical capacity into AI platforms, GPU clouds, and inference services that enterprises can adopt with confidence. Over time, operational quality matters as much as hardware scale.",
+      future: "Watch the rise of inference-led revenue, cost-aware orchestration, governance tooling, sovereignty requirements, memory efficiency, and tail-latency control as core differentiators in AI service delivery.",
+      builders: [
+        `<strong>Hyperscale AI cloud platforms</strong><span>${companyLink("azure")}, ${companyLink("aws")}, ${companyLink("googleCloud")}</span>`,
+        `<strong>Specialized GPU cloud infrastructure</strong><span>${companyLink("coreweave")}, ${companyLink("lambda")}, ${companyLink("crusoe")}</span>`,
+        `<strong>Observability, security, and operations</strong><span>${companyLink("cloudflare")}, ${companyLink("datadog")}, ${companyLink("paloalto")}</span>`
+      ]
+    }
+  },
+  ko: {
+    power: {
+      name: "전력 및 에너지 백본",
+      role: "어떤 AI 시스템이든 실제로 가동되게 만드는 안정적 전력 계층",
+      signal: "미래 신호: 더 빠르게 안정적인 전력과 계통 접속을 확보하는 사업자가 AI 캠퍼스 확장에 앞설 가능성이 큽니다.",
+      lede: "AI는 컴퓨트 이야기가 되기 전에 먼저 전력 이야기로 시작됩니다.",
+      how: "GPU가 모델을 학습하거나 사용자를 서비스하기 전에 전력은 먼저 들어오고, 전압이 낮춰지고, 안정화되며, 장애 상황에서도 유지되어야 합니다. 전기는 변전, 스위치기어, UPS, 배전 설비, 백업 전원을 거쳐 랙과 서버에 도달합니다. AI 캠퍼스가 수십에서 수백 MW 규모로 커질수록 전력은 배경 인프라가 아니라 일정, 비용, 확장 속도를 좌우하는 핵심 제약이 됩니다.",
+      future: "앞으로 중요한 신호는 계통 접속 속도, 더 높은 전압의 캠퍼스 배전, 현장 발전, 장시간 백업, 그리고 유틸리티가 AI 부하를 기존 데이터센터 수요와 다르게 가격 책정하기 시작하는지 여부입니다.",
+      builders: [
+        `<strong>전력망 및 배전 설계</strong><span>${companyLink("schneider")}, ${companyLink("eaton")}, ${companyLink("abb")}</span>`,
+        `<strong>핵심 전력 및 백업 시스템</strong><span>${companyLink("vertiv")}, ${companyLink("cummins")}, ${companyLink("caterpillar")}</span>`,
+        `<strong>발전 및 전력망 현대화 참고</strong><span>${companyLink("gevernova")}, ${companyLink("siemensEnergy")}, ${companyLink("abb")}</span>`
+      ]
+    },
+    cooling: {
+      name: "냉각 및 열 제거",
+      role: "높아지는 전력 밀도를 실제 컴퓨팅 시간으로 바꾸는 열 관리 계층",
+      signal: "미래 신호: 액체 냉각은 고급 옵션에서 고밀도 AI 클러스터의 기본 설계로 이동하고 있습니다.",
+      lede: "더 많은 전력은 열이 시스템 밖으로 빠져나갈 수 있을 때만 더 많은 컴퓨트가 됩니다.",
+      how: "AI 칩은 전기를 연산으로 바꾸는 동시에 많은 열도 만들어냅니다. 랙 밀도가 높아질수록 냉각은 더 이상 단순한 공조가 아니라 전체 열 경로의 문제입니다. 열은 칩에서 콜드 플레이트와 액체 루프로 이동하고, 다시 CDU, 펌프, 칠러, 방열 장비로 흘러갑니다. 그래서 냉각은 단순히 다운타임을 막는 수단이 아니라, 배치 밀도, 물 사용, 에너지 효율, 유지보수 설계, 미래 확장의 한계를 함께 결정합니다.",
+      future: "앞으로 중요한 신호는 액체 냉각의 기본화, 직접 칩 냉각 설계, 커넥터 신뢰성, 누수 감지, 혼합형 열 관리 구조, 그리고 지역 물·전력 조건이 고밀도 배치에 주는 압력입니다.",
+      builders: [
+        `<strong>데이터센터 액체 냉각 및 열관리</strong><span>${companyLink("vertiv")}, ${companyLink("schneider")}, ${companyLink("delta")}</span>`,
+        `<strong>대형 칠러 및 HVAC 인프라</strong><span>${companyLink("trane")}, ${companyLink("jci")}, ${companyLink("carrier")}</span>`,
+        `<strong>글로벌 HVAC 및 냉각 장비 참고</strong><span>${companyLink("daikin")}, ${companyLink("carrier")}, ${companyLink("trane")}</span>`
+      ]
+    },
+    compute: {
+      name: "컴퓨트 및 AI 칩",
+      role: "칩, 메모리, 시스템 설계를 실제 AI 용량으로 바꾸는 통합 계층",
+      signal: "미래 신호: HBM, 첨단 패키징, 랙 단위 납품은 GPU 출하만큼이나 확장 속도를 결정할 수 있습니다.",
+      lede: "GPU 한 장이 곧 AI 시스템은 아닙니다. 메모리, 패키징, 통합이 함께 도착해야 비로소 유용해집니다.",
+      how: "컴퓨트는 AI 인프라에서 가장 눈에 띄는 층이지만, 결코 칩만의 이야기가 아닙니다. 실제로 동작하는 AI 노드는 GPU, HBM, 첨단 패키징, 보드, 전력 설계, 냉각, 펌웨어, 랙 수준 시스템 통합이 함께 맞물려야 합니다. 현실의 AI 구축 속도는 프로세서 헤드라인보다 공급망 전체에서 가장 느린 연결고리에 더 자주 의해 결정됩니다.",
+      future: "앞으로 중요한 신호는 HBM 확장, 첨단 패키징 증설, 랙 단위 시스템 인도, 자체 AI 실리콘, 저전력 추론 하드웨어, 그리고 훈련용 시스템과 서빙용 시스템의 분화입니다.",
+      builders: [
+        `<strong>AI 가속기 플랫폼</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}</span>`,
+        `<strong>파운드리 및 첨단 패키징</strong><span>${companyLink("tsmc")}, ${companyLink("intelFoundry")}, ${companyLink("amkor")}</span>`,
+        `<strong>고대역폭 메모리 참고</strong><span>${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}</span>`
+      ]
+    },
+    network: {
+      name: "네트워킹 및 데이터 이동",
+      role: "여러 장비를 하나의 AI 시스템처럼 움직이게 하는 데이터 경로",
+      signal: "미래 신호: 클러스터가 커질수록 광 연결, 토폴로지, 트래픽 제어가 실효 훈련 속도의 한계로 더 자주 드러납니다.",
+      lede: "컴퓨트가 능력의 상한을 정한다면, 네트워크는 클러스터가 실제로 함께 사고할 수 있는지를 결정합니다.",
+      how: "대형 AI 시스템은 프로세서를 더 넣는다고 자동으로 강해지지 않습니다. 데이터가 클러스터 전체를 충분히 빠르게 이동할 수 있어야 비로소 유용해집니다. 훈련에서는 가속기들이 지속적으로 그래디언트와 파라미터를 주고받고, 추론에서는 요청, 검색, 응답이 여러 노드를 오갑니다. 스위치, NIC, 광모듈, 광섬유, 토폴로지는 이론상의 컴퓨트를 실제 성능으로 얼마나 바꿀 수 있는지 결정합니다.",
+      future: "앞으로 중요한 신호는 더 빠른 광 패브릭, AI 최적화 이더넷, 혼잡 제어, 더 촘촘한 광통합, 그리고 추론 중심 워크로드를 위한 저지연 데이터 경로입니다.",
+      builders: [
+        `<strong>데이터센터 스위칭 및 라우팅</strong><span>${companyLink("arista")}, ${companyLink("cisco")}, ${companyLink("nvidia")}</span>`,
+        `<strong>네트워크 실리콘 및 데이터 이동</strong><span>${companyLink("broadcom")}, ${companyLink("marvell")}, ${companyLink("cloudflare")}</span>`,
+        `<strong>광 인터커넥트 및 고속 전송</strong><span>${companyLink("coherent")}, ${companyLink("lumentum")}, ${companyLink("broadcom")}</span>`
+      ]
+    },
+    site: {
+      name: "캠퍼스 구축 및 인도",
+      role: "토지, 유틸리티, 시공 능력을 실제 용량으로 바꾸는 현실화 계층",
+      signal: "미래 신호: 공급 확대는 토지, 전력, 물, 시공 능력을 동시에 맞출 수 있는 주체에게 더 많이 달려 있습니다.",
+      lede: "AI 수요는 하루아침에 발표될 수 있지만, 실제 용량은 수년에 걸쳐 만들어집니다.",
+      how: "데이터센터 캠퍼스는 디지털 야심이 물리적 일정과 부딪히는 지점입니다. 용량은 토지 확보, 인허가, 계통 접속, 수자원 계획, 토목, 기계·전기 설비, 소방, 커미셔닝이 모두 맞물릴 때에만 현실이 됩니다. 이런 결정은 장주기이며 지역 조건에 크게 좌우되기 때문에, 발표된 AI 확장 계획과 실제 온라인 용량은 서로 다른 시간축에서 움직이는 경우가 많습니다.",
+      future: "앞으로 중요한 신호는 지역별 허가 속도, 프리패브 캠퍼스, 물 사용 압력, 데이터 주권이 이끄는 현지 배치, 그리고 희소한 용량을 선점하기 위한 장기 선임대 계약입니다.",
+      builders: [
+        `<strong>글로벌 코로케이션 및 인터커넥션 캠퍼스</strong><span>${companyLink("equinix")}, ${companyLink("digitalrealty")}, ${companyLink("databank")}</span>`,
+        `<strong>지역 인도 및 관리형 인프라 참고</strong><span>${companyLink("nttdata")}, ${companyLink("qts")}, ${companyLink("databank")}</span>`
+      ]
+    },
+    ops: {
+      name: "클라우드 및 AI 운영",
+      role: "인프라를 고객이 신뢰할 수 있는 서비스로 바꾸는 운영 계층",
+      signal: "미래 신호: 하드웨어 조달이 쉬워질수록 차별화는 이용률, 추론 효율, 거버넌스, 서비스 품질로 이동할 수 있습니다.",
+      lede: "GPU를 보유하는 것과, 신뢰할 수 있는 AI 제품을 제공하는 것은 같은 일이 아닙니다.",
+      how: "하드웨어로 가득 찬 건물도 그 자체로는 아직 서비스가 아닙니다. 누군가는 워크로드를 스케줄링하고, 사용량을 계량하고, 데이터를 보호하고, 시스템을 모니터링하고, 장애를 복구하고, 고객을 지원하며, 서비스 약속을 지켜야 합니다. 이 계층은 물리 인프라를 기업이 실제로 채택하고 의존할 수 있는 AI 플랫폼, GPU 클라우드, 추론 서비스로 바꿉니다. 시간이 갈수록 운영 품질은 하드웨어 규모만큼 중요해집니다.",
+      future: "앞으로 중요한 신호는 추론 중심 수익 구조, 비용 인지형 오케스트레이션, 거버넌스 도구, 주권 요구, 그리고 메모리 효율과 꼬리 지연 제어가 AI 서비스 경쟁력의 핵심이 되는 흐름입니다.",
+      builders: [
+        `<strong>하이퍼스케일 AI 클라우드</strong><span>${companyLink("azure")}, ${companyLink("aws")}, ${companyLink("googleCloud")}</span>`,
+        `<strong>전용 GPU 클라우드 인프라</strong><span>${companyLink("coreweave")}, ${companyLink("lambda")}, ${companyLink("crusoe")}</span>`,
+        `<strong>관측성, 보안, 운영 참고</strong><span>${companyLink("cloudflare")}, ${companyLink("datadog")}, ${companyLink("paloalto")}</span>`
+      ]
+    }
+  },
+  ja: {
+    power: {
+      name: "電力とエネルギー基盤",
+      role: "どんな AI システムでも実際に動かす安定電力の層",
+      signal: "未来シグナル: 安定した電力と系統接続をより早く確保できる事業者が、AI キャンパス拡張で先行しやすくなります。",
+      lede: "AI はコンピュートの物語になる前に、まず電力の物語として始まります。",
+      how: "GPU がモデルを学習したりユーザーに応答したりする前に、電力はまず届き、降圧され、安定化され、障害時にも維持されなければなりません。電気は変電、開閉装置、UPS、配電設備、バックアップ電源を経て、ようやくラックとサーバーに届きます。AI キャンパスが数十から数百 MW 規模へ広がるほど、電力は背景インフラではなく、スケジュール、コスト、拡張速度を左右する中心的な制約になります。",
+      future: "今後重要なシグナルは、系統接続の速さ、より高電圧のキャンパス配電、オンサイト発電、長時間バックアップ、そして公益事業者が AI 負荷を従来型データセンター需要とは別物として価格設定し始めるかどうかです。",
+      builders: [
+        `<strong>電力網と配電アーキテクチャ</strong><span>${companyLink("schneider")}、${companyLink("eaton")}、${companyLink("abb")}</span>`,
+        `<strong>重要電源とバックアップ系</strong><span>${companyLink("vertiv")}、${companyLink("cummins")}、${companyLink("caterpillar")}</span>`,
+        `<strong>発電と電力網高度化の参考</strong><span>${companyLink("gevernova")}、${companyLink("siemensEnergy")}、${companyLink("abb")}</span>`
+      ]
+    },
+    cooling: {
+      name: "冷却と熱除去",
+      role: "上昇する電力密度を実際の計算時間へ変える熱管理の層",
+      signal: "未来シグナル: 液冷は高級オプションから、高密度 AI クラスターの標準要件へ移行しつつあります。",
+      lede: "より多くの電力は、熱がきちんとシステムの外へ逃げられるときにだけ、より多くの計算能力になります。",
+      how: "AI チップは電力を計算へ変えると同時に、大量の熱も生み出します。ラック密度が上がるほど、冷却は単なる空調ではなく、熱経路全体の問題になります。熱はチップからコールドプレートと液冷ループへ移り、さらに CDU、ポンプ、チラー、放熱設備へ流れます。つまり冷却は停止を防ぐためだけでなく、配備密度、水利用、エネルギー効率、保守設計、将来の拡張限界を左右します。",
+      future: "今後重要なシグナルは、液冷の標準化、ダイレクト・トゥ・チップ設計、コネクタ信頼性、漏液検知、ハイブリッド熱管理構成、そして地域の水・電力条件が高密度配備に与える圧力です。",
+      builders: [
+        `<strong>データセンター液冷と熱管理</strong><span>${companyLink("vertiv")}、${companyLink("schneider")}、${companyLink("delta")}</span>`,
+        `<strong>大規模チラーと HVAC インフラ</strong><span>${companyLink("trane")}、${companyLink("jci")}、${companyLink("carrier")}</span>`,
+        `<strong>グローバル HVAC と冷却設備の参考</strong><span>${companyLink("daikin")}、${companyLink("carrier")}、${companyLink("trane")}</span>`
+      ]
+    },
+    compute: {
+      name: "コンピュートと AI チップ",
+      role: "チップ、メモリ、システム設計を実際の AI 容量へ変える統合層",
+      signal: "未来シグナル: HBM、先端パッケージング、ラック単位の納入は、GPU 出荷量と同じくらい拡張速度を左右します。",
+      lede: "GPU 1 枚だけでは AI システムにはなりません。メモリ、パッケージング、統合がそろって初めて役に立ちます。",
+      how: "コンピュートは AI インフラで最も目立つ層ですが、決してチップだけの話ではありません。実際に動く AI ノードは、GPU、HBM、先端パッケージング、ボード、電力供給、冷却、ファームウェア、ラック単位のシステム統合が同時にそろって初めて成立します。現実の AI 構築速度は、プロセッサの見出しよりも、サプライチェーン全体の中で最も遅い工程に左右されることがよくあります。",
+      future: "今後重要なシグナルは、HBM の拡張、先端パッケージング増強、ラック単位システムの納入、自社製 AI シリコン、低消費電力の推論ハードウェア、そして学習向けとサービング向けシステムの分化です。",
+      builders: [
+        `<strong>AI アクセラレータプラットフォーム</strong><span>${companyLink("nvidia")}、${companyLink("amd")}</span>`,
+        `<strong>ファウンドリと先端パッケージング</strong><span>${companyLink("tsmc")}、${companyLink("intelFoundry")}、${companyLink("amkor")}</span>`,
+        `<strong>高帯域メモリの参考</strong><span>${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}</span>`
+      ]
+    },
+    network: {
+      name: "ネットワーキングとデータ移動",
+      role: "複数の装置を一つの AI システムのように動かすデータ経路",
+      signal: "未来シグナル: クラスターが大きくなるほど、光接続、トポロジー、トラフィック制御が実効学習速度の上限として見えやすくなります。",
+      lede: "コンピュートが能力の上限を決めるなら、ネットワークはクラスター全体が本当に一緒に考えられるかを決めます。",
+      how: "大規模 AI システムは、プロセッサを増やすだけで自動的に強くなるわけではありません。データがクラスター全体を十分な速さで移動できて初めて価値が生まれます。学習ではアクセラレータ同士が継続的に勾配やパラメータをやり取りし、推論ではリクエスト、検索、応答が複数ノードをまたぎます。スイッチ、NIC、光モジュール、光ファイバー、トポロジーは、理論上の計算力がどれだけ実効性能へ変わるかを決めます。",
+      future: "今後重要なシグナルは、より高速な光ファブリック、AI 最適化イーサネット、輻輳制御、より密な光統合、そして推論中心ワークロード向けの低遅延データ経路です。",
+      builders: [
+        `<strong>データセンターのスイッチングとルーティング</strong><span>${companyLink("arista")}、${companyLink("cisco")}、${companyLink("nvidia")}</span>`,
+        `<strong>ネットワークシリコンとデータ搬送</strong><span>${companyLink("broadcom")}、${companyLink("marvell")}、${companyLink("cloudflare")}</span>`,
+        `<strong>光接続と高速伝送</strong><span>${companyLink("coherent")}、${companyLink("lumentum")}、${companyLink("broadcom")}</span>`
+      ]
+    },
+    site: {
+      name: "キャンパス建設と立ち上げ",
+      role: "土地、ユーティリティ、建設力を実容量へ変える現実化の層",
+      signal: "未来シグナル: 供給拡大は、土地、電力、水、建設能力を同時に整えられる事業者により強く依存します。",
+      lede: "AI 需要は一夜で発表できますが、実際の容量は数年かけてしか作れません。",
+      how: "データセンターキャンパスは、デジタルの野心が物理的なスケジュールとぶつかる場所です。容量は、土地の確保、許認可、系統接続、水計画、土木、機電設備、防火、試運転がすべてそろって初めて現実になります。こうした判断は長期にわたり、地域条件にも大きく左右されるため、発表された AI 拡張計画と実際にオンラインになる容量は、しばしば別々の時間軸で動きます。",
+      future: "今後重要なシグナルは、地域ごとの許認可スピード、プレハブ型キャンパス、水利用圧力、データ主権が促すローカル配備、そして希少な容量を先に押さえるための長期プレリース契約です。",
+      builders: [
+        `<strong>グローバルなコロケーションと相互接続キャンパス</strong><span>${companyLink("equinix")}、${companyLink("digitalrealty")}、${companyLink("databank")}</span>`,
+        `<strong>地域デリバリーとマネージドインフラの参考</strong><span>${companyLink("nttdata")}、${companyLink("qts")}、${companyLink("databank")}</span>`
+      ]
+    },
+    ops: {
+      name: "クラウドと AI 運用",
+      role: "インフラを顧客が信頼できるサービスへ変える運用層",
+      signal: "未来シグナル: ハードウェア調達が容易になるほど、差別化は利用率、推論効率、ガバナンス、サービス品質へ移る可能性があります。",
+      lede: "GPU を持っていることと、信頼できる AI 製品を届けられることは同じではありません。",
+      how: "ハードウェアで埋まった建物があっても、それだけではまだサービスではありません。誰かがワークロードをスケジュールし、使用量を計測し、データを守り、システムを監視し、障害を修復し、顧客を支援し、サービスの約束を守る必要があります。この層は物理インフラを、企業が実際に採用し、頼れる AI プラットフォーム、GPU クラウド、推論サービスへ変えます。時間が経つほど、運用品質はハードウェア規模と同じくらい重要になります。",
+      future: "今後重要なシグナルは、推論中心の収益構造、コストを意識したオーケストレーション、ガバナンスツール、主権要件、そしてメモリ効率とテールレイテンシ制御が AI サービス競争力の中核になる流れです。",
+      builders: [
+        `<strong>ハイパースケール AI クラウド</strong><span>${companyLink("azure")}、${companyLink("aws")}、${companyLink("googleCloud")}</span>`,
+        `<strong>専用 GPU クラウド基盤</strong><span>${companyLink("coreweave")}、${companyLink("lambda")}、${companyLink("crusoe")}</span>`,
+        `<strong>可観測性・セキュリティ・運用</strong><span>${companyLink("cloudflare")}、${companyLink("datadog")}、${companyLink("paloalto")}</span>`
+      ]
+    }
+  }
+};
+
+const chapter1SignalsToWatch = {
+  zh: [
+    `<strong>電力接入與定價</strong><span>真正限制新園區上線速度的，常常不是建築本身，而是可靠電力何時能交付，以及用電成本如何被重新定價。</span>`,
+    `<strong>液冷成為標準</strong><span>隨著機櫃密度升高，液冷會從進階配置走向更普遍的資料中心預設。</span>`,
+    `<strong>HBM 與封裝平衡</strong><span>晶片 headline 很重要，但真正影響交付節奏的，常常是記憶體與封裝產能能否同步跟上。</span>`,
+    `<strong>高速光互連</strong><span>更快的 optics 與更成熟的資料搬運架構，會直接決定大型叢集的實際效率。</span>`,
+    `<strong>已獲批准的園區容量</strong><span>稀缺的不是土地本身，而是已可施工、可供電、可冷卻的就緒容量。</span>`,
+    `<strong>推論經濟與編排</strong><span>當 AI 從訓練走向大量服務，利用率、記憶體效率與延遲控制會越來越影響商業模式。</span>`
+  ],
+  en: [
+    `<strong>Power access and pricing</strong><span>The real limit on new campuses is often when reliable megawatts arrive and how utilities choose to price new AI load.</span>`,
+    `<strong>Liquid cooling as default</strong><span>As rack density rises, liquid cooling is moving from advanced configuration toward baseline data center design.</span>`,
+    `<strong>HBM and packaging balance</strong><span>Chip headlines matter, but delivery speed often depends on whether memory and packaging scale at the same time.</span>`,
+    `<strong>Faster optical fabrics</strong><span>Better optics and cleaner data movement increasingly define how much of a large cluster is actually usable.</span>`,
+    `<strong>Permitted campus capacity</strong><span>The scarce asset is not land by itself, but capacity that is approved, buildable, power-ready, and coolable.</span>`,
+    `<strong>Inference economics and orchestration</strong><span>As AI shifts from training toward serving, utilization, memory efficiency, and latency control become core business variables.</span>`
+  ],
+  ko: [
+    `<strong>전력 접속과 가격</strong><span>새 AI 캠퍼스의 실제 제약은 건물보다 안정적인 MW가 언제 들어오고 그 전력이 어떻게 가격 책정되는가인 경우가 많습니다.</span>`,
+    `<strong>액체 냉각의 표준화</strong><span>랙 밀도가 높아질수록 액체 냉각은 고급 옵션이 아니라 기본 데이터센터 설계로 이동합니다.</span>`,
+    `<strong>HBM과 패키징 균형</strong><span>칩 자체보다도 메모리와 패키징이 동시에 확장되는지가 실제 납기 속도를 좌우할 수 있습니다.</span>`,
+    `<strong>더 빠른 광 패브릭</strong><span>광 연결과 데이터 이동 구조가 좋아질수록 대형 클러스터의 실효 효율도 함께 달라집니다.</span>`,
+    `<strong>승인된 캠퍼스 용량</strong><span>희소한 자산은 토지 자체가 아니라 인허가를 마치고 전력과 냉각 준비가 된 실제 용량입니다.</span>`,
+    `<strong>추론 경제성과 오케스트레이션</strong><span>AI가 훈련에서 서비스로 이동할수록 이용률, 메모리 효율, 지연 제어가 핵심 사업 변수가 됩니다.</span>`
+  ],
+  ja: [
+    `<strong>電力接続と価格</strong><span>新しい AI キャンパスの制約は、建物そのものより、安定した MW をいつ受け取れ、その電力がどう価格付けされるかにあることが多いです。</span>`,
+    `<strong>液冷の標準化</strong><span>ラック密度が高まるほど、液冷は特別仕様ではなく、データセンターの基本設計へ近づきます。</span>`,
+    `<strong>HBM とパッケージングの均衡</strong><span>チップの見出し以上に、メモリとパッケージングが同時に拡張できるかが実際の納入速度を左右します。</span>`,
+    `<strong>より高速な光ファブリック</strong><span>光接続とデータ移動設計が進むほど、大規模クラスターの実効効率も変わってきます。</span>`,
+    `<strong>許認可済みキャンパス容量</strong><span>希少なのは土地そのものではなく、建設でき、通電でき、冷却できる準備済み容量です。</span>`,
+    `<strong>推論の経済性とオーケストレーション</strong><span>AI が学習からサービスへ移るほど、利用率、メモリ効率、遅延制御が重要な事業変数になります。</span>`
+  ]
+};
+
+const chapter1ReadingLinks = {
+  zh: {
+    power: [
+      externalLink("ABB：資料中心電力與電氣化", referenceCompanies.abb.url),
+      externalLink("Cummins：備援電力與發電系統", referenceCompanies.cummins.url),
+      externalLink("Siemens Energy：電網與能源系統", referenceCompanies.siemensEnergy.url)
+    ],
+    cooling: [
+      externalLink("Vertiv：資料中心熱管理", referenceCompanies.vertiv.url),
+      externalLink("Carrier：商用冷卻與 HVAC", referenceCompanies.carrier.url),
+      externalLink("Daikin：全球冷凍空調解決方案", referenceCompanies.daikin.url)
+    ],
+    compute: [
+      externalLink("NVIDIA：AI data center 平台", referenceCompanies.nvidia.url),
+      externalLink("TSMC：晶圓代工與先進封裝", referenceCompanies.tsmc.url),
+      externalLink("Micron：高頻寬記憶體與記憶體技術", referenceCompanies.micron.url)
+    ],
+    network: [
+      externalLink("Arista Networks：資料中心網路", referenceCompanies.arista.url),
+      externalLink("Coherent：光通訊與高速互連", referenceCompanies.coherent.url),
+      externalLink("Cloudflare：全球網路與邊緣交付", referenceCompanies.cloudflare.url)
+    ],
+    site: [
+      externalLink("Equinix：全球互連與資料中心園區", referenceCompanies.equinix.url),
+      externalLink("DataBank：AI 基礎設施建置案例", referenceCompanies.databank.url),
+      externalLink("NTT DATA：資料中心與代管基礎設施", referenceCompanies.nttdata.url)
+    ],
+    ops: [
+      externalLink("Microsoft Azure：AI 與雲端平台", referenceCompanies.azure.url),
+      externalLink("Lambda：專用 GPU cloud", referenceCompanies.lambda.url),
+      externalLink("Datadog：可觀測性與雲端營運", referenceCompanies.datadog.url)
+    ]
+  },
+  en: {
+    power: [
+      externalLink("ABB: data center electrification", referenceCompanies.abb.url),
+      externalLink("Cummins: backup power systems", referenceCompanies.cummins.url),
+      externalLink("Siemens Energy: grid and energy systems", referenceCompanies.siemensEnergy.url)
+    ],
+    cooling: [
+      externalLink("Vertiv: thermal management for data centers", referenceCompanies.vertiv.url),
+      externalLink("Carrier: commercial cooling and HVAC", referenceCompanies.carrier.url),
+      externalLink("Daikin: global cooling solutions", referenceCompanies.daikin.url)
+    ],
+    compute: [
+      externalLink("NVIDIA: AI data center platform", referenceCompanies.nvidia.url),
+      externalLink("TSMC: foundry and advanced packaging", referenceCompanies.tsmc.url),
+      externalLink("Micron: HBM and memory technology", referenceCompanies.micron.url)
+    ],
+    network: [
+      externalLink("Arista Networks: data center networking", referenceCompanies.arista.url),
+      externalLink("Coherent: optics and high-speed interconnect", referenceCompanies.coherent.url),
+      externalLink("Cloudflare: edge delivery and network services", referenceCompanies.cloudflare.url)
+    ],
+    site: [
+      externalLink("Equinix: global interconnection campuses", referenceCompanies.equinix.url),
+      externalLink("DataBank: AI infrastructure deployment", referenceCompanies.databank.url),
+      externalLink("NTT DATA: managed data center infrastructure", referenceCompanies.nttdata.url)
+    ],
+    ops: [
+      externalLink("Microsoft Azure: AI and cloud platform", referenceCompanies.azure.url),
+      externalLink("Lambda: specialized GPU cloud", referenceCompanies.lambda.url),
+      externalLink("Datadog: observability and cloud operations", referenceCompanies.datadog.url)
+    ]
+  },
+  ko: {
+    power: [
+      externalLink("ABB: 데이터센터 전기화", referenceCompanies.abb.url),
+      externalLink("Cummins: 백업 전력 시스템", referenceCompanies.cummins.url),
+      externalLink("Siemens Energy: 전력망 및 에너지 시스템", referenceCompanies.siemensEnergy.url)
+    ],
+    cooling: [
+      externalLink("Vertiv: 데이터센터 열관리", referenceCompanies.vertiv.url),
+      externalLink("Carrier: 상업용 냉각 및 HVAC", referenceCompanies.carrier.url),
+      externalLink("Daikin: 글로벌 냉각 솔루션", referenceCompanies.daikin.url)
+    ],
+    compute: [
+      externalLink("NVIDIA: AI 데이터센터 플랫폼", referenceCompanies.nvidia.url),
+      externalLink("TSMC: 파운드리 및 첨단 패키징", referenceCompanies.tsmc.url),
+      externalLink("Micron: HBM 및 메모리 기술", referenceCompanies.micron.url)
+    ],
+    network: [
+      externalLink("Arista Networks: 데이터센터 네트워킹", referenceCompanies.arista.url),
+      externalLink("Coherent: 광통신 및 고속 인터커넥트", referenceCompanies.coherent.url),
+      externalLink("Cloudflare: 엣지 전송 및 네트워크 서비스", referenceCompanies.cloudflare.url)
+    ],
+    site: [
+      externalLink("Equinix: 글로벌 인터커넥션 캠퍼스", referenceCompanies.equinix.url),
+      externalLink("DataBank: AI 인프라 구축 사례", referenceCompanies.databank.url),
+      externalLink("NTT DATA: 관리형 데이터센터 인프라", referenceCompanies.nttdata.url)
+    ],
+    ops: [
+      externalLink("Microsoft Azure: AI 및 클라우드 플랫폼", referenceCompanies.azure.url),
+      externalLink("Lambda: 전용 GPU 클라우드", referenceCompanies.lambda.url),
+      externalLink("Datadog: 관측성과 클라우드 운영", referenceCompanies.datadog.url)
+    ]
+  },
+  ja: {
+    power: [
+      externalLink("ABB: データセンター電化", referenceCompanies.abb.url),
+      externalLink("Cummins: バックアップ電源システム", referenceCompanies.cummins.url),
+      externalLink("Siemens Energy: 電力網とエネルギーシステム", referenceCompanies.siemensEnergy.url)
+    ],
+    cooling: [
+      externalLink("Vertiv: データセンター熱管理", referenceCompanies.vertiv.url),
+      externalLink("Carrier: 商用冷却と HVAC", referenceCompanies.carrier.url),
+      externalLink("Daikin: グローバル冷却ソリューション", referenceCompanies.daikin.url)
+    ],
+    compute: [
+      externalLink("NVIDIA: AI データセンタープラットフォーム", referenceCompanies.nvidia.url),
+      externalLink("TSMC: ファウンドリと先端パッケージング", referenceCompanies.tsmc.url),
+      externalLink("Micron: HBM とメモリ技術", referenceCompanies.micron.url)
+    ],
+    network: [
+      externalLink("Arista Networks: データセンターネットワーク", referenceCompanies.arista.url),
+      externalLink("Coherent: 光通信と高速相互接続", referenceCompanies.coherent.url),
+      externalLink("Cloudflare: エッジ配信とネットワーク運用", referenceCompanies.cloudflare.url)
+    ],
+    site: [
+      externalLink("Equinix: グローバル相互接続キャンパス", referenceCompanies.equinix.url),
+      externalLink("DataBank: AI インフラ構築事例", referenceCompanies.databank.url),
+      externalLink("NTT DATA: マネージドデータセンター基盤", referenceCompanies.nttdata.url)
+    ],
+    ops: [
+      externalLink("Microsoft Azure: AI とクラウド基盤", referenceCompanies.azure.url),
+      externalLink("Lambda: 専用 GPU クラウド", referenceCompanies.lambda.url),
+      externalLink("Datadog: 可観測性とクラウド運用", referenceCompanies.datadog.url)
+    ]
   }
 };
 
@@ -893,12 +1509,29 @@ const chapter3Content = {
 });
 
 const canvas = document.querySelector("#sceneCanvas");
+const stage = document.querySelector(".stage");
 const appShell = document.querySelector("#appShell");
 const rightPanel = document.querySelector("#rightPanel");
 const insightContent = document.querySelector("#insightContent");
+const insightPeek = document.querySelector("#insightPeek");
 const labelLayer = document.querySelector("#labelLayer");
 const layerList = document.querySelector("#layerList");
 const modeList = document.querySelector("#modeList");
+const mobileLayerSummary = document.querySelector("#mobileLayerSummary");
+const mobileLayerName = document.querySelector("#mobileLayerName");
+const mobileLayerSignal = document.querySelector("#mobileLayerSignal");
+const mobileLayerDock = document.querySelector("#mobileLayerDock");
+const mobileStageControls = document.querySelector("#mobileStageControls");
+const mobileStageChip = document.querySelector("#mobileStageChip");
+const mobileStageSheet = document.querySelector("#mobileStageSheet");
+const mobileStageTabs = document.querySelector("#mobileStageTabs");
+const mobileStageTools = document.querySelector("#mobileStageTools");
+const mobileStageExplodeToggle = document.querySelector("#mobileStageExplodeToggle");
+const mobileStageExplodeRange = document.querySelector("#mobileStageExplodeRange");
+const mobileStageReset = document.querySelector("#mobileStageReset");
+const mobileHeroHeader = document.querySelector("#mobileHeroHeader");
+const mobileBrandName = document.querySelector("#mobileBrandName");
+const mobilePageTitle = document.querySelector("#mobilePageTitle");
 const chapterTabs = document.querySelector("#chapterTabs");
 const detailTitle = document.querySelector("#detailTitle");
 const detailLede = document.querySelector("#detailLede");
@@ -917,9 +1550,13 @@ const analysisSupplierList = document.querySelector("#analysisSupplierList");
 const analysisRiskHeading = document.querySelector("#analysisRiskHeading");
 const analysisRiskText = document.querySelector("#analysisRiskText");
 const aboutOpen = document.querySelector("#aboutOpen");
+const updatesOpen = document.querySelector("#updatesOpen");
 const aboutScrim = document.querySelector("#aboutScrim");
 const aboutDrawer = document.querySelector("#aboutDrawer");
 const aboutClose = document.querySelector("#aboutClose");
+const updatesScrim = document.querySelector("#updatesScrim");
+const updatesDrawer = document.querySelector("#updatesDrawer");
+const updatesClose = document.querySelector("#updatesClose");
 const aboutEyebrow = document.querySelector("#aboutEyebrow");
 const aboutTitle = document.querySelector("#aboutTitle");
 const aboutDescription = document.querySelector("#aboutDescription");
@@ -928,8 +1565,15 @@ const aboutFocus = document.querySelector("#aboutFocus");
 const aboutAudience = document.querySelector("#aboutAudience");
 const aboutUpdated = document.querySelector("#aboutUpdated");
 const aboutContact = document.querySelector("#aboutContact");
+const updatesEyebrow = document.querySelector("#updatesEyebrow");
+const updatesTitle = document.querySelector("#updatesTitle");
+const updatesUpdated = document.querySelector("#updatesUpdated");
+const updatesDescription = document.querySelector("#updatesDescription");
+const updatesList = document.querySelector("#updatesList");
+const mobileInsightClose = document.querySelector("#mobileInsightClose");
 const activeLayerName = document.querySelector("#activeLayerName");
 const activeLayerSignal = document.querySelector("#activeLayerSignal");
+const sliderRow = document.querySelector("#sliderRow");
 const explodeRange = document.querySelector("#explodeRange");
 const resetView = document.querySelector("#resetView");
 const languageTabs = document.querySelector("#languageTabs");
@@ -943,7 +1587,14 @@ const audioSegmentTitle = document.querySelector("#audioSegmentTitle");
 const transcriptToggle = document.querySelector("#transcriptToggle");
 const transcriptPanel = document.querySelector("#transcriptPanel");
 const transcriptText = document.querySelector("#transcriptText");
+const analysisSignalsSection = document.querySelector("#analysisSignalsSection");
+const analysisSignalsHeading = document.querySelector("#analysisSignalsHeading");
+const analysisSignalsList = document.querySelector("#analysisSignalsList");
+const analysisReferencesSection = document.querySelector("#analysisReferencesSection");
+const analysisReferencesHeading = document.querySelector("#analysisReferencesHeading");
+const analysisReferencesList = document.querySelector("#analysisReferencesList");
 const staticTextEls = {
+  brandName: document.querySelector("#brandName"),
   pageTitle: document.querySelector("#pageTitle"),
   introText: document.querySelector("#introText"),
   languageLabel: document.querySelector("#languageLabel"),
@@ -1005,11 +1656,23 @@ camera.position.set(12, 9, 14);
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
-controls.dampingFactor = 0.055;
+controls.dampingFactor = 0.068;
+controls.rotateSpeed = 0.88;
 controls.minDistance = 7;
 controls.maxDistance = 32;
 controls.maxPolarAngle = Math.PI * 0.49;
+controls.enablePan = false;
 controls.target.set(0, 1.1, 0);
+controls.addEventListener("start", () => {
+  orbitInteracting = true;
+  orbitResumeAt = performance.now() + 1200;
+  canvas.style.cursor = "grabbing";
+});
+controls.addEventListener("end", () => {
+  orbitInteracting = false;
+  orbitResumeAt = performance.now() + 1800;
+  canvas.style.cursor = hovered ? "pointer" : "grab";
+});
 
 const ambient = new THREE.AmbientLight(0x8fb7ff, 0.45);
 scene.add(ambient);
@@ -1052,136 +1715,136 @@ const speechLangs = { en: "en-US", zh: "zh-TW", ko: "ko-KR", ja: "ja-JP" };
 const chapter1AudioContent = {
   zh: {
     power: {
-      title: "電力與電網",
-      text: "AI 資料中心的第一個瓶頸，往往不是 GPU，而是電力。一座 AI 園區需要數十到上百 MW，建案就會從 IT 採購，變成電網工程。變壓器、開關設備、UPS、備援電源與併網時程，決定算力能不能真的上線。關鍵觀察是：AI 基礎設施的擴張速度，受限於可取得的電力容量與電網穩定度。"
+      title: "電力與能源骨幹",
+      text: "AI 在成為算力故事之前，首先是一個電力故事。在 GPU 開始訓練模型或服務使用者之前，電力必須先進站、降壓、穩定，並能在故障時持續供應。這就是為什麼變電站、開關設備、UPS、備援發電與併網條件如此重要。未來訊號是：誰能更快取得穩定可交付的電力容量，誰就更有機會率先擴張 AI 園區。"
     },
     cooling: {
-      title: "冷卻系統",
-      text: "第二層是冷卻。AI 伺服器讓機櫃功率密度快速提高，傳統風冷開始接近極限。散熱不再只是機房空調，而是從 GPU 晶片、液冷板、CDU、泵浦、冷水主機到冷卻塔的完整路徑。關鍵觀察是：冷卻效率、接頭可靠度、水質與用水壓力，會直接影響 GPU 叢集的可用率與營運成本。"
+      title: "冷卻與散熱系統",
+      text: "更多電力，只有在熱能能順利離開系統時，才會真正變成更多算力。當機櫃密度持續升高，熱必須從晶片移入冷板與液冷迴路，再流向泵浦、冷水主機與散熱設備。這一層決定部署密度、穩定性、用水與能效。未來訊號是：液冷正從進階配置走向預設設計。"
     },
     compute: {
-      title: "算力設備",
-      text: "第三層是算力設備，也是資本支出最密集的核心。但這裡不只是一張 GPU。真正的系統包含 GPU、HBM、先進封裝、伺服器主板、電源、散熱、機櫃與整機測試。關鍵觀察是：算力供給是多條供應鏈同時協作的結果。瓶頸可能出現在晶片，也可能出現在記憶體、封裝、良率或整櫃交付。"
+      title: "算力設備與 AI 晶片",
+      text: "一張 GPU 並不等於一套 AI 系統。只有當記憶體、封裝、供電、散熱與整櫃整合同時到位時，它才真正有用。實際上，算力供給是一條高度協作的製造鏈。未來訊號是：HBM、封裝產能與整櫃交付速度，會和晶片 headline 一樣重要。"
     },
     network: {
-      title: "網路互連",
-      text: "第四層是網路互連。大型 AI 訓練不是把 GPU 堆在一起就好，GPU 之間還需要低延遲、高頻寬的資料交換。交換器、NIC、DPU、光模組、光纖與拓樸設計，都會影響叢集利用率。關鍵觀察是：AI 訓練叢集本質上是網路化的算力系統，延遲與封包效率會變成算力效率的一部分。"
+      title: "網路互連與資料搬運",
+      text: "算力決定能力上限，但資料搬運決定多台機器能否成為同一套系統。無論訓練還是推論，交換器、NIC、光模組、光纖與拓樸，都會決定系統同步與交換上下文的速度。這一層決定理論算力有多少能真正轉成可用效能。未來訊號是：當模型系統更加分散，光互連與網路效率會更直接定義可用效能。"
     },
     site: {
-      title: "土地與建築",
-      text: "第五層是土地與建築。資料中心不是可以快速複製的軟體，而是多年期的重資產基礎建設。一座 AI 園區能不能落地，取決於土地、電力距離、水資源、環評、法規、施工能力與客戶合約。關鍵觀察是：真正的供給不是土地面積，而是可被批准、可施工、可供電、可冷卻，並能準時交付的容量。"
+      title: "園區建設與交付",
+      text: "AI 熱潮可以在新聞標題裡快速升溫，但真實容量仍然以基礎設施的速度前進。土地、審批、電網接入、水資源、施工與交付時程，都會決定需求何時變成真正容量。這也是為什麼資料中心供給，不能只看土地大小。未來訊號是：真正稀缺的資產，會是已獲批准、可施工、可供電、可冷卻的就緒容量。"
     },
     ops: {
-      title: "營運與平台",
-      text: "第六層是營運與平台。基礎設施只有被調度、計費、監控、維護與治理之後，才會變成真正可銷售的算力服務。這一層把 GPU、機房、網路與能源，轉成雲端 GPU、訓練平台與推論服務。關鍵觀察是：當硬體供給增加，差異化會從誰有卡，轉向誰能把卡穩定、合規、高利用率地交付給客戶。"
+      title: "雲端與 AI 營運",
+      text: "擁有 GPU，並不等於能把 AI 交付成值得信任的產品。基礎設施只有在能被營運、治理並持續維持可用時，才會真正變成服務。長期來看，營運品質對客戶信任的影響，會和硬體規格一樣重要。未來訊號是：差異化正轉向利用率、推論效率、治理能力與服務可靠度。"
     }
   },
   en: {
     power: {
-      title: "Power & Grid",
-      text: "The first bottleneck in an AI data center is often not the GPU. It is power. When an AI campus needs tens or even hundreds of megawatts, the project becomes a grid infrastructure challenge. Transformers, switchgear, UPS systems, backup power, and interconnection timelines decide when compute can actually go online. The key finding: AI infrastructure growth is constrained by available power and grid reliability."
+      title: "Power & Energy Backbone",
+      text: "Before AI becomes a compute story, it begins as a power story. Before GPUs can train a model or serve a user, electricity has to arrive, step down, stabilize, and survive failure. That is why substations, switchgear, UPS systems, backup generation, and grid access matter so much. Future signal: the operators who secure dependable power capacity first will often scale first."
     },
     cooling: {
-      title: "Cooling Systems",
-      text: "The second layer is cooling. AI servers are pushing rack power density higher, and traditional air cooling is approaching its limits. Thermal management is no longer just room air conditioning. It is a full heat path from the GPU chip to cold plates, CDUs, pumps, chillers, and cooling towers. The key finding: cooling efficiency, connector reliability, water quality, and water availability directly shape cluster uptime and operating cost."
+      title: "Cooling & Heat Removal",
+      text: "Cooling decides whether rising electrical load can become sustained AI performance. As rack density rises, heat has to leave the chip, move through cold plates and liquid loops, and reach pumps, chillers, and heat rejection systems. This layer shapes density, uptime, water use, and energy efficiency. Future signal: liquid cooling is moving from advanced option toward default design."
     },
     compute: {
-      title: "Compute Equipment",
-      text: "The third layer is compute equipment, the most capital-intensive part of the AI data center. But this is not just about a GPU. The real system includes GPUs, HBM, advanced packaging, server boards, power, cooling, racks, and system-level testing. The key finding: compute supply depends on several supply chains working together. The bottleneck may sit in chips, memory, packaging, yield, or rack-scale delivery."
+      title: "Compute & AI Chips",
+      text: "The real unit of AI capacity is not a GPU. It is a fully integrated system. A working AI node depends on HBM, advanced packaging, power delivery, cooling, and rack-level integration arriving together. In practice, compute supply is a coordinated manufacturing chain. Future signal: HBM, packaging capacity, and rack-scale delivery will matter as much as chip headlines."
     },
     network: {
-      title: "Network Interconnect",
-      text: "The fourth layer is network interconnect. Large AI training is not simply a pile of GPUs. GPUs need low-latency, high-bandwidth data exchange with one another. Switches, NICs, DPUs, optical modules, fiber, and topology all affect cluster utilization. The key finding: an AI training cluster is a networked compute system, where latency and packet efficiency become part of compute efficiency."
+      title: "Networking & Data Movement",
+      text: "In AI infrastructure, data movement is what turns many machines into one working system. During training and inference, switches, NICs, optics, fiber, and topology decide how quickly systems can synchronize and exchange context. This layer determines how much theoretical compute becomes real performance. Future signal: as model systems become more distributed, optical interconnect and network efficiency will increasingly define usable performance."
     },
     site: {
-      title: "Site & Construction",
-      text: "The fifth layer is site and construction. A data center is not software that can be copied instantly. It is multi-year, heavy infrastructure. Whether an AI campus can be built depends on land, power distance, water, permitting, regulation, construction capacity, and customer contracts. The key finding: real supply is not land area. It is approved, buildable, powered, cooled, and deliverable capacity."
+      title: "Campus & Buildout",
+      text: "The AI boom may move fast in headlines, but physical capacity still moves at infrastructure speed. Land, permitting, grid access, water, construction, and delivery schedules all shape when demand becomes real capacity. This is why data center supply cannot be measured by acreage alone. Future signal: the scarce asset will be fully permitted, power-ready, buildable capacity."
     },
     ops: {
-      title: "Operations & Platform",
-      text: "The sixth layer is operations and platform. Infrastructure becomes a sellable compute service only after it can be scheduled, billed, monitored, maintained, and governed. This layer turns GPUs, facilities, networks, and energy into GPU cloud, training platforms, and inference services. The key finding: as hardware supply expands, differentiation shifts from who has GPUs to who can deliver them reliably, compliantly, and at high utilization."
+      title: "Cloud & AI Operations",
+      text: "Infrastructure becomes a product only when it can be operated, governed, and trusted. This layer turns hardware into services that developers and enterprises can actually use. Over time, operational quality shapes customer trust as much as hardware specs do. Future signal: differentiation is shifting toward utilization, inference efficiency, governance, and service reliability."
     }
   },
   ko: {
     power: {
-      title: "전력 및 전력망",
-      text: "AI 데이터센터의 첫 번째 병목은 GPU가 아니라 전력인 경우가 많습니다. 하나의 AI 캠퍼스가 수십에서 수백 MW를 요구하면, 프로젝트는 IT 구매가 아니라 전력망 인프라 문제가 됩니다. 변압기, 스위치기어, UPS, 예비 전원, 계통 연결 일정이 실제 컴퓨팅 가동 시점을 결정합니다. 핵심은 AI 인프라 확장 속도가 확보 가능한 전력과 전력망 안정성에 의해 제한된다는 점입니다."
+      title: "전력 및 에너지 백본",
+      text: "AI는 컴퓨트 이야기가 되기 전에 먼저 전력 이야기로 시작됩니다. GPU가 모델을 학습하거나 사용자를 서비스하기 전에 전기는 먼저 들어오고, 전압이 낮춰지고, 안정화되며, 장애 상황에서도 유지되어야 합니다. 그래서 변전, 스위치기어, UPS, 백업 전원, 계통 접속이 매우 중요합니다. 미래 신호는 안정적인 전력 용량을 더 빨리 확보하는 운영자가 먼저 확장할 가능성이 크다는 점입니다."
     },
     cooling: {
-      title: "냉각 시스템",
-      text: "두 번째 층은 냉각입니다. AI 서버는 랙 전력 밀도를 빠르게 높이고 있으며, 전통적인 공랭 방식은 한계에 가까워지고 있습니다. 열 관리는 더 이상 단순한 전산실 공조가 아닙니다. GPU 칩에서 콜드 플레이트, CDU, 펌프, 칠러, 냉각탑으로 이어지는 전체 열 경로입니다. 핵심은 냉각 효율, 접속부 신뢰성, 수질, 물 사용 압력이 클러스터 가동률과 운영비에 직접 영향을 준다는 점입니다."
+      title: "냉각 및 열 제거",
+      text: "더 많은 전력은 열이 시스템 밖으로 빠져나갈 수 있을 때만 더 많은 컴퓨트가 됩니다. 랙 밀도가 높아질수록 열은 칩에서 콜드 플레이트와 액체 루프를 거쳐 펌프, 칠러, 방열 장비로 이동해야 합니다. 이 층은 배치 밀도, 안정성, 물 사용, 에너지 효율을 결정합니다. 미래 신호는 액체 냉각이 고급 옵션에서 기본 설계로 이동하고 있다는 점입니다."
     },
     compute: {
-      title: "컴퓨팅 장비",
-      text: "세 번째 층은 컴퓨팅 장비이며, AI 데이터센터에서 가장 자본 집약적인 핵심입니다. 하지만 이것은 GPU 한 장의 문제가 아닙니다. 실제 시스템은 GPU, HBM, 첨단 패키징, 서버 보드, 전원, 냉각, 랙, 그리고 시스템 테스트로 구성됩니다. 핵심은 컴퓨팅 공급이 여러 공급망의 동시 협업 결과라는 점입니다. 병목은 칩, 메모리, 패키징, 수율, 또는 랙 단위 납품에서 발생할 수 있습니다."
+      title: "컴퓨트 및 AI 칩",
+      text: "GPU 한 장이 곧 AI 시스템은 아닙니다. 메모리, 패키징, 전력 설계, 냉각, 랙 단위 통합이 함께 도착해야 비로소 유용해집니다. 실제로 컴퓨트 공급은 조율된 제조 체인입니다. 미래 신호는 HBM, 패키징 용량, 랙 단위 인도가 칩 헤드라인만큼 중요해진다는 점입니다."
     },
     network: {
-      title: "네트워크 인터커넥트",
-      text: "네 번째 층은 네트워크 인터커넥트입니다. 대규모 AI 훈련은 GPU를 많이 쌓는 것만으로 충분하지 않습니다. GPU 사이에는 낮은 지연시간과 높은 대역폭의 데이터 교환이 필요합니다. 스위치, NIC, DPU, 광모듈, 광섬유, 토폴로지가 모두 클러스터 이용률에 영향을 줍니다. 핵심은 AI 훈련 클러스터가 네트워크화된 컴퓨팅 시스템이며, 지연시간과 패킷 효율이 곧 컴퓨팅 효율의 일부가 된다는 점입니다."
+      title: "네트워킹 및 데이터 이동",
+      text: "컴퓨트가 능력의 상한을 정한다면, 데이터 이동은 많은 장비를 하나의 시스템으로 묶습니다. 훈련과 추론 모두에서 스위치, NIC, 광모듈, 광섬유, 토폴로지는 시스템 동기화와 컨텍스트 교환 속도를 결정합니다. 이 층은 이론상의 컴퓨트가 실제 성능으로 얼마나 전환되는지를 좌우합니다. 미래 신호는 모델 시스템이 더 분산될수록 광 인터커넥트와 네트워크 효율이 실제 성능을 규정하게 된다는 점입니다."
     },
     site: {
-      title: "부지와 건설",
-      text: "다섯 번째 층은 부지와 건설입니다. 데이터센터는 즉시 복제할 수 있는 소프트웨어가 아니라, 수년에 걸친 중자산 인프라입니다. AI 캠퍼스가 실제로 지어질 수 있는지는 토지, 전력 접근성, 물, 인허가, 규제, 시공 능력, 고객 계약에 달려 있습니다. 핵심은 진짜 공급이 토지 면적이 아니라 승인되고, 지을 수 있고, 전력을 공급받고, 냉각 가능하며, 제때 납품 가능한 용량이라는 점입니다."
+      title: "캠퍼스 구축 및 인도",
+      text: "AI 붐은 헤드라인에서는 빠르게 움직일 수 있지만, 실제 용량은 여전히 인프라의 속도로 움직입니다. 토지, 인허가, 계통 접속, 물, 시공, 납기 일정이 수요가 언제 실제 용량이 되는지를 결정합니다. 그래서 데이터센터 공급은 단순한 면적으로 측정할 수 없습니다. 미래 신호는 완전한 인허가와 전력 준비가 끝난 건설 가능 용량이 가장 희소한 자산이 된다는 점입니다."
     },
     ops: {
-      title: "운영과 플랫폼",
-      text: "여섯 번째 층은 운영과 플랫폼입니다. 인프라는 스케줄링, 과금, 모니터링, 유지보수, 거버넌스를 거친 뒤에야 판매 가능한 컴퓨팅 서비스가 됩니다. 이 층은 GPU, 시설, 네트워크, 에너지를 GPU 클라우드, 훈련 플랫폼, 추론 서비스로 전환합니다. 핵심은 하드웨어 공급이 늘어날수록 차별화가 누가 GPU를 보유했는가에서, 누가 안정적이고 규정을 준수하며 높은 이용률로 제공할 수 있는가로 이동한다는 점입니다."
+      title: "클라우드 및 AI 운영",
+      text: "GPU를 보유하는 것과 신뢰할 수 있는 AI 제품을 제공하는 것은 같은 일이 아닙니다. 인프라는 운영되고, 거버넌스가 적용되며, 지속적으로 신뢰될 수 있을 때 비로소 제품이 됩니다. 이 층은 하드웨어를 개발자와 기업이 실제로 사용할 수 있는 서비스로 바꿉니다. 시간이 갈수록 운영 품질은 하드웨어 사양만큼 고객 신뢰를 좌우합니다. 미래 신호는 차별화가 이용률, 추론 효율, 거버넌스, 서비스 신뢰성으로 이동하고 있다는 점입니다."
     }
   },
   ja: {
     power: {
-      title: "電力と電力網",
-      text: "AI データセンターの最初のボトルネックは、GPU ではなく電力であることが少なくありません。AI キャンパスが数十から数百 MW を必要とすると、案件は IT 調達ではなく電力網インフラの課題になります。変圧器、開閉装置、UPS、バックアップ電源、系統接続の時期が、計算能力を実際に稼働できるかを左右します。重要なのは、AI インフラの成長速度が、利用可能な電力と電力網の安定性に制約されることです。"
+      title: "電力とエネルギー基盤",
+      text: "AI はコンピュートの物語になる前に、まず電力の物語として始まります。GPU がモデルを学習したりユーザーに応答したりする前に、電気はまず届き、降圧され、安定化され、障害時にも維持されなければなりません。だからこそ、変電、開閉装置、UPS、バックアップ電源、系統接続が重要です。今後のシグナルは、安定した電力容量をより早く確保できる事業者ほど先に拡張しやすいという点です。"
     },
     cooling: {
-      title: "冷却システム",
-      text: "第 2 の層は冷却です。AI サーバーはラックの電力密度を急速に高めており、従来の空冷は限界に近づいています。熱管理は、もはや機械室の空調だけではありません。GPU チップからコールドプレート、CDU、ポンプ、チラー、冷却塔まで続く熱の経路全体です。重要なのは、冷却効率、接続部の信頼性、水質、水利用の制約が、クラスターの稼働率と運用コストを直接左右することです。"
+      title: "冷却と熱除去",
+      text: "より多くの電力は、熱がきちんとシステムの外へ逃げられるときにだけ、より多くの計算能力になります。ラック密度が上がるほど、熱はチップからコールドプレートと液冷ループを通り、ポンプ、チラー、放熱設備へ移動しなければなりません。この層は、配備密度、安定性、水利用、エネルギー効率を左右します。今後のシグナルは、液冷が特別なオプションから標準設計へ移りつつあることです。"
     },
     compute: {
-      title: "計算設備",
-      text: "第 3 の層は計算設備であり、AI データセンターの中で最も資本集約的な中核です。しかし、これは GPU だけの話ではありません。実際のシステムには、GPU、HBM、先端パッケージング、サーバーボード、電源、冷却、ラック、システムテストが含まれます。重要なのは、計算能力の供給が複数のサプライチェーンの連携によって成り立つことです。ボトルネックは、チップ、メモリ、パッケージング、歩留まり、またはラック単位の納入に現れます。"
+      title: "コンピュートと AI チップ",
+      text: "GPU 1 枚だけでは AI システムにはなりません。メモリ、パッケージング、電力設計、冷却、ラック単位の統合がそろって初めて役に立ちます。実際には、コンピュート供給は協調された製造チェーンです。今後のシグナルは、HBM、パッケージング能力、ラック単位の納入が、チップの見出しと同じくらい重要になることです。"
     },
     network: {
-      title: "ネットワーク相互接続",
-      text: "第 4 の層はネットワーク相互接続です。大規模な AI 学習は、GPU を積み上げるだけでは成立しません。GPU 同士には、低遅延で高帯域のデータ交換が必要です。スイッチ、NIC、DPU、光モジュール、光ファイバー、トポロジーの設計が、クラスター利用率に影響します。重要なのは、AI 学習クラスターがネットワーク化された計算システムであり、遅延とパケット効率が計算効率の一部になることです。"
+      title: "ネットワーキングとデータ移動",
+      text: "コンピュートが能力の上限を決めるなら、データ移動は多くの装置を一つのシステムへまとめます。学習でも推論でも、スイッチ、NIC、光モジュール、光ファイバー、トポロジーが、どれだけ速く同期し文脈をやり取りできるかを決めます。この層は、理論上の計算力がどれだけ実効性能へ変わるかを左右します。今後のシグナルは、モデルシステムが分散するほど、光相互接続とネットワーク効率が実効性能を左右することです。"
     },
     site: {
-      title: "用地と建設",
-      text: "第 5 の層は用地と建設です。データセンターはすぐに複製できるソフトウェアではなく、数年単位の重いインフラです。AI キャンパスを実際に建設できるかは、土地、電力への距離、水資源、許認可、規制、施工能力、顧客契約に左右されます。重要なのは、本当の供給が土地面積ではなく、承認され、建設でき、電力と冷却を確保し、期限内に引き渡せる容量であることです。"
+      title: "キャンパス建設と立ち上げ",
+      text: "AI ブームは見出しでは速く進んでも、実際の容量は依然としてインフラの速度でしか動きません。土地、許認可、系統接続、水、建設、納期が、需要がいつ本当の容量になるかを決めます。だからデータセンター供給は、面積だけでは測れません。今後のシグナルは、許認可が完了し、電力準備が整った建設可能容量こそが最も希少な資産になることです。"
     },
     ops: {
-      title: "運用とプラットフォーム",
-      text: "第 6 の層は運用とプラットフォームです。インフラは、スケジューリング、課金、監視、保守、ガバナンスができて初めて販売可能な計算サービスになります。この層は、GPU、施設、ネットワーク、エネルギーを、GPU クラウド、学習プラットフォーム、推論サービスへ変換します。重要なのは、ハードウェア供給が増えるほど、差別化が GPU を持っているかではなく、安定的に、コンプライアンスを満たし、高い利用率で提供できるかへ移ることです。"
+      title: "クラウドと AI 運用",
+      text: "GPU を持っていることと、信頼できる AI 製品を届けられることは同じではありません。インフラは、運用され、統制され、継続的に信頼できて初めて製品になります。この層は、ハードウェアを開発者や企業が実際に使えるサービスへ変えます。時間が経つほど、運用品質はハードウェア仕様と同じくらい顧客の信頼を左右します。今後のシグナルは、差別化が利用率、推論効率、ガバナンス、サービス信頼性へ移っていることです。"
     }
   }
 };
 
 // Static ElevenLabs exports. Missing languages fall back to browser speech synthesis.
 const chapter1AudioSources = {
-  "en-power": "audio/chapter1/en-power.mp3",
-  "en-cooling": "audio/chapter1/en-cooling.mp3",
-  "en-compute": "audio/chapter1/en-compute.mp3",
-  "en-network": "audio/chapter1/en-network.mp3",
-  "en-site": "audio/chapter1/en-site.mp3",
-  "en-ops": "audio/chapter1/en-ops.mp3",
-  "zh-power": "audio/chapter1/zh-power.mp3?v=brb-20260617",
-  "zh-cooling": "audio/chapter1/zh-cooling.mp3?v=brb-20260617",
-  "zh-compute": "audio/chapter1/zh-compute.mp3?v=brb-20260617",
-  "zh-network": "audio/chapter1/zh-network.mp3?v=brb-20260617",
-  "zh-site": "audio/chapter1/zh-site.mp3?v=brb-20260617",
-  "zh-ops": "audio/chapter1/zh-ops.mp3?v=brb-20260617",
-  "ko-power": "audio/chapter1/ko-power.mp3?v=uy-20260617",
-  "ko-cooling": "audio/chapter1/ko-cooling.mp3?v=uy-20260617",
-  "ko-compute": "audio/chapter1/ko-compute.mp3?v=uy-20260617",
-  "ko-network": "audio/chapter1/ko-network.mp3?v=uy-20260617",
-  "ko-site": "audio/chapter1/ko-site.mp3?v=uy-20260617",
-  "ko-ops": "audio/chapter1/ko-ops.mp3?v=uy-20260617",
-  "ja-power": "audio/chapter1/ja-power.mp3?v=t7-20260617",
-  "ja-cooling": "audio/chapter1/ja-cooling.mp3?v=t7-20260617",
-  "ja-compute": "audio/chapter1/ja-compute.mp3?v=t7-20260617",
-  "ja-network": "audio/chapter1/ja-network.mp3?v=t7-20260617",
-  "ja-site": "audio/chapter1/ja-site.mp3?v=t7-20260617",
-  "ja-ops": "audio/chapter1/ja-ops.mp3?v=t7-20260617"
+  "en-power": "audio/chapter1/en-power.mp3?v=edu-20260621",
+  "en-cooling": "audio/chapter1/en-cooling.mp3?v=edu-20260621",
+  "en-compute": "audio/chapter1/en-compute.mp3?v=edu-20260621",
+  "en-network": "audio/chapter1/en-network.mp3?v=edu-20260621",
+  "en-site": "audio/chapter1/en-site.mp3?v=edu-20260621",
+  "en-ops": "audio/chapter1/en-ops.mp3?v=edu-20260621",
+  "zh-power": "audio/chapter1/zh-power.mp3?v=edu-20260621",
+  "zh-cooling": "audio/chapter1/zh-cooling.mp3?v=edu-20260621",
+  "zh-compute": "audio/chapter1/zh-compute.mp3?v=edu-20260621",
+  "zh-network": "audio/chapter1/zh-network.mp3?v=edu-20260621",
+  "zh-site": "audio/chapter1/zh-site.mp3?v=edu-20260621",
+  "zh-ops": "audio/chapter1/zh-ops.mp3?v=edu-20260621",
+  "ko-power": "audio/chapter1/ko-power.mp3?v=edu-20260621",
+  "ko-cooling": "audio/chapter1/ko-cooling.mp3?v=edu-20260621",
+  "ko-compute": "audio/chapter1/ko-compute.mp3?v=edu-20260621",
+  "ko-network": "audio/chapter1/ko-network.mp3?v=edu-20260621",
+  "ko-site": "audio/chapter1/ko-site.mp3?v=edu-20260621",
+  "ko-ops": "audio/chapter1/ko-ops.mp3?v=edu-20260621",
+  "ja-power": "audio/chapter1/ja-power.mp3?v=edu-20260621",
+  "ja-cooling": "audio/chapter1/ja-cooling.mp3?v=edu-20260621",
+  "ja-compute": "audio/chapter1/ja-compute.mp3?v=edu-20260621",
+  "ja-network": "audio/chapter1/ja-network.mp3?v=edu-20260621",
+  "ja-site": "audio/chapter1/ja-site.mp3?v=edu-20260621",
+  "ja-ops": "audio/chapter1/ja-ops.mp3?v=edu-20260621"
 };
 const chapter2AudioSources = {
   "en-compare": "audio/chapter2/en-compare.mp3",
@@ -1214,6 +1877,7 @@ const chapter3AudioSources = {
 
 let activeChapter = "chapter1";
 let selectedId = "compute";
+let chapter1HasInteracted = false;
 let selectedMode = "compare";
 let selectedNode = "compare";
 let activeSegmentId = "compare";
@@ -1226,6 +1890,17 @@ let explodeTarget = Number(explodeRange.value) / 100;
 let explodeCurrent = explodeTarget;
 let hovered = null;
 let insightsRevealed = false;
+let wheelLayerLockUntil = 0;
+let mobileExplodeExpanded = false;
+let mobileInsightExpanded = false;
+let mobileStageOpen = false;
+let orbitInteracting = false;
+let orbitResumeAt = 0;
+let pointerIntent = null;
+const chapter1DefaultCameraPosition = new THREE.Vector3(13.9, 11.4, 17.6);
+const chapter1DefaultTarget = new THREE.Vector3(0.12, 1.48, 0.08);
+const desiredChapter1CameraPosition = chapter1DefaultCameraPosition.clone();
+const desiredChapter1Target = chapter1DefaultTarget.clone();
 
 const compactPositions = {
   site: new THREE.Vector3(0, 0, 0),
@@ -1244,6 +1919,35 @@ const explodedPositions = {
   network: new THREE.Vector3(0, 3.15, -2.1),
   ops: new THREE.Vector3(0, 5.05, 1.55)
 };
+
+const chapter1FocusViews = {
+  power: {
+    position: new THREE.Vector3(-10.8, 5.8, 10.8),
+    target: new THREE.Vector3(-3.2, 1.2, 0.42)
+  },
+  cooling: {
+    position: new THREE.Vector3(10.4, 5.6, 10),
+    target: new THREE.Vector3(3.05, 1.24, 0.24)
+  },
+  compute: {
+    position: new THREE.Vector3(0.7, 5.7, 9.7),
+    target: new THREE.Vector3(0, 1.72, 0.06)
+  },
+  network: {
+    position: new THREE.Vector3(1.55, 7.4, 8.5),
+    target: new THREE.Vector3(0, 2.78, -0.7)
+  },
+  site: {
+    position: new THREE.Vector3(1.05, 5.1, 12.1),
+    target: new THREE.Vector3(0, 0.62, 0.18)
+  },
+  ops: {
+    position: new THREE.Vector3(1.7, 7.6, 9.1),
+    target: new THREE.Vector3(0, 3.78, 0.46)
+  }
+};
+const chapter1DimColor = new THREE.Color(0x0c1219);
+const chapter1BaseColor = new THREE.Color();
 
 const colorSchemes = {
   minimal: {
@@ -1362,6 +2066,54 @@ const languageShortLabels = {
   ko: "한국어",
   ja: "日本語"
 };
+
+const chapter1LayerSymbols = Object.freeze({
+  power: "⚡",
+  cooling: "❄",
+  compute: "◼",
+  network: "⇄",
+  site: "▦",
+  ops: "☁"
+});
+
+const chapter1ShortNames = Object.freeze({
+  en: {
+    power: "Power",
+    cooling: "Cooling",
+    compute: "Compute",
+    network: "Network",
+    site: "Campus",
+    ops: "Ops"
+  },
+  zh: {
+    power: "電力",
+    cooling: "冷卻",
+    compute: "算力",
+    network: "網路",
+    site: "園區",
+    ops: "營運"
+  },
+  ko: {
+    power: "전력",
+    cooling: "냉각",
+    compute: "컴퓨트",
+    network: "네트워크",
+    site: "캠퍼스",
+    ops: "운영"
+  },
+  ja: {
+    power: "電力",
+    cooling: "冷却",
+    compute: "コンピュート",
+    network: "ネット",
+    site: "キャンパス",
+    ops: "運用"
+  }
+});
+
+function chapter1ShortName(layerId) {
+  return chapter1ShortNames[activeLang]?.[layerId] ?? chapter1ShortNames.en[layerId] ?? layerId;
+}
 
 function mat(color, roughness = 0.58, metalness = 0.18, opacity = 1) {
   return new THREE.MeshStandardMaterial({
@@ -2238,7 +2990,8 @@ function applyColorScheme(name) {
 function localizedLayer(layer) {
   return {
     ...layer,
-    ...(layerTranslations[activeLang]?.[layer.id] ?? {})
+    ...(layerTranslations[activeLang]?.[layer.id] ?? {}),
+    ...(chapter1EducationalCopy[activeLang]?.[layer.id] ?? {})
   };
 }
 
@@ -2421,10 +3174,13 @@ function hideInsights() {
   insightsRevealed = false;
   closeAnalysisDrawer();
   closeAboutDrawer();
+  mobileInsightExpanded = false;
   appShell.classList.add("insight-is-hidden");
   rightPanel.classList.remove("is-revealed");
+  insightPeek?.setAttribute("aria-expanded", "false");
   rightPanel.setAttribute("aria-hidden", "true");
   insightContent.setAttribute("aria-hidden", "true");
+  syncMobileControls();
 }
 
 function revealInsights() {
@@ -2432,8 +3188,71 @@ function revealInsights() {
   insightsRevealed = true;
   appShell.classList.remove("insight-is-hidden");
   rightPanel.classList.add("is-revealed");
+  insightPeek?.setAttribute("aria-expanded", "true");
   rightPanel.setAttribute("aria-hidden", "false");
   insightContent.setAttribute("aria-hidden", "false");
+}
+
+function isMobileLayout() {
+  return window.innerWidth <= 1120;
+}
+
+function chapterChipLabel(chapterId = activeChapter) {
+  if (chapterId === "chapter2") return "C2";
+  if (chapterId === "chapter3") return "C3";
+  return "C1";
+}
+
+function setMobileStageOpen(open) {
+  if (!mobileStageSheet || !mobileStageChip) return;
+  mobileStageOpen = open;
+  if (!open) mobileExplodeExpanded = false;
+  mobileStageSheet.hidden = !open;
+  mobileStageChip.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+function syncMobileControls() {
+  const mobileLayout = isMobileLayout();
+  const chapter1Active = activeChapter === "chapter1";
+  if (sliderRow) {
+    const expanded = !mobileLayout || (chapter1Active && mobileExplodeExpanded);
+    sliderRow.classList.toggle("is-expanded", expanded);
+  }
+  if (staticTextEls.explodeLabel) {
+    staticTextEls.explodeLabel.setAttribute(
+      "aria-expanded",
+      !mobileLayout || (chapter1Active && mobileExplodeExpanded) ? "true" : "false"
+    );
+    staticTextEls.explodeLabel.disabled = mobileLayout && !chapter1Active;
+  }
+  rightPanel.classList.toggle("mobile-expanded", mobileLayout && mobileInsightExpanded);
+  if (mobileStageControls && mobileStageChip && mobileStageSheet && mobileStageExplodeToggle && mobileStageExplodeRange && mobileStageReset) {
+    mobileStageControls.hidden = !mobileLayout;
+    setMobileStageOpen(mobileLayout && mobileStageOpen);
+    mobileStageChip.textContent = chapterChipLabel();
+    mobileStageExplodeToggle.textContent = t("explodeLabel");
+    mobileStageReset.textContent = t("reset");
+    mobileStageExplodeToggle.hidden = !chapter1Active;
+    mobileStageExplodeRange.hidden = !chapter1Active || !mobileExplodeExpanded;
+    mobileStageExplodeToggle.setAttribute("aria-expanded", chapter1Active && mobileExplodeExpanded ? "true" : "false");
+    mobileStageExplodeRange.value = explodeRange.value;
+    document.querySelectorAll(".mobile-stage-button").forEach((button) => {
+      const active = button.dataset.chapter === activeChapter;
+      button.classList.toggle("is-active", active);
+      button.textContent = (activeChapter === "chapter3" ? chapter3Copy() : chapter2Copy()).chapterLabels?.[button.dataset.chapter] ?? button.textContent;
+    });
+  }
+  if (mobileHeroHeader) {
+    mobileHeroHeader.hidden = !mobileLayout;
+  }
+  if (mobileInsightClose) {
+    mobileInsightClose.hidden = !(mobileLayout && mobileInsightExpanded);
+  }
+}
+
+function setMobileInsightExpanded(open) {
+  mobileInsightExpanded = open;
+  syncMobileControls();
 }
 
 function openAnalysisDrawer() {
@@ -2452,6 +3271,7 @@ function closeAnalysisDrawer() {
 
 function openAboutDrawer() {
   closeAnalysisDrawer();
+  closeUpdatesDrawer();
   aboutDrawer.hidden = false;
   aboutScrim.hidden = false;
   aboutDrawer.setAttribute("aria-hidden", "false");
@@ -2465,9 +3285,29 @@ function closeAboutDrawer() {
   aboutOpen.setAttribute("aria-expanded", "false");
 }
 
+function openUpdatesDrawer() {
+  closeAnalysisDrawer();
+  closeAboutDrawer();
+  updatesDrawer.hidden = false;
+  updatesScrim.hidden = false;
+  updatesDrawer.setAttribute("aria-hidden", "false");
+  updatesOpen.setAttribute("aria-expanded", "true");
+}
+
+function closeUpdatesDrawer() {
+  updatesDrawer.hidden = true;
+  updatesScrim.hidden = true;
+  updatesDrawer.setAttribute("aria-hidden", "true");
+  updatesOpen.setAttribute("aria-expanded", "false");
+}
+
 function updateStaticText() {
   document.documentElement.lang = activeChapter === "chapter3" ? chapter3Copy().htmlLang : activeChapter === "chapter2" ? chapter2Copy().htmlLang : t("htmlLang");
-  document.title = activeChapter === "chapter3" ? chapter3Copy().title : activeChapter === "chapter2" ? chapter2Copy().title : t("pageTitle");
+  document.title = activeChapter === "chapter3"
+    ? `${chapter3Copy().title} | Compute to Grid`
+    : activeChapter === "chapter2"
+      ? `${chapter2Copy().title} | Compute to Grid`
+      : t("browserTitle") || t("pageTitle");
   Object.entries(staticTextEls).forEach(([key, element]) => {
     if (!element) return;
     if (activeChapter === "chapter3" && key === "pageTitle") element.textContent = chapter3Copy().title;
@@ -2476,7 +3316,19 @@ function updateStaticText() {
     else if (activeChapter === "chapter2" && key === "introText") element.textContent = chapter2Copy().intro;
     else element.textContent = t(key);
   });
+  if (mobileBrandName) mobileBrandName.textContent = t("brandName");
+  if (mobilePageTitle) {
+    mobilePageTitle.textContent = activeChapter === "chapter3"
+      ? chapter3Copy().title
+      : activeChapter === "chapter2"
+        ? chapter2Copy().title
+        : t("pageTitle");
+  }
+  if (mobileInsightClose) {
+    mobileInsightClose.setAttribute("aria-label", t("closeAnalysis"));
+  }
   layerList.setAttribute("aria-label", t("layerListLabel"));
+  mobileLayerDock?.setAttribute("aria-label", t("layerListLabel"));
   resetView.textContent = t("reset");
   resetView.title = t("resetTitle");
   languageMenuButton.textContent = languageShortLabels[activeLang] ?? "EN";
@@ -2487,6 +3339,10 @@ function updateStaticText() {
   analysisClose.setAttribute("aria-label", t("closeAnalysis"));
   aboutOpen.textContent = t("aboutLink");
   aboutOpen.setAttribute("aria-expanded", aboutDrawer.hidden ? "false" : "true");
+  if (updatesOpen) {
+    updatesOpen.textContent = t("updatesLink");
+    updatesOpen.setAttribute("aria-expanded", updatesDrawer.hidden ? "false" : "true");
+  }
   aboutEyebrow.textContent = t("aboutEyebrow");
   aboutTitle.textContent = t("aboutTitle");
   aboutDescription.textContent = t("aboutDescription");
@@ -2498,6 +3354,24 @@ function updateStaticText() {
   aboutContact.href = "mailto:hello@dandanstop.me";
   aboutClose.textContent = t("closeAnalysis");
   aboutClose.setAttribute("aria-label", t("closeAnalysis"));
+  if (updatesEyebrow) updatesEyebrow.textContent = t("updatesEyebrow");
+  if (updatesTitle) updatesTitle.textContent = t("updatesTitle");
+  if (updatesUpdated) updatesUpdated.textContent = t("updatesUpdated");
+  if (updatesDescription) updatesDescription.textContent = t("updatesDescription");
+  if (updatesList) {
+    updatesList.innerHTML = (t("updatesItems") ?? []).map((item) => `<li>${item}</li>`).join("");
+  }
+  if (updatesClose) {
+    updatesClose.textContent = t("closeAnalysis");
+    updatesClose.setAttribute("aria-label", t("closeAnalysis"));
+  }
+  if (insightPeek) {
+    insightPeek.textContent = t("insightTitle");
+    insightPeek.setAttribute("aria-expanded", insightsRevealed ? "true" : "false");
+  }
+  if (staticTextEls.hintZoom) {
+    staticTextEls.hintZoom.textContent = activeChapter === "chapter1" && window.innerWidth > 1120 ? t("hintWheelLayer") : t("hintZoom");
+  }
   document.querySelectorAll(".language-button").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.lang === activeLang);
   });
@@ -2506,15 +3380,19 @@ function updateStaticText() {
     button.textContent = copy.chapterLabels?.[button.dataset.chapter] ?? button.textContent;
     button.classList.toggle("is-active", button.dataset.chapter === activeChapter);
   });
+  syncMobileControls();
 }
 
 function hydrateUi() {
   layerList.innerHTML = "";
   modeList.innerHTML = "";
   labelLayer.innerHTML = "";
+  mobileLayerDock.innerHTML = "";
   labels.clear();
   layerList.hidden = activeChapter !== "chapter1";
   modeList.hidden = activeChapter === "chapter1";
+  mobileLayerDock.hidden = activeChapter !== "chapter1";
+  mobileLayerSummary.hidden = activeChapter !== "chapter1";
 
   if (activeChapter === "chapter3") {
     const copy = chapter3Copy();
@@ -2618,14 +3496,15 @@ function hydrateUi() {
     button.role = "tab";
     button.style.setProperty("--layer-color", `#${layer.color.toString(16).padStart(6, "0")}`);
     button.innerHTML = `
-      <span class="dot"></span>
+      <span class="layer-glyph">${chapter1LayerSymbols[layer.id] ?? "•"}</span>
+      <span class="layer-index">${String(index + 1).padStart(2, "0")}</span>
       <span class="layer-copy">
-        <span class="layer-title">${copy.name}</span>
+        <span class="layer-title">${chapter1ShortName(layer.id)}</span>
         <span class="layer-role">${copy.role}</span>
       </span>
-      <span class="layer-index">${String(index + 1).padStart(2, "0")}</span>
     `;
     button.addEventListener("click", () => {
+      chapter1HasInteracted = true;
       revealInsights();
       selectLayer(layer.id);
       trackEvent("layer_select", {
@@ -2637,6 +3516,30 @@ function hydrateUi() {
     });
     layerList.appendChild(button);
 
+    const mobileButton = document.createElement("button");
+    mobileButton.className = "mobile-layer-button";
+    mobileButton.type = "button";
+    mobileButton.id = `mobile-tab-${layer.id}`;
+    mobileButton.dataset.layer = layer.id;
+    mobileButton.style.setProperty("--layer-color", `#${layer.color.toString(16).padStart(6, "0")}`);
+    mobileButton.innerHTML = `
+      <span class="mobile-layer-glyph">${chapter1LayerSymbols[layer.id] ?? "•"}</span>
+      <span class="mobile-layer-index">${String(index + 1).padStart(2, "0")}</span>
+      <span class="mobile-layer-label">${chapter1ShortName(layer.id)}</span>
+    `;
+    mobileButton.addEventListener("click", () => {
+      chapter1HasInteracted = true;
+      revealInsights();
+      selectLayer(layer.id);
+      trackEvent("layer_select", {
+        chapter_id: "chapter1",
+        layer_id: layer.id,
+        layer_name: localizedLayer(layer).name,
+        interaction_source: "mobile_dock"
+      });
+    });
+    mobileLayerDock.appendChild(mobileButton);
+
     const label = document.createElement("div");
     label.className = "scene-label";
     label.style.setProperty("--layer-color", `#${layer.color.toString(16).padStart(6, "0")}`);
@@ -2644,6 +3547,47 @@ function hydrateUi() {
     labelLayer.appendChild(label);
     labels.set(layer.id, label);
   });
+}
+
+function cycleChapter1Layer(direction) {
+  const layerIds = layers.map(({ id }) => id);
+  const currentIndex = layerIds.indexOf(selectedId);
+  if (currentIndex === -1) return;
+  const nextIndex = (currentIndex + direction + layerIds.length) % layerIds.length;
+  const nextId = layerIds[nextIndex];
+  chapter1HasInteracted = true;
+  revealInsights();
+  selectLayer(nextId);
+  trackEvent("layer_select", {
+    chapter_id: "chapter1",
+    layer_id: nextId,
+    layer_name: localizedLayer(layers.find((item) => item.id === nextId)).name,
+    interaction_source: "wheel",
+    wheel_direction: direction > 0 ? "next" : "previous"
+  });
+}
+
+function handleChapter1Wheel(event) {
+  if (activeChapter !== "chapter1" || window.innerWidth <= 1120) return;
+  if (event.ctrlKey || Math.abs(event.deltaY) < 14) return;
+  if (!analysisDrawer.hidden || !aboutDrawer.hidden || !updatesDrawer.hidden || !languagePanel.hidden) return;
+  if (event.target.closest("input, button, a, .right-panel, .analysis-drawer, .about-drawer, .updates-drawer, .global-language-menu")) return;
+  const now = performance.now();
+  if (now < wheelLayerLockUntil) return;
+  event.preventDefault();
+  wheelLayerLockUntil = now + 340;
+  cycleChapter1Layer(event.deltaY > 0 ? 1 : -1);
+}
+
+function setChapter1CameraFocus(layerId) {
+  const view = chapter1FocusViews[layerId];
+  if (!view) {
+    desiredChapter1CameraPosition.copy(chapter1DefaultCameraPosition);
+    desiredChapter1Target.copy(chapter1DefaultTarget);
+    return;
+  }
+  desiredChapter1CameraPosition.copy(view.position);
+  desiredChapter1Target.copy(view.target);
 }
 
 function updateAudioDock() {
@@ -2684,7 +3628,13 @@ function renderInsightPanels({
   supplierHeading,
   supplierHtml,
   riskHeading,
-  riskText: fullRiskText
+  riskText: fullRiskText,
+  extraHeading = "",
+  extraHtml = "",
+  extraVisible = false,
+  referencesHeading = "",
+  referencesHtml = "",
+  referencesVisible = false
 }) {
   document.querySelector("#insightEyebrow").textContent = eyebrow;
   detailTitle.textContent = title;
@@ -2701,6 +3651,16 @@ function renderInsightPanels({
   analysisSupplierList.innerHTML = supplierHtml;
   analysisRiskHeading.textContent = riskHeading;
   analysisRiskText.textContent = fullRiskText;
+  if (analysisSignalsSection) {
+    analysisSignalsSection.hidden = !extraVisible;
+    analysisSignalsHeading.textContent = extraHeading;
+    analysisSignalsList.innerHTML = extraHtml;
+  }
+  if (analysisReferencesSection) {
+    analysisReferencesSection.hidden = !referencesVisible;
+    analysisReferencesHeading.textContent = referencesHeading;
+    analysisReferencesList.innerHTML = referencesHtml;
+  }
   analysisOpen.textContent = t("readFullAnalysis");
   analysisClose.textContent = t("closeAnalysis");
 }
@@ -2817,6 +3777,9 @@ function focusChapter2Node(nodeId) {
 function selectChapter(chapterId) {
   activeChapter = chapterId;
   hovered = null;
+  mobileExplodeExpanded = false;
+  mobileInsightExpanded = false;
+  mobileStageOpen = false;
   root.visible = activeChapter === "chapter1";
   chapter2Root.visible = activeChapter === "chapter2";
   chapter3Root.visible = activeChapter === "chapter3";
@@ -2857,9 +3820,10 @@ function selectChapter(chapterId) {
   }
   hydrateUi();
   updateStaticText();
-  selectLayer(selectedId);
-  camera.position.set(12, 9, 14);
-  controls.target.set(0, 1.1, 0);
+  camera.position.copy(chapter1DefaultCameraPosition);
+  controls.target.copy(chapter1DefaultTarget);
+  setChapter1CameraFocus(chapter1HasInteracted ? selectedId : null);
+  selectLayer(selectedId, { focus: chapter1HasInteracted });
 }
 
 function setLanguageMenuOpen(open) {
@@ -2868,30 +3832,51 @@ function setLanguageMenuOpen(open) {
   languageMenuButton.setAttribute("aria-expanded", open ? "true" : "false");
 }
 
-function selectLayer(id) {
+function selectLayer(id, { focus = true } = {}) {
   selectedId = id;
   const layer = localizedLayer(layers.find((item) => item.id === id));
+  const builders = layer.builders ?? layer.suppliers ?? [];
+  const signals = chapter1SignalsToWatch[activeLang] ?? chapter1SignalsToWatch.en;
+  const references = chapter1ReadingLinks[activeLang]?.[id] ?? chapter1ReadingLinks.en?.[id] ?? [];
   renderInsightPanels({
     eyebrow: layer.name,
     title: t("insightTitle"),
     lede: layer.lede,
     metrics: layer.metrics,
-    summaryHeading: t("riskHeading"),
-    summaryText: layer.risk,
-    supplierHeading: t("supplierHeading"),
-    supplierHtml: layer.suppliers.map((item) => `<li>${item}</li>`).join(""),
-    riskHeading: t("riskHeading"),
-    riskText: layer.risk
+    summaryHeading: t("chapter1SummaryHeading"),
+    summaryText: layer.how ?? layer.risk,
+    supplierHeading: t("chapter1BuildersHeading"),
+    supplierHtml: builders.map((item) => `<li>${item}</li>`).join(""),
+    riskHeading: t("chapter1FutureHeading"),
+    riskText: layer.future ?? layer.signal ?? layer.risk,
+    extraHeading: t("chapter1SignalsHeading"),
+    extraHtml: signals.map((item) => `<li>${item}</li>`).join(""),
+    extraVisible: true,
+    referencesHeading: t("chapter1LearnMoreHeading"),
+    referencesHtml: references.map((item) => `<li>${item}</li>`).join(""),
+    referencesVisible: references.length > 0
   });
-  activeLayerName.textContent = `${layer.name} ${layerIndexLabel(id)}`;
-  activeLayerSignal.textContent = layer.signal;
+  const layerSummaryLabel = `${layerIndexLabel(id)} ${chapter1ShortName(id)}`;
+  activeLayerName.textContent = layerSummaryLabel;
+  activeLayerSignal.textContent = layer.role;
+  mobileLayerName.textContent = layerSummaryLabel;
+  mobileLayerSignal.textContent = layer.role;
   document.querySelectorAll(".layer-button").forEach((button) => {
     button.classList.toggle("is-active", button.id === `tab-${id}`);
     button.setAttribute("aria-selected", button.id === `tab-${id}` ? "true" : "false");
   });
-  const target = groupByLayer.get(id)?.position;
-  if (target) controls.target.lerp(new THREE.Vector3(target.x, target.y + 0.7, target.z), 0.45);
+  document.querySelectorAll(".mobile-layer-button").forEach((button) => {
+    const active = button.dataset.layer === id;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
+  });
+  if (focus && chapter1HasInteracted) {
+    setChapter1CameraFocus(id);
+  } else {
+    setChapter1CameraFocus(null);
+  }
   updateAudioDock();
+  syncMobileControls();
   if (audioPlaying) playAudioBriefing();
 }
 
@@ -2900,6 +3885,7 @@ function resize() {
   renderer.setSize(rect.width, rect.height, false);
   camera.aspect = rect.width / rect.height;
   camera.updateProjectionMatrix();
+  syncMobileControls();
 }
 
 function updateLabels() {
@@ -2982,6 +3968,11 @@ function setPointer(event) {
 
 function pointerMove(event) {
   setPointer(event);
+  if (pointerIntent) {
+    const deltaX = event.clientX - pointerIntent.x;
+    const deltaY = event.clientY - pointerIntent.y;
+    if (Math.hypot(deltaX, deltaY) > 8) pointerIntent.moved = true;
+  }
   if (event.buttons) revealInsights();
   raycaster.setFromCamera(pointer, camera);
   const hits = raycaster.intersectObjects(clickable, false);
@@ -2993,11 +3984,23 @@ function pointerMove(event) {
     return true;
   });
   hovered = activeChapter === "chapter3" ? hit?.object?.userData.nodeId ?? null : activeChapter === "chapter2" ? hit?.object?.userData.nodeId ?? null : hit?.object?.userData.layerId ?? null;
-  canvas.style.cursor = hovered ? "pointer" : "grab";
+  if (!orbitInteracting) canvas.style.cursor = hovered ? "pointer" : "grab";
 }
 
 function pointerDown(event) {
   revealInsights();
+  pointerIntent = {
+    x: event.clientX,
+    y: event.clientY,
+    moved: false
+  };
+}
+
+function pointerUp(event) {
+  if (!pointerIntent) return;
+  const wasMoved = pointerIntent.moved;
+  pointerIntent = null;
+  if (wasMoved || orbitInteracting) return;
   setPointer(event);
   raycaster.setFromCamera(pointer, camera);
   const hits = raycaster.intersectObjects(clickable, false);
@@ -3036,6 +4039,7 @@ function pointerDown(event) {
   }
   const hitId = hit?.object?.userData.layerId;
   if (hitId) {
+    chapter1HasInteracted = true;
     selectLayer(hitId);
     trackEvent("layer_select", {
       chapter_id: "chapter1",
@@ -3155,25 +4159,54 @@ function animateChapter3(time) {
 function animate() {
   requestAnimationFrame(animate);
   const time = performance.now() * 0.001;
+  const now = performance.now();
   explodeCurrent += (explodeTarget - explodeCurrent) * 0.08;
 
   if (activeChapter === "chapter1") {
+    const orbitAssistActive = !orbitInteracting && now >= orbitResumeAt;
+    if (orbitAssistActive) {
+      camera.position.lerp(desiredChapter1CameraPosition, 0.085);
+      controls.target.lerp(desiredChapter1Target, 0.11);
+    }
     groupByLayer.forEach((group, id) => {
       const target = group.userData.compact.clone().lerp(group.userData.exploded, explodeCurrent);
-      if (id === selectedId) target.y += 0.24 + Math.sin(time * 2.2) * 0.035;
+      const isSelected = chapter1HasInteracted && id === selectedId;
+      const isHovered = id === hovered;
+      if (isSelected) target.y += 0.14 + Math.sin(time * 2.2) * 0.024;
       group.position.lerp(target, 0.12);
       group.rotation.y = Math.sin(time * 0.5 + id.length) * 0.018;
+      const targetScale = isSelected ? 1.04 : isHovered ? 1.01 : chapter1HasInteracted ? 0.985 : 1;
+      group.scale.x += (targetScale - group.scale.x) * 0.12;
+      group.scale.y += (targetScale - group.scale.y) * 0.12;
+      group.scale.z += (targetScale - group.scale.z) * 0.12;
 
       group.traverse((child) => {
         if (!child.material || child.type === "Line") return;
-        const isActive = id === selectedId || id === hovered;
+        const emphasis = chapter1HasInteracted ? (isSelected ? 1 : isHovered ? 0.9 : 0.74) : 1;
         child.material.emissive = child.material.emissive || new THREE.Color(0x000000);
-        child.material.emissiveIntensity = isActive ? 0.18 : 0.035;
+        child.material.emissiveIntensity = chapter1HasInteracted ? (isSelected ? 0.14 : isHovered ? 0.08 : 0.02) : isHovered ? 0.05 : 0.03;
+        if (child.material.color) {
+          if (child.material.userData.originalColor === undefined) {
+            child.material.userData.originalColor = child.material.color.getHex();
+          }
+          chapter1BaseColor.setHex(child.material.userData.originalColor);
+          if (chapter1HasInteracted) {
+            child.material.color.copy(chapter1BaseColor).lerp(chapter1DimColor, 1 - emphasis);
+          } else {
+            child.material.color.copy(chapter1BaseColor);
+          }
+        }
+        if (child.material.opacity !== undefined) {
+          const originalOpacity = child.material.userData.originalOpacity ?? 1;
+          child.material.transparent = originalOpacity < 1 || (chapter1HasInteracted && emphasis < 0.99);
+          child.material.opacity = chapter1HasInteracted ? Math.max(0.28, originalOpacity * emphasis) : originalOpacity;
+        }
       });
     });
 
     flowLines.forEach((line, index) => {
       line.visible = true;
+      line.material.opacity = 0.18;
       if (line.material.dashSize) line.material.dashOffset = -time * (0.38 + index * 0.015);
     });
   } else if (activeChapter === "chapter2") {
@@ -3194,8 +4227,8 @@ function animate() {
     animateChapter3(time);
   }
 
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.38;
+  controls.autoRotate = !orbitInteracting && now >= orbitResumeAt;
+  controls.autoRotateSpeed = 0.28;
   controls.update();
   renderer.render(scene, camera);
   updateLabels();
@@ -3204,6 +4237,58 @@ function animate() {
 explodeRange.addEventListener("input", () => {
   revealInsights();
   explodeTarget = Number(explodeRange.value) / 100;
+});
+
+staticTextEls.explodeLabel?.addEventListener("click", () => {
+  if (!isMobileLayout() || activeChapter !== "chapter1") return;
+  mobileExplodeExpanded = !mobileExplodeExpanded;
+  syncMobileControls();
+  trackEvent("explode_toggle", {
+    chapter_id: activeChapter,
+    state: mobileExplodeExpanded ? "expanded" : "collapsed",
+    interaction_source: "mobile_link"
+  });
+});
+
+mobileStageChip?.addEventListener("click", () => {
+  if (!isMobileLayout()) return;
+  setMobileStageOpen(!mobileStageOpen);
+});
+
+mobileStageTabs?.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-chapter]");
+  if (!button) return;
+  const previousChapter = activeChapter;
+  selectChapter(button.dataset.chapter);
+  if (previousChapter !== activeChapter) {
+    trackEvent("chapter_select", {
+      chapter_id: activeChapter,
+      previous_chapter_id: previousChapter,
+      interaction_source: "mobile_chip"
+    });
+  }
+});
+
+mobileStageExplodeToggle?.addEventListener("click", () => {
+  if (!isMobileLayout() || activeChapter !== "chapter1") return;
+  mobileExplodeExpanded = !mobileExplodeExpanded;
+  syncMobileControls();
+  trackEvent("explode_toggle", {
+    chapter_id: activeChapter,
+    state: mobileExplodeExpanded ? "expanded" : "collapsed",
+    interaction_source: "mobile_chip"
+  });
+});
+
+mobileStageExplodeRange?.addEventListener("input", () => {
+  revealInsights();
+  explodeRange.value = mobileStageExplodeRange.value;
+  explodeTarget = Number(mobileStageExplodeRange.value) / 100;
+  syncMobileControls();
+});
+
+mobileStageReset?.addEventListener("click", () => {
+  resetView.click();
 });
 
 resetView.addEventListener("click", () => {
@@ -3223,11 +4308,13 @@ resetView.addEventListener("click", () => {
     hideInsights();
     return;
   }
-  camera.position.set(12, 9, 14);
-  controls.target.set(0, 1.1, 0);
+  chapter1HasInteracted = false;
+  camera.position.copy(chapter1DefaultCameraPosition);
+  controls.target.copy(chapter1DefaultTarget);
   explodeRange.value = "72";
   explodeTarget = 0.72;
-  selectLayer("compute");
+  setChapter1CameraFocus(null);
+  selectLayer("compute", { focus: false });
 });
 
 languageTabs.addEventListener("click", (event) => {
@@ -3259,6 +4346,8 @@ languageMenuButton.addEventListener("click", () => {
 document.addEventListener("click", (event) => {
   if (event.target.closest("#globalLanguageMenu")) return;
   setLanguageMenuOpen(false);
+  if (event.target.closest("#mobileStageControls")) return;
+  setMobileStageOpen(false);
 });
 
 chapterTabs.addEventListener("click", (event) => {
@@ -3282,6 +4371,14 @@ analysisOpen.addEventListener("click", () => {
   });
 });
 
+insightPeek?.addEventListener("click", () => {
+  revealInsights();
+  trackEvent("insight_peek_open", {
+    chapter_id: activeChapter,
+    segment_id: activeSegmentForTracking()
+  });
+});
+
 analysisClose.addEventListener("click", closeAnalysisDrawer);
 analysisScrim.addEventListener("click", closeAnalysisDrawer);
 aboutOpen.addEventListener("click", () => {
@@ -3290,16 +4387,40 @@ aboutOpen.addEventListener("click", () => {
 });
 aboutClose.addEventListener("click", closeAboutDrawer);
 aboutScrim.addEventListener("click", closeAboutDrawer);
+updatesOpen?.addEventListener("click", () => {
+  openUpdatesDrawer();
+  trackEvent("updates_open");
+});
+updatesClose?.addEventListener("click", closeUpdatesDrawer);
+updatesScrim?.addEventListener("click", closeUpdatesDrawer);
 aboutContact.addEventListener("click", () => {
   trackEvent("contact_click", {
     contact_method: "email"
   });
 });
 
+rightPanel.addEventListener("click", (event) => {
+  if (!isMobileLayout() || rightPanel.getAttribute("aria-hidden") === "true") return;
+  if (event.target.closest("button, a, input")) return;
+  mobileInsightExpanded = !mobileInsightExpanded;
+  syncMobileControls();
+  trackEvent("insight_card_toggle", {
+    chapter_id: activeChapter,
+    segment_id: activeSegmentForTracking(),
+    state: mobileInsightExpanded ? "expanded" : "collapsed"
+  });
+});
+
+mobileInsightClose?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  setMobileInsightExpanded(false);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
   if (!analysisDrawer.hidden) closeAnalysisDrawer();
   if (!aboutDrawer.hidden) closeAboutDrawer();
+  if (!updatesDrawer.hidden) closeUpdatesDrawer();
 });
 
 audioToggle.addEventListener("click", () => {
@@ -3335,14 +4456,20 @@ audioPlayer.addEventListener("error", () => {
 
 canvas.addEventListener("pointermove", pointerMove);
 canvas.addEventListener("pointerdown", pointerDown);
+canvas.addEventListener("pointerup", pointerUp);
+canvas.addEventListener("pointercancel", () => {
+  pointerIntent = null;
+});
 canvas.addEventListener("wheel", revealInsights, { passive: true });
+stage?.addEventListener("wheel", handleChapter1Wheel, { passive: false });
 window.addEventListener("resize", resize);
 
 updateStaticText();
 hydrateUi();
 applyColorScheme(activeScheme);
 resize();
-selectLayer("compute");
+setChapter1CameraFocus(null);
+selectLayer("compute", { focus: false });
 trackEvent("project_view", {
   segment_id: activeSegmentForTracking()
 });

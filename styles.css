@@ -1701,6 +1701,9 @@ body.is-file-protocol .file-warning {
 
   .right-panel.mobile-expanded {
     max-height: 80dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     cursor: default;
   }
 
@@ -1741,6 +1744,11 @@ body.is-file-protocol .file-warning {
     gap: 8px;
   }
 
+  .right-panel.mobile-expanded .insight-content {
+    max-height: none;
+    overflow: visible;
+  }
+
   .right-panel .detail-lede {
     margin: 0;
     font-size: 13px;
@@ -1758,14 +1766,22 @@ body.is-file-protocol .file-warning {
     display: grid;
   }
 
-  .about-link {
-    align-self: flex-start;
+  .meta-links {
     position: fixed;
     left: 18px;
     bottom: 8px;
-    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     z-index: 8;
+    gap: 6px;
     pointer-events: auto;
+  }
+
+  .about-link {
+    align-self: flex-start;
+    position: static;
+    margin-top: 0;
   }
 
   .audio-dock,

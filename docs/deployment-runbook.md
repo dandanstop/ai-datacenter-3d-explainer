@@ -109,6 +109,7 @@ After deployment, verify:
 - About drawer opens and Contact points to `mailto:hello@dandanstop.me`.
 - `/robots.txt` returns 200.
 - `/sitemap.xml` returns 200.
+- `/datacenter-3d/sitemap.xml` returns 200.
 - `/og-image.png` returns 200.
 - JSON-LD parses successfully.
 - `og:image` and `twitter:image` resolve to the production domain.

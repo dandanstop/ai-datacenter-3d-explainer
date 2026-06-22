@@ -277,7 +277,7 @@ const uiText = {
     chapter1SignalsHeading: "Signals to watch",
     chapter1LearnMoreHeading: "Learn more",
     layerListLabel: "Value-chain layers",
-    audioLabel: "Audio briefing",
+    audioLabel: "Voice guide",
     play: "Play",
     pause: "Pause",
     transcript: "Transcript",
@@ -331,7 +331,7 @@ const uiText = {
     chapter1SignalsHeading: "계속 지켜볼 신호",
     chapter1LearnMoreHeading: "더 읽어보기",
     layerListLabel: "밸류체인 레이어",
-    audioLabel: "오디오 브리핑",
+    audioLabel: "음성 안내",
     play: "재생",
     pause: "일시정지",
     transcript: "스크립트",
@@ -385,7 +385,7 @@ const uiText = {
     chapter1SignalsHeading: "継続して見るべきシグナル",
     chapter1LearnMoreHeading: "さらに読む",
     layerListLabel: "バリューチェーン層",
-    audioLabel: "音声ブリーフィング",
+    audioLabel: "音声ガイド",
     play: "再生",
     pause: "一時停止",
     transcript: "文字起こし",
@@ -1477,7 +1477,7 @@ const chapter2Content = {
     insightTitle: "Workload insight",
     implicationHeading: "Infrastructure implications",
     contextHeading: "Key finding",
-    audioLabel: "Audio briefing",
+    audioLabel: "Voice guide",
     play: "Play",
     pause: "Pause",
     transcript: "Transcript",
@@ -1623,7 +1623,7 @@ const chapter2Content = {
     insightTitle: "워크로드 인사이트",
     implicationHeading: "인프라 영향",
     contextHeading: "분석 읽기",
-    audioLabel: "오디오 브리핑",
+    audioLabel: "음성 안내",
     play: "재생",
     pause: "일시정지",
     transcript: "스크립트",
@@ -1673,7 +1673,7 @@ const chapter2Content = {
     insightTitle: "ワークロード・インサイト",
     implicationHeading: "インフラへの影響",
     contextHeading: "分析テキスト",
-    audioLabel: "音声ブリーフィング",
+    audioLabel: "音声ガイド",
     play: "再生",
     pause: "一時停止",
     transcript: "文字起こし",
@@ -1726,7 +1726,7 @@ const chapter3Content = {
     insightTitle: "Agentic AI insight",
     supplierHeading: "Value-chain roles",
     contextHeading: "Key finding",
-    audioLabel: "Audio briefing",
+    audioLabel: "Voice guide",
     play: "Play",
     pause: "Pause",
     transcript: "Transcript",
@@ -1852,7 +1852,7 @@ const chapter3Content = {
     intro: lang === "ko"
       ? "3D 에이전트 분해도로 Agentic AI가 데이터를 받고, 추론하고, 계획하고, 실행하며, 아래의 조정 인프라에 의존하는 방식을 보여줍니다."
       : "3D エージェント分解図で、Agentic AI がデータを受け取り、推論し、計画し、実行し、下層の調整インフラに依存する仕組みを示します。",
-    audioLabel: lang === "ko" ? "오디오 브리핑" : "音声ブリーフィング",
+    audioLabel: lang === "ko" ? "음성 안내" : "音声ガイド",
     play: lang === "ko" ? "재생" : "再生",
     pause: lang === "ko" ? "일시정지" : "一時停止",
     transcript: lang === "ko" ? "스크립트" : "文字起こし",
@@ -3814,6 +3814,10 @@ function chapterChipLabel(chapterId = activeChapter) {
   return "C1";
 }
 
+function mobileAudioLabel() {
+  return activeAudioUi().audioLabel;
+}
+
 function setMobileStageOpen(open) {
   if (!mobileStageSheet || !mobileStageChip) return;
   mobileStageOpen = open;
@@ -4294,14 +4298,19 @@ function setChapter1CameraFocus(layerId) {
 
 function updateAudioDock() {
   const copy = activeAudioUi();
-  const transcriptOpen = transcriptPanel.getAttribute("aria-hidden") === "false";
+  const mobile = isMobileLayout();
+  const transcriptOpen = !mobile && transcriptPanel.getAttribute("aria-hidden") === "false";
   audioDock.hidden = false;
   transcriptPanel.hidden = !transcriptOpen;
+  transcriptPanel.setAttribute("aria-hidden", transcriptOpen ? "false" : "true");
   audioLabel.textContent = copy.audioLabel;
-  audioToggle.textContent = audioPlaying ? copy.pause : copy.play;
+  audioToggle.textContent = mobile ? mobileAudioLabel() : audioPlaying ? copy.pause : copy.play;
   audioToggle.setAttribute("aria-pressed", audioPlaying ? "true" : "false");
+  audioToggle.setAttribute("aria-label", `${audioPlaying ? copy.pause : copy.play} ${copy.audioLabel}`);
+  audioToggle.setAttribute("title", `${audioPlaying ? copy.pause : copy.play} ${copy.audioLabel}`);
   audioToggle.classList.toggle("is-active", audioPlaying);
   transcriptToggle.textContent = copy.transcript;
+  transcriptToggle.setAttribute("aria-expanded", transcriptOpen ? "true" : "false");
   transcriptToggle.classList.toggle("is-active", transcriptOpen);
   audioSegmentTitle.textContent = activeBriefingTitle();
   transcriptText.textContent = activeBriefingText();
@@ -4613,6 +4622,7 @@ function resize() {
   camera.aspect = rect.width / rect.height;
   camera.updateProjectionMatrix();
   syncMobileControls();
+  updateAudioDock();
 }
 
 function updateLabels() {
@@ -5192,6 +5202,7 @@ audioToggle.addEventListener("click", () => {
 });
 
 transcriptToggle.addEventListener("click", () => {
+  if (isMobileLayout()) return;
   const isOpen = transcriptPanel.getAttribute("aria-hidden") === "false";
   transcriptPanel.setAttribute("aria-hidden", isOpen ? "true" : "false");
   transcriptPanel.hidden = isOpen;

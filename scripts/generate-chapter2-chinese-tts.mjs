@@ -10,7 +10,7 @@ const chapter = {
   transcript: path.join("docs", "chapter2-audio-transcripts.md"),
   outputDir: path.join("audio", "chapter2"),
   segments: [
-    { id: "compare", heading: "Compare Both" },
+    { id: "compare", heading: "Overview" },
     { id: "training", heading: "Training AI" },
     { id: "inference", heading: "Inference AI" }
   ]

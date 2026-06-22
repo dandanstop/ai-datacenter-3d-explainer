@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented here.
 
-## [Unreleased] - 2026-06-21
+## [Unreleased] - 2026-06-22
 
 ### Changed
 
@@ -37,12 +37,22 @@ All notable changes to this project are documented here.
 - Moved Chapter 1 mobile exploration to a fixed bottom layer dock with an active summary card and closeable mobile insight sheet.
 - Reduced mobile visual weight for `Exploded view`, `Reset`, and chapter switching by moving them behind expandable controls instead of showing everything at load.
 - Added a low-profile `Updates` link beside `About`, opening a lightweight project-updates drawer with recent maintenance highlights in English, Traditional Chinese, Korean, and Japanese.
+- Reframed Chapter 2 around `One AI System, Two Workload Modes`, replacing the older `From Training Factories to Inference Networks` wording in static summaries and project documents.
+- Switched Chapter 2 default editorial naming from `Compare Both` to `Overview` while preserving existing audio file ids and runtime mappings for compatibility.
+- Refined Chapter 2 multilingual copy across English, Traditional Chinese, Korean, and Japanese so the overview now emphasizes workload imbalance, CPU coordination, and machine-level role shifts.
+- Localized remaining Chapter 2 UI and scene terminology in Traditional Chinese, Korean, and Japanese, including metrics, region labels, and component labels.
+- Expanded Chapter 2 editorial references to include Google Cloud TPU, AWS Trainium, AWS Inferentia, Intel Xeon / AMX, and Apple Silicon.
+- Updated Chapter 2 transcript-source conventions so all four languages now use `Overview` as the first audio segment heading.
+- Updated Chapter 2 TTS extraction scripts to read the new `Overview` heading without changing current output filenames or runtime audio URLs.
+- Synchronized `REQUIREMENTS.md` with the live Chapter 2 product state, including overview-first interaction, desktop wheel mode switching, mobile bottom-dock navigation, and shell-transparency focus behavior.
 
 ### Fixed
 
 - Fixed a Chapter 1 runtime initialization-order bug that could prevent the 3D scene from rendering in the browser.
 - Fixed Chapter 1 drag-to-rotate feeling by pausing camera assist while orbiting, separating click from drag intent, delaying auto-rotate resume, tuning OrbitControls damping, and disabling pan.
 - Replaced static `vercel.json` with programmatic `vercel.mjs` so Vercel preview deployments now return `X-Robots-Tag: noindex, nofollow` while production keeps normal indexability.
+- Fixed Chapter 2 multilingual drift where zh / ko / ja still contained older English labels, stale overview transcript wording, and outdated static summary content.
+- Fixed a future-maintenance issue where Chapter 2 TTS generation scripts would fail after the transcript heading rename from `Compare Both` to `Overview`.
 
 ## [1.0.0] - 2026-06-17
 

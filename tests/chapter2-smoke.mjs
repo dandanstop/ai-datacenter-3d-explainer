@@ -15,8 +15,9 @@ function assert(condition, message) {
 const appSource = readFileSync(new URL("../app.js", import.meta.url), "utf8");
 assert(!appSource.includes('"user head"'), "Inference user requests icon should not include a user head mesh.");
 assert(!appSource.includes('"user body"'), "Inference user requests icon should not include a user body mesh.");
-assert(appSource.includes('"notebook screen"'), "Inference user requests icon should keep a notebook screen mesh.");
-assert(appSource.includes('"data volume block"'), "Training dataset icon should include many data volume blocks.");
+assert(appSource.includes('"Request Path"'), "Inference path label should use Request Path.");
+assert(appSource.includes('"High-Bandwidth Memory"'), "Inference path should label High-Bandwidth Memory.");
+assert(appSource.includes('"Batch Staging"'), "Training-side preprocessing should use Batch Staging.");
 
 const browser = await chromium.launch({
   headless: true,
@@ -30,7 +31,7 @@ page.on("pageerror", (error) => pageErrors.push(error.message || String(error)))
 await page.goto(url, { waitUntil: "load", timeout: 15000 });
 await page.waitForTimeout(600);
 
-const chapter2Button = page.locator('[data-chapter="chapter2"]');
+const chapter2Button = page.locator('.chapter-button[data-chapter="chapter2"]');
 await chapter2Button.click();
 await page.waitForTimeout(500);
 
@@ -54,7 +55,7 @@ const state = await page.evaluate(() => {
   };
 });
 
-assert(state.title.includes("Training") && state.title.includes("Inference"), "Chapter 2 title should render after selecting Chapter 2.");
+assert(state.title.includes("One AI System") && state.title.includes("Two Workload"), "Chapter 2 title should render after selecting Chapter 2.");
 assert(state.activeMode === "compare", "Chapter 2 should default to Compare mode.");
 assert(state.rightHidden, "Insight panel should remain hidden before Chapter 2 interaction.");
 assert(state.audioDockVisible, "Compact audio dock should be visible in Chapter 2.");
@@ -110,9 +111,9 @@ const inferenceOnly = await page.evaluate(() => ({
 }));
 
 assert(inferenceOnly.activeMode === "inference", "Inference AI mode should be active after click.");
-assert(!inferenceOnly.labels.some((label) => /Dataset|Training AI|Preprocessing|GPU training|Checkpoint|Model artifact/.test(label)), "Inference AI mode should hide training-side 3D labels.");
-assert(inferenceOnly.labels.includes("User requests"), "Inference AI mode should label user requests without API wording.");
-assert(inferenceOnly.labels.includes("High Bandwidth Memory"), "Inference AI mode should label High Bandwidth Memory.");
+assert(!inferenceOnly.labels.some((label) => /Batch Input|Training AI|Batch Staging|GPU Compute|Checkpointing|Training State/.test(label)), "Inference AI mode should hide training-side 3D labels.");
+assert(inferenceOnly.labels.includes("Request Path"), "Inference AI mode should label the request path.");
+assert(inferenceOnly.labels.includes("High-Bandwidth Memory"), "Inference AI mode should label High-Bandwidth Memory.");
 assert(!inferenceOnly.labels.includes("User/API requests"), "Inference AI mode should not show the old User/API requests label.");
 assert(!inferenceOnly.labels.includes("KV cache"), "Inference AI mode should not show the old KV cache label.");
 
@@ -120,19 +121,19 @@ await page.click("#languageMenuButton");
 await page.click('[data-lang="zh"]');
 await page.waitForTimeout(200);
 const zhTitle = await page.locator("#pageTitle").textContent();
-assert(zhTitle.includes("訓練") && zhTitle.includes("推論"), "Chinese Chapter 2 title should be localized.");
+assert(zhTitle.includes("同一套 AI 系統") && zhTitle.includes("工作模式"), "Chinese Chapter 2 title should be localized.");
 
 await page.click("#languageMenuButton");
 await page.click('[data-lang="ko"]');
 await page.waitForTimeout(200);
 const koTitle = await page.locator("#pageTitle").textContent();
-assert(koTitle.includes("훈련") && koTitle.includes("추론"), "Korean Chapter 2 title should be localized.");
+assert(koTitle.includes("하나의 AI 시스템") && koTitle.includes("워크로드"), "Korean Chapter 2 title should be localized.");
 
 await page.click("#languageMenuButton");
 await page.click('[data-lang="ja"]');
 await page.waitForTimeout(200);
 const jaTitle = await page.locator("#pageTitle").textContent();
-assert(jaTitle.includes("学習") && jaTitle.includes("推論"), "Japanese Chapter 2 title should be localized.");
+assert(jaTitle.includes("AI システム") && jaTitle.includes("ワークロード"), "Japanese Chapter 2 title should be localized.");
 
 assert(pageErrors.length === 0, `Unexpected page errors: ${pageErrors.join("; ")}`);
 

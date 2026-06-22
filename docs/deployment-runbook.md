@@ -31,12 +31,13 @@ Tracked deployment files include:
 Current release-candidate checks already verified locally:
 
 - `node --check app.js` passes
-- local preview responds on `http://127.0.0.1:8128/`
+- local preview responds on `http://127.0.0.1:8124/`
 - canonical is pinned to `https://dandanstop.me/datacenter-3d`
-- JSON-LD `dateModified` is updated to `2026-06-21`
-- `sitemap.xml` `lastmod` is updated to `2026-06-21`
+- JSON-LD `dateModified` is updated to `2026-06-22`
+- `sitemap.xml` `lastmod` is updated to `2026-06-22`
 - only one `<h1>` remains in `index.html`
 - Vercel preview deployments are configured to return `X-Robots-Tag: noindex, nofollow`
+- project is a static site and does not require `package.json`, build, or install steps for Vercel
 
 ## 2. GitHub Setup
 
@@ -142,6 +143,11 @@ This release candidate includes:
 - smoother Chapter 1 drag rotation behavior
 - mobile stage chip + layer dock experience
 - About + Updates low-profile metadata links
+- Chapter 2 editorial reframing to `One AI System, Two Workload Modes`
+- Chapter 2 multilingual sync across English, Traditional Chinese, Korean, and Japanese
+- Chapter 2 overview-first interaction model with clearer CPU coordination framing
+- Chapter 2 transcript and TTS-heading sync from `Compare Both` to `Overview`
+- release documentation updates in `CHANGELOG.md`, `RELEASES.md`, `REQUIREMENTS.md`, and SEO / About maintenance notes
 - SEO quick wins:
   - production canonical
   - refreshed `dateModified`

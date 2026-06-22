@@ -1102,149 +1102,161 @@ Source of truth: generated from `app.js` current `uiText`, base layer data, and 
 
 Chapter 2 current theme:
 
-From Training Factories to Inference Networks
+One AI System, Two Workload Modes
 
 Core message:
 
-Training AI and inference AI both run models, but they stress infrastructure in different ways. Training is compute- and throughput-oriented because it builds model capability. Inference is memory-, latency-, and efficiency-oriented because it serves users in real time.
+One AI system can support both training and inference, but the hardware mix is rarely split evenly. Training favors synchronized throughput and coordinated GPU utilization. Inference favors latency, memory bandwidth, routing efficiency, and live request handling. CPU coordination helps connect both modes inside the same machine.
 
 Current Chapter 2 interaction model:
 
-- Default mode: Compare Both.
-- 3D model: two workload lanes, visually separated as Training AI and Inference AI.
-- Compare Both: shows both lanes with clear labels and a larger gap between the two flow systems.
-- Training AI mode: shows only the training workload lane and hides the inference lane.
-- Inference AI mode: shows only the inference workload lane and hides the training lane.
+- Default mode: Overview.
+- 3D model: one machine shell with three editorial regions: Training AI, CPU Coordination, and Inference AI.
+- Overview mode: keeps the full machine visible, shows region-level guidance first, and suppresses lower-level labels until the user drills deeper.
+- Training AI mode: visually emphasizes the training side, increases outer-shell transparency, reveals internal labels, and hides inference-specific detail labels.
+- Inference AI mode: visually emphasizes the inference side, increases outer-shell transparency, reveals internal labels, and hides training-specific detail labels.
+- Desktop wheel behavior: mouse wheel can cycle Chapter 2 modes in order `Overview -> Training AI -> Inference AI`.
+- Mobile navigation: Chapter 2 uses the same compact bottom icon dock pattern as the refreshed Chapter 1 / Chapter 3 mobile navigation.
 - Insight panel: available like Chapter 1, with the visual heading pattern `{mode name} + Insight`.
 - Audio briefing: compact player, no autoplay, transcript collapsed by default.
 - Audio behavior: player transcript switches by selected mode or clicked 3D node.
 - Audio transcript source file: `docs/chapter2-audio-transcripts.md`.
+- Audio transcript convention: the first segment heading is now `Overview` in every language, while the output file id remains `compare` for backward-compatible audio URLs and runtime mapping.
+- Editorial reference layer: each mode includes `How it works`, `Who builds this layer`, `Future signals`, and official `Learn more` links.
 
 #### English (en)
 
-- Title: From Training Factories to Inference Networks
-- Intro: Use an interactive 3D workload model to compare compute-driven AI training with memory- and efficiency-driven inference: training builds models, while inference serves users.
+- Title: One AI System, Two Workload Modes
+- Intro: AI infrastructure may support both training and inference, but the hardware mix is rarely split evenly. The same machine changes shape depending on the job, and CPU coordination helps hold both modes together.
 - Mode labels:
-  - Compare Both
+  - Overview
   - Training AI
   - Inference AI
-- Compare Both signal: The real dividing line in AI hardware choices: training and inference may both look like running AI, but they demand entirely different hardware worlds.
-- Training AI signal: Training rewards high GPU utilization, east-west bandwidth, checkpoint throughput, and power density.
-- Inference AI signal: Inference rewards routing, concurrency, high-bandwidth memory, retrieval speed, and predictable response time.
-- Lane labels:
+- Overview signal: Training teaches the model. Inference serves the user. The same AI system can support both, but the hardware balance changes with the workload.
+- Training AI signal: Training depends on synchronized accelerators, memory capacity, cluster interconnect, and host-side control to keep long learning runs productive.
+- Inference AI signal: Inference depends on latency control, memory bandwidth, routing efficiency, retrieval speed, and CPU-side request orchestration.
+- Region labels:
   - Training AI
+  - CPU Coordination
   - Inference AI
 - 3D node labels:
-  - Dataset lake
-  - Preprocessing
-  - GPU training cluster
-  - Interconnect fabric
-  - Checkpoint storage
-  - Model artifact
-  - User requests
-  - Gateway / load balancer
-  - Model serving rack
+  - Batch Staging
+  - GPU Compute
+  - Checkpointing
+  - CPU Coordination
+  - Request Path
+  - Live Serving
   - High Bandwidth Memory
-  - Retrieval / vector database
-  - Response edge
+- Official reference additions:
+  - Google Cloud TPU
+  - AWS Trainium
+  - AWS Inferentia
+  - Intel Xeon / AMX
+  - Apple Silicon
 - Audio briefing segments:
-  - Compare Both: Training AI and inference AI both run models, but they stress infrastructure in very different ways. Training is about throughput: using large GPU clusters to build model capability. Inference is about latency and efficiency: serving users quickly while they wait. That is why AI infrastructure is no longer just a GPU story. It is a system-wide rebuild across compute, memory, networking, and orchestration.
+  - Overview: One AI system can support both training and inference, but the hardware mix is rarely split evenly. Training favors synchronized throughput. Inference favors latency, memory bandwidth, and routing efficiency. GPUs handle the heaviest math, while CPUs coordinate data flow and live requests across both modes.
   - Training AI: Training AI works like a throughput factory. Massive datasets move through synchronized GPU clusters, and the goal is to keep expensive accelerators highly utilized. The bottleneck is not only GPUs. It also includes HBM, interconnect, checkpoint storage, power, and cooling.
   - Inference AI: Inference AI works more like real-time traffic. It handles many user requests, and every routing decision, memory access, retrieval step, and model response can affect latency. The key challenge is balancing quality, cost, and response speed.
 
 #### Traditional Chinese (zh)
 
-- Title: 從訓練工廠到推論網路
-- Intro: 用互動式 3D workload 模型，比較算力導向的 AI 訓練與記憶體、效率導向的 AI 推論：訓練建立模型，推論服務使用者。
+- Title: 一套 AI 系統，兩種工作負載模式
+- Intro: 同一套 AI 基礎設施可以同時支援訓練與推理，但硬體配置很少平均分配。系統會隨任務改變形狀，而 CPU 協調層負責把兩種模式串起來。
 - Mode labels:
-  - 兩者比較
+  - 總覽
   - 訓練 AI
   - 推論 AI
-- Compare Both signal: AI 硬體選擇的真正分水嶺：這兩件事看起來都在「跑 AI」，但對硬體的需求，卻是完全不同的世界。
-- Training AI signal: 訓練重視 GPU 利用率、東西向頻寬、checkpoint 吞吐量與功率密度。
-- Inference AI signal: 推論重視路由、併發、高頻寬記憶體、檢索速度與可預期回應時間。
-- Lane labels:
+- 總覽 signal: 訓練負責教會模型，推理負責服務使用者。同一套 AI 系統可以同時支援兩者，但硬體重心會跟著工作負載改變。
+- 訓練 AI signal: 訓練依賴同步化加速器、記憶體容量、叢集互連與主機端控制，讓長時間學習任務維持效率。
+- 推論 AI signal: 推論依賴延遲控制、記憶體頻寬、路由效率、檢索速度與 CPU 端請求協調。
+- Region labels:
   - 訓練 AI
+  - CPU 協調層
   - 推論 AI
 - 3D node labels:
-  - 資料湖
-  - 資料前處理
-  - GPU 訓練叢集
-  - 互連網路
+  - 訓練批次
+  - GPU 運算
   - Checkpoint 儲存
-  - 模型成果
-  - 使用者請求
-  - Gateway / 負載平衡
-  - 模型服務機櫃
+  - CPU 協調層
+  - 請求路徑
+  - 即時服務
   - 高頻寬記憶體
-  - 檢索 / 向量資料庫
-  - 回應邊緣
+- Official reference additions:
+  - Google Cloud TPU
+  - AWS Trainium
+  - AWS Inferentia
+  - Intel Xeon / AMX
+  - Apple Silicon
 - Audio briefing segments:
-  - 兩者比較: 訓練 AI 和推論 AI 都在跑模型，但壓力完全不同。訓練重視吞吐量，目標是用大量 GPU 建立模型能力；推論重視延遲與效率，目標是在使用者等待時快速回應。這就是為什麼 AI 基礎設施不只是 GPU 需求增加，而是算力、記憶體、網路與系統編排一起重組。
+  - 總覽: 同一套 AI 系統可以同時支援訓練與推理，但硬體配置不會平均分配。訓練重視吞吐量與同步，推理重視延遲、記憶體頻寬與路由效率。GPU 負責最重的運算，CPU 則協調資料與請求，讓整台機器真正運轉。
   - 訓練 AI: 訓練 AI 像一座吞吐量工廠。大量資料被送進同步化 GPU 叢集，核心目標是讓昂貴的加速器保持高利用率。瓶頸不只在 GPU，還包括 HBM、互連網路、儲存 checkpoint、電力與冷卻。
   - 推論 AI: 推論 AI 像即時交通系統。它要處理大量使用者請求，每一次路由、記憶體存取、檢索與模型回應，都會影響延遲。推論的競爭重點，是在品質、成本與回應速度之間取得平衡。
 
 #### Korean (ko)
 
-- Title: 훈련 공장에서 추론 네트워크로
-- Intro: 인터랙티브 3D 워크로드 모델로 컴퓨팅 중심의 AI 훈련과 메모리·효율 중심의 추론을 비교합니다. 훈련은 모델을 만들고, 추론은 사용자를 서비스합니다.
+- Title: 하나의 AI 시스템, 두 가지 워크로드 모드
+- Intro: 하나의 AI 인프라가 훈련과 추론을 모두 지원할 수 있지만, 하드웨어 비중이 늘 반반인 것은 아닙니다. 시스템은 작업에 따라 형태가 달라지고, CPU 조정 계층이 두 모드를 연결합니다.
 - Mode labels:
-  - 둘 다 비교
+  - 개요
   - 훈련 AI
   - 추론 AI
-- Compare Both signal: AI 하드웨어 선택의 진짜 분기점: 둘 다 AI를 실행하는 것처럼 보이지만, 필요한 하드웨어는 완전히 다른 세계입니다.
-- Training AI signal: 훈련은 GPU 이용률, 동서 대역폭, 체크포인트 처리량, 전력 밀도가 중요합니다.
-- Inference AI signal: 추론은 라우팅, 동시성, 고대역폭 메모리, 검색 속도, 예측 가능한 응답시간이 중요합니다.
-- Lane labels:
+- 개요 signal: 훈련은 모델을 가르치고, 추론은 사용자를 서비스합니다. 같은 AI 시스템이 둘 다 지원할 수 있지만 하드웨어 균형은 워크로드에 따라 달라집니다.
+- 훈련 AI signal: 훈련은 동기화된 가속기, 메모리 용량, 클러스터 인터커넥트, 호스트 측 제어에 의존해 장시간 학습을 유지합니다.
+- 추론 AI signal: 추론은 지연시간 제어, 메모리 대역폭, 라우팅 효율, 검색 속도, CPU 측 요청 조정에 의존합니다.
+- Region labels:
   - 훈련 AI
+  - CPU 조정 계층
   - 추론 AI
 - 3D node labels:
-  - 데이터 레이크
-  - 전처리
-  - GPU 훈련 클러스터
-  - 인터커넥트 패브릭
+  - 훈련 배치
+  - GPU 연산
   - 체크포인트 저장소
-  - 모델 산출물
-  - 사용자 요청
-  - 게이트웨이 / 로드밸런서
-  - 모델 서빙 랙
+  - CPU 조정 계층
+  - 요청 경로
+  - 실시간 서빙
   - 고대역폭 메모리
-  - 검색 / 벡터 DB
-  - 응답 엣지
+- Official reference additions:
+  - Google Cloud TPU
+  - AWS Trainium
+  - AWS Inferentia
+  - Intel Xeon / AMX
+  - Apple Silicon
 - Audio briefing segments:
-  - 둘 다 비교: 훈련 AI와 추론 AI는 모두 모델을 실행하지만, 인프라에 주는 압력은 매우 다릅니다. 훈련은 처리량이 핵심이며, 대규모 GPU 클러스터로 모델 능력을 만듭니다. 추론은 지연시간과 효율이 핵심이며, 사용자가 기다리는 동안 빠르게 응답해야 합니다. 그래서 AI 인프라는 단순한 GPU 수요가 아니라 컴퓨팅, 메모리, 네트워크, 오케스트레이션의 재구성입니다.
+  - 개요: 하나의 AI 시스템이 훈련과 추론을 모두 지원할 수 있지만, 하드웨어 비중이 항상 반반인 것은 아닙니다. 훈련은 동기화된 처리량을, 추론은 지연시간과 메모리 대역폭, 라우팅 효율을 더 중시합니다. GPU가 가장 무거운 계산을 수행하고, CPU는 데이터 흐름과 요청을 조정해 두 모드를 함께 움직이게 합니다.
   - 훈련 AI: 훈련 AI는 처리량 공장과 같습니다. 대규모 데이터가 동기화된 GPU 클러스터를 지나가고, 목표는 비싼 가속기를 최대한 바쁘게 유지하는 것입니다. 병목은 GPU만이 아닙니다. HBM, 인터커넥트, 체크포인트 저장소, 전력, 냉각도 함께 중요합니다.
   - 추론 AI: 추론 AI는 실시간 교통 시스템에 가깝습니다. 많은 사용자 요청을 처리해야 하며, 라우팅, 메모리 접근, 검색, 모델 응답의 모든 단계가 지연시간에 영향을 줍니다. 핵심은 품질, 비용, 응답 속도 사이의 균형입니다.
 
 #### Japanese (ja)
 
-- Title: 学習工場から推論ネットワークへ
-- Intro: インタラクティブな 3D ワークロードモデルで、計算力中心の AI 学習とメモリ・効率中心の推論を比較します。学習はモデルを作り、推論はユーザーに提供します。
+- Title: 1つの AI システム、2つのワークロードモード
+- Intro: 同じ AI インフラが学習と推論の両方を支えられますが、ハードウェア配分が常に半々になるわけではありません。システムは仕事に応じて形を変え、CPU 調整レイヤーが2つのモードをつなぎます。
 - Mode labels:
-  - 両方を比較
+  - 概要
   - 学習 AI
   - 推論 AI
-- Compare Both signal: AI ハードウェア選択の本当の分岐点：どちらも「AI を動かす」ように見えますが、求めるハードウェアはまったく別の世界です。
-- Training AI signal: 学習では GPU 利用率、東西帯域、チェックポイント処理、電力密度が重要です。
-- Inference AI signal: 推論ではルーティング、同時実行、高帯域メモリ、検索速度、予測可能な応答時間が重要です。
-- Lane labels:
+- 概要 signal: 学習はモデルを鍛え、推論はユーザーに届けます。同じ AI システムが両方を支えられますが、ハードウェアの重心はワークロードによって変わります。
+- 学習 AI signal: 学習は同期化されたアクセラレータ、メモリ容量、クラスター相互接続、ホスト側制御によって長時間学習を支えます。
+- 推論 AI signal: 推論は遅延制御、メモリ帯域、ルーティング効率、検索速度、CPU 側の要求調整に支えられます。
+- Region labels:
   - 学習 AI
+  - CPU 調整レイヤー
   - 推論 AI
 - 3D node labels:
-  - データレイク
-  - 前処理
-  - GPU 学習クラスター
-  - 相互接続ファブリック
+  - 学習バッチ
+  - GPU 演算
   - チェックポイント保存
-  - モデル成果物
-  - ユーザー要求
-  - ゲートウェイ / 負荷分散
-  - モデルサービングラック
+  - CPU 調整レイヤー
+  - リクエスト経路
+  - リアルタイム提供
   - 高帯域メモリ
-  - 検索 / ベクトルDB
-  - 応答エッジ
+- Official reference additions:
+  - Google Cloud TPU
+  - AWS Trainium
+  - AWS Inferentia
+  - Intel Xeon / AMX
+  - Apple Silicon
 - Audio briefing segments:
-  - 両方を比較: 学習 AI と推論 AI はどちらもモデルを動かしますが、インフラへの負荷は大きく異なります。学習はスループットが重要で、大規模な GPU クラスターでモデル能力を作ります。推論は遅延と効率が重要で、ユーザーが待っている間に素早く応答する必要があります。つまり AI インフラは、GPU だけでなく、計算、メモリ、ネットワーク、オーケストレーション全体の再構成です。
+  - 概要: 同じ AI システムが学習と推論の両方を支えられますが、ハードウェア配分が常に半々になるわけではありません。学習は同期スループットを、推論は遅延、メモリ帯域、ルーティング効率をより重視します。GPU が最も重い計算を担い、CPU はデータフローと要求処理を調整して 2 つのモードを支えます。
   - 学習 AI: 学習 AI はスループット工場のようなものです。大量のデータが同期された GPU クラスターを通り、高価なアクセラレーターを高い利用率で動かすことが目標です。ボトルネックは GPU だけではありません。HBM、相互接続、チェックポイント保存、電力、冷却も重要です。
   - 推論 AI: 推論 AI はリアルタイム交通システムに近いものです。大量のユーザー要求を処理し、ルーティング、メモリアクセス、検索、モデル応答の各ステップが遅延に影響します。重要なのは、品質、コスト、応答速度のバランスです。
 

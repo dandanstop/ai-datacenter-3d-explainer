@@ -26,9 +26,9 @@ Runtime mapping in `app.js`:
 
 ## Chinese
 
-### Compare Both
+### Overview
 
-訓練 AI 和推論 AI 都在跑模型，但壓力完全不同。訓練重視吞吐量，目標是用大量 GPU 建立模型能力；推論重視延遲與效率，目標是在使用者等待時快速回應。這就是為什麼 AI 基礎設施不只是 GPU 需求增加，而是算力、記憶體、網路與系統編排一起重組。
+同一套 AI 系統可以同時支援訓練與推理，但硬體配置不會平均分配。訓練重視吞吐量與同步，推理重視延遲、記憶體頻寬與路由效率。GPU 負責最重的運算，CPU 則協調資料與請求，讓整台機器真正運轉。
 
 ### Training AI
 
@@ -40,9 +40,9 @@ Runtime mapping in `app.js`:
 
 ## English
 
-### Compare Both
+### Overview
 
-Training AI and inference AI both run models, but they stress infrastructure in very different ways. Training is about throughput: using large GPU clusters to build model capability. Inference is about latency and efficiency: serving users quickly while they wait. That is why AI infrastructure is no longer just a GPU story. It is a system-wide rebuild across compute, memory, networking, and orchestration.
+One AI system can support both training and inference, but the hardware mix is rarely split evenly. Training favors synchronized throughput. Inference favors latency, memory bandwidth, and routing efficiency. GPUs handle the heaviest math, while CPUs coordinate data flow and live requests across both modes.
 
 ### Training AI
 
@@ -54,9 +54,9 @@ Inference AI works more like real-time traffic. It handles many user requests, a
 
 ## Korean
 
-### Compare Both
+### Overview
 
-훈련 AI와 추론 AI는 모두 모델을 실행하지만, 인프라에 주는 압력은 매우 다릅니다. 훈련은 처리량이 핵심이며, 대규모 GPU 클러스터로 모델 능력을 만듭니다. 추론은 지연시간과 효율이 핵심이며, 사용자가 기다리는 동안 빠르게 응답해야 합니다. 그래서 AI 인프라는 단순한 GPU 수요가 아니라 컴퓨팅, 메모리, 네트워크, 오케스트레이션의 재구성입니다.
+하나의 AI 시스템이 훈련과 추론을 모두 지원할 수 있지만, 하드웨어 비중이 항상 반반인 것은 아닙니다. 훈련은 동기화된 처리량을, 추론은 지연시간과 메모리 대역폭, 라우팅 효율을 더 중시합니다. GPU가 가장 무거운 계산을 수행하고, CPU는 데이터 흐름과 요청을 조정해 두 모드를 함께 움직이게 합니다.
 
 ### Training AI
 
@@ -68,9 +68,9 @@ Inference AI works more like real-time traffic. It handles many user requests, a
 
 ## Japanese
 
-### Compare Both
+### Overview
 
-学習 AI と推論 AI はどちらもモデルを動かしますが、インフラへの負荷は大きく異なります。学習はスループットが重要で、大規模な GPU クラスターでモデル能力を作ります。推論は遅延と効率が重要で、ユーザーが待っている間に素早く応答する必要があります。つまり AI インフラは、GPU だけでなく、計算、メモリ、ネットワーク、オーケストレーション全体の再構成です。
+同じ AI システムが学習と推論の両方を支えられますが、ハードウェア配分が常に半々になるわけではありません。学習は同期スループットを、推論は遅延、メモリ帯域、ルーティング効率をより重視します。GPU が最も重い計算を担い、CPU はデータフローと要求処理を調整して 2 つのモードを支えます。
 
 ### Training AI
 

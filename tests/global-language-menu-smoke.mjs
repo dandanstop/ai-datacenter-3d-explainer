@@ -57,7 +57,7 @@ const afterChinese = await page.evaluate(() => ({
   menuHidden: document.querySelector("#languageTabs")?.hidden || false
 }));
 
-assert(afterChinese.title.includes("GPU") && afterChinese.title.includes("電網"), "Chinese language switch should update page title.");
+assert(afterChinese.title.includes("AI 競賽") && afterChinese.title.includes("電網"), "Chinese language switch should update page title.");
 assert(afterChinese.triggerText.includes("中文"), "Language trigger should update to the active language.");
 assert(afterChinese.menuHidden, "Language options should collapse after selecting a language.");
 assert(pageErrors.length === 0, `Unexpected page errors: ${pageErrors.join("; ")}`);

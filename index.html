@@ -33,7 +33,7 @@
     <meta name="twitter:image" content="https://dandanstop.me/og-image.png" />
     <meta name="twitter:image:alt" content="Interactive 3D AI data center value chain explainer" />
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="./styles.css?v=20260621-updates-link" />
+    <link rel="stylesheet" href="./styles.css?v=20260622-ch2-localization-sync" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2CJ15FLWPY"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -68,7 +68,7 @@
           "name": "DanDanStop",
           "url": "#about"
         },
-        "dateModified": "2026-06-21",
+        "dateModified": "2026-06-22",
         "about": [
           "AI data centers",
           "AI infrastructure",
@@ -114,32 +114,32 @@
             "@type": "LearningResource",
             "@id": "https://dandanstop.me/datacenter-3d#chapter-2",
             "url": "https://dandanstop.me/datacenter-3d#chapter-2",
-            "name": "Chapter 2: From Training Factories to Inference Networks",
-            "headline": "Training AI versus inference AI workload infrastructure",
-            "description": "An interactive 3D workload comparison showing how training is compute- and throughput-driven while inference is memory-, latency-, and efficiency-driven.",
+            "name": "Chapter 2: One AI System, Two Workload Modes",
+            "headline": "How training AI, inference AI, and CPU coordination reshape the same machine",
+            "description": "An interactive 3D chapter showing how one AI system can support both training and inference, with hardware balance shifting by workload and CPU coordination linking the two modes.",
             "learningResourceType": "Interactive 3D chapter",
             "inLanguage": "en",
-            "text": "Training AI builds model capability through large synchronized GPU runs. Inference AI delivers product experience through real-time serving, routing, high-bandwidth memory, retrieval, and latency management.",
+            "text": "Training AI teaches models through synchronized accelerators. Inference AI serves live requests through memory bandwidth, routing, and low-latency delivery. CPU coordination helps hold both workload modes together inside one machine.",
             "associatedMedia": [
               {
                 "@type": "AudioObject",
-                "name": "Chapter 2 compare both audio briefing",
+                "name": "Chapter 2 overview audio briefing",
                 "encodingFormat": "audio/mpeg",
                 "inLanguage": "en",
                 "contentUrl": "/audio/chapter2/en-compare.mp3",
-                "transcript": "Training AI and inference AI both run models, but they stress infrastructure in very different ways. Training is about throughput and synchronized GPU utilization. Inference is about latency, memory locality, retrieval, routing, and serving efficiency."
+                "transcript": "One AI system can support both training and inference, but the hardware mix is rarely split evenly. GPUs do the heaviest math, while CPUs coordinate data flow and live requests across both modes."
               }
             ],
             "hasPart": [
               {
                 "@type": "DefinedTerm",
                 "name": "Training AI",
-                "description": "A large synchronized workload optimized for GPU utilization, east-west bandwidth, checkpoint throughput, HBM, power, and cooling."
+                "description": "A large synchronized learning workload optimized for accelerator utilization, memory capacity, interconnect bandwidth, and host-side coordination."
               },
               {
                 "@type": "DefinedTerm",
                 "name": "Inference AI",
-                "description": "A real-time serving workload optimized for routing, concurrency, high-bandwidth memory, retrieval speed, and predictable response time."
+                "description": "A real-time serving workload optimized for latency, routing, memory bandwidth, retrieval speed, and CPU orchestration."
               }
             ]
           },
@@ -517,24 +517,21 @@ DanDanStop</h2>
       </article>
 
       <article id="chapter-2">
-        <h3>Chapter 2: From Training Factories to Inference Networks</h3>
+        <h3>Chapter 2: One AI System, Two Workload Modes</h3>
         <p>
-          Training AI and inference AI both use GPUs, but they stress infrastructure in different ways. Training is
-          compute- and throughput-driven: large synchronized batches move through GPU clusters, and the goal is to keep
-          accelerators highly utilized. Inference is memory-, latency-, and efficiency-driven: many user requests must
-          be served quickly through routing, model servers, high-bandwidth memory, retrieval systems, and response
-          edges.
+          AI infrastructure may support both training and inference, but the hardware mix is rarely split evenly. The
+          same machine changes shape depending on the job: training favors synchronized throughput, while inference
+          favors memory bandwidth, routing, and low-latency serving. CPU coordination helps hold both modes together.
         </p>
         <p>
-          Audio briefing transcript summary: training builds model capability through large synchronized runs. Inference
-          turns that capability into a live service where routing, cache locality, retrieval, CPU orchestration, and
-          latency determine product experience. The bottleneck moves with the workload, from GPU supply and interconnect
-          toward serving architecture, memory bandwidth, retrieval, observability, and cost efficiency.
+          Audio briefing transcript summary: one AI system can support both training and inference, but the workload
+          balance changes how the hardware is used. GPUs do the heaviest math, while CPUs coordinate data flow, request
+          handling, and host-side execution across both modes.
         </p>
         <ul>
-          <li>Compare Both Insight: training builds capability, inference delivers experience. Throughput and latency are different infrastructure competitions.</li>
-          <li>Training AI Insight: large datasets, preprocessing, synchronized GPU clusters, interconnect fabric, checkpoint storage, and model artifacts create a throughput factory.</li>
-          <li>Inference AI Insight: user requests, gateways, model serving racks, high-bandwidth memory, retrieval or vector databases, and response edges create a real-time serving network.</li>
+          <li>Overview Insight: one AI system may support both learning and serving, but its bottlenecks move with the workload.</li>
+          <li>Training AI Insight: large datasets, synchronized GPU clusters, interconnect fabric, high-capacity memory, and host-side scheduling create a compute factory.</li>
+          <li>Inference AI Insight: live requests, memory bandwidth, routing efficiency, retrieval, and CPU orchestration create a real-time serving system.</li>
         </ul>
       </article>
 
@@ -581,6 +578,6 @@ DanDanStop</h2>
       </section>
     </noscript>
 
-    <script type="module" src="./app.js?v=20260621-updates-link"></script>
+    <script type="module" src="./app.js?v=20260622-ch2-localization-sync"></script>
   </body>
 </html>

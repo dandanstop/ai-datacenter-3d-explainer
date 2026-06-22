@@ -1,7 +1,7 @@
 # SEO, GEO, And About Maintenance Notes
 
 Status: current implementation baseline  
-Last updated: 2026-06-19  
+Last updated: 2026-06-22  
 Local preview URL: http://127.0.0.1:8124/
 
 ## Purpose
@@ -56,7 +56,7 @@ Implemented in `index.html`:
 
 - Expanded JSON-LD from six value-chain layer items to nine `hasPart` items:
   - Chapter 1: From GPUs to the Grid
-  - Chapter 2: From Training Factories to Inference Networks
+  - Chapter 2: One AI System, Two Workload Modes
   - Chapter 3: From Response to Action
   - Power & Grid
   - Cooling Systems
@@ -67,7 +67,7 @@ Implemented in `index.html`:
 - Added `author` and `creator` as `Person`:
   - Name: DanDanStop
   - URL: `#about`
-- Added `dateModified`: `2026-06-19`
+- Added `dateModified`: `2026-06-22`
 - Added chapter-level `AudioObject` entries with English transcript summaries:
   - `/audio/chapter1/en-compute.mp3`
   - `/audio/chapter2/en-compare.mp3`
@@ -88,11 +88,43 @@ Current static SEO/GEO text includes:
 
 - Chapter 1 AI data center value-chain summary.
 - Chapter 1 company examples across power, cooling, compute, networking, site construction, and operations.
-- Chapter 2 training vs inference workload summary.
-- Chapter 2 audio briefing summary.
+- Chapter 2 overview-first workload summary built around training AI, inference AI, and CPU coordination.
+- Chapter 2 audio briefing summary aligned to the `Overview` segment naming.
 - Chapter 3 Agentic AI workflow summary.
 - Chapter 3 value-chain roles and company examples.
 - Chapter 3 audio briefing summary.
+
+## Chapter 2 Maintenance Notes
+
+As of the current baseline, Chapter 2 has been editorially reframed and should be maintained using the following rules:
+
+- Canonical Chapter 2 title:
+  - `One AI System, Two Workload Modes`
+- Canonical first mode label:
+  - `Overview`
+- Editorial thesis:
+  - one AI machine may support both training and inference, but the hardware balance changes by workload
+  - CPU coordination is part of the chapter thesis, not a secondary footnote
+- Static SEO summary, JSON-LD chapter summary, visible transcript copy, and TTS extraction headings should remain synchronized.
+- Transcript heading convention:
+  - the first segment heading is `Overview` in all four languages
+  - the runtime audio file id remains `compare` for backward compatibility
+- Official Chapter 2 reference coverage should continue to include:
+  - Google Cloud TPU
+  - AWS Trainium
+  - AWS Inferentia
+  - Intel Xeon / AMX
+  - Apple Silicon
+
+If Chapter 2 copy changes again, update these files together:
+
+- `app.js`
+- `index.html`
+- `docs/chapter2-audio-transcripts.md`
+- `scripts/generate-chapter2-chinese-tts.mjs`
+- `scripts/generate-chapter2-3-english-tts.mjs`
+- `scripts/generate-chapter2-3-korean-tts.mjs`
+- `scripts/generate-chapter2-3-japanese-tts.mjs`
 
 ## About Drawer
 
@@ -110,6 +142,22 @@ Contact:
 Schema:
 
 - About author identity is also reflected in JSON-LD through `author` and `creator`.
+
+Updates drawer:
+
+- Entry point: low-profile text link beside `About`.
+- Drawer: in-page overlay drawer using the same visual family as the About drawer.
+- Purpose: show compact visitor-facing release highlights without competing with the main 3D experience.
+- Current editorial focus:
+  - recent Chapter 2 reframing
+  - multilingual sync
+  - Chapter 2 interaction clarification
+  - SEO / transcript / TTS maintenance sync
+- Language coverage:
+  - English
+  - Traditional Chinese
+  - Korean
+  - Japanese
 
 Profile icon:
 
@@ -250,11 +298,15 @@ Use these checks after About or SEO changes:
 - JSON-LD parses successfully.
 - JSON-LD includes `author.name = DanDanStop`.
 - JSON-LD includes nine `hasPart` items.
+- JSON-LD Chapter 2 entry uses `One AI System, Two Workload Modes`.
 - `.seo-index-content` exists in rendered DOM.
 - About drawer opens and closes.
+- Updates drawer opens and closes.
+- Updates drawer content reflects the latest release-worthy change set.
 - About title contains a line break before `DanDanStop`.
 - Contact link resolves to `mailto:hello@dandanstop.me`.
 - Language switching updates About copy in English, Traditional Chinese, Korean, and Japanese.
+- Language switching updates Updates drawer copy in English, Traditional Chinese, Korean, and Japanese.
 - Console has no application-breaking errors.
 
 ## Remaining SEO Tasks

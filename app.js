@@ -17,8 +17,13 @@ const referenceCompanies = {
   delta: { name: "Delta Electronics", url: "https://www.deltaww.com/en-US/index" },
   nvidia: { name: "NVIDIA", url: "https://www.nvidia.com/en-us/data-center/" },
   amd: { name: "AMD", url: "https://www.amd.com/en.html" },
+  googleTpu: { name: "Google TPU", url: "https://cloud.google.com/tpu" },
+  awsTrainium: { name: "AWS Trainium", url: "https://aws.amazon.com/ai/machine-learning/trainium/" },
+  awsInferentia: { name: "AWS Inferentia", url: "https://aws.amazon.com/ai/machine-learning/inferentia/" },
   tsmc: { name: "TSMC", url: "https://www.tsmc.com/english" },
   micron: { name: "Micron", url: "https://www.micron.com/" },
+  intelXeon: { name: "Intel", url: "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html" },
+  appleSilicon: { name: "Apple Silicon", url: "https://www.apple.com/mac/" },
   intelFoundry: { name: "Intel Foundry", url: "https://www.intel.com/content/www/us/en/foundry/overview.html" },
   amkor: { name: "Amkor", url: "https://amkor.com/" },
   samsungSemi: { name: "Samsung Semiconductor", url: "https://semiconductor.samsung.com/" },
@@ -238,12 +243,12 @@ const uiText = {
     updatesEyebrow: "更新紀錄",
     updatesTitle: "近期更新",
     updatesUpdated: "更新時間：2026 年 6 月",
-    updatesDescription: "第一版於 2026 年 6 月推出。之後持續以低調但重要的方式優化內容、導覽與互動細節。",
+    updatesDescription: "第一版於 2026 年 6 月推出。近期更新重點放在 Chapter 2 的內容重寫、多語同步，以及更清楚的系統級科普表達。",
     updatesItems: [
-      "重新整理 Chapter 1 導覽，讓 3D 模型更容易先被理解",
-      "調整手機版 dock 與 stage chip，讓首屏更聚焦在模型本身",
-      "優化 3D 旋轉手感，讓拖曳互動更順暢自然",
-      "補強 SEO 與 metadata，讓內容更容易被發現與持續索引"
+      "將 Chapter 2 重構為「一套 AI 系統，兩種工作負載模式」，更清楚解釋訓練、推理與 CPU 協調之間的關係",
+      "同步更新 Chapter 2 的中文、英文、韓文、日文內容，補齊殘留英文標籤與舊版摘要",
+      "調整 Chapter 2 的總覽、訓練、推理互動邏輯，讓使用者更容易先理解整機，再看內部組成",
+      "同步維護 SEO 靜態摘要、audio transcript 與 TTS 腳本，降低後續內容更新時的維護落差"
     ]
   },
   en: {
@@ -292,12 +297,12 @@ const uiText = {
     updatesEyebrow: "Updates",
     updatesTitle: "Recent updates",
     updatesUpdated: "Updated: June 2026",
-    updatesDescription: "Version 1 launched in June 2026. Since then, the project has continued to evolve through small but meaningful upgrades to content, navigation, and interaction design.",
+    updatesDescription: "Version 1 launched in June 2026. The latest pass focuses on Chapter 2: clearer editorial framing, multilingual sync, and a more readable system-level explanation of training, inference, and CPU coordination.",
     updatesItems: [
-      "Refined Chapter 1 navigation so the 3D model is easier to understand at first glance",
-      "Improved the mobile dock and stage chip to keep the first screen focused on the model",
-      "Smoothed 3D rotation behavior so drag interactions feel calmer and more natural",
-      "Strengthened SEO and metadata foundations so the explainer is easier to discover and revisit"
+      "Reframed Chapter 2 as `One AI System, Two Workload Modes` to explain training AI, inference AI, and CPU coordination more clearly",
+      "Updated Chapter 2 copy across English, Traditional Chinese, Korean, and Japanese, including residual labels and static summaries",
+      "Refined Chapter 2 interaction flow so readers can understand the whole machine first, then drill into training-side and inference-side components",
+      "Synchronized SEO summaries, audio transcripts, and TTS extraction rules so future content updates stay consistent"
     ]
   },
   ko: {
@@ -346,12 +351,12 @@ const uiText = {
     updatesEyebrow: "업데이트",
     updatesTitle: "최근 업데이트",
     updatesUpdated: "업데이트: 2026년 6월",
-    updatesDescription: "Version 1은 2026년 6월에 공개되었습니다. 그 이후로도 콘텐츠, 내비게이션, 인터랙션을 중심으로 작지만 의미 있는 개선을 계속 더해왔습니다.",
+    updatesDescription: "Version 1은 2026년 6월에 공개되었습니다. 최근 업데이트는 Chapter 2를 중심으로, 더 선명한 편집 방향과 다국어 동기화, 그리고 시스템 수준 설명 강화에 초점을 맞추고 있습니다.",
     updatesItems: [
-      "3D 모델을 처음부터 더 쉽게 이해할 수 있도록 Chapter 1 내비게이션을 다듬었습니다",
-      "첫 화면이 모델에 더 집중되도록 모바일 dock과 stage chip을 개선했습니다",
-      "드래그 회전이 더 차분하고 자연스럽게 느껴지도록 3D 인터랙션을 부드럽게 조정했습니다",
-      "더 잘 발견되고 다시 찾아오게 만들 수 있도록 SEO 및 메타데이터 기반을 보강했습니다"
+      "Chapter 2를 `하나의 AI 시스템, 두 가지 워크로드 모드`로 재정리해 훈련, 추론, CPU 조정의 관계를 더 명확하게 설명했습니다",
+      "Chapter 2의 영어, 중국어, 한국어, 일본어 카피를 다시 맞추고 남아 있던 영어 라벨과 오래된 요약을 정리했습니다",
+      "사용자가 먼저 전체 기계를 이해한 뒤 훈련 측과 추론 측 내부 구성을 살펴볼 수 있도록 Chapter 2 인터랙션 흐름을 다듬었습니다",
+      "향후 콘텐츠 업데이트가 일관되게 유지되도록 SEO 요약, 오디오 스크립트, TTS 추출 규칙을 함께 동기화했습니다"
     ]
   },
   ja: {
@@ -400,12 +405,12 @@ const uiText = {
     updatesEyebrow: "更新情報",
     updatesTitle: "最近の更新",
     updatesUpdated: "更新日：2026年6月",
-    updatesDescription: "Version 1 は 2026年6月に公開しました。その後も、コンテンツ、導線、インタラクションを中心に、小さくても意味のある改善を積み重ねています。",
+    updatesDescription: "Version 1 は 2026年6月に公開しました。最近の更新は Chapter 2 を中心に、編集の軸を明確にし、多言語同期とシステム視点の説明強化を進めたものです。",
     updatesItems: [
-      "最初の一目で 3D モデルを理解しやすくなるよう、Chapter 1 の導線を整えました",
-      "最初の画面がモデル中心になるよう、モバイルの dock と stage chip を見直しました",
-      "ドラッグ操作がより落ち着いて自然に感じられるよう、3D 回転挙動を調整しました",
-      "より見つけやすく、再訪しやすくするために、SEO とメタデータの基盤を強化しました"
+      "Chapter 2 を `1つの AI システム、2つのワークロードモード` として再構成し、学習、推論、CPU 調整の関係をより明確にしました",
+      "Chapter 2 の英語、中国語、韓国語、日本語のコピーをそろえ、残っていた英語ラベルや古い要約を整理しました",
+      "まず機械全体を理解し、その後に学習側と推論側の内部構成へ入っていけるよう、Chapter 2 のインタラクション導線を整えました",
+      "今後の更新でも整合性を保てるよう、SEO 要約、音声スクリプト、TTS 抽出ルールをまとめて同期しました"
     ]
   }
 };
@@ -1000,12 +1005,474 @@ const chapter1ReadingLinks = {
   }
 };
 
+const chapter2EditorialExtensions = {
+  en: {
+    compare: {
+      how: "Training improves the model through repeated learning cycles across synchronized accelerators. Inference delivers answers and actions while a person or application is waiting. GPUs handle the heaviest parallel math, but CPUs help feed data, coordinate requests, manage host-side execution, and keep the overall system from stalling.",
+      builders: [
+        `<strong>Accelerator and AI system layer</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, ${companyLink("googleTpu")}, ${companyLink("awsTrainium")} / ${companyLink("awsInferentia", "Inferentia")}</span>`,
+        `<strong>Memory and packaging backbone</strong><span>${companyLink("tsmc")}, ${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}, ${companyLink("amkor")}</span>`,
+        `<strong>CPU and coordination layer</strong><span>${companyLink("intelXeon", "Intel (INTC)")}, ${companyLink("appleSilicon")}, ${companyLink("cloudflare")}, ${companyLink("arista")}, ${companyLink("broadcom")}</span>`
+      ],
+      future: "The AI market is moving from one general compute race toward workload-specific system design. The best machine for training will not always be the best machine for inference, and the systems that coordinate accelerators, memory, and software most efficiently may gain the real advantage.",
+      signals: [
+        `<strong>Training and inference continue to split</strong><span>System design is diverging around learning throughput on one side and serving efficiency on the other.</span>`,
+        `<strong>Memory pressure shifts by workload</strong><span>Training leans on capacity and synchronization, while inference leans on bandwidth, locality, and routing efficiency.</span>`,
+        `<strong>CPU orchestration matters again</strong><span>As AI products scale, host-side coordination, scheduling, and request handling become visible infrastructure constraints.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: AI training and inference systems", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU: training and inference systems", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium: AI training accelerator", referenceCompanies.awsTrainium.url),
+        externalLink("AWS Inferentia: AI inference chip", referenceCompanies.awsInferentia.url),
+        externalLink("Intel: Xeon and AMX for AI", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple: Apple Silicon and unified memory", referenceCompanies.appleSilicon.url),
+        externalLink("Micron: HBM and memory technology", referenceCompanies.micron.url)
+      ]
+    },
+    training: {
+      how: "Training works like a compute factory. Massive datasets move through forward pass, backward pass, and parameter updates across large GPU clusters. CPUs help manage data pipelines, host-side scheduling, job control, and cluster coordination so accelerators stay fed and aligned.",
+      builders: [
+        `<strong>Training accelerators and rack systems</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, Supermicro (SMCI), Quanta (2382.TW), Wiwynn (6669.TW)</span>`,
+        `<strong>Packaging, memory, and silicon supply</strong><span>${companyLink("tsmc")}, ${companyLink("amkor")}, ${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}</span>`,
+        `<strong>Cluster interconnect and orchestration</strong><span>${companyLink("arista")}, ${companyLink("broadcom")}, ${companyLink("marvell")}, Intel (INTC)</span>`
+      ],
+      future: "Training systems are becoming rack-scale and cluster-scale products. Power, memory, packaging, networking, cooling, and control layers will increasingly be designed together as one coordinated system rather than as separate components.",
+      signals: [
+        `<strong>Advanced packaging defines rollout speed</strong><span>HBM supply and advanced packaging capacity still shape how fast training clusters can expand.</span>`,
+        `<strong>Network fabric becomes part of compute</strong><span>As models scale, all-reduce efficiency and cluster topology decide how much GPU time becomes real learning progress.</span>`,
+        `<strong>Host coordination scales with the cluster</strong><span>CPUs remain important for data staging, scheduling, and keeping large synchronized runs organized.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: data center training platforms", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU: large-scale training", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium: AI training accelerator", referenceCompanies.awsTrainium.url),
+        externalLink("TSMC: advanced packaging", referenceCompanies.tsmc.url),
+        externalLink("DeepSpeed: large-scale training", "https://github.com/microsoft/DeepSpeed")
+      ]
+    },
+    inference: {
+      how: "Inference behaves more like live traffic than offline computation. Memory bandwidth, KV cache handling, retrieval speed, software orchestration, and response consistency shape the real user experience. CPUs often handle tokenization, request coordination, scheduling, sampling logic, and output processing. In many edge and enterprise setups, CPUs may even run quantized models directly.",
+      builders: [
+        `<strong>Inference accelerators and clouds</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, ${companyLink("aws")}, ${companyLink("googleCloud")}, Groq, Cerebras</span>`,
+        `<strong>CPU-first and edge inference platforms</strong><span>Intel Xeon, Apple Silicon, Qualcomm, llama.cpp</span>`,
+        `<strong>Serving software and delivery layer</strong><span>vLLM, TensorRT-LLM, Hugging Face TGI, ${companyLink("cloudflare")}</span>`
+      ],
+      future: "Inference is where AI becomes product experience. As usage scales, winning systems will be the ones that control latency, memory movement, CPU orchestration, and cost per response without sacrificing quality.",
+      signals: [
+        `<strong>Latency becomes a product metric</strong><span>Time to first token, inter-token delay, and concurrency control shape whether users feel the system is responsive.</span>`,
+        `<strong>CPU bottlenecks become visible</strong><span>Tokenization, host scheduling, and request handling can hold back GPU-heavy systems if the control layer cannot keep up.</span>`,
+        `<strong>CPU-first inference expands at the edge</strong><span>Quantized models, unified memory, and enterprise CPU deployments are widening the set of AI tasks that can run without large GPU fleets.</span>`
+      ],
+      references: [
+        externalLink("Cloudflare: AI inference and edge delivery", referenceCompanies.cloudflare.url),
+        externalLink("AWS Inferentia: AI inference chip", referenceCompanies.awsInferentia.url),
+        externalLink("Google Cloud TPU: low-latency inference", referenceCompanies.googleTpu.url),
+        externalLink("llama.cpp: local and CPU-first inference", "https://github.com/ggerganov/llama.cpp"),
+        externalLink("Intel: Xeon and AMX for AI", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple: Apple Silicon and unified memory", referenceCompanies.appleSilicon.url)
+      ]
+    }
+  },
+  zh: {
+    compare: {
+      how: "訓練透過同步化加速器反覆學習，讓模型變得更好；推理則是在使用者或應用程式等待時，輸出答案與行動。GPU 負責最密集的平行運算，但 CPU 幫助餵送資料、協調請求、管理主機端執行流程，並避免整體系統停滯。",
+      builders: [
+        `<strong>加速器與 AI 系統層</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、${companyLink("googleTpu")}、${companyLink("awsTrainium")} / ${companyLink("awsInferentia", "Inferentia")}</span>`,
+        `<strong>記憶體與封裝骨幹</strong><span>${companyLink("tsmc")}、${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}、${companyLink("amkor")}</span>`,
+        `<strong>CPU 與協調層</strong><span>${companyLink("intelXeon", "Intel (INTC)")}、${companyLink("appleSilicon")}、${companyLink("cloudflare")}、${companyLink("arista")}、${companyLink("broadcom")}</span>`
+      ],
+      future: "AI 市場正從單一算力競賽，轉向依工作負載分化的系統設計。最適合訓練的機器，不一定是最適合推理的機器；未來真正有優勢的，可能是那些最能有效協調加速器、記憶體與軟體層的系統。",
+      signals: [
+        `<strong>訓練與推理持續分流</strong><span>系統設計正朝兩條路線前進，一邊優化學習吞吐量，一邊優化服務效率。</span>`,
+        `<strong>記憶體壓力會隨工作負載變化</strong><span>訓練更依賴容量與同步，推理更依賴頻寬、資料局部性與路由效率。</span>`,
+        `<strong>CPU 協調層重新重要</strong><span>當 AI 產品規模化，主機端協調、排程與請求管理會成為可見的基礎設施限制。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：AI 訓練與推理系統", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU：訓練與推理系統", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium：AI 訓練加速器", referenceCompanies.awsTrainium.url),
+        externalLink("AWS Inferentia：AI 推理晶片", referenceCompanies.awsInferentia.url),
+        externalLink("Intel：Xeon 與 AMX AI 平台", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple：Apple Silicon 與統一記憶體", referenceCompanies.appleSilicon.url),
+        externalLink("Micron：HBM 與記憶體技術", referenceCompanies.micron.url)
+      ]
+    },
+    training: {
+      how: "訓練像一座算力工廠。大量資料會穿過前向傳播、反向傳播與參數更新，並在大型 GPU 叢集中同步執行。CPU 負責管理資料管線、主機端排程、工作控制與叢集協調，讓加速器持續被有效餵料並保持同步。",
+      builders: [
+        `<strong>訓練加速器與整櫃系統</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、Supermicro (SMCI)、Quanta (2382.TW)、Wiwynn (6669.TW)</span>`,
+        `<strong>封裝、記憶體與晶片供應</strong><span>${companyLink("tsmc")}、${companyLink("amkor")}、${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}</span>`,
+        `<strong>叢集互連與協調層</strong><span>${companyLink("arista")}、${companyLink("broadcom")}、${companyLink("marvell")}、Intel (INTC)</span>`
+      ],
+      future: "訓練系統正逐漸變成整櫃級、整叢集級的產品。未來電力、記憶體、封裝、網路、冷卻與控制層，會越來越像同一套協調系統的一部分，而不是彼此獨立的元件。",
+      signals: [
+        `<strong>先進封裝決定擴張速度</strong><span>HBM 供給與先進封裝產能，仍會直接影響訓練叢集擴張的節奏。</span>`,
+        `<strong>互連網路變成算力的一部分</strong><span>當模型持續放大，all-reduce 效率與叢集拓樸會決定多少 GPU 時間真正轉成學習成果。</span>`,
+        `<strong>主機端協調會跟著叢集放大</strong><span>CPU 在資料準備、排程與同步管理上仍然關鍵，能讓大型訓練保持有序。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：資料中心訓練平台", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU：大規模訓練平台", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium：AI 訓練加速器", referenceCompanies.awsTrainium.url),
+        externalLink("TSMC：先進封裝", referenceCompanies.tsmc.url),
+        externalLink("DeepSpeed：大規模訓練框架", "https://github.com/microsoft/DeepSpeed")
+      ]
+    },
+    inference: {
+      how: "推理更像即時交通系統，而不是離線計算。記憶體頻寬、KV 快取管理、檢索速度、軟體編排與回應穩定性，才共同決定真正的使用體驗。CPU 常常負責分詞處理、請求協調、排程、取樣邏輯與輸出處理；在許多邊緣與企業場景中，CPU 甚至能直接執行量化後模型。",
+      builders: [
+        `<strong>推理加速器與雲端平台</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、${companyLink("aws")}、${companyLink("googleCloud")}、Groq、Cerebras</span>`,
+        `<strong>CPU 主導與邊緣推理平台</strong><span>Intel Xeon、Apple Silicon、Qualcomm、llama.cpp</span>`,
+        `<strong>服務軟體與交付層</strong><span>vLLM、TensorRT-LLM、Hugging Face TGI、${companyLink("cloudflare")}</span>`
+      ],
+      future: "推理是 AI 真正變成產品體驗的地方。當使用量持續擴大，真正有競爭力的系統，會是那些能同時控制延遲、資料搬移、CPU 協調與每次回應成本，又不犧牲品質的系統。",
+      signals: [
+        `<strong>延遲變成產品指標</strong><span>首 token 時間、token 間延遲與併發控制，會直接影響使用者是否覺得系統夠快。</span>`,
+        `<strong>CPU 瓶頸開始浮現</strong><span>若主機端協調跟不上，分詞處理、主機端排程與請求處理就會反過來拖慢 GPU 系統。</span>`,
+        `<strong>CPU 主導推理向邊緣擴張</strong><span>量化模型、統一記憶體與企業 CPU 部署，正在擴大不靠大型 GPU 也能跑 AI 的場景。</span>`
+      ],
+      references: [
+        externalLink("Cloudflare：AI 推論與邊緣交付", referenceCompanies.cloudflare.url),
+        externalLink("AWS Inferentia：AI 推理晶片", referenceCompanies.awsInferentia.url),
+        externalLink("Google Cloud TPU：低延遲推理平台", referenceCompanies.googleTpu.url),
+        externalLink("llama.cpp：本地與 CPU 主導推理", "https://github.com/ggerganov/llama.cpp"),
+        externalLink("Intel：Xeon 與 AMX AI 平台", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple：Apple Silicon 與統一記憶體", referenceCompanies.appleSilicon.url)
+      ]
+    }
+  },
+  ko: {
+    compare: {
+      how: "훈련은 동기화된 가속기에서 반복 학습을 수행해 모델을 개선하고, 추론은 사용자나 애플리케이션이 기다리는 동안 답과 행동을 전달합니다. GPU가 가장 무거운 병렬 연산을 처리하지만, CPU는 데이터 공급, 요청 조정, 호스트 실행 관리, 시스템 정체 방지에 중요한 역할을 합니다.",
+      builders: [
+        `<strong>가속기와 AI 시스템 계층</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, ${companyLink("googleTpu")}, ${companyLink("awsTrainium")} / ${companyLink("awsInferentia", "Inferentia")}</span>`,
+        `<strong>메모리와 패키징 백본</strong><span>${companyLink("tsmc")}, ${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}, ${companyLink("amkor")}</span>`,
+        `<strong>CPU와 조정 계층</strong><span>${companyLink("intelXeon", "Intel (INTC)")}, ${companyLink("appleSilicon")}, ${companyLink("cloudflare")}, ${companyLink("arista")}, ${companyLink("broadcom")}</span>`
+      ],
+      future: "AI 시장은 하나의 범용 컴퓨트 경쟁에서 워크로드별 시스템 설계로 이동하고 있습니다. 훈련에 최적인 기계가 항상 추론에 최적인 것은 아니며, 가속기, 메모리, 소프트웨어를 가장 효율적으로 조정하는 시스템이 우위를 가질 수 있습니다.",
+      signals: [
+        `<strong>훈련과 추론의 분화</strong><span>한쪽은 학습 처리량, 다른 한쪽은 서빙 효율을 중심으로 시스템 설계가 나뉘고 있습니다.</span>`,
+        `<strong>워크로드마다 다른 메모리 압력</strong><span>훈련은 용량과 동기화를, 추론은 대역폭과 지역성, 라우팅 효율을 더 강하게 요구합니다.</span>`,
+        `<strong>CPU 오케스트레이션의 재부상</strong><span>AI 제품이 확장될수록 호스트 조정, 스케줄링, 요청 관리가 눈에 보이는 인프라 제약이 됩니다.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: AI 학습 및 추론 시스템", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU: 학습 및 추론 시스템", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium: AI 학습 가속기", referenceCompanies.awsTrainium.url),
+        externalLink("AWS Inferentia: AI 추론 칩", referenceCompanies.awsInferentia.url),
+        externalLink("Intel: Xeon and AMX for AI", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple: Apple Silicon 및 통합 메모리", referenceCompanies.appleSilicon.url),
+        externalLink("Micron: HBM 및 메모리 기술", referenceCompanies.micron.url)
+      ]
+    },
+    training: {
+      how: "훈련은 컴퓨트 공장처럼 작동합니다. 대규모 데이터가 순전파, 역전파, 파라미터 업데이트를 거치며 큰 GPU 클러스터를 통과합니다. CPU는 데이터 파이프라인, 호스트 스케줄링, 작업 제어, 클러스터 조정을 담당해 가속기가 계속 공급되고 정렬되도록 돕습니다.",
+      builders: [
+        `<strong>훈련 가속기와 랙 시스템</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, Supermicro (SMCI), Quanta (2382.TW), Wiwynn (6669.TW)</span>`,
+        `<strong>패키징, 메모리, 실리콘 공급망</strong><span>${companyLink("tsmc")}, ${companyLink("amkor")}, ${companyLink("micron")}, ${companyLink("skhynix")}, ${companyLink("samsungSemi")}</span>`,
+        `<strong>클러스터 인터커넥트와 조정 계층</strong><span>${companyLink("arista")}, ${companyLink("broadcom")}, ${companyLink("marvell")}, Intel (INTC)</span>`
+      ],
+      future: "훈련 시스템은 랙 단위와 클러스터 단위 제품으로 진화하고 있습니다. 전력, 메모리, 패키징, 네트워킹, 냉각, 제어 계층이 각각의 부품이 아니라 하나의 조정된 시스템으로 함께 설계될 것입니다.",
+      signals: [
+        `<strong>첨단 패키징이 확장 속도를 좌우</strong><span>HBM 공급과 첨단 패키징 용량은 여전히 학습 클러스터 확대 속도를 결정합니다.</span>`,
+        `<strong>네트워크 패브릭은 컴퓨트의 일부</strong><span>모델이 커질수록 all-reduce 효율과 토폴로지가 GPU 시간이 실제 학습 진척으로 이어지는지를 좌우합니다.</span>`,
+        `<strong>호스트 조정도 함께 확장</strong><span>CPU는 데이터 준비, 스케줄링, 동기화 관리에서 여전히 중요하며, 대규모 훈련을 질서 있게 유지합니다.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: 데이터센터 훈련 플랫폼", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU: 대규모 훈련 플랫폼", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium: AI 학습 가속기", referenceCompanies.awsTrainium.url),
+        externalLink("TSMC: 첨단 패키징", referenceCompanies.tsmc.url),
+        externalLink("DeepSpeed: 대규모 훈련", "https://github.com/microsoft/DeepSpeed")
+      ]
+    },
+    inference: {
+      how: "추론은 오프라인 계산보다 실시간 트래픽에 가깝습니다. 메모리 대역폭, KV 캐시 관리, 검색 속도, 소프트웨어 오케스트레이션, 응답 일관성이 실제 사용자 경험을 좌우합니다. CPU는 토크나이징, 요청 조정, 스케줄링, 샘플링 로직, 출력 처리까지 자주 담당하며, 많은 엣지와 엔터프라이즈 환경에서는 양자화된 모델을 직접 실행하기도 합니다.",
+      builders: [
+        `<strong>추론 가속기와 클라우드</strong><span>${companyLink("nvidia")}, ${companyLink("amd")}, ${companyLink("aws")}, ${companyLink("googleCloud")}, Groq, Cerebras</span>`,
+        `<strong>CPU 중심 및 엣지 추론 플랫폼</strong><span>Intel Xeon, Apple Silicon, Qualcomm, llama.cpp</span>`,
+        `<strong>서빙 소프트웨어와 전달 계층</strong><span>vLLM, TensorRT-LLM, Hugging Face TGI, ${companyLink("cloudflare")}</span>`
+      ],
+      future: "추론은 AI가 제품 경험이 되는 단계입니다. 사용량이 늘어날수록 지연시간, 데이터 이동, CPU 조정, 응답당 비용을 함께 제어하는 시스템이 경쟁력을 갖게 됩니다.",
+      signals: [
+        `<strong>지연시간이 곧 제품 지표</strong><span>첫 토큰 시간, 토큰 간 지연, 동시성 제어가 사용자가 시스템을 빠르다고 느끼는지 결정합니다.</span>`,
+        `<strong>CPU 병목의 가시화</strong><span>호스트 조정이 따라오지 못하면 토크나이징, 스케줄링, 요청 처리가 GPU 시스템의 발목을 잡을 수 있습니다.</span>`,
+        `<strong>CPU 중심 추론의 확장</strong><span>양자화 모델, 통합 메모리, 엔터프라이즈 CPU 배포가 대형 GPU 없이도 가능한 AI 작업 범위를 넓히고 있습니다.</span>`
+      ],
+      references: [
+        externalLink("Cloudflare: AI 추론과 엣지 전송", referenceCompanies.cloudflare.url),
+        externalLink("AWS Inferentia: AI 추론 칩", referenceCompanies.awsInferentia.url),
+        externalLink("Google Cloud TPU: 저지연 추론 플랫폼", referenceCompanies.googleTpu.url),
+        externalLink("llama.cpp: 로컬 및 CPU 중심 추론", "https://github.com/ggerganov/llama.cpp"),
+        externalLink("Intel: Xeon 및 AMX AI 플랫폼", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple: Apple Silicon 및 통합 메모리", referenceCompanies.appleSilicon.url)
+      ]
+    }
+  },
+  ja: {
+    compare: {
+      how: "学習は同期化されたアクセラレータ上で繰り返し学習しモデルを改善し、推論はユーザーやアプリが待つあいだに答えや行動を届けます。GPU が最も重い並列計算を担いますが、CPU はデータ供給、要求調整、ホスト側実行管理、システム停滞の回避に重要な役割を果たします。",
+      builders: [
+        `<strong>アクセラレータと AI システム層</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、${companyLink("googleTpu")}、${companyLink("awsTrainium")} / ${companyLink("awsInferentia", "Inferentia")}</span>`,
+        `<strong>メモリとパッケージング基盤</strong><span>${companyLink("tsmc")}、${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}、${companyLink("amkor")}</span>`,
+        `<strong>CPU と調整レイヤー</strong><span>${companyLink("intelXeon", "Intel (INTC)")}、${companyLink("appleSilicon")}、${companyLink("cloudflare")}、${companyLink("arista")}、${companyLink("broadcom")}</span>`
+      ],
+      future: "AI 市場は、1つの汎用コンピュート競争から、ワークロード別のシステム設計へ移っています。学習に最適な機械が常に推論にも最適とは限らず、アクセラレータ、メモリ、ソフトウェアを最も効率よく調整するシステムが優位に立つ可能性があります。",
+      signals: [
+        `<strong>学習系と推論系の分化</strong><span>一方は学習スループット、もう一方はサービング効率を中心に、設計思想が分かれつつあります。</span>`,
+        `<strong>ワークロードごとに違うメモリ圧力</strong><span>学習は容量と同期性を、推論は帯域、局所性、ルーティング効率をより強く求めます。</span>`,
+        `<strong>CPU オーケストレーションの再重要化</strong><span>AI 製品が拡大するほど、ホスト側の調整、スケジューリング、要求処理が見える制約になります。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：AI 学習と推論システム", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU：学習と推論システム", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium：AI 学習アクセラレータ", referenceCompanies.awsTrainium.url),
+        externalLink("AWS Inferentia：AI 推論チップ", referenceCompanies.awsInferentia.url),
+        externalLink("Intel：Xeon と AMX の AI 基盤", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple：Apple Silicon とユニファイドメモリ", referenceCompanies.appleSilicon.url),
+        externalLink("Micron：HBM とメモリ技術", referenceCompanies.micron.url)
+      ]
+    },
+    training: {
+      how: "学習はコンピュート工場のように動きます。大規模データが順伝播、逆伝播、パラメータ更新を通り、大型 GPU クラスターを流れます。CPU はデータパイプライン、ホスト側スケジューリング、ジョブ制御、クラスター調整を担当し、アクセラレータが常に供給され同期した状態を保てるようにします。",
+      builders: [
+        `<strong>学習アクセラレータとラックシステム</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、Supermicro (SMCI)、Quanta (2382.TW)、Wiwynn (6669.TW)</span>`,
+        `<strong>パッケージング、メモリ、シリコン供給</strong><span>${companyLink("tsmc")}、${companyLink("amkor")}、${companyLink("micron")}、${companyLink("skhynix")}、${companyLink("samsungSemi")}</span>`,
+        `<strong>クラスター相互接続と調整レイヤー</strong><span>${companyLink("arista")}、${companyLink("broadcom")}、${companyLink("marvell")}、Intel (INTC)</span>`
+      ],
+      future: "学習システムはラック単位・クラスター単位の製品へ進化しています。電力、メモリ、パッケージング、ネットワーク、冷却、制御層が、個別部品ではなく1つの調整されたシステムとして設計されていくでしょう。",
+      signals: [
+        `<strong>先進パッケージングが拡張速度を決める</strong><span>HBM 供給と先進パッケージング能力は、学習クラスター拡大の速度を左右し続けます。</span>`,
+        `<strong>ネットワークファブリックは計算の一部</strong><span>モデルが大きくなるほど、all-reduce 効率とトポロジーが GPU 時間を実際の学習成果へ変えられるかを決めます。</span>`,
+        `<strong>ホスト調整もクラスターとともに拡大</strong><span>CPU はデータ準備、スケジューリング、同期管理で依然重要であり、大規模学習を秩序立てて維持します。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：データセンター学習基盤", referenceCompanies.nvidia.url),
+        externalLink("Google Cloud TPU：大規模学習プラットフォーム", referenceCompanies.googleTpu.url),
+        externalLink("AWS Trainium：AI 学習アクセラレータ", referenceCompanies.awsTrainium.url),
+        externalLink("TSMC：先進パッケージング", referenceCompanies.tsmc.url),
+        externalLink("DeepSpeed：大規模学習", "https://github.com/microsoft/DeepSpeed")
+      ]
+    },
+    inference: {
+      how: "推論はオフライン計算よりもライブトラフィックに近い性質を持ちます。メモリ帯域、KV キャッシュ管理、検索速度、ソフトウェアオーケストレーション、応答の一貫性が実際のユーザー体験を左右します。CPU はトークナイズ、要求調整、スケジューリング、サンプリング処理、出力整形を頻繁に担当し、多くのエッジや企業環境では量子化モデルを直接動かすこともあります。",
+      builders: [
+        `<strong>推論アクセラレータとクラウド</strong><span>${companyLink("nvidia")}、${companyLink("amd")}、${companyLink("aws")}、${companyLink("googleCloud")}、Groq、Cerebras</span>`,
+        `<strong>CPU 主導とエッジ推論基盤</strong><span>Intel Xeon、Apple Silicon、Qualcomm、llama.cpp</span>`,
+        `<strong>サービングソフトウェアと配信レイヤー</strong><span>vLLM、TensorRT-LLM、Hugging Face TGI、${companyLink("cloudflare")}</span>`
+      ],
+      future: "推論は AI が製品体験になる場所です。利用が広がるほど、遅延、データ移動、CPU 調整、応答単価を同時に制御できるシステムが競争力を持ちます。",
+      signals: [
+        `<strong>遅延が製品指標になる</strong><span>最初のトークン時間、トークン間遅延、同時実行制御が、ユーザーが速いと感じるかを決めます。</span>`,
+        `<strong>CPU ボトルネックの可視化</strong><span>ホスト側調整が追いつかなければ、トークナイズ、スケジューリング、要求処理が GPU システムの足を引っ張ります。</span>`,
+        `<strong>CPU 主導推論の拡大</strong><span>量子化モデル、統一メモリ、企業 CPU 配備によって、大型 GPU なしで動く AI タスクが増えています。</span>`
+      ],
+      references: [
+        externalLink("Cloudflare：AI 推論とエッジ配信", referenceCompanies.cloudflare.url),
+        externalLink("AWS Inferentia：AI 推論チップ", referenceCompanies.awsInferentia.url),
+        externalLink("Google Cloud TPU：低遅延推論プラットフォーム", referenceCompanies.googleTpu.url),
+        externalLink("llama.cpp：ローカルと CPU 主導推論", "https://github.com/ggerganov/llama.cpp"),
+        externalLink("Intel：Xeon と AMX の AI 基盤", "https://www.intel.com/content/www/us/en/products/details/processors/xeon/xeon6.html"),
+        externalLink("Apple：Apple Silicon とユニファイドメモリ", referenceCompanies.appleSilicon.url)
+      ]
+    }
+  }
+};
+
+const chapter3EditorialExtensions = {
+  en: {
+    overview: {
+      how: "Agentic AI changes the unit of work from a single response into a workflow. An agent receives requests, context, documents, APIs, and system state, then keeps coordinating until the task is complete. That makes the surrounding workflow stack just as important as the model itself.",
+      future: "The next leaders in agentic AI may be defined less by the smartest demo and more by who can safely complete multi-step work across enterprise systems with reliable latency, permissions, and auditability.",
+      signals: [
+        `<strong>Authorization becomes product infrastructure</strong><span>As agents start doing real work, permission boundaries and identity checks move from compliance detail to core system design.</span>`,
+        `<strong>Multi-agent coordination becomes practical</strong><span>Delegation, retries, and specialized sub-agents could become standard patterns as workflows grow more complex.</span>`,
+        `<strong>Integration depth becomes a moat</strong><span>Agents that can reliably connect to data, tools, and system actions will matter more than agents that only generate polished text.</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure: AI and agent platform", referenceCompanies.azure.url),
+        externalLink("AWS: generative AI and workflow services", referenceCompanies.aws.url),
+        externalLink("Cloudflare: AI and developer platform", referenceCompanies.cloudflare.url)
+      ]
+    },
+    core: {
+      how: "The agent core is the decision loop that turns context into action. It perceives signals, reasons about intent, plans the next steps, calls tools, checks results, and continues until the workflow reaches an acceptable outcome. In practice, this means the core is a coordination layer, not just a prompt wrapper.",
+      future: "The competitive edge in agent systems may shift toward planning quality, tool reliability, memory strategy, and verification loops rather than model output style alone.",
+      signals: [
+        `<strong>Memory design grows in importance</strong><span>Short-term context, long-term memory, and retrieval strategy increasingly shape whether an agent stays coherent over many steps.</span>`,
+        `<strong>Tool reliability becomes user trust</strong><span>An agent only feels intelligent if it can call the right tool, recover from failure, and keep the workflow on track.</span>`,
+        `<strong>Verification loops become mandatory</strong><span>As workflows touch real systems, checking outputs before action becomes part of the product, not an optional safety layer.</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure: agent and copilots stack", referenceCompanies.azure.url),
+        externalLink("Palo Alto Networks: AI security and governance", referenceCompanies.paloalto.url),
+        externalLink("Datadog: observability for production workflows", referenceCompanies.datadog.url)
+      ]
+    },
+    infrastructure: {
+      how: "Behind the interface, agent workflows depend on a coordination stack. CPUs manage orchestration and control flow, GPUs run inference and embeddings, memory and retrieval systems provide context, and networks keep each step connected. Once workflows stretch across multiple hops, tail latency and observability become part of the core architecture.",
+      future: "As agents perform more retrieval, tool calls, verification, and retries, the bottleneck shifts from model speed alone toward CPU orchestration, memory locality, storage responsiveness, network hops, and tail-latency control.",
+      signals: [
+        `<strong>CPU orchestration gains share of value</strong><span>More multi-step control flow means CPUs and scheduler design matter more alongside GPU inference.</span>`,
+        `<strong>Retrieval stack quality becomes visible</strong><span>Slow vector stores, brittle connectors, and fragmented memory quickly show up as workflow delay and inconsistency.</span>`,
+        `<strong>Observability and security move inward</strong><span>Tracing, policy enforcement, and runtime monitoring become embedded design requirements as agents interact with production systems.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: data center compute and networking", referenceCompanies.nvidia.url),
+        externalLink("Micron: memory for AI systems", referenceCompanies.micron.url),
+        externalLink("Cloudflare: network and runtime infrastructure", referenceCompanies.cloudflare.url)
+      ]
+    }
+  },
+  zh: {
+    overview: {
+      how: "Agentic AI 把工作的最小單位，從一次模型回應，改成一條可持續推進的工作流。Agent 會接收請求、上下文、文件、API 與系統狀態，並持續協調直到任務完成。這代表真正重要的，不只是模型本身，而是模型周圍的 workflow stack。",
+      future: "下一批 Agentic AI 的領先者，可能不是最會 demo 的系統，而是那些能在企業環境中，用可靠延遲、權限控制與可稽核流程，安全完成多步驟任務的平台。",
+      signals: [
+        `<strong>授權控制變成產品基礎設施</strong><span>當 Agent 開始做真實工作，權限邊界與身份驗證會從合規細節，變成核心系統設計。</span>`,
+        `<strong>多代理協作走向實用化</strong><span>隨著工作流變得更複雜，委派、重試與專職 sub-agent 可能成為常見模式。</span>`,
+        `<strong>整合深度形成護城河</strong><span>能可靠連接資料、工具與系統動作的 Agent，會比只會生成漂亮文字的 Agent 更有價值。</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure：AI 與 Agent 平台", referenceCompanies.azure.url),
+        externalLink("AWS：生成式 AI 與 workflow 服務", referenceCompanies.aws.url),
+        externalLink("Cloudflare：AI 與開發者平台", referenceCompanies.cloudflare.url)
+      ]
+    },
+    core: {
+      how: "Agent Core 是把上下文轉成行動的決策迴圈。它先感知訊號、理解意圖、規劃步驟、呼叫工具、檢查結果，再持續推進直到工作流達到可接受的完成狀態。實際上，它更像一層協調系統，而不只是 prompt 包裝器。",
+      future: "代理系統的競爭優勢，未來可能更多來自規劃品質、工具可靠度、記憶策略與驗證迴圈，而不只是模型輸出的表面流暢度。",
+      signals: [
+        `<strong>記憶體設計的重要性上升</strong><span>短期上下文、長期記憶與檢索策略，會直接影響 Agent 能否在多步驟任務中維持一致性。</span>`,
+        `<strong>工具可靠度等於使用者信任</strong><span>只有當 Agent 能選對工具、從失敗中恢復、並把工作流拉回正軌時，它才會被視為真正聰明。</span>`,
+        `<strong>驗證迴圈會變成標準配備</strong><span>當 workflow 開始碰觸真實系統，行動前的輸出檢查不再是附加安全層，而是產品本身的一部分。</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure：Agent 與 Copilot 堆疊", referenceCompanies.azure.url),
+        externalLink("Palo Alto Networks：AI 安全與治理", referenceCompanies.paloalto.url),
+        externalLink("Datadog：生產 workflow 的可觀測性", referenceCompanies.datadog.url)
+      ]
+    },
+    infrastructure: {
+      how: "在介面背後，Agent workflow 依賴的是一整套協調堆疊。CPU 負責 orchestration 與 control flow，GPU 負責推論與 embeddings，記憶體與檢索系統提供上下文，網路則把每一步接起來。一旦 workflow 穿越多個 hops，尾端延遲與可觀測性就會變成核心架構的一部分。",
+      future: "當 Agent 增加更多檢索、工具呼叫、驗證與重試後，瓶頸會從模型速度本身，轉向 CPU 協調、記憶體局部性、儲存回應、網路 hops 與尾端延遲控制。",
+      signals: [
+        `<strong>CPU 協調的價值比重上升</strong><span>更多多步驟控制流程，代表 CPU 與排程設計的重要性會與 GPU 推論一起上升。</span>`,
+        `<strong>檢索堆疊品質變得可見</strong><span>慢速向量資料庫、脆弱連接器與分散記憶，會很快反映成 workflow 延遲與不一致。</span>`,
+        `<strong>可觀測性與資安更往內層移動</strong><span>當 Agent 連接正式系統時，trace、政策執行與 runtime 監控會變成內建設計要求。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：資料中心算力與網路", referenceCompanies.nvidia.url),
+        externalLink("Micron：AI 系統記憶體", referenceCompanies.micron.url),
+        externalLink("Cloudflare：網路與 runtime 基礎設施", referenceCompanies.cloudflare.url)
+      ]
+    }
+  },
+  ko: {
+    overview: {
+      how: "Agentic AI는 작업의 최소 단위를 한 번의 모델 응답에서 계속 이어지는 워크플로로 바꿉니다. 에이전트는 요청, 문맥, 문서, API, 시스템 상태를 받아 과업이 끝날 때까지 계속 조정합니다. 그래서 중요한 것은 모델 자체뿐 아니라 모델을 둘러싼 워크플로 스택입니다.",
+      future: "다음 단계의 Agentic AI 리더는 가장 화려한 데모보다, 기업 환경에서 신뢰할 수 있는 지연시간, 권한 제어, 감사 가능성을 바탕으로 여러 단계를 안전하게 끝내는 플랫폼이 될 가능성이 큽니다.",
+      signals: [
+        `<strong>권한 제어가 제품 인프라가 됨</strong><span>에이전트가 실제 업무를 수행하기 시작하면 권한 경계와 신원 확인은 규정 준수 세부사항이 아니라 핵심 시스템 설계가 됩니다.</span>`,
+        `<strong>멀티 에이전트 조정의 실용화</strong><span>워크플로가 복잡해질수록 위임, 재시도, 전문화된 하위 에이전트가 표준 패턴이 될 수 있습니다.</span>`,
+        `<strong>통합 깊이가 해자가 됨</strong><span>데이터, 도구, 시스템 작업과 안정적으로 연결되는 에이전트가 단지 매끈한 텍스트를 생성하는 에이전트보다 더 중요해집니다.</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure: AI 및 에이전트 플랫폼", referenceCompanies.azure.url),
+        externalLink("AWS: 생성형 AI 및 워크플로 서비스", referenceCompanies.aws.url),
+        externalLink("Cloudflare: AI 및 개발자 플랫폼", referenceCompanies.cloudflare.url)
+      ]
+    },
+    core: {
+      how: "에이전트 코어는 문맥을 행동으로 바꾸는 의사결정 루프입니다. 신호를 감지하고, 의도를 추론하고, 다음 단계를 계획하고, 도구를 호출하고, 결과를 확인한 뒤, 워크플로가 충분한 결과에 도달할 때까지 계속 진행합니다. 실제로 이것은 단순한 프롬프트 래퍼가 아니라 조정 계층에 가깝습니다.",
+      future: "에이전트 시스템의 경쟁력은 앞으로 모델 문체보다 계획 품질, 도구 신뢰성, 메모리 전략, 검증 루프에서 더 많이 나올 가능성이 큽니다.",
+      signals: [
+        `<strong>메모리 설계의 중요성 확대</strong><span>단기 문맥, 장기 메모리, 검색 전략은 여러 단계를 거치는 작업에서 에이전트가 일관성을 유지하는지를 좌우합니다.</span>`,
+        `<strong>도구 신뢰성이 곧 사용자 신뢰</strong><span>에이전트가 올바른 도구를 호출하고, 실패에서 회복하고, 워크플로를 다시 정상 궤도로 돌릴 수 있어야 비로소 똑똑하게 느껴집니다.</span>`,
+        `<strong>검증 루프가 기본 기능이 됨</strong><span>워크플로가 실제 시스템을 건드리기 시작하면 행동 전에 결과를 확인하는 과정은 선택적 안전장치가 아니라 제품의 일부가 됩니다.</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure: agent 및 Copilot 스택", referenceCompanies.azure.url),
+        externalLink("Palo Alto Networks: AI 보안과 거버넌스", referenceCompanies.paloalto.url),
+        externalLink("Datadog: 운영 워크플로의 관측성", referenceCompanies.datadog.url)
+      ]
+    },
+    infrastructure: {
+      how: "인터페이스 뒤에서 에이전트 워크플로는 전체 조정 스택에 의존합니다. CPU는 오케스트레이션과 제어 흐름을 관리하고, GPU는 추론과 임베딩을 실행하며, 메모리와 검색 시스템은 문맥을 제공하고, 네트워크는 각 단계를 연결합니다. 워크플로가 여러 홉으로 늘어나면 꼬리 지연시간과 관측성이 핵심 아키텍처 요소가 됩니다.",
+      future: "에이전트가 더 많은 검색, 도구 호출, 검증, 재시도를 수행할수록 병목은 모델 속도 자체에서 CPU 조정, 메모리 지역성, 저장 응답, 네트워크 홉, 꼬리 지연시간 제어로 이동합니다.",
+      signals: [
+        `<strong>CPU 조정의 가치 비중 확대</strong><span>더 많은 다단계 제어 흐름은 CPU와 스케줄러 설계의 중요성을 GPU 추론과 함께 끌어올립니다.</span>`,
+        `<strong>검색 스택 품질이 드러남</strong><span>느린 벡터 저장소, 취약한 커넥터, 분산된 메모리는 곧바로 워크플로 지연과 불안정성으로 나타납니다.</span>`,
+        `<strong>관측성과 보안이 더 안쪽으로 이동</strong><span>에이전트가 실제 운영 시스템과 연결될수록 추적, 정책 집행, 런타임 모니터링은 내장 설계 요구사항이 됩니다.</span>`
+      ],
+      references: [
+        externalLink("NVIDIA: 데이터센터 컴퓨트와 네트워킹", referenceCompanies.nvidia.url),
+        externalLink("Micron: AI 시스템 메모리", referenceCompanies.micron.url),
+        externalLink("Cloudflare: 네트워크 및 런타임 인프라", referenceCompanies.cloudflare.url)
+      ]
+    }
+  },
+  ja: {
+    overview: {
+      how: "Agentic AI は、仕事の最小単位を1回のモデル応答から継続的なワークフローへ変えます。エージェントはリクエスト、文脈、文書、API、システム状態を受け取り、タスクが完了するまで調整を続けます。つまり重要なのはモデル単体ではなく、それを取り巻くワークフロースタックです。",
+      future: "次の Agentic AI の勝者は、最も派手なデモを作る企業よりも、企業環境で信頼できる遅延、権限制御、監査可能性を保ちながら多段の仕事を安全に完了できるプラットフォームになるかもしれません。",
+      signals: [
+        `<strong>認可制御が製品インフラになる</strong><span>エージェントが実際の業務を始めるほど、権限境界と本人確認はコンプライアンス項目ではなく中核設計になります。</span>`,
+        `<strong>マルチエージェント協調の実用化</strong><span>ワークフローが複雑になるほど、委任、再試行、専門化したサブエージェントが標準パターンになる可能性があります。</span>`,
+        `<strong>統合の深さが堀になる</strong><span>データ、ツール、システム操作へ確実につながるエージェントは、きれいな文章だけを出すエージェントより価値が高くなります。</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure：AI とエージェント基盤", referenceCompanies.azure.url),
+        externalLink("AWS：生成 AI とワークフローサービス", referenceCompanies.aws.url),
+        externalLink("Cloudflare：AI と開発者プラットフォーム", referenceCompanies.cloudflare.url)
+      ]
+    },
+    core: {
+      how: "エージェントコアは、文脈を行動へ変える意思決定ループです。信号を受け取り、意図を推論し、次の手順を計画し、ツールを呼び出し、結果を確認しながら、ワークフローが十分な成果に到達するまで進み続けます。実際には、これは単なるプロンプトラッパーではなく調整レイヤーです。",
+      future: "エージェントシステムの競争力は今後、モデル出力の見た目よりも、計画品質、ツール信頼性、メモリ戦略、検証ループにより強く左右される可能性があります。",
+      signals: [
+        `<strong>メモリ設計の重要性が高まる</strong><span>短期文脈、長期メモリ、検索戦略は、多段タスクでエージェントが一貫性を保てるかを大きく左右します。</span>`,
+        `<strong>ツール信頼性がそのままユーザー信頼になる</strong><span>適切なツールを呼び出し、失敗から復旧し、ワークフローを軌道に戻せてこそ、エージェントは本当に賢く見えます。</span>`,
+        `<strong>検証ループが標準機能になる</strong><span>ワークフローが実システムに触れるようになるほど、行動前の出力確認は任意の安全層ではなく製品そのものになります。</span>`
+      ],
+      references: [
+        externalLink("Microsoft Azure：Agent と Copilot スタック", referenceCompanies.azure.url),
+        externalLink("Palo Alto Networks：AI セキュリティとガバナンス", referenceCompanies.paloalto.url),
+        externalLink("Datadog：本番ワークフローの可観測性", referenceCompanies.datadog.url)
+      ]
+    },
+    infrastructure: {
+      how: "インターフェースの裏側では、エージェントワークフローは調整スタック全体に依存しています。CPU はオーケストレーションと制御フローを管理し、GPU は推論と埋め込みを実行し、メモリと検索システムは文脈を供給し、ネットワークが各ステップをつなぎます。ワークフローが複数ホップにまたがるほど、テールレイテンシと可観測性は中核アーキテクチャになります。",
+      future: "エージェントがより多くの検索、ツール呼び出し、検証、再試行を行うほど、ボトルネックはモデル速度そのものから、CPU オーケストレーション、メモリ局所性、ストレージ応答、ネットワークホップ、テールレイテンシ制御へ移っていきます。",
+      signals: [
+        `<strong>CPU オーケストレーションの価値比重が上がる</strong><span>より多くの多段制御フローは、CPU とスケジューラ設計の重要性を GPU 推論と並ぶ位置へ押し上げます。</span>`,
+        `<strong>検索スタック品質が可視化される</strong><span>遅いベクトルストア、脆いコネクタ、断片化したメモリは、すぐにワークフロー遅延と不安定さとして現れます。</span>`,
+        `<strong>可観測性とセキュリティが内側へ入る</strong><span>エージェントが本番システムとつながるほど、トレース、ポリシー適用、ランタイム監視は組み込み要件になります。</span>`
+      ],
+      references: [
+        externalLink("NVIDIA：データセンター計算とネットワーク", referenceCompanies.nvidia.url),
+        externalLink("Micron：AI システム向けメモリ", referenceCompanies.micron.url),
+        externalLink("Cloudflare：ネットワークとランタイム基盤", referenceCompanies.cloudflare.url)
+      ]
+    }
+  }
+};
+
+function chapter2Editorial(modeId) {
+  return chapter2EditorialExtensions[activeLang]?.[modeId] ?? chapter2EditorialExtensions.en[modeId];
+}
+
+function chapter3Editorial(modeId) {
+  return chapter3EditorialExtensions[activeLang]?.[modeId] ?? chapter3EditorialExtensions.en[modeId];
+}
+
 const chapter2Content = {
   en: {
     htmlLang: "en",
     chapterLabels: { chapter1: "Chapter 1", chapter2: "Chapter 2", chapter3: "Chapter 3" },
-    title: "From Training Factories to Inference Networks",
-    intro: "Use an interactive 3D workload model to compare compute-driven AI training with memory- and efficiency-driven inference: training builds models, while inference serves users.",
+    title: "One AI System, Two Workload Modes",
+    intro: "AI infrastructure may support both training and inference, but the hardware mix is rarely split evenly. The machine changes shape depending on the job, and CPU coordination helps hold both modes together.",
     modeListLabel: "Workload modes",
     insightTitle: "Workload insight",
     implicationHeading: "Infrastructure implications",
@@ -1015,84 +1482,90 @@ const chapter2Content = {
     pause: "Pause",
     transcript: "Transcript",
     transcriptText:
-      "Training builds model capability through large synchronized runs. Inference turns that capability into a live service where routing, cache locality, retrieval, and latency determine product experience.",
+      "Training teaches the model. Inference serves the user. CPUs help coordinate both systems, keeping data moving, requests organized, and infrastructure responsive.",
     modes: [
       {
         id: "compare",
-        name: "Compare Both",
-        role: "Throughput vs latency",
-        signal: "The real dividing line in AI hardware choices: training and inference may both look like running AI, but they demand entirely different hardware worlds.",
-        lede: "Training behaves like a throughput factory. Inference behaves like real-time traffic. The comparison helps users see why AI infrastructure expands beyond aggregate GPU demand.",
-        metrics: [["Batch", "Training moves large synchronized blocks"], ["P95", "Inference is judged by tail latency"], ["Cache", "Serving economics depend on memory locality"], ["I/O", "Both workloads stress storage and network"]],
+        name: "Overview",
+        role: "One machine, two modes",
+        signal: "Training teaches the model. Inference serves the user. The same AI system can support both, but the hardware balance changes with the workload.",
+        lede: "Training and inference may live inside the same AI estate, but they do not ask the machine to behave the same way. Training favors synchronized throughput. Inference favors fast serving, memory bandwidth, and low-latency coordination.",
+        metrics: [["Train", "Builds model capability"], ["Infer", "Delivers live responses"], ["CPU", "Coordinates system flow"], ["Memory", "Shifts by workload"]],
         insights: [
-          ["Training Builds Capability, Inference Delivers Experience", "Training creates the model's capability through large synchronized runs. Inference turns that capability into a live service for many concurrent users."],
-          ["Throughput And Latency Are Different Games", "Training is judged by cluster efficiency. Inference is judged by whether the system responds within a user-visible latency budget."],
-          ["The Bottleneck Moves With The Workload", "The pressure shifts from GPU supply and interconnect toward routing, cache misses, retrieval, CPU orchestration, and observability."]
+          ["Training teaches, inference serves", "Training improves the model through repeated learning cycles, while inference turns that model into a user-facing service."],
+          ["The machine logic changes with the workload", "Training rewards synchronized throughput. Inference rewards memory efficiency, routing, and low-latency delivery."],
+          ["CPU is part of the story", "GPU math may dominate headlines, but CPUs help feed data, coordinate requests, and keep the system from stalling."]
         ]
       },
       {
         id: "training",
         name: "Training AI",
-        role: "Large synchronized workload",
-        signal: "Training rewards high GPU utilization, east-west bandwidth, checkpoint throughput, and power density.",
-        lede: "Training moves large batches through synchronized GPU clusters. The core objective is to keep accelerators busy and reduce idle time between coordinated steps.",
-        metrics: [["Throughput", "Primary optimization target"], ["All-reduce", "East-west network pressure"], ["Checkpoint", "Periodic storage write burst"], ["HBM", "Sensitive memory bottleneck"]],
+        role: "Built to teach at scale",
+        signal: "Training depends on synchronized GPU clusters, memory capacity, fast interconnect, and coordinated control.",
+        lede: "Training works like a compute factory. Large datasets move through forward pass, backward pass, and parameter updates. The goal is to keep expensive accelerators aligned, fed, and productive over long runs.",
+        metrics: [["Throughput", "Primary optimization target"], ["HBM", "Capacity pressure"], ["Fabric", "Cluster synchronization"], ["CPU", "Host-side coordination"]],
         insights: [
-          ["Training Is A Throughput Factory", "The training side emphasizes batch movement, synchronized GPU utilization, power delivery, cooling, and rack-scale integration."],
-          ["Synchronization Creates Network Pressure", "Large runs require GPUs to exchange gradients and intermediate state, making topology, optics, NICs, and switches part of the compute system."],
-          ["Checkpointing Turns Storage Into Insurance", "Long training jobs periodically write checkpoints so work can recover from failure, turning storage throughput into a resilience layer."]
+          ["Training behaves like a compute factory", "Massive batches move through synchronized GPU clusters, and the system is judged by how efficiently it turns power and hardware into learning progress."],
+          ["The cluster must move together", "Network fabric, checkpoint storage, and memory capacity are all part of the training machine, not background infrastructure."],
+          ["CPUs help keep the factory organized", "Data pipelines, scheduling, and job control still rely on CPUs to keep training systems aligned and productive."]
         ]
       },
       {
         id: "inference",
         name: "Inference AI",
-        role: "Many real-time requests",
-        signal: "Inference rewards routing, concurrency, high-bandwidth memory, retrieval speed, and predictable response time.",
-        lede: "Inference serves many small requests while users are waiting. Every hop through gateway, model server, high-bandwidth memory, retrieval, and response edge can become visible latency.",
-        metrics: [["Requests", "Continuous user demand"], ["Latency", "User-visible budget"], ["HBM", "Memory bandwidth shapes serving efficiency"], ["RAG", "Quality gain with extra round trips"]],
+        role: "Built to respond in real time",
+        signal: "Inference rewards memory bandwidth, routing, CPU orchestration, retrieval speed, and predictable latency.",
+        lede: "Inference behaves more like live traffic than offline computation. Every hop through request handling, model serving, memory, retrieval, and response delivery can become visible latency.",
+        metrics: [["TTFT", "First-token delay"], ["HBM", "Bandwidth pressure"], ["CPU", "Request coordination"], ["Cost", "Per-response economics"]],
         insights: [
-          ["Inference Is Real-Time Traffic", "Serving systems must route, schedule, access memory, retrieve, and respond under variable demand rather than run one giant batch."],
-          ["Memory Bandwidth Is Infrastructure", "High-bandwidth memory and memory locality can shorten the request path, while misses often add network, storage, and compute cost."],
-          ["Retrieval Adds Intelligence And Latency", "RAG can improve answer quality, but every retrieval call adds storage access, network round trips, and tail-latency risk."]
+          ["Inference is a serving system", "Inference turns model capability into product experience, so latency, concurrency, and response consistency matter as much as raw model quality."],
+          ["Memory and retrieval shape the path", "Bandwidth, KV cache handling, and retrieval speed decide whether responses feel instant or slow."],
+          ["CPU coordination becomes visible", "CPUs often handle tokenization, scheduling, sampling, and output processing, and they can become a bottleneck in high-concurrency serving."]
         ]
       }
     ],
     nodes: {
-      dataset: ["Dataset lake", "Large training data blocks enter the pipeline."],
-      preprocess: ["Preprocessing", "Data is cleaned, tokenized, and staged before training."],
-      trainGpu: ["GPU training cluster", "Racks pulse together to show synchronized utilization."],
-      interconnect: ["Interconnect fabric", "East-west waves show the network as part of compute."],
-      checkpoint: ["Checkpoint storage", "Periodic write bursts protect long training runs."],
-      artifact: ["Model artifact", "Training creates capability, not a product experience yet."],
-      requests: ["User requests", "User and notebook requests represent live inference demand."],
-      gateway: ["Gateway / load balancer", "Routing choices affect reliability and latency."],
-      serving: ["Model serving rack", "Inference is about concurrency and response time."],
-      cache: ["High Bandwidth Memory", "Memory bandwidth and locality shorten the inference path."],
-      retrieval: ["Retrieval / vector database", "RAG adds context plus storage and network pressure."],
-      response: ["Response edge", "Inference turns model capability into user experience."]
+      dataset: ["Batch Input", "Large training batches are staged and fed into the learning system."],
+      preprocess: ["Batch Staging", "Data cleanup, tokenization, and scheduling prepare training jobs before GPU compute begins."],
+      trainGpu: ["GPU Compute", "Training depends on synchronized accelerators that stay busy over long learning runs."],
+      interconnect: ["Training Fabric", "The cluster network helps many accelerators move as one coordinated machine."],
+      checkpoint: ["Checkpointing", "Training periodically writes progress so long jobs can recover and continue."],
+      artifact: ["Training State", "Weights, optimizer state, and intermediate progress have to be retained across the run."],
+      cpu: ["CPU Coordination", "CPUs help schedule jobs, tokenize inputs, move data, and coordinate traffic across both workload modes."],
+      requests: ["Request Path", "Inference starts with live demand arriving from applications, notebooks, or user interfaces."],
+      gateway: ["Routing Layer", "Requests are filtered, routed, and organized before they reach the serving path."],
+      serving: ["Live Serving", "Inference turns model capability into a response stream users can actually feel."],
+      cache: ["High-Bandwidth Memory", "Inference depends on memory bandwidth and locality to keep response latency predictable."],
+      retrieval: ["Context Retrieval", "Some inference stacks fetch extra knowledge before the model answers."],
+      response: ["Response Delivery", "Tokens leave the system under tight latency and reliability constraints."]
     },
     segments: {
-      compare: "Training builds capability. Inference delivers experience.",
-      training: "Training moves large batches through synchronized GPU clusters.",
-      inference: "Inference serves many real-time requests under a latency budget."
+      compare: "Training teaches. Inference serves. CPU coordinates.",
+      training: "Training teaches models through synchronized, large-scale learning.",
+      inference: "Inference serves live requests under tight latency and memory constraints."
     },
     audioBriefings: {
-      compare: "Training AI and inference AI both run models, but they stress infrastructure in very different ways. Training is about throughput: using large GPU clusters to build model capability. Inference is about latency and efficiency: serving users quickly while they wait. That is why AI infrastructure is no longer just a GPU story. It is a system-wide rebuild across compute, memory, networking, and orchestration.",
-      training: "Training AI works like a throughput factory. Massive datasets move through synchronized GPU clusters, and the goal is to keep expensive accelerators highly utilized. The bottleneck is not only GPUs. It also includes HBM, interconnect, checkpoint storage, power, and cooling.",
-      inference: "Inference AI works more like real-time traffic. It handles many user requests, and every routing decision, memory access, retrieval step, and model response can affect latency. The key challenge is balancing quality, cost, and response speed."
+      compare: "Training teaches the model. Inference serves the user. GPUs do the heaviest math, but CPUs help coordinate requests, host execution, and data flow. That is why AI infrastructure is no longer just a GPU story.",
+      training: "Training AI works like a compute factory. Large datasets move through synchronized GPU clusters, while CPUs help manage pipelines, scheduling, and control. The bottleneck is not only GPU supply. It also includes memory, interconnect, storage, power, and cooling.",
+      inference: "Inference AI behaves like live traffic. Memory bandwidth, retrieval, and latency shape the user experience, and CPUs often handle tokenization, request coordination, and output processing. Inference is a system problem, not just a GPU problem."
     },
     laneLabels: {
       training: "Training AI",
       inference: "Inference AI"
+    },
+    regionLabels: {
+      training: "Training AI",
+      inference: "Inference AI",
+      cpu: "CPU Coordination"
     }
   },
   zh: {
     htmlLang: "zh-Hant",
     chapterLabels: { chapter1: "第一章", chapter2: "第二章", chapter3: "第三章" },
-    title: "從訓練工廠到推論網路",
-    intro: "用互動式 3D workload 模型，比較算力導向的 AI 訓練與記憶體、效率導向的 AI 推論：訓練建立模型，推論服務使用者。",
-    modeListLabel: "Workload 模式",
-    insightTitle: "Workload 洞察",
+    title: "同一套 AI 系統，兩種不同工作模式",
+    intro: "AI 基礎設施可能同時支援訓練與推理，但實際硬體配置很少平均分配。機器的形狀會隨任務而改變，而 CPU 協調層則幫助兩種模式穩定運作。",
+    modeListLabel: "工作負載模式",
+    insightTitle: "工作負載洞察",
     implicationHeading: "基礎設施影響",
     contextHeading: "閱讀分析",
     audioLabel: "語音導覽",
@@ -1100,46 +1573,52 @@ const chapter2Content = {
     pause: "暫停",
     transcript: "逐字稿",
     transcriptText:
-      "訓練透過大規模同步運算建立模型能力；推論則把能力變成即時服務。路由、快取、檢索與延遲，會直接影響產品體驗。",
+      "訓練讓模型學會，推理讓 AI 服務使用者，而 CPU 幫助協調兩者，讓資料流動、請求有序、系統保持回應能力。",
     modes: [
-      { id: "compare", name: "兩者比較", role: "吞吐量 vs 延遲", signal: "AI 硬體選擇的真正分水嶺：這兩件事看起來都在「跑 AI」，但對硬體的需求，卻是完全不同的世界。", lede: "訓練像吞吐量工廠，推論像即時交通系統。對照視圖讓使用者理解 AI 基礎設施不只是 GPU 數量增加。", metrics: [["Batch", "訓練移動大型同步批次"], ["P95", "推論重視尾端延遲"], ["Cache", "記憶體局部性影響成本"], ["I/O", "兩者都壓迫儲存與網路"]], insights: [["訓練建立能力，推論交付體驗", "訓練用大型同步運算建立模型能力；推論把能力轉成服務，面對大量同時使用者。"], ["吞吐量與延遲是兩種競賽", "訓練看叢集效率，推論看系統能否在使用者可感知的延遲內回應。"], ["瓶頸會跟著 workload 移動", "壓力從 GPU、HBM、互連與 checkpoint，擴展到路由、快取、檢索、CPU 編排與可觀測性。"]] },
-      { id: "training", name: "訓練 AI", role: "大型同步 workload", signal: "訓練重視 GPU 利用率、東西向頻寬、checkpoint 吞吐量與功率密度。", lede: "訓練把大量資料批次送進同步化 GPU 叢集，核心是讓昂貴加速器維持高利用率。", metrics: [["Throughput", "主要優化目標"], ["All-reduce", "東西向網路壓力"], ["Checkpoint", "週期性儲存寫入"], ["HBM", "敏感記憶體瓶頸"]], insights: [["訓練是吞吐量工廠", "訓練側重批次資料移動、GPU 同步利用率、電力、冷卻與 rack-scale 整合。"], ["同步會創造網路壓力", "大型訓練需要 GPU 交換梯度與中間狀態，拓樸、光模組、NIC 與交換器都成為算力系統的一部分。"], ["Checkpoint 是儲存保險", "長時間訓練任務需要定期寫入 checkpoint，讓儲存吞吐量成為可靠度的一部分。"]] },
-      { id: "inference", name: "推論 AI", role: "大量即時請求", signal: "推論重視路由、併發、高頻寬記憶體、檢索速度與可預期回應時間。", lede: "推論要在使用者等待時處理大量小請求，每一次 gateway、server、memory、retrieval 與 response edge 都可能變成可感知延遲。", metrics: [["Requests", "連續使用者需求"], ["Latency", "使用者可感知預算"], ["HBM", "記憶體頻寬影響服務效率"], ["RAG", "提高品質但增加往返"]], insights: [["推論是即時交通", "推論系統必須在變動需求下完成路由、排程、記憶體存取、檢索與回應，而不是跑單一大批次。"], ["記憶體頻寬就是基礎設施", "高頻寬記憶體與資料局部性可縮短請求路徑，miss 則可能增加網路、儲存與算力成本。"], ["檢索增加智慧，也增加延遲", "RAG 能提升回答品質，但每次檢索都會帶來儲存存取、網路往返與尾端延遲風險。"]] }
+      { id: "compare", name: "總覽", role: "一台機器，兩種模式", signal: "訓練讓模型學會，推理服務使用者。同一套 AI 系統可以同時支援兩者，但硬體重心會隨工作負載改變。", lede: "訓練與推理可能存在於同一座 AI 基礎設施中，但它們不會要求機器以相同方式運作。訓練偏向同步吞吐量，推理偏向即時服務、記憶體頻寬與低延遲協調。", metrics: [["訓練", "建立模型能力"], ["推理", "交付即時回應"], ["CPU", "協調系統流程"], ["記憶體", "壓力隨工作負載改變"]], insights: [["訓練讓模型學會，推理讓 AI 服務使用者", "訓練透過反覆學習提升模型能力，而推理把這個能力轉成面向使用者的即時服務。"], ["不同工作負載需要不同機器邏輯", "訓練重視同步吞吐量，推理重視記憶體效率、路由品質與低延遲回應。"], ["CPU 也是系統故事的一部分", "GPU 雖然最受關注，但 CPU 負責餵送資料、協調請求，避免整體系統停滯。"]] },
+      { id: "training", name: "訓練 AI", role: "為大規模學習而設計", signal: "訓練依賴同步化 GPU 叢集、記憶體容量、快速互連與有序控制。", lede: "訓練像一座算力工廠。大量資料穿過前向傳播、反向傳播與參數更新，核心目標是讓昂貴加速器長時間維持同步並持續產出學習進度。", metrics: [["吞吐量", "主要優化目標"], ["HBM", "容量壓力"], ["互連", "叢集同步"], ["CPU", "主機端協調"]], insights: [["訓練像一座算力工廠", "大型批次資料被送入同步化 GPU 叢集，整個系統的價值在於能否高效率地把硬體與電力轉成學習成果。"], ["整個叢集都要一起移動", "互連網路、Checkpoint 儲存與記憶體容量，都是訓練機器的一部分，不只是背景設施。"], ["CPU 負責讓工廠有序運轉", "資料管線、排程與工作控制仍依賴 CPU，讓大型訓練系統保持同步與穩定。"]] },
+      { id: "inference", name: "推理 AI", role: "為即時回應而設計", signal: "推理重視記憶體頻寬、路由、CPU 協調、檢索速度與可預期延遲。", lede: "推理更像即時交通系統。每一次請求都要穿過請求處理、模型服務、記憶體、檢索與回應交付，任何一個環節都可能變成使用者感受到的延遲。", metrics: [["首 Token", "延遲指標"], ["HBM", "頻寬壓力"], ["CPU", "請求協調"], ["成本", "每次回應經濟性"]], insights: [["推理是服務系統", "推理把模型能力轉成產品體驗，因此延遲、併發與回應穩定性，會和模型品質一樣重要。"], ["記憶體與檢索決定回應路徑", "頻寬、KV Cache 管理與檢索速度，會直接影響回應是否夠快。"], ["CPU 協調開始變得可見", "CPU 常常負責 tokenization、排程、sampling 與輸出處理，並可能在高併發場景中變成瓶頸。"]] }
     ],
     nodes: {
-      dataset: ["資料湖", "大型訓練資料批次進入 pipeline。"],
-      preprocess: ["資料前處理", "資料在訓練前被清理、tokenize 與 staging。"],
-      trainGpu: ["GPU 訓練叢集", "機櫃同步閃爍代表高利用率運轉。"],
-      interconnect: ["互連網路", "東西向波形顯示網路也是算力系統。"],
-      checkpoint: ["Checkpoint 儲存", "週期性寫入保護長時間訓練。"],
-      artifact: ["模型成果", "訓練建立能力，但還不是產品體驗。"],
-      requests: ["使用者請求", "使用者與 notebook 請求代表即時推論需求。"],
-      gateway: ["Gateway / 負載平衡", "路由選擇影響可靠度與延遲。"],
-      serving: ["模型服務機櫃", "推論重點是併發與回應時間。"],
-      cache: ["高頻寬記憶體", "記憶體頻寬與資料局部性會縮短推論路徑。"],
-      retrieval: ["檢索 / 向量資料庫", "RAG 帶來上下文，也帶來儲存與網路壓力。"],
-      response: ["回應邊緣", "推論把模型能力轉成使用者體驗。"]
+      dataset: ["訓練批次", "大型訓練批次會先被整理並送入學習系統。"],
+      preprocess: ["批次前置層", "資料清理、tokenize 與排程，會在 GPU 訓練前先完成準備。"],
+      trainGpu: ["GPU 運算", "訓練依賴同步化加速器，在長時間學習過程中保持高利用率。"],
+      interconnect: ["訓練互連", "叢集網路幫助多個加速器像一台機器一樣協同移動。"],
+      checkpoint: ["Checkpoint 儲存", "訓練需要定期寫入進度，讓長時間任務能恢復與延續。"],
+      artifact: ["訓練狀態", "權重、optimizer state 與中間進度都必須在訓練過程中被保留。"],
+      cpu: ["CPU 協調層", "CPU 幫助排程工作、tokenize 輸入、搬移資料，並協調兩種工作負載模式之間的流程。"],
+      requests: ["請求路徑", "推理從即時需求開始，來源可能是應用程式、notebook 或使用者介面。"],
+      gateway: ["路由層", "請求在進入模型服務前，會先被過濾、分流與整理。"],
+      serving: ["即時服務", "推理把模型能力轉成使用者真實感受到的回應流程。"],
+      cache: ["高頻寬記憶體", "推理高度依賴記憶體頻寬與資料局部性，才能維持可預期的延遲。"],
+      retrieval: ["上下文檢索", "部分推理流程會先取回額外知識，再交給模型回答。"],
+      response: ["回應輸出", "token 需要在延遲與可靠性限制下順利送出系統。"]
     },
     segments: {
-      compare: "訓練建立能力，推論交付體驗。",
-      training: "訓練把大型批次送進同步化 GPU 叢集。",
-      inference: "推論在延遲預算內服務大量即時請求。"
+      compare: "訓練讓模型學會，推理讓 AI 服務使用者，CPU 負責協調整個系統。",
+      training: "訓練透過同步化、大規模學習建立模型能力。",
+      inference: "推理在記憶體與延遲限制下服務即時請求。"
     },
     audioBriefings: {
-      compare: "訓練 AI 和推論 AI 都在跑模型，但壓力完全不同。訓練重視吞吐量，目標是用大量 GPU 建立模型能力；推論重視延遲與效率，目標是在使用者等待時快速回應。這就是為什麼 AI 基礎設施不只是 GPU 需求增加，而是算力、記憶體、網路與系統編排一起重組。",
-      training: "訓練 AI 像一座吞吐量工廠。大量資料被送進同步化 GPU 叢集，核心目標是讓昂貴的加速器保持高利用率。瓶頸不只在 GPU，還包括 HBM、互連網路、儲存 checkpoint、電力與冷卻。",
-      inference: "推論 AI 像即時交通系統。它要處理大量使用者請求，每一次路由、記憶體存取、檢索與模型回應，都會影響延遲。推論的競爭重點，是在品質、成本與回應速度之間取得平衡。"
+      compare: "訓練讓模型學會，推理讓 AI 服務使用者。GPU 負責最重的運算，但 CPU 也在背後協調請求、主機端執行與資料流動。這就是為什麼 AI 基礎設施不再只是 GPU 的故事。",
+      training: "訓練 AI 像一座算力工廠。大量資料穿過同步化 GPU 叢集，而 CPU 負責管理資料管線、排程與控制。瓶頸不只在 GPU，也在記憶體、互連、儲存、電力與冷卻。",
+      inference: "推理 AI 更像即時交通系統。記憶體頻寬、檢索與延遲會直接影響體驗，而 CPU 也常負責 tokenization、請求協調與輸出處理。推理是一個系統問題，而不只是 GPU 問題。"
     },
     laneLabels: {
       training: "訓練 AI",
-      inference: "推論 AI"
+      inference: "推理 AI"
+    },
+    regionLabels: {
+      training: "訓練 AI",
+      inference: "推理 AI",
+      cpu: "CPU 協調層"
     }
   },
   ko: {
     htmlLang: "ko",
     chapterLabels: { chapter1: "1장", chapter2: "2장", chapter3: "3장" },
-    title: "훈련 공장에서 추론 네트워크로",
-    intro: "인터랙티브 3D 워크로드 모델로 컴퓨팅 중심의 AI 훈련과 메모리·효율 중심의 추론을 비교합니다. 훈련은 모델을 만들고, 추론은 사용자를 서비스합니다.",
+    title: "하나의 AI 시스템, 두 가지 워크로드 모드",
+    intro: "AI 인프라는 훈련과 추론을 모두 지원할 수 있지만, 실제 하드웨어 비중이 항상 반반으로 나뉘지는 않습니다. 기계의 형태는 작업에 따라 달라지고, CPU 조정 계층이 두 모드를 함께 묶어 줍니다.",
     modeListLabel: "워크로드 모드",
     insightTitle: "워크로드 인사이트",
     implicationHeading: "인프라 영향",
@@ -1148,42 +1627,48 @@ const chapter2Content = {
     play: "재생",
     pause: "일시정지",
     transcript: "스크립트",
-    transcriptText: "훈련은 대규모 동기 연산으로 모델 능력을 만들고, 추론은 그 능력을 실시간 서비스로 바꿉니다. 라우팅, 캐시, 검색, 지연시간이 제품 경험을 좌우합니다.",
+    transcriptText: "훈련은 모델을 가르치고, 추론은 사용자를 서비스하며, CPU는 두 시스템이 계속 움직이도록 돕습니다.",
     modes: [
-      { id: "compare", name: "둘 다 비교", role: "처리량 vs 지연시간", signal: "AI 하드웨어 선택의 진짜 분기점: 둘 다 AI를 실행하는 것처럼 보이지만, 필요한 하드웨어는 완전히 다른 세계입니다.", lede: "훈련은 처리량 공장이고 추론은 실시간 트래픽입니다. 비교 화면은 AI 인프라가 단순 GPU 수요를 넘어서는 이유를 보여줍니다.", metrics: [["Batch", "훈련은 큰 동기 배치를 이동"], ["P95", "추론은 꼬리 지연시간이 중요"], ["Cache", "메모리 지역성이 비용에 영향"], ["I/O", "둘 다 저장장치와 네트워크를 압박"]], insights: [["훈련은 능력을 만들고 추론은 경험을 전달", "훈련은 대규모 동기 실행으로 모델 능력을 만들고 추론은 이를 다수 사용자용 서비스로 전환합니다."], ["처리량과 지연시간은 다른 게임", "훈련은 클러스터 효율로 평가되고 추론은 지연 예산 안에서 응답하는지로 평가됩니다."], ["병목은 워크로드와 함께 이동", "압력은 GPU와 인터커넥트에서 라우팅, 캐시 미스, 검색, CPU 오케스트레이션, 관측성으로 확장됩니다."]] },
-      { id: "training", name: "훈련 AI", role: "대형 동기 워크로드", signal: "훈련은 GPU 이용률, 동서 대역폭, 체크포인트 처리량, 전력 밀도가 중요합니다.", lede: "훈련은 큰 배치를 동기화된 GPU 클러스터로 이동시키며 가속기를 계속 바쁘게 유지하는 것이 핵심입니다.", metrics: [["Throughput", "주요 최적화 목표"], ["All-reduce", "동서 네트워크 압력"], ["Checkpoint", "주기적 저장 쓰기"], ["HBM", "민감한 메모리 병목"]], insights: [["훈련은 처리량 공장", "훈련은 배치 이동, GPU 동기 이용률, 전력, 냉각, 랙 통합을 강조합니다."], ["동기화는 네트워크 압력을 만든다", "대규모 실행은 GPU 간 상태 교환을 요구하므로 토폴로지, 광모듈, NIC, 스위치가 컴퓨팅 시스템의 일부가 됩니다."], ["체크포인트는 저장장치 보험", "긴 훈련 작업은 복구를 위해 주기적으로 체크포인트를 쓰며 저장 처리량이 회복탄력성의 일부가 됩니다."]] },
-      { id: "inference", name: "추론 AI", role: "다수 실시간 요청", signal: "추론은 라우팅, 동시성, 고대역폭 메모리, 검색 속도, 예측 가능한 응답시간이 중요합니다.", lede: "추론은 사용자가 기다리는 동안 많은 작은 요청을 처리합니다. 게이트웨이, 서버, 메모리, 검색, 응답 엣지의 모든 홉이 지연시간이 됩니다.", metrics: [["Requests", "연속적인 사용자 수요"], ["Latency", "사용자 체감 예산"], ["HBM", "메모리 대역폭이 서빙 효율에 영향"], ["RAG", "품질 향상과 왕복 증가"]], insights: [["추론은 실시간 트래픽", "서빙 시스템은 변화하는 수요에서 라우팅, 스케줄링, 메모리 접근, 검색, 응답을 수행해야 합니다."], ["메모리 대역폭은 인프라입니다", "고대역폭 메모리와 데이터 지역성은 요청 경로를 줄이고 미스는 비용과 지연을 늘릴 수 있습니다."], ["검색은 지능과 지연을 함께 추가", "RAG는 품질을 높일 수 있지만 저장장치 접근, 네트워크 왕복, 꼬리 지연 리스크를 추가합니다."]] }
+      { id: "compare", name: "개요", role: "한 대의 기계, 두 가지 모드", signal: "훈련은 모델을 가르치고, 추론은 사용자를 서비스합니다. 같은 AI 시스템이 둘을 모두 지원할 수 있지만 하드웨어의 중심은 워크로드에 따라 달라집니다.", lede: "훈련과 추론은 같은 AI 인프라 안에 있을 수 있지만, 기계가 같은 방식으로 동작하길 요구하지는 않습니다. 훈련은 동기화된 처리량을, 추론은 빠른 서빙과 메모리 대역폭, 저지연 조정을 더 중시합니다.", metrics: [["훈련", "모델 능력 구축"], ["추론", "실시간 응답 전달"], ["CPU", "시스템 흐름 조정"], ["메모리", "워크로드마다 다른 압력"]], insights: [["훈련은 가르치고 추론은 서비스한다", "훈련은 반복 학습으로 모델 능력을 키우고, 추론은 그 능력을 사용자 서비스로 바꿉니다."], ["워크로드마다 다른 기계 논리", "훈련은 동기화된 처리량을, 추론은 메모리 효율과 라우팅, 저지연 응답을 중시합니다."], ["CPU도 시스템의 일부다", "GPU가 주목받지만 CPU는 데이터 공급과 요청 조정을 맡아 시스템이 멈추지 않게 합니다."]] },
+      { id: "training", name: "훈련 AI", role: "대규모 학습용", signal: "훈련은 동기화된 GPU 클러스터, 메모리 용량, 빠른 인터커넥트, 질서 있는 제어에 의존합니다.", lede: "훈련은 컴퓨트 공장처럼 움직입니다. 큰 데이터가 순전파, 역전파, 파라미터 업데이트를 거치며, 목표는 비싼 가속기를 오랫동안 정렬된 상태로 유지하는 것입니다.", metrics: [["처리량", "주요 최적화 목표"], ["HBM", "용량 압력"], ["패브릭", "클러스터 동기화"], ["CPU", "호스트 조정"]], insights: [["훈련은 컴퓨트 공장이다", "대형 배치가 동기화된 GPU 클러스터를 지나며, 시스템의 가치는 하드웨어와 전력을 얼마나 잘 학습 성과로 바꾸는지에 달려 있습니다."], ["클러스터 전체가 함께 움직여야 한다", "인터커넥트, 체크포인트 저장, 메모리 용량은 훈련 기계의 일부이지 배경 인프라가 아닙니다."], ["CPU가 공장을 정리한다", "데이터 파이프라인, 스케줄링, 작업 제어는 여전히 CPU에 의존하며 대규모 훈련을 질서 있게 유지합니다."]] },
+      { id: "inference", name: "추론 AI", role: "실시간 응답용", signal: "추론은 메모리 대역폭, 라우팅, CPU 조정, 검색 속도, 예측 가능한 지연시간을 중시합니다.", lede: "추론은 실시간 트래픽에 가깝습니다. 요청 처리, 모델 서빙, 메모리, 검색, 응답 전달의 어느 단계든 사용자가 느끼는 지연이 될 수 있습니다.", metrics: [["첫 토큰", "지연 지표"], ["HBM", "대역폭 압력"], ["CPU", "요청 조정"], ["비용", "응답당 경제성"]], insights: [["추론은 서빙 시스템이다", "추론은 모델 능력을 제품 경험으로 바꾸므로 지연시간, 동시성, 응답 일관성이 모델 품질만큼 중요합니다."], ["메모리와 검색이 경로를 만든다", "대역폭, KV 캐시 관리, 검색 속도가 응답이 즉각적인지 느린지를 좌우합니다."], ["CPU 조정이 눈에 보이기 시작한다", "CPU는 토크나이징, 스케줄링, 샘플링, 출력 처리를 담당하며, 고동시성 상황에서 병목이 될 수 있습니다."]] }
     ],
     nodes: {
-      dataset: ["데이터 레이크", "큰 훈련 데이터 블록이 파이프라인으로 들어갑니다."],
-      preprocess: ["전처리", "데이터가 훈련 전에 정리되고 토큰화됩니다."],
-      trainGpu: ["GPU 훈련 클러스터", "랙이 함께 깜박이며 동기 이용률을 보여줍니다."],
-      interconnect: ["인터커넥트 패브릭", "동서 파형은 네트워크도 컴퓨팅임을 보여줍니다."],
-      checkpoint: ["체크포인트 저장소", "주기적 쓰기가 긴 훈련을 보호합니다."],
-      artifact: ["모델 산출물", "훈련은 능력을 만들지만 아직 제품 경험은 아닙니다."],
-      requests: ["사용자 요청", "사용자와 노트북 요청이 실시간 추론 수요를 나타냅니다."],
-      gateway: ["게이트웨이 / 로드밸런서", "라우팅은 신뢰성과 지연에 영향을 줍니다."],
-      serving: ["모델 서빙 랙", "추론은 동시성과 응답시간이 핵심입니다."],
-      cache: ["고대역폭 메모리", "메모리 대역폭과 데이터 지역성은 추론 경로를 줄입니다."],
-      retrieval: ["검색 / 벡터 DB", "RAG는 맥락과 저장·네트워크 압력을 함께 추가합니다."],
-      response: ["응답 엣지", "추론은 모델 능력을 사용자 경험으로 바꿉니다."]
+      dataset: ["훈련 배치", "대규모 훈련 배치가 먼저 정리되어 학습 시스템으로 들어갑니다."],
+      preprocess: ["배치 준비", "데이터 정리, 토큰화, 스케줄링이 GPU 훈련 전에 먼저 이뤄집니다."],
+      trainGpu: ["GPU 연산", "훈련은 동기화된 가속기가 긴 학습 동안 계속 바쁘게 유지되어야 합니다."],
+      interconnect: ["훈련 패브릭", "클러스터 네트워크는 많은 가속기가 하나의 기계처럼 움직이도록 돕습니다."],
+      checkpoint: ["체크포인트 저장", "훈련은 주기적으로 진행 상황을 저장해 긴 작업을 이어 갈 수 있게 합니다."],
+      artifact: ["훈련 상태", "가중치, 옵티마이저 상태, 중간 진행 정보는 훈련 내내 유지되어야 합니다."],
+      cpu: ["CPU 조정 계층", "CPU는 작업 스케줄링, 입력 토큰화, 데이터 이동을 맡으며 두 워크로드 모드의 흐름을 조정합니다."],
+      requests: ["요청 경로", "추론은 애플리케이션, 노트북, 사용자 인터페이스에서 들어오는 실시간 요청으로 시작됩니다."],
+      gateway: ["라우팅 계층", "요청은 서빙 경로에 도달하기 전에 먼저 필터링되고 분배됩니다."],
+      serving: ["실시간 서빙", "추론은 모델 능력을 사용자가 체감하는 응답 흐름으로 바꿉니다."],
+      cache: ["고대역폭 메모리", "추론은 예측 가능한 지연을 위해 메모리 대역폭과 데이터 지역성에 크게 의존합니다."],
+      retrieval: ["컨텍스트 검색", "일부 추론 스택은 답변 전에 추가 지식을 먼저 가져옵니다."],
+      response: ["응답 전달", "토큰은 엄격한 지연과 신뢰성 제약 속에서 시스템 밖으로 나가야 합니다."]
     },
-    segments: { compare: "훈련은 능력을 만들고 추론은 경험을 전달합니다.", training: "훈련은 큰 배치를 동기화된 GPU 클러스터로 보냅니다.", inference: "추론은 지연 예산 안에서 많은 실시간 요청을 처리합니다." },
+    segments: { compare: "훈련은 모델을 가르치고, 추론은 사용자를 서비스하며, CPU는 시스템을 조정합니다.", training: "훈련은 동기화된 대규모 학습으로 모델 능력을 만듭니다.", inference: "추론은 메모리와 지연 제약 아래에서 실시간 요청을 처리합니다." },
     audioBriefings: {
-      compare: "훈련 AI와 추론 AI는 모두 모델을 실행하지만, 인프라에 주는 압력은 매우 다릅니다. 훈련은 처리량이 핵심이며, 대규모 GPU 클러스터로 모델 능력을 만듭니다. 추론은 지연시간과 효율이 핵심이며, 사용자가 기다리는 동안 빠르게 응답해야 합니다. 그래서 AI 인프라는 단순한 GPU 수요가 아니라 컴퓨팅, 메모리, 네트워크, 오케스트레이션의 재구성입니다.",
-      training: "훈련 AI는 처리량 공장과 같습니다. 대규모 데이터가 동기화된 GPU 클러스터를 지나가고, 목표는 비싼 가속기를 최대한 바쁘게 유지하는 것입니다. 병목은 GPU만이 아닙니다. HBM, 인터커넥트, 체크포인트 저장소, 전력, 냉각도 함께 중요합니다.",
-      inference: "추론 AI는 실시간 교통 시스템에 가깝습니다. 많은 사용자 요청을 처리해야 하며, 라우팅, 메모리 접근, 검색, 모델 응답의 모든 단계가 지연시간에 영향을 줍니다. 핵심은 품질, 비용, 응답 속도 사이의 균형입니다."
+      compare: "훈련은 모델을 가르치고, 추론은 사용자를 서비스합니다. GPU가 가장 무거운 계산을 수행하지만 CPU도 요청 조정, 호스트 실행, 데이터 흐름에서 중요한 역할을 합니다. 그래서 AI 인프라는 더 이상 GPU만의 이야기가 아닙니다.",
+      training: "훈련 AI는 컴퓨트 공장처럼 움직입니다. 대규모 데이터가 동기화된 GPU 클러스터를 지나가고, CPU는 데이터 파이프라인, 스케줄링, 제어를 관리합니다. 병목은 GPU뿐 아니라 메모리, 인터커넥트, 저장장치, 전력, 냉각에도 있습니다.",
+      inference: "추론 AI는 실시간 트래픽에 가깝습니다. 메모리 대역폭, 검색, 지연시간이 사용자 경험을 좌우하고, CPU는 토크나이징, 요청 조정, 출력 처리까지 맡습니다. 추론은 GPU만의 문제가 아니라 시스템 전체의 문제입니다."
     },
     laneLabels: {
       training: "훈련 AI",
       inference: "추론 AI"
+    },
+    regionLabels: {
+      training: "훈련 AI",
+      inference: "추론 AI",
+      cpu: "CPU 조정 계층"
     }
   },
   ja: {
     htmlLang: "ja",
     chapterLabels: { chapter1: "第1章", chapter2: "第2章", chapter3: "第3章" },
-    title: "学習工場から推論ネットワークへ",
-    intro: "インタラクティブな 3D ワークロードモデルで、計算力中心の AI 学習とメモリ・効率中心の推論を比較します。学習はモデルを作り、推論はユーザーに提供します。",
+    title: "同じ AI システム、2 つのワークロードモード",
+    intro: "AI インフラは学習と推論の両方を支えられますが、実際のハードウェア配分が常に半々になるわけではありません。機械の形は仕事に応じて変わり、その両方を CPU の調整レイヤーが支えます。",
     modeListLabel: "ワークロードモード",
     insightTitle: "ワークロード・インサイト",
     implicationHeading: "インフラへの影響",
@@ -1192,35 +1677,41 @@ const chapter2Content = {
     play: "再生",
     pause: "一時停止",
     transcript: "文字起こし",
-    transcriptText: "学習は大規模な同期処理でモデル能力を作り、推論はその能力をリアルタイムサービスへ変えます。ルーティング、キャッシュ、検索、遅延が製品体験を左右します。",
+    transcriptText: "学習はモデルを育て、推論はユーザーに届け、CPU はその両方を調整します。",
     modes: [
-      { id: "compare", name: "両方を比較", role: "スループット vs 遅延", signal: "AI ハードウェア選択の本当の分岐点：どちらも「AI を動かす」ように見えますが、求めるハードウェアはまったく別の世界です。", lede: "学習はスループット工場、推論はリアルタイム交通です。比較ビューは AI インフラが単なる GPU 需要を超える理由を示します。", metrics: [["Batch", "学習は大きな同期バッチを移動"], ["P95", "推論は尾部遅延が重要"], ["Cache", "メモリ局所性がコストに影響"], ["I/O", "両方がストレージとネットワークを圧迫"]], insights: [["学習は能力を作り、推論は体験を届ける", "学習は大規模同期実行でモデル能力を作り、推論はその能力を多くのユーザー向けサービスへ変えます。"], ["スループットと遅延は別の競争", "学習はクラスター効率で評価され、推論はユーザーが感じる遅延予算内で応答できるかで評価されます。"], ["ボトルネックはワークロードとともに動く", "圧力は GPU や相互接続から、ルーティング、キャッシュミス、検索、CPU オーケストレーション、可観測性へ広がります。"]] },
-      { id: "training", name: "学習 AI", role: "大規模同期ワークロード", signal: "学習では GPU 利用率、東西帯域、チェックポイント処理、電力密度が重要です。", lede: "学習は大きなバッチを同期 GPU クラスターへ流し、高価なアクセラレーターを遊ばせないことが核心です。", metrics: [["Throughput", "主な最適化対象"], ["All-reduce", "東西ネットワーク圧力"], ["Checkpoint", "周期的な保存書き込み"], ["HBM", "敏感なメモリ制約"]], insights: [["学習はスループット工場", "学習はバッチ移動、GPU 同期利用率、電力、冷却、ラック統合を重視します。"], ["同期はネットワーク圧力を生む", "大規模実行では GPU 間の状態交換が必要で、トポロジー、光モジュール、NIC、スイッチが計算システムの一部になります。"], ["チェックポイントはストレージ保険", "長時間の学習ジョブは復旧のため定期的にチェックポイントを書き込み、ストレージ性能が信頼性を支えます。"]] },
-      { id: "inference", name: "推論 AI", role: "多数のリアルタイム要求", signal: "推論ではルーティング、同時実行、高帯域メモリ、検索速度、予測可能な応答時間が重要です。", lede: "推論はユーザーが待つ間に多数の小さな要求を処理します。ゲートウェイ、サーバー、メモリ、検索、応答エッジの各ホップが遅延になります。", metrics: [["Requests", "連続するユーザー需要"], ["Latency", "ユーザー体感の予算"], ["HBM", "メモリ帯域がサービング効率に影響"], ["RAG", "品質向上と往復増加"]], insights: [["推論はリアルタイム交通", "サービングシステムは変動需要のなかでルーティング、スケジューリング、メモリアクセス、検索、応答を行います。"], ["メモリ帯域はインフラです", "高帯域メモリとデータ局所性は要求経路を短縮し、ミスはコストと遅延を増やします。"], ["検索は知能と遅延を同時に加える", "RAG は回答品質を高めますが、ストレージアクセス、ネットワーク往復、尾部遅延リスクを追加します。"]] }
+      { id: "compare", name: "概要", role: "1 台の機械、2 つのモード", signal: "学習はモデルを育て、推論はユーザーに届けます。同じ AI システムが両方を支えられますが、ハードウェアの重心はワークロードによって変わります。", lede: "学習と推論は同じ AI 基盤の中に共存できますが、機械に同じ振る舞いを求めるわけではありません。学習は同期スループットを、推論は高速サービング、メモリ帯域、低遅延の調整をより重視します。", metrics: [["学習", "モデル能力を構築"], ["推論", "リアルタイム応答を配信"], ["CPU", "システムの流れを調整"], ["メモリ", "負荷はワークロードで変わる"]], insights: [["学習は育て、推論は届ける", "学習は反復的な学習でモデル能力を高め、推論はその能力をユーザー向けサービスへ変えます。"], ["ワークロードごとに機械の論理が違う", "学習は同期スループットを、推論はメモリ効率、ルーティング、低遅延応答を重視します。"], ["CPU もシステムの一部である", "GPU が注目されがちですが、CPU はデータ供給や要求調整を担い、全体が止まらないように支えます。"]] },
+      { id: "training", name: "学習 AI", role: "大規模学習向け", signal: "学習は同期 GPU クラスター、メモリ容量、高速相互接続、秩序ある制御に依存します。", lede: "学習はコンピュート工場のように動きます。大きなデータが順伝播、逆伝播、パラメータ更新を通り、目標は高価なアクセラレータを長時間そろえて動かし続けることです。", metrics: [["スループット", "主要な最適化対象"], ["HBM", "容量圧力"], ["ファブリック", "クラスター同期"], ["CPU", "ホスト調整"]], insights: [["学習はコンピュート工場である", "大きなバッチが同期 GPU クラスターを流れ、システムの価値はハードウェアと電力をどれだけ学習成果に変えられるかで決まります。"], ["クラスター全体が一緒に動く必要がある", "相互接続、チェックポイント保存、メモリ容量は学習マシンの一部であり、背景インフラではありません。"], ["CPU が工場を整える", "データパイプライン、スケジューリング、ジョブ制御は依然として CPU に依存し、大規模学習を秩序立てて維持します。"]] },
+      { id: "inference", name: "推論 AI", role: "リアルタイム応答向け", signal: "推論はメモリ帯域、ルーティング、CPU 調整、検索速度、予測可能な遅延を重視します。", lede: "推論はライブトラフィックに近く、要求処理、モデルサービング、メモリ、検索、応答配信のどの段階もユーザーが感じる遅延になり得ます。", metrics: [["初回トークン", "遅延指標"], ["HBM", "帯域圧力"], ["CPU", "要求調整"], ["コスト", "応答あたりの経済性"]], insights: [["推論はサービングシステムである", "推論はモデル能力を製品体験へ変えるため、遅延、同時実行性、応答の一貫性がモデル品質と同じくらい重要になります。"], ["メモリと検索が経路を決める", "帯域、KV キャッシュ管理、検索速度が応答が速いか遅いかを左右します。"], ["CPU 調整が見えてくる", "CPU はトークナイズ、スケジューリング、サンプリング、出力処理を担当し、高同時実行ではボトルネックになることがあります。"]] }
     ],
     nodes: {
-      dataset: ["データレイク", "大きな学習データブロックがパイプラインへ入ります。"],
-      preprocess: ["前処理", "データは学習前に整形され、トークン化されます。"],
-      trainGpu: ["GPU 学習クラスター", "ラックが同期して発光し、高利用率を示します。"],
-      interconnect: ["相互接続ファブリック", "東西方向の波がネットワークも計算の一部であることを示します。"],
-      checkpoint: ["チェックポイント保存", "周期的な書き込みが長時間学習を守ります。"],
-      artifact: ["モデル成果物", "学習は能力を作りますが、まだ製品体験ではありません。"],
-      requests: ["ユーザー要求", "ユーザーとノートブックの要求がリアルタイム推論需要を表します。"],
-      gateway: ["ゲートウェイ / 負荷分散", "ルーティングは信頼性と遅延に影響します。"],
-      serving: ["モデルサービングラック", "推論では同時実行と応答時間が重要です。"],
-      cache: ["高帯域メモリ", "メモリ帯域とデータ局所性は推論経路を短縮します。"],
-      retrieval: ["検索 / ベクトルDB", "RAG は文脈とストレージ・ネットワーク圧力を加えます。"],
-      response: ["応答エッジ", "推論はモデル能力をユーザー体験へ変えます。"]
+      dataset: ["学習バッチ", "大きな学習バッチが整理され、学習システムへ投入されます。"],
+      preprocess: ["バッチ準備", "データ整形、トークン化、スケジューリングが GPU 学習の前に行われます。"],
+      trainGpu: ["GPU 演算", "学習では同期したアクセラレータを長時間忙しく保つことが重要です。"],
+      interconnect: ["学習ファブリック", "クラスターのネットワークが多くのアクセラレータを 1 台の機械のように動かします。"],
+      checkpoint: ["チェックポイント保存", "学習では進捗を定期的に保存し、長時間ジョブを再開できるようにします。"],
+      artifact: ["学習状態", "重み、オプティマイザ状態、中間進捗は学習全体を通じて保持する必要があります。"],
+      cpu: ["CPU 調整レイヤー", "CPU はジョブのスケジューリング、入力のトークナイズ、データ移動を担い、2 つのワークロードモードをまたいで流れを整えます。"],
+      requests: ["リクエスト経路", "推論はアプリケーション、ノートブック、ユーザー UI から届くライブ要求から始まります。"],
+      gateway: ["ルーティング層", "要求はサービング経路に届く前に、まず振り分けと整理が行われます。"],
+      serving: ["リアルタイム提供", "推論はモデル能力を、ユーザーが実際に体感する応答ストリームへ変えます。"],
+      cache: ["高帯域メモリ", "推論は予測可能な遅延を保つため、メモリ帯域とデータ局所性に強く依存します。"],
+      retrieval: ["文脈検索", "一部の推論スタックは、回答の前に追加知識を取りに行きます。"],
+      response: ["応答配信", "トークンは厳しい遅延と信頼性の制約の中でシステム外へ届けられます。"]
     },
-    segments: { compare: "学習は能力を作り、推論は体験を届けます。", training: "学習は大きなバッチを同期 GPU クラスターへ送ります。", inference: "推論は遅延予算内で多数のリアルタイム要求を処理します。" },
+    segments: { compare: "学習はモデルを育て、推論はユーザーに届け、CPU が全体を調整します。", training: "学習は同期化された大規模学習でモデル能力を作ります。", inference: "推論はメモリと遅延の制約の中でリアルタイム要求を処理します。" },
     audioBriefings: {
-      compare: "学習 AI と推論 AI はどちらもモデルを動かしますが、インフラへの負荷は大きく異なります。学習はスループットが重要で、大規模な GPU クラスターでモデル能力を作ります。推論は遅延と効率が重要で、ユーザーが待っている間に素早く応答する必要があります。つまり AI インフラは、GPU だけでなく、計算、メモリ、ネットワーク、オーケストレーション全体の再構成です。",
-      training: "学習 AI はスループット工場のようなものです。大量のデータが同期された GPU クラスターを通り、高価なアクセラレーターを高い利用率で動かすことが目標です。ボトルネックは GPU だけではありません。HBM、相互接続、チェックポイント保存、電力、冷却も重要です。",
-      inference: "推論 AI はリアルタイム交通システムに近いものです。大量のユーザー要求を処理し、ルーティング、メモリアクセス、検索、モデル応答の各ステップが遅延に影響します。重要なのは、品質、コスト、応答速度のバランスです。"
+      compare: "学習はモデルを育て、推論はユーザーに届けます。GPU が最も重い計算を行いますが、CPU も要求調整、ホスト実行、データフローで重要な役割を担います。だから AI インフラは、もはや GPU だけの話ではありません。",
+      training: "学習 AI はコンピュート工場のように動きます。大規模データが同期 GPU クラスターを流れ、CPU はデータパイプライン、スケジューリング、制御を管理します。ボトルネックは GPU だけでなく、メモリ、相互接続、ストレージ、電力、冷却にもあります。",
+      inference: "推論 AI はライブトラフィックに近い性質を持ちます。メモリ帯域、検索、遅延が体験を左右し、CPU はトークナイズ、要求調整、出力処理を担います。推論は GPU だけの問題ではなく、システム全体の問題です。"
     },
     laneLabels: {
       training: "学習 AI",
       inference: "推論 AI"
+    },
+    regionLabels: {
+      training: "学習 AI",
+      inference: "推論 AI",
+      cpu: "CPU 調整レイヤー"
     }
   }
 };
@@ -1705,6 +2196,7 @@ const clickable = [];
 const flowLines = [];
 const chapter2FlowLines = [];
 const chapter2Particles = [];
+const chapter2ShellMeshes = [];
 const chapter3FlowLines = [];
 const chapter3Particles = [];
 const labels = new Map();
@@ -1895,6 +2387,7 @@ let mobileExplodeExpanded = false;
 let mobileInsightExpanded = false;
 let mobileStageOpen = false;
 let orbitInteracting = false;
+const chapter2ModeOrder = ["compare", "training", "inference"];
 let orbitResumeAt = 0;
 let pointerIntent = null;
 const chapter1DefaultCameraPosition = new THREE.Vector3(13.9, 11.4, 17.6);
@@ -2125,22 +2618,22 @@ const chapter1ShortNames = Object.freeze({
 
 const chapter2ShortNames = Object.freeze({
   en: {
-    compare: "Compare",
+    compare: "Overview",
     training: "Training",
     inference: "Inference"
   },
   zh: {
-    compare: "比較",
+    compare: "總覽",
     training: "訓練",
-    inference: "推論"
+    inference: "推理"
   },
   ko: {
-    compare: "비교",
+    compare: "개요",
     training: "훈련",
     inference: "추론"
   },
   ja: {
-    compare: "比較",
+    compare: "概要",
     training: "訓練",
     inference: "推論"
   }
@@ -2737,137 +3230,168 @@ function createChapter2NodeModel(id, mode, position, build) {
 }
 
 function createChapter2() {
-  const trainingColor = 0xffb84d;
-  const inferenceColor = 0x19d3ff;
-  const sharedGreen = 0x76ff7a;
-  const metal = mat(0xd5dde8, 0.48, 0.24);
+  const trainingColor = 0xf0a13a;
+  const trainingGlow = 0xffd06b;
+  const trainingCopper = 0xa76128;
+  const inferenceColor = 0x39b8ff;
+  const inferenceGlow = 0x8cecff;
+  const inferenceBlue = 0x2b69d1;
+  const sharedGreen = 0x8ddc72;
+  const shell = mat(0xe8edf3, 0.46, 0.12, 0.4);
+  const shellSoft = mat(0xc8d3df, 0.56, 0.1, 0.23);
+  const shellDark = mat(0x1a2430, 0.68, 0.22, 0.92);
   const darkRack = mat(0x0b1420, 0.7, 0.28);
+  const tray = mat(0x2f3945, 0.66, 0.18);
+  const steel = mat(0x95a4b4, 0.44, 0.32);
 
-  createChapter2NodeModel("dataset", "training", new THREE.Vector3(-5.9, 0.05, 1.85), (group) => {
-    group.add(makeChapter2Box("dataset", "data platform base", [1.28, 0.12, 0.86], [0, 0.18, 0], mat(0x26313c, 0.55, 0.22)));
-    for (let row = 0; row < 3; row += 1) {
-      for (let col = 0; col < 5; col += 1) {
-        const x = -0.48 + col * 0.24;
-        const z = -0.26 + row * 0.24;
-        const y = 0.34 + ((row + col) % 3) * 0.07;
-        group.add(makeChapter2Box("dataset", "data volume block", [0.16, 0.12, 0.16], [x, y, z], mat(row % 2 ? 0x69d4ff : trainingColor, 0.34, 0.18, 0.86)));
+  function addStaticBox(size, position, material, rotation = {}, shellRole = null) {
+    const mesh = new THREE.Mesh(new THREE.BoxGeometry(size[0], size[1], size[2]), materialInstance(material));
+    mesh.position.set(position[0], position[1], position[2]);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    if (rotation.x) mesh.rotation.x = rotation.x;
+    if (rotation.y) mesh.rotation.y = rotation.y;
+    if (rotation.z) mesh.rotation.z = rotation.z;
+    if (shellRole) {
+      mesh.userData.chapter = "chapter2";
+      mesh.userData.shellRole = shellRole;
+      chapter2ShellMeshes.push(mesh);
+    }
+    chapter2Root.add(mesh);
+    return mesh;
+  }
+
+  function addStaticCylinder(radiusTop, radiusBottom, height, position, material, radial = 28, rotation = {}) {
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radial), materialInstance(material));
+    mesh.position.set(position[0], position[1], position[2]);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    if (rotation.x) mesh.rotation.x = rotation.x;
+    if (rotation.y) mesh.rotation.y = rotation.y;
+    if (rotation.z) mesh.rotation.z = rotation.z;
+    chapter2Root.add(mesh);
+    return mesh;
+  }
+
+  addStaticBox([11.8, 0.18, 4.8], [0.55, -0.14, 0.08], mat(0x121a24, 0.82, 0.14));
+  addStaticBox([11.2, 0.12, 4.28], [0.55, -0.02, 0.08], mat(0x1a2431, 0.76, 0.18));
+  addStaticBox([4.8, 2.25, 3.1], [-2.55, 1.02, 0.05], shell, {}, "training");
+  addStaticBox([4.8, 2.25, 3.1], [4.0, 1.02, 0.05], shell, {}, "inference");
+  addStaticBox([11.0, 0.06, 3.42], [0.55, 2.05, 0.05], shellSoft, {}, "shared");
+  addStaticBox([11.0, 0.08, 0.18], [0.55, 0.08, 1.64], shellDark, {}, "shared");
+  addStaticBox([11.0, 0.08, 0.18], [0.55, 0.08, -1.54], shellDark, {}, "shared");
+  addStaticBox([0.26, 2.35, 3.18], [0.72, 1.02, 0.05], mat(sharedGreen, 0.34, 0.14, 0.09), {}, "shared");
+  addStaticBox([0.08, 2.18, 2.98], [0.72, 1.02, 0.05], mat(0xf6ffbe, 0.22, 0.12, 0.3), {}, "shared");
+  addStaticBox([4.2, 0.22, 0.18], [-2.55, 2.16, 0.05], mat(trainingColor, 0.26, 0.18, 0.18), {}, "training");
+  addStaticBox([4.2, 0.22, 0.18], [4.0, 2.16, 0.05], mat(inferenceColor, 0.22, 0.18, 0.18), {}, "inference");
+  addStaticCylinder(0.09, 0.09, 3.12, [-4.88, 1.02, 1.48], steel, 14, { z: Math.PI / 2 });
+  addStaticCylinder(0.09, 0.09, 3.12, [6.38, 1.02, 1.48], steel, 14, { z: Math.PI / 2 });
+
+  createChapter2NodeModel("dataset", "training", new THREE.Vector3(-4.55, 0.08, 1.15), (group) => {
+    group.add(makeChapter2Box("dataset", "batch intake tray", [1.56, 0.12, 0.88], [0, 0.2, 0], tray));
+    for (let lane = 0; lane < 3; lane += 1) {
+      for (let slot = 0; slot < 4; slot += 1) {
+        group.add(makeChapter2Box("dataset", "batch block", [0.22, 0.12, 0.18], [-0.52 + slot * 0.34, 0.38 + lane * 0.13, -0.24 + lane * 0.24], mat(lane === 1 ? 0xf7c65f : trainingColor, 0.3, 0.18, 0.9)));
       }
     }
-    for (let i = 0; i < 4; i += 1) {
-      group.add(makeChapter2Box("dataset", "data shard tile", [0.72 - i * 0.1, 0.035, 0.52 - i * 0.06], [0.02, 0.68 + i * 0.045, -0.02], mat(0x365a72, 0.38, 0.18, 0.72)));
-    }
+    group.add(makeChapter2Box("dataset", "training batch rail", [1.2, 0.05, 0.12], [0, 0.62, -0.28], mat(trainingGlow, 0.18, 0.14, 0.84)));
   });
 
-  createChapter2NodeModel("preprocess", "training", new THREE.Vector3(-3.9, 0.1, 1.2), (group) => {
-    group.add(makeChapter2Box("preprocess", "preprocessing conveyor", [1.1, 0.18, 0.5], [0, 0.2, 0], mat(0x3c4650, 0.66, 0.18)));
-    for (let i = 0; i < 4; i += 1) {
-      group.add(makeChapter2Box("preprocess", "pipeline rollers", [0.12, 0.08, 0.56], [-0.42 + i * 0.28, 0.35, 0], metal));
-    }
-    group.add(makeChapter2Box("preprocess", "token staging block", [0.34, 0.16, 0.28], [0.18, 0.5, 0], mat(trainingColor, 0.42, 0.18)));
-  });
+  createChapter2NodeModel("preprocess", "training", new THREE.Vector3(-3.65, 0.08, 1.0), () => {});
 
-  createChapter2NodeModel("trainGpu", "training", new THREE.Vector3(-1.9, 0.05, 0.78), (group) => {
+  createChapter2NodeModel("trainGpu", "training", new THREE.Vector3(-1.9, 0.02, 0.32), (group) => {
     for (let row = 0; row < 2; row += 1) {
       for (let col = 0; col < 3; col += 1) {
-        const x = (col - 1) * 0.48;
-        const z = (row - 0.5) * 0.58;
-        group.add(makeChapter2Box("trainGpu", "training GPU rack", [0.34, 0.88, 0.42], [x, 0.48, z], darkRack));
-        group.add(makeChapter2Box("trainGpu", "GPU drawer", [0.28, 0.045, 0.38], [x, 0.28, z + 0.03], mat(0x17424a, 0.42, 0.48)));
-        group.add(makeChapter2Sphere("trainGpu", "rack status", 0.025, [x - 0.09, 0.12, z + 0.23], mat(sharedGreen, 0.2, 0.08), 10));
+        const x = (col - 1) * 0.58;
+        const z = (row - 0.5) * 0.74;
+        group.add(makeChapter2Box("trainGpu", "training rack shell", [0.42, 1.16, 0.52], [x, 0.6, z], darkRack));
+        group.add(makeChapter2Box("trainGpu", "gpu drawer", [0.34, 0.05, 0.42], [x, 0.3, z + 0.05], mat(trainingCopper, 0.38, 0.34)));
+        group.add(makeChapter2Box("trainGpu", "gpu glow plane", [0.3, 0.03, 0.32], [x, 0.75, z], mat(trainingGlow, 0.14, 0.12, 0.8)));
+        group.add(makeChapter2Sphere("trainGpu", "rack status", 0.026, [x - 0.11, 0.14, z + 0.28], mat(sharedGreen, 0.2, 0.08), 10));
       }
     }
+    group.add(makeChapter2Box("trainGpu", "fabric bridge", [1.88, 0.08, 0.12], [0, 1.34, 0], mat(trainingColor, 0.18, 0.18, 0.78)));
   });
 
-  createChapter2NodeModel("interconnect", "training", new THREE.Vector3(-0.75, 0.2, -0.52), (group) => {
-    group.add(makeChapter2Box("interconnect", "spine switch", [1.38, 0.22, 0.32], [0, 0.52, 0], mat(sharedGreen, 0.4, 0.28)));
-    group.add(makeChapter2Box("interconnect", "leaf switch", [1.72, 0.18, 0.28], [0, 0.22, 0.48], mat(sharedGreen, 0.44, 0.24)));
-    for (let i = 0; i < 7; i += 1) {
-      group.add(makeChapter2Sphere("interconnect", "link light", 0.018, [-0.66 + i * 0.22, 0.25, 0.64], mat(0xe1ff5b, 0.18, 0.08), 8));
+  createChapter2NodeModel("interconnect", "training", new THREE.Vector3(-0.12, 0.08, -0.25), () => {});
+
+  createChapter2NodeModel("checkpoint", "training", new THREE.Vector3(-3.82, 0.02, -1.18), (group) => {
+    for (let i = 0; i < 4; i += 1) {
+      group.add(makeChapter2Box("checkpoint", "checkpoint slab", [1.2 - i * 0.1, 0.14, 0.66 - i * 0.06], [0, 0.16 + i * 0.17, 0], mat(0x566170, 0.5, 0.2)));
+    }
+    group.add(makeChapter2Box("checkpoint", "checkpoint stripe", [0.94, 0.04, 0.72], [0, 0.92, 0], mat(trainingGlow, 0.18, 0.16, 0.84)));
+  });
+
+  createChapter2NodeModel("artifact", "training", new THREE.Vector3(-4.4, 0.08, -1.34), () => {});
+
+  createChapter2NodeModel("cpu", "shared", new THREE.Vector3(0.8, -0.04, -0.02), (group) => {
+    group.add(makeChapter2Box("cpu", "cpu base", [4.8, 0.18, 1.08], [0, 0.18, 0], mat(0x24313f, 0.58, 0.24)));
+    group.add(makeChapter2Box("cpu", "coordination plane", [3.9, 0.04, 0.88], [0, 0.34, 0], mat(0x1a433c, 0.3, 0.16, 0.88)));
+    group.add(makeChapter2Box("cpu", "cpu die", [0.58, 0.14, 0.48], [0, 0.46, 0], mat(sharedGreen, 0.24, 0.14, 0.94)));
+    for (let i = 0; i < 6; i += 1) {
+      group.add(makeChapter2Box("cpu", "coordination card", [0.24, 0.12, 0.22], [-1.7 + i * 0.68, 0.48, 0.26], mat(0x395d68, 0.36, 0.16, 0.82)));
+      group.add(makeChapter2Sphere("cpu", "coordination light", 0.024, [-1.7 + i * 0.68, 0.68, -0.22], mat(i % 2 ? inferenceColor : sharedGreen, 0.16, 0.08), 10));
+    }
+    group.add(makeChapter2Box("cpu", "control bus", [4.24, 0.05, 0.1], [0, 0.26, -0.26], mat(0xe1ff5b, 0.24, 0.18, 0.82)));
+  });
+
+  createChapter2NodeModel("requests", "inference", new THREE.Vector3(3.05, 0.16, 1.18), (group) => {
+    group.add(makeChapter2Box("requests", "request slab", [1.34, 0.12, 0.74], [0, 0.22, 0], tray));
+    group.add(makeChapter2Box("requests", "request window", [1.04, 0.44, 0.05], [0, 0.58, -0.08], mat(inferenceBlue, 0.24, 0.18)));
+    group.add(makeChapter2Box("requests", "request glow", [0.82, 0.22, 0.02], [0, 0.58, -0.02], mat(inferenceGlow, 0.12, 0.1, 0.72)));
+    for (let i = 0; i < 4; i += 1) {
+      group.add(makeChapter2Sphere("requests", "request pulse", 0.042, [0.72 + i * 0.18, 0.42 + Math.sin(i) * 0.05, 0.08 - i * 0.04], mat(inferenceColor, 0.16, 0.12), 10));
     }
   });
 
-  createChapter2NodeModel("checkpoint", "training", new THREE.Vector3(-3.05, 0.04, -1.7), (group) => {
+  createChapter2NodeModel("gateway", "inference", new THREE.Vector3(3.96, 0.12, 0.94), () => {});
+
+  createChapter2NodeModel("serving", "inference", new THREE.Vector3(4.88, 0.04, 0.28), (group) => {
     for (let i = 0; i < 3; i += 1) {
-      group.add(makeChapter2Box("checkpoint", "checkpoint storage tier", [0.92, 0.16, 0.52], [0, 0.16 + i * 0.2, 0], mat(0x5b6673, 0.5, 0.22)));
+      group.add(makeChapter2Box("serving", "serving rack", [0.42, 1.08, 0.52], [-0.56 + i * 0.56, 0.56, 0], darkRack));
+      group.add(makeChapter2Box("serving", "serving tray", [0.3, 0.04, 0.42], [-0.56 + i * 0.56, 0.3, 0.04], mat(inferenceBlue, 0.3, 0.22)));
+      group.add(makeChapter2Sphere("serving", "serving status", 0.024, [-0.66 + i * 0.56, 0.14, 0.28], mat(inferenceGlow, 0.12, 0.08), 10));
     }
-    group.add(makeChapter2Box("checkpoint", "write burst stripe", [0.72, 0.035, 0.56], [0, 0.86, 0], mat(trainingColor, 0.28, 0.28)));
+    group.add(makeChapter2Box("serving", "serving beam", [1.86, 0.08, 0.12], [0, 1.28, 0], mat(inferenceColor, 0.16, 0.16, 0.78)));
   });
 
-  createChapter2NodeModel("artifact", "training", new THREE.Vector3(-5.15, 0.18, -1.45), (group) => {
-    const capsule = makeChapter2Cylinder("artifact", "model artifact capsule", 0.26, 0.26, 0.74, [0, 0.44, 0], mat(0xe1ff5b, 0.32, 0.28, 0.82), 36);
-    capsule.rotation.z = Math.PI / 2;
-    group.add(capsule);
-    group.add(makeChapter2Sphere("artifact", "artifact glow", 0.22, [0.46, 0.44, 0], mat(0xe1ff5b, 0.18, 0.08, 0.64), 18));
-  });
-
-  createChapter2NodeModel("requests", "inference", new THREE.Vector3(3.0, 0.35, 1.95), (group) => {
-    group.add(makeChapter2Box("requests", "notebook keyboard", [0.9, 0.07, 0.56], [0, 0.26, 0.08], mat(0x26313c, 0.52, 0.3)));
-    group.add(makeChapter2Box("requests", "notebook trackpad", [0.24, 0.018, 0.16], [0, 0.31, 0.24], mat(0x566370, 0.48, 0.22)));
-    const screen = makeChapter2Box("requests", "notebook screen", [0.84, 0.52, 0.045], [0, 0.62, -0.18], mat(0x153f5a, 0.24, 0.24));
-    screen.rotation.x = -0.32;
-    group.add(screen);
-    group.add(makeChapter2Box("requests", "notebook glow", [0.58, 0.32, 0.02], [0, 0.64, -0.15], mat(inferenceColor, 0.2, 0.12, 0.72)));
-    for (let i = 0; i < 5; i += 1) {
-      group.add(makeChapter2Sphere("requests", "request pulse", 0.038, [0.58 + i * 0.12, 0.38 + Math.sin(i) * 0.05, 0.08 - i * 0.04], mat(inferenceColor, 0.22, 0.12), 10));
-    }
-  });
-
-  createChapter2NodeModel("gateway", "inference", new THREE.Vector3(4.25, 0.12, 1.18), (group) => {
-    group.add(makeChapter2Box("gateway", "gateway router", [0.9, 0.52, 0.52], [0, 0.42, 0], mat(0x1a3d4f, 0.34, 0.28)));
-    group.add(makeChapter2Box("gateway", "routing aperture", [0.64, 0.08, 0.58], [0, 0.44, 0.31], mat(inferenceColor, 0.24, 0.18, 0.72)));
-  });
-
-  createChapter2NodeModel("serving", "inference", new THREE.Vector3(6.1, 0.05, 0.62), (group) => {
-    for (let i = 0; i < 3; i += 1) {
-      group.add(makeChapter2Box("serving", "model serving rack", [0.34, 0.94, 0.46], [-0.42 + i * 0.42, 0.5, 0], darkRack));
-      group.add(makeChapter2Sphere("serving", "serving status", 0.022, [-0.5 + i * 0.42, 0.12, 0.25], mat(inferenceColor, 0.18, 0.1), 10));
-    }
-  });
-
-  createChapter2NodeModel("cache", "inference", new THREE.Vector3(6.0, 0.15, -0.82), (group) => {
-    group.add(makeChapter2Box("cache", "HBM substrate", [1.42, 0.14, 0.92], [0, 0.3, 0], mat(0x102b23, 0.38, 0.34)));
-    group.add(makeChapter2Box("cache", "memory bandwidth plane", [1.28, 0.035, 0.78], [0, 0.42, 0], mat(0x1c5f50, 0.24, 0.18, 0.72)));
+  createChapter2NodeModel("cache", "inference", new THREE.Vector3(4.55, 0.1, -1.08), (group) => {
+    group.add(makeChapter2Box("cache", "HBM substrate", [1.86, 0.14, 1.12], [0, 0.3, 0], mat(0x102738, 0.38, 0.24)));
+    group.add(makeChapter2Box("cache", "memory bandwidth plane", [1.62, 0.04, 0.92], [0, 0.42, 0], mat(inferenceBlue, 0.16, 0.16, 0.72)));
     for (let row = 0; row < 3; row += 1) {
       for (let col = 0; col < 4; col += 1) {
-        const x = -0.48 + col * 0.32;
-        const z = -0.26 + row * 0.26;
-        group.add(makeChapter2Box("cache", "HBM stack", [0.2, 0.22, 0.18], [x, 0.58, z], mat(sharedGreen, 0.24, 0.18, 0.84)));
-        group.add(makeChapter2Box("cache", "HBM stack cap", [0.18, 0.035, 0.16], [x, 0.71, z], mat(0xb9ffd0, 0.22, 0.16, 0.9)));
+        const x = -0.58 + col * 0.38;
+        const z = -0.34 + row * 0.34;
+        group.add(makeChapter2Box("cache", "HBM stack", [0.22, 0.34, 0.2], [x, 0.66, z], mat(inferenceColor, 0.16, 0.2, 0.84)));
+        group.add(makeChapter2Box("cache", "HBM stack cap", [0.2, 0.04, 0.18], [x, 0.85, z], mat(inferenceGlow, 0.14, 0.12, 0.88)));
       }
     }
-    group.add(makeChapter2Box("cache", "wide memory bus", [1.72, 0.045, 0.08], [0, 0.2, 0.56], mat(0xe1ff5b, 0.28, 0.24)));
+    group.add(makeChapter2Box("cache", "wide memory bus", [2.0, 0.05, 0.08], [0, 0.2, 0.68], mat(inferenceGlow, 0.14, 0.14, 0.84)));
   });
 
-  createChapter2NodeModel("retrieval", "inference", new THREE.Vector3(4.25, 0.06, -1.72), (group) => {
-    for (let i = 0; i < 3; i += 1) {
-      group.add(makeChapter2Cylinder("retrieval", "vector database tier", 0.4, 0.4, 0.12, [0, 0.18 + i * 0.18, 0], mat(0x5eead4, 0.38, 0.22), 36));
-    }
-    group.add(makeChapter2Box("retrieval", "search index face", [0.56, 0.18, 0.035], [0, 0.5, 0.42], mat(inferenceColor, 0.24, 0.16, 0.72)));
-  });
+  createChapter2NodeModel("retrieval", "inference", new THREE.Vector3(4.02, 0.1, -1.14), () => {});
 
-  createChapter2NodeModel("response", "inference", new THREE.Vector3(6.65, 0.3, -1.65), (group) => {
-    group.add(makeChapter2Sphere("response", "response edge hub", 0.24, [0, 0.34, 0], mat(0xff6bcb, 0.2, 0.12), 18));
-    for (let i = 0; i < 5; i += 1) {
-      const angle = -0.8 + i * 0.4;
-      group.add(makeChapter2Sphere("response", "response fanout", 0.045, [Math.cos(angle) * 0.62, 0.34, Math.sin(angle) * 0.42], mat(inferenceColor, 0.24, 0.12), 10));
-    }
-  });
+  createChapter2NodeModel("response", "inference", new THREE.Vector3(5.95, 0.12, 0.05), () => {});
 
   const trainingPath = [
-    new THREE.Vector3(-5.9, 0.62, 1.85),
-    new THREE.Vector3(-3.9, 0.62, 1.2),
-    new THREE.Vector3(-1.9, 0.8, 0.78),
-    new THREE.Vector3(-0.75, 0.86, -0.52),
-    new THREE.Vector3(-3.05, 0.72, -1.7),
-    new THREE.Vector3(-5.15, 0.7, -1.45)
+    new THREE.Vector3(-4.55, 0.72, 1.15),
+    new THREE.Vector3(-3.2, 0.98, 0.78),
+    new THREE.Vector3(-1.9, 1.02, 0.32),
+    new THREE.Vector3(-2.85, 0.94, -0.52),
+    new THREE.Vector3(-3.82, 0.76, -1.18)
   ];
   const inferencePath = [
-    new THREE.Vector3(3.0, 0.62, 1.95),
-    new THREE.Vector3(4.25, 0.62, 1.18),
-    new THREE.Vector3(6.1, 0.72, 0.62),
-    new THREE.Vector3(6.0, 0.66, -0.82),
-    new THREE.Vector3(4.25, 0.68, -1.72),
-    new THREE.Vector3(6.65, 0.68, -1.65)
+    new THREE.Vector3(3.05, 0.74, 1.18),
+    new THREE.Vector3(3.98, 0.98, 0.92),
+    new THREE.Vector3(4.88, 1.02, 0.28),
+    new THREE.Vector3(4.55, 0.78, -1.08),
+    new THREE.Vector3(5.4, 0.78, -0.62)
+  ];
+  const cpuPath = [
+    new THREE.Vector3(-2.2, 0.42, -0.18),
+    new THREE.Vector3(0.8, 0.44, -0.02),
+    new THREE.Vector3(2.92, 0.44, 0.18),
+    new THREE.Vector3(4.88, 0.54, 0.28)
   ];
 
   for (let i = 0; i < trainingPath.length - 1; i += 1) {
@@ -2876,8 +3400,12 @@ function createChapter2() {
   for (let i = 0; i < inferencePath.length - 1; i += 1) {
     makeChapter2Line("inference", [inferencePath[i], inferencePath[i + 1]], inferenceColor, 0.7);
   }
-  for (let i = 0; i < 5; i += 1) makeChapter2Particle("training", trainingPath, trainingColor, 0.065);
-  for (let i = 0; i < 13; i += 1) makeChapter2Particle("inference", inferencePath, inferenceColor, 0.038);
+  for (let i = 0; i < cpuPath.length - 1; i += 1) {
+    makeChapter2Line("shared", [cpuPath[i], cpuPath[i + 1]], sharedGreen, 0.44);
+  }
+  for (let i = 0; i < 5; i += 1) makeChapter2Particle("training", trainingPath, trainingColor, 0.06);
+  for (let i = 0; i < 11; i += 1) makeChapter2Particle("inference", inferencePath, inferenceColor, 0.036);
+  for (let i = 0; i < 5; i += 1) makeChapter2Particle("shared", cpuPath, sharedGreen, 0.03);
 }
 
 function addAgentPod(group, nodeId, x, y, z, scale = 1) {
@@ -3600,24 +4128,31 @@ function hydrateUi() {
       mobileLayerDock.appendChild(mobileButton);
     });
 
+    const visibleChapter2Labels = new Set(["dataset", "trainGpu", "checkpoint", "cpu", "requests", "serving", "cache"]);
     Object.entries(copy.nodes).forEach(([nodeId, [label]]) => {
+      if (!visibleChapter2Labels.has(nodeId)) return;
       const nodeLabel = document.createElement("div");
-      nodeLabel.className = "scene-label";
-      nodeLabel.style.setProperty("--layer-color", nodeId === "dataset" || nodeId === "trainGpu" ? "#ffb84d" : "#19d3ff");
+      nodeLabel.className = "scene-label detail-label chapter2-detail-label";
+      nodeLabel.style.setProperty("--layer-color",
+        nodeId === "dataset" || nodeId === "trainGpu" || nodeId === "checkpoint" ? "#ffb84d" :
+        nodeId === "cpu" ? "#76ff7a" :
+        "#19d3ff"
+      );
       nodeLabel.textContent = label;
       labelLayer.appendChild(nodeLabel);
       labels.set(nodeId, nodeLabel);
     });
     [
-      ["lane-training", copy.laneLabels.training, "#ffb84d"],
-      ["lane-inference", copy.laneLabels.inference, "#19d3ff"]
+      ["region-training", copy.regionLabels.training, "#ffb84d"],
+      ["region-inference", copy.regionLabels.inference, "#19d3ff"],
+      ["region-cpu", copy.regionLabels.cpu, "#76ff7a"]
     ].forEach(([labelId, text, color]) => {
-      const laneLabel = document.createElement("div");
-      laneLabel.className = "scene-label lane-label";
-      laneLabel.style.setProperty("--layer-color", color);
-      laneLabel.textContent = text;
-      labelLayer.appendChild(laneLabel);
-      labels.set(labelId, laneLabel);
+      const regionLabel = document.createElement("div");
+      regionLabel.className = "scene-label region-label chapter2-region-label";
+      regionLabel.style.setProperty("--layer-color", color);
+      regionLabel.textContent = text;
+      labelLayer.appendChild(regionLabel);
+      labels.set(labelId, regionLabel);
     });
     return;
   }
@@ -3716,6 +4251,36 @@ function handleChapter1Wheel(event) {
   cycleChapter1Layer(event.deltaY > 0 ? 1 : -1);
 }
 
+function cycleChapter2Mode(direction) {
+  const currentIndex = chapter2ModeOrder.indexOf(selectedMode);
+  if (currentIndex === -1) return;
+  const nextIndex = Math.max(0, Math.min(chapter2ModeOrder.length - 1, currentIndex + direction));
+  if (nextIndex === currentIndex) return;
+  const nextMode = chapter2ModeOrder[nextIndex];
+  revealInsights();
+  selectChapter2Mode(nextMode, true);
+  const modeName = chapter2Copy().modes.find((mode) => mode.id === nextMode)?.name ?? nextMode;
+  trackEvent("mode_select", {
+    chapter_id: "chapter2",
+    mode_id: nextMode,
+    mode_name: modeName,
+    interaction_source: "wheel",
+    wheel_direction: direction > 0 ? "next" : "previous"
+  });
+}
+
+function handleChapter2Wheel(event) {
+  if (activeChapter !== "chapter2" || window.innerWidth <= 1120) return;
+  if (event.ctrlKey || Math.abs(event.deltaY) < 14) return;
+  if (!analysisDrawer.hidden || !aboutDrawer.hidden || !updatesDrawer.hidden || !languagePanel.hidden) return;
+  if (event.target.closest("input, button, a, .right-panel, .analysis-drawer, .about-drawer, .updates-drawer, .global-language-menu")) return;
+  const now = performance.now();
+  if (now < wheelLayerLockUntil) return;
+  event.preventDefault();
+  wheelLayerLockUntil = now + 520;
+  cycleChapter2Mode(event.deltaY > 0 ? 1 : -1);
+}
+
 function setChapter1CameraFocus(layerId) {
   const view = chapter1FocusViews[layerId];
   if (!view) {
@@ -3806,19 +4371,24 @@ function updateChapter2Insight() {
   const copy = chapter2Copy();
   const mode = chapter2Mode();
   const node = selectedNode && selectedNode !== selectedMode ? chapter2Node(selectedNode) : null;
+  const editorial = chapter2Editorial(mode.id);
   renderInsightPanels({
     eyebrow: node ? node[0] : mode.name,
     title: insightWord(),
     lede: node ? node[1] : mode.lede,
     metrics: mode.metrics,
-    summaryHeading: copy.contextHeading,
-    summaryText: copy.transcriptText,
-    supplierHeading: copy.implicationHeading,
-    supplierHtml: mode.insights
-      .map(([title, body]) => `<li><strong>${title}</strong><span>${body}</span></li>`)
-      .join(""),
-    riskHeading: copy.contextHeading,
-    riskText: copy.transcriptText
+    summaryHeading: t("chapter1SummaryHeading"),
+    summaryText: editorial.how,
+    supplierHeading: t("chapter1BuildersHeading"),
+    supplierHtml: editorial.builders.map((item) => `<li>${item}</li>`).join(""),
+    riskHeading: t("chapter1FutureHeading"),
+    riskText: editorial.future,
+    extraHeading: t("chapter1SignalsHeading"),
+    extraHtml: editorial.signals.map((item) => `<li>${item}</li>`).join(""),
+    extraVisible: true,
+    referencesHeading: t("chapter1LearnMoreHeading"),
+    referencesHtml: editorial.references.map((item) => `<li>${item}</li>`).join(""),
+    referencesVisible: true
   });
   activeLayerName.textContent = node ? node[0] : mode.name;
   activeLayerSignal.textContent = node ? node[1] : mode.signal;
@@ -3838,17 +4408,24 @@ function updateChapter3Insight() {
   const copy = chapter3Copy();
   const mode = chapter3Mode();
   const node = selectedChapter3Node && selectedChapter3Node !== selectedChapter3Mode ? chapter3Node(selectedChapter3Node) : null;
+  const editorial = chapter3Editorial(mode.id);
   renderInsightPanels({
     eyebrow: node ? node[0] : mode.id === "overview" ? "Agentic AI" : mode.name,
     title: insightWord(),
     lede: node ? node[1] : mode.lede,
     metrics: mode.metrics,
-    summaryHeading: copy.contextHeading,
-    summaryText: mode.risk,
-    supplierHeading: copy.supplierHeading,
+    summaryHeading: t("chapter1SummaryHeading"),
+    summaryText: editorial.how,
+    supplierHeading: t("chapter1BuildersHeading"),
     supplierHtml: mode.suppliers.map((item) => `<li>${item}</li>`).join(""),
-    riskHeading: copy.contextHeading,
-    riskText: mode.risk
+    riskHeading: t("chapter1FutureHeading"),
+    riskText: editorial.future,
+    extraHeading: t("chapter1SignalsHeading"),
+    extraHtml: editorial.signals.map((item) => `<li>${item}</li>`).join(""),
+    extraVisible: true,
+    referencesHeading: t("chapter1LearnMoreHeading"),
+    referencesHtml: editorial.references.map((item) => `<li>${item}</li>`).join(""),
+    referencesVisible: true
   });
   activeLayerName.textContent = node ? node[0] : mode.name;
   activeLayerSignal.textContent = node ? node[1] : mode.signal;
@@ -3901,24 +4478,27 @@ function selectChapter2Mode(modeId, shouldReveal = false) {
   updateChapter2Insight();
   if (audioPlaying) playAudioBriefing();
   const focusTargets = {
-    compare: new THREE.Vector3(0.75, 0.7, 0),
-    training: new THREE.Vector3(-3.25, 0.8, 0.15),
-    inference: new THREE.Vector3(5.35, 0.8, 0.1)
+    compare: new THREE.Vector3(0.8, 0.62, 0.02),
+    training: new THREE.Vector3(-2.65, 0.76, 0.04),
+    inference: new THREE.Vector3(4.35, 0.76, 0.04)
   };
   controls.target.lerp(focusTargets[modeId] ?? focusTargets.compare, 0.58);
 }
 
 function focusChapter2Node(nodeId) {
   const trainingNodes = new Set(["dataset", "preprocess", "trainGpu", "interconnect", "checkpoint", "artifact"]);
-  selectedMode = trainingNodes.has(nodeId) ? "training" : "inference";
+  selectedMode = nodeId === "cpu" ? "compare" : trainingNodes.has(nodeId) ? "training" : "inference";
   selectedNode = nodeId;
-  activeSegmentId = nodeId;
+  activeSegmentId = nodeId === "cpu" ? "compare" : nodeId;
   revealInsights();
   updateChapter2Insight();
   playAudioBriefing();
   trackAudioPlay();
   const group = chapter2GroupByNode.get(nodeId);
-  if (group) controls.target.lerp(new THREE.Vector3(group.position.x, group.position.y + 0.45, group.position.z), 0.58);
+  if (group) {
+    const yLift = nodeId === "cpu" ? 0.35 : 0.55;
+    controls.target.lerp(new THREE.Vector3(group.position.x, group.position.y + yLift, group.position.z), 0.58);
+  }
 }
 
 function selectChapter(chapterId) {
@@ -3946,8 +4526,8 @@ function selectChapter(chapterId) {
     hydrateUi();
     updateStaticText();
     updateChapter2Insight();
-    camera.position.set(10.8, 7.6, 12.2);
-    controls.target.set(0.75, 0.7, 0);
+    camera.position.set(10.6, 7.4, 12.0);
+    controls.target.set(0.8, 0.62, 0.02);
     return;
   }
   if (activeChapter === "chapter3") {
@@ -4064,34 +4644,49 @@ function updateLabels() {
     return;
   }
   if (activeChapter === "chapter2") {
-    const lanePositions = {
-      "lane-training": {
-        mode: "training",
-        position: new THREE.Vector3(-3.75, 2.1, 1.58)
+    const regionPositions = {
+      "region-training": {
+        visible: selectedMode === "compare",
+        position: new THREE.Vector3(-2.7, 2.36, 0.95)
       },
-      "lane-inference": {
-        mode: "inference",
-        position: new THREE.Vector3(5.35, 2.1, 1.25)
+      "region-inference": {
+        visible: selectedMode === "compare",
+        position: new THREE.Vector3(4.22, 2.36, 0.95)
+      },
+      "region-cpu": {
+        visible: selectedMode === "compare",
+        position: new THREE.Vector3(0.8, 0.94, 1.36)
       }
     };
-    Object.entries(lanePositions).forEach(([labelId, config]) => {
+    Object.entries(regionPositions).forEach(([labelId, config]) => {
       const label = labels.get(labelId);
       if (!label) return;
       const pos = config.position.clone();
       pos.project(camera);
-      const visible = chapter2ModeVisible(config.mode) && pos.z < 1;
+      const visible = config.visible && pos.z < 1;
       label.style.opacity = visible ? "1" : "0";
       label.style.transform = `translate(${(pos.x * 0.5 + 0.5) * rect.width}px, ${(-pos.y * 0.5 + 0.5) * rect.height}px) translate(-50%, -50%)`;
     });
+    const labelOffsets = {
+      dataset: { y: 0.96, x: 0, py: 0 },
+      trainGpu: { y: 1.24, x: 0, py: 0 },
+      checkpoint: { y: 0.94, x: 0, py: 0 },
+      cpu: { y: 0.9, x: 0, py: 0 },
+      requests: { y: 0.92, x: 0, py: 0 },
+      serving: { y: 1.18, x: 0, py: 0 },
+      cache: { y: 1.12, x: 0, py: 0 }
+    };
     chapter2GroupByNode.forEach((group, nodeId) => {
       const label = labels.get(nodeId);
       if (!label) return;
       const pos = group.position.clone();
-      pos.y += 0.9;
+      const config = labelOffsets[nodeId] ?? { y: 0.9, x: 0, py: 0 };
+      pos.x += config.x;
+      pos.y += config.y;
       pos.project(camera);
-      const visible = group.visible && pos.z < 1;
+      const visible = selectedMode !== "compare" && group.visible && pos.z < 1;
       label.style.opacity = visible ? "1" : "0";
-      label.style.transform = `translate(${(pos.x * 0.5 + 0.5) * rect.width}px, ${(-pos.y * 0.5 + 0.5) * rect.height}px) translate(-50%, -50%)`;
+      label.style.transform = `translate(${(pos.x * 0.5 + 0.5) * rect.width}px, ${(-pos.y * 0.5 + 0.5) * rect.height + config.py}px) translate(-50%, -50%)`;
     });
     return;
   }
@@ -4206,7 +4801,7 @@ function interpolatePath(points, progress) {
 }
 
 function chapter2ModeVisible(mode) {
-  return selectedMode === "compare" || selectedMode === mode;
+  return mode === "shared" || selectedMode === "compare" || selectedMode === mode;
 }
 
 function chapter2NodeVisible(nodeId) {
@@ -4224,17 +4819,32 @@ function chapter3NodeVisible(nodeId) {
 }
 
 function animateChapter2(time) {
+  const shellOpacityScale =
+    selectedMode === "compare"
+      ? { training: 1, inference: 1, shared: 1 }
+      : selectedMode === "training"
+        ? { training: 0.26, inference: 0.16, shared: 0.44 }
+        : { training: 0.16, inference: 0.26, shared: 0.44 };
+
+  chapter2ShellMeshes.forEach((mesh) => {
+    const role = mesh.userData.shellRole ?? "shared";
+    const targetOpacity = (mesh.material.userData.originalOpacity ?? 1) * (shellOpacityScale[role] ?? 1);
+    mesh.material.transparent = true;
+    mesh.material.opacity += (targetOpacity - mesh.material.opacity) * 0.14;
+  });
+
   chapter2GroupByNode.forEach((group, id) => {
     const nodeMode = group.userData.mode;
-    const active = id === selectedNode || selectedNode === nodeMode || selectedMode === "compare";
+    const active = id === selectedNode || (nodeMode !== "shared" && selectedNode === nodeMode) || (nodeMode === "shared" && selectedMode === "compare") || selectedMode === "compare";
     const visible = chapter2ModeVisible(nodeMode);
     group.visible = visible;
-    group.position.y = group.userData.base.y + (active ? 0.12 + Math.sin(time * 2.4 + id.length) * 0.035 : 0);
+    const activeLift = nodeMode === "shared" ? 0.07 : 0.12;
+    group.position.y = group.userData.base.y + (active ? activeLift + Math.sin(time * 2.4 + id.length) * 0.03 : 0);
     group.rotation.y = Math.sin(time * 0.45 + id.length) * 0.025;
     group.traverse((child) => {
       if (!child.material || child.type === "Line") return;
       child.material.emissive = child.material.emissive || new THREE.Color(0x000000);
-      child.material.emissiveIntensity = active ? 0.28 : visible ? 0.06 : 0.015;
+      child.material.emissiveIntensity = active ? 0.28 : nodeMode === "shared" ? 0.1 : visible ? 0.06 : 0.015;
       if (child.material.opacity !== undefined) {
         child.material.opacity = visible ? child.material.userData.originalOpacity ?? 1 : 0.36;
       }
@@ -4252,10 +4862,13 @@ function animateChapter2(time) {
     const visible = chapter2ModeVisible(particle.userData.mode);
     particle.visible = visible;
     if (!visible) return;
-    const speed = particle.userData.mode === "training" ? 0.18 : 0.42;
+    const speed = particle.userData.mode === "training" ? 0.18 : particle.userData.mode === "shared" ? 0.24 : 0.42;
     const pos = interpolatePath(particle.userData.path, time * speed + particle.userData.offset);
     particle.position.copy(pos);
-    const scale = particle.userData.mode === "training" ? 1.2 + Math.sin(time * 3) * 0.08 : 0.8 + Math.sin(time * 7 + particle.userData.offset) * 0.22;
+    const scale =
+      particle.userData.mode === "training" ? 1.12 + Math.sin(time * 3) * 0.07 :
+      particle.userData.mode === "shared" ? 0.88 + Math.sin(time * 4 + particle.userData.offset) * 0.08 :
+      0.78 + Math.sin(time * 7 + particle.userData.offset) * 0.18;
     particle.scale.setScalar(scale);
   });
 }
@@ -4449,8 +5062,8 @@ resetView.addEventListener("click", () => {
   }
   if (activeChapter === "chapter2") {
     stopAudioBriefing();
-    camera.position.set(10.8, 7.6, 12.2);
-    controls.target.set(0.75, 0.7, 0);
+    camera.position.set(10.6, 7.4, 12.0);
+    controls.target.set(0.8, 0.62, 0.02);
     selectChapter2Mode("compare", false);
     hideInsights();
     return;
@@ -4609,6 +5222,7 @@ canvas.addEventListener("pointercancel", () => {
 });
 canvas.addEventListener("wheel", revealInsights, { passive: true });
 stage?.addEventListener("wheel", handleChapter1Wheel, { passive: false });
+stage?.addEventListener("wheel", handleChapter2Wheel, { passive: false });
 window.addEventListener("resize", resize);
 
 updateStaticText();

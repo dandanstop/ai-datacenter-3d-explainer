@@ -2076,6 +2076,18 @@ const chapter1LayerSymbols = Object.freeze({
   ops: "☁"
 });
 
+const chapter2ModeSymbols = Object.freeze({
+  compare: "◫",
+  training: "▤",
+  inference: "◉"
+});
+
+const chapter3ModeSymbols = Object.freeze({
+  overview: "✦",
+  core: "◎",
+  infrastructure: "▣"
+});
+
 const chapter1ShortNames = Object.freeze({
   en: {
     power: "Power",
@@ -2111,8 +2123,79 @@ const chapter1ShortNames = Object.freeze({
   }
 });
 
+const chapter2ShortNames = Object.freeze({
+  en: {
+    compare: "Compare",
+    training: "Training",
+    inference: "Inference"
+  },
+  zh: {
+    compare: "比較",
+    training: "訓練",
+    inference: "推論"
+  },
+  ko: {
+    compare: "비교",
+    training: "훈련",
+    inference: "추론"
+  },
+  ja: {
+    compare: "比較",
+    training: "訓練",
+    inference: "推論"
+  }
+});
+
+const chapter3ShortNames = Object.freeze({
+  en: {
+    overview: "Overview",
+    core: "Core",
+    infrastructure: "Infra"
+  },
+  zh: {
+    overview: "總覽",
+    core: "Core",
+    infrastructure: "基建"
+  },
+  ko: {
+    overview: "개요",
+    core: "코어",
+    infrastructure: "인프라"
+  },
+  ja: {
+    overview: "概要",
+    core: "コア",
+    infrastructure: "基盤"
+  }
+});
+
 function chapter1ShortName(layerId) {
   return chapter1ShortNames[activeLang]?.[layerId] ?? chapter1ShortNames.en[layerId] ?? layerId;
+}
+
+function chapterModeShortName(chapterId, modeId) {
+  const map = chapterId === "chapter3" ? chapter3ShortNames : chapter2ShortNames;
+  return map[activeLang]?.[modeId] ?? map.en[modeId] ?? modeId;
+}
+
+function chapterModeGlyph(chapterId, modeId) {
+  const map = chapterId === "chapter3" ? chapter3ModeSymbols : chapter2ModeSymbols;
+  return map[modeId] ?? "•";
+}
+
+function chapterModeColor(chapterId, modeId) {
+  if (chapterId === "chapter3") {
+    return {
+      overview: "#5eead4",
+      core: "#19d3ff",
+      infrastructure: "#e1ff5b"
+    }[modeId] ?? "#19d3ff";
+  }
+  return {
+    compare: "#e1ff5b",
+    training: "#ffb84d",
+    inference: "#19d3ff"
+  }[modeId] ?? "#19d3ff";
 }
 
 function mat(color, roughness = 0.58, metalness = 0.18, opacity = 1) {
@@ -3391,25 +3474,29 @@ function hydrateUi() {
   labels.clear();
   layerList.hidden = activeChapter !== "chapter1";
   modeList.hidden = activeChapter === "chapter1";
-  mobileLayerDock.hidden = activeChapter !== "chapter1";
+  mobileLayerDock.hidden = false;
   mobileLayerSummary.hidden = activeChapter !== "chapter1";
 
   if (activeChapter === "chapter3") {
     const copy = chapter3Copy();
+    mobileLayerDock.setAttribute("aria-label", copy.modeListLabel);
+    mobileLayerDock.style.setProperty("--mobile-dock-columns", String(copy.modes.length));
     modeList.setAttribute("aria-label", copy.modeListLabel);
     copy.modes.forEach((mode, index) => {
       const button = document.createElement("button");
-      button.className = "mode-button";
+      button.className = "mode-button mode-nav-button";
       button.type = "button";
       button.id = `mode-${mode.id}`;
       button.role = "tab";
       button.dataset.mode = mode.id;
+      button.style.setProperty("--layer-color", chapterModeColor("chapter3", mode.id));
       button.innerHTML = `
-        <span>
-          <span class="mode-title">${mode.name}</span>
+        <span class="mode-glyph">${chapterModeGlyph("chapter3", mode.id)}</span>
+        <span class="mode-index">C3-${String(index + 1).padStart(2, "0")}</span>
+        <span class="mode-copy">
+          <span class="mode-title">${chapterModeShortName("chapter3", mode.id)}</span>
           <span class="mode-role">${mode.role}</span>
         </span>
-        <span class="mode-index">C3-${String(index + 1).padStart(2, "0")}</span>
       `;
       button.addEventListener("click", () => {
         revealInsights();
@@ -3422,6 +3509,28 @@ function hydrateUi() {
         });
       });
       modeList.appendChild(button);
+
+      const mobileButton = document.createElement("button");
+      mobileButton.className = "mobile-layer-button";
+      mobileButton.type = "button";
+      mobileButton.dataset.mode = mode.id;
+      mobileButton.style.setProperty("--layer-color", chapterModeColor("chapter3", mode.id));
+      mobileButton.innerHTML = `
+        <span class="mobile-layer-glyph">${chapterModeGlyph("chapter3", mode.id)}</span>
+        <span class="mobile-layer-index">C3-${String(index + 1).padStart(2, "0")}</span>
+        <span class="mobile-layer-label">${chapterModeShortName("chapter3", mode.id)}</span>
+      `;
+      mobileButton.addEventListener("click", () => {
+        revealInsights();
+        selectChapter3Mode(mode.id, true);
+        trackEvent("mode_select", {
+          chapter_id: "chapter3",
+          mode_id: mode.id,
+          mode_name: mode.name,
+          interaction_source: "mobile_dock"
+        });
+      });
+      mobileLayerDock.appendChild(mobileButton);
     });
 
     Object.entries(copy.nodes ?? chapter3Content.en.nodes).forEach(([nodeId, [label]]) => {
@@ -3437,20 +3546,24 @@ function hydrateUi() {
 
   if (activeChapter === "chapter2") {
     const copy = chapter2Copy();
+    mobileLayerDock.setAttribute("aria-label", copy.modeListLabel);
+    mobileLayerDock.style.setProperty("--mobile-dock-columns", String(copy.modes.length));
     modeList.setAttribute("aria-label", copy.modeListLabel);
     copy.modes.forEach((mode, index) => {
       const button = document.createElement("button");
-      button.className = "mode-button";
+      button.className = "mode-button mode-nav-button";
       button.type = "button";
       button.id = `mode-${mode.id}`;
       button.role = "tab";
       button.dataset.mode = mode.id;
+      button.style.setProperty("--layer-color", chapterModeColor("chapter2", mode.id));
       button.innerHTML = `
-        <span>
-          <span class="mode-title">${mode.name}</span>
+        <span class="mode-glyph">${chapterModeGlyph("chapter2", mode.id)}</span>
+        <span class="mode-index">C2-${String(index + 1).padStart(2, "0")}</span>
+        <span class="mode-copy">
+          <span class="mode-title">${chapterModeShortName("chapter2", mode.id)}</span>
           <span class="mode-role">${mode.role}</span>
         </span>
-        <span class="mode-index">C2-${String(index + 1).padStart(2, "0")}</span>
       `;
       button.addEventListener("click", () => {
         revealInsights();
@@ -3463,6 +3576,28 @@ function hydrateUi() {
         });
       });
       modeList.appendChild(button);
+
+      const mobileButton = document.createElement("button");
+      mobileButton.className = "mobile-layer-button";
+      mobileButton.type = "button";
+      mobileButton.dataset.mode = mode.id;
+      mobileButton.style.setProperty("--layer-color", chapterModeColor("chapter2", mode.id));
+      mobileButton.innerHTML = `
+        <span class="mobile-layer-glyph">${chapterModeGlyph("chapter2", mode.id)}</span>
+        <span class="mobile-layer-index">C2-${String(index + 1).padStart(2, "0")}</span>
+        <span class="mobile-layer-label">${chapterModeShortName("chapter2", mode.id)}</span>
+      `;
+      mobileButton.addEventListener("click", () => {
+        revealInsights();
+        selectChapter2Mode(mode.id, true);
+        trackEvent("mode_select", {
+          chapter_id: "chapter2",
+          mode_id: mode.id,
+          mode_name: mode.name,
+          interaction_source: "mobile_dock"
+        });
+      });
+      mobileLayerDock.appendChild(mobileButton);
     });
 
     Object.entries(copy.nodes).forEach(([nodeId, [label]]) => {
@@ -3487,6 +3622,8 @@ function hydrateUi() {
     return;
   }
 
+  mobileLayerDock.setAttribute("aria-label", t("layerListLabel"));
+  mobileLayerDock.style.setProperty("--mobile-dock-columns", String(layers.length));
   layers.forEach((layer, index) => {
     const copy = localizedLayer(layer);
     const button = document.createElement("button");
@@ -3689,6 +3826,11 @@ function updateChapter2Insight() {
     button.classList.toggle("is-active", button.dataset.mode === selectedMode);
     button.setAttribute("aria-selected", button.dataset.mode === selectedMode ? "true" : "false");
   });
+  document.querySelectorAll(".mobile-layer-button").forEach((button) => {
+    const active = button.dataset.mode === selectedMode;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
+  });
   updateAudioDock();
 }
 
@@ -3713,6 +3855,11 @@ function updateChapter3Insight() {
   document.querySelectorAll(".mode-button").forEach((button) => {
     button.classList.toggle("is-active", button.dataset.mode === selectedChapter3Mode);
     button.setAttribute("aria-selected", button.dataset.mode === selectedChapter3Mode ? "true" : "false");
+  });
+  document.querySelectorAll(".mobile-layer-button").forEach((button) => {
+    const active = button.dataset.mode === selectedChapter3Mode;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", active ? "true" : "false");
   });
   updateAudioDock();
 }

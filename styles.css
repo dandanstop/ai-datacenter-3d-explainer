@@ -285,6 +285,62 @@ h3 {
   font-weight: 800;
 }
 
+.mode-nav-button {
+  grid-template-columns: auto auto minmax(0, 1fr);
+  width: 74px;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  transition:
+    width 220ms ease,
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.mode-nav-button:hover,
+.mode-nav-button:focus-visible {
+  width: 100%;
+  background: rgba(25, 211, 255, 0.08);
+}
+
+.mode-nav-button.is-active {
+  width: 100%;
+  border-color: rgba(225, 255, 91, 0.72);
+  background: rgba(225, 255, 91, 0.08);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+}
+
+.mode-glyph {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  color: var(--layer-color);
+  font-size: 15px;
+  line-height: 1;
+}
+
+.mode-copy {
+  min-width: 0;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.mode-nav-button.is-active .mode-copy,
+.mode-nav-button:hover .mode-copy,
+.mode-nav-button:focus-visible .mode-copy {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .layer-button {
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr);
@@ -555,9 +611,13 @@ h3 {
 
 .meta-links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.meta-links .about-link {
+  margin-top: 0;
 }
 
 @media (max-width: 1120px) {
@@ -737,7 +797,7 @@ body.is-file-protocol .file-warning {
   bottom: 16px;
   z-index: 5;
   display: none;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--mobile-dock-columns, 6), minmax(0, 1fr));
   gap: 6px;
   padding: 8px;
   border: 1px solid rgba(231, 238, 247, 0.12);
@@ -1664,6 +1724,10 @@ body.is-file-protocol .file-warning {
   }
 
   .layer-list {
+    display: none;
+  }
+
+  .mode-list {
     display: none;
   }
 

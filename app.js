@@ -232,7 +232,7 @@ const uiText = {
     closeAnalysis: "關閉",
     aboutLink: "關於作者",
     aboutEyebrow: "關於",
-    aboutTitle: "策展與製作：\nDanDanStop",
+    aboutTitle: "Curated by\n丹丹不打烊",
     aboutDescription: "Hi - DanDanStop 基本上是我給自己的提醒：「DanDan，在又因為研究新科技熬成通宵之前，先停一下。」",
     aboutBuilder: "這裡是我的個人科技實驗室與靈感基地，核心心態很簡單：快速行動、保持好奇、持續迭代。",
     aboutFocus: "我通常會親自動手測試最新 AI 工具、MarTech 想法，還有一些只是因為好玩而做的小實驗。",

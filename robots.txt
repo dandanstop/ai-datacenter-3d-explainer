@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dandanstop.me/sitemap.xml
+# Explicit allow rules for major AI crawlers and assistants
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Root sitemap index for all live projects on this domain
+Sitemap: https://www.dandanstop.me/sitemap.xml

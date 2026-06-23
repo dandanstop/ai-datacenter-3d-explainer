@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chapter Editorial Structure"
+  short_description: "Structure explainer chapters for teaching and depth"
+  default_prompt: "Use $chapter-editorial-structure to write this chapter's summaries, insight sections, company references, and future signals."

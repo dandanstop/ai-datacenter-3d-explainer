@@ -1,0 +1,4 @@
+interface:
+  display_name: "3D Visual Design"
+  short_description: "Design clear 3D explainer scenes and navigation"
+  default_prompt: "Use $3d-visual-design to shape the 3D scene, focus states, and desktop/mobile navigation for this explainer."

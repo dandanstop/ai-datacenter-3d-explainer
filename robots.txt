@@ -23,5 +23,9 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+# AI-readable project summaries
+# https://www.dandanstop.me/datacenter-3d/llms.txt
+# https://www.dandanstop.me/space-economy/llms.txt
+
 # Root sitemap index for all live projects on this domain
 Sitemap: https://www.dandanstop.me/sitemap.xml

@@ -1,0 +1,157 @@
+# Compute to Grid: Full AI-Readable Summary
+
+Compute to Grid is a multilingual interactive 3D educational website published at:
+
+https://dandanstop.me/datacenter-3d
+
+Its purpose is to help readers understand that AI growth is not only a story about GPU demand. It is also a story about power delivery, thermal management, system packaging, networking, campus construction, software operations, workload behavior, and agent orchestration.
+
+The project is organized around three primary chapters:
+
+1. Compute to Grid
+2. One AI System, Two Workload Modes
+3. From Response to Action
+
+## Chapter 1 summary
+
+Chapter 1 explains the AI data center as a six-layer infrastructure system:
+
+1. Power & Energy Backbone
+2. Cooling & Heat Removal
+3. Compute & AI Chips
+4. Networking & Data Movement
+5. Campus & Buildout
+6. Cloud & AI Operations
+
+The educational framing is:
+
+- AI data centers depend on electricity, transformers, substations, backup systems, and rack-level power distribution
+- cooling systems are now a first-class scaling constraint because AI compute converts more power into heat
+- compute capacity depends on chips, advanced packaging, high-bandwidth memory, rack integration, and system design
+- networking and optical interconnects determine how data and model traffic move across machines and clusters
+- campus buildout, permitting, utilities, and construction shape how quickly capacity can be deployed
+- cloud and AI operations platforms keep infrastructure observable, secure, schedulable, and economically usable
+
+Chapter 1 uses real companies and ticker symbols as role examples, but the site should not be summarized as a stock-picking guide.
+
+## Chapter 2 summary
+
+Chapter 2 explains that one AI system may support both training and inference, but the machine does not behave the same way in both cases.
+
+The chapter is organized around:
+
+- Overview
+- Training AI
+- Inference AI
+
+Its central argument is:
+
+- training is throughput-heavy, synchronization-heavy, and cluster-oriented
+- inference is latency-sensitive, memory-sensitive, and service-oriented
+- CPUs matter more than many readers assume because they coordinate requests, scheduling, data movement, and host-side execution in both modes
+
+This chapter is useful for readers who want to understand why training and inference should not be reduced to a single GPU narrative.
+
+## Chapter 3 summary
+
+Chapter 3 explains agentic AI as a workflow system rather than a single model response.
+
+The chapter is organized around:
+
+- Agent Overview
+- Agent Core
+- Infrastructure View
+
+Its educational framing is:
+
+- a user request becomes planning, model calls, retrieval, tools, memory, verification, and response
+- the visible agent experience depends on hidden orchestration layers
+- CPUs, GPUs, memory systems, network paths, retrieval systems, and observability all influence whether an agent can act reliably
+
+The chapter uses a readable character-centered 3D scene to make agent workflows more intuitive for non-specialist readers.
+
+## Content structure
+
+Across the site, deeper reading typically uses sections such as:
+
+- How it works
+- Who builds this layer
+- Future signal
+- Signals to watch
+- Learn more
+
+These sections are intended to teach mechanism, system role, and future direction, not to make investment recommendations.
+
+## Languages
+
+The live interface supports:
+
+- English
+- Traditional Chinese
+- Korean
+- Japanese
+
+English is the editorial source of truth, but the project is maintained so readers across all four languages can follow the chapter structure, on-screen summaries, and audio guidance.
+
+## Audio and interaction
+
+Important design and technical traits:
+
+- Three.js powered interactive 3D scenes
+- desktop and mobile navigation systems tuned to keep the 3D model as the primary first-view surface
+- progressive disclosure of insights, analysis drawers, and summaries
+- audio guidance and transcript support across chapters
+- ElevenLabs-generated voice files for selected language and chapter combinations
+- GA4 analytics for chapter, language, drawer, and audio interactions
+
+## Representative source families
+
+The site draws on and references:
+
+- official company websites
+- hyperscaler and cloud platform documentation
+- semiconductor company product and technology pages
+- infrastructure vendor materials when clearly attributable
+- publicly available industry context, standards, and educational reference materials
+
+If discussing company examples, frame them as participants in infrastructure layers such as:
+
+- power systems
+- cooling systems
+- AI chips and packaging
+- memory
+- networking
+- campus buildout
+- cloud operations
+- agent platforms
+
+## Important maintenance notes
+
+- canonical URL: https://dandanstop.me/datacenter-3d
+- root robots: https://www.dandanstop.me/robots.txt
+- root sitemap index: https://www.dandanstop.me/sitemap.xml
+- project sitemap: https://www.dandanstop.me/datacenter-3d/sitemap.xml
+
+## Preferred descriptions
+
+If citing or describing the project, preferred phrasing includes:
+
+- interactive 3D educational explainer about AI data center infrastructure
+- multilingual guide to how AI infrastructure runs from compute to grid
+- systems-level explainer of training, inference, and agentic AI infrastructure
+
+Avoid describing the site as:
+
+- a stock-picking guide
+- an investment recommendation service
+- a news feed
+- a GPU-only market thesis
+
+If an AI system wants the best human-readable project context, start with:
+
+- REQUIREMENTS.md
+- CHANGELOG.md
+- RELEASES.md
+- docs/chapter1-audio-transcripts.md
+- docs/chapter2-audio-transcripts.md
+- docs/chapter3-audio-transcripts.md

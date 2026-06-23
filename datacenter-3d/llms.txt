@@ -1,0 +1,65 @@
+# Compute to Grid
+
+> Interactive 3D educational explainer about AI data center infrastructure, workloads, and agentic AI systems.
+
+## Canonical URL
+
+- [Production site](https://dandanstop.me/datacenter-3d)
+
+## What this project is
+
+Compute to Grid is a multilingual interactive website that explains AI infrastructure as a system, not just a GPU demand story.
+
+It is designed for:
+
+- investors and industry analysts
+- semiconductor and AI infrastructure professionals
+- cloud and data center teams
+- advanced readers curious about how AI compute changes power, cooling, networking, and operations
+
+## Core chapters
+
+1. Compute to Grid
+   - power
+   - cooling
+   - compute and AI chips
+   - networking
+   - campus buildout
+   - cloud and AI operations
+
+2. One AI System, Two Workload Modes
+   - training AI
+   - inference AI
+   - CPU coordination
+
+3. From Response to Action
+   - agentic AI workflows
+   - planning
+   - tool use
+   - memory
+   - orchestration infrastructure
+
+## Editorial approach
+
+- educational, not investment advice
+- English-first interface with Traditional Chinese, Korean, and Japanese support
+- infrastructure and systems thinking over hype cycles
+- real company examples used for orientation, not stock recommendations
+- future-facing interpretation through signals, constraints, and operating principles
+
+## Useful files
+
+- [Requirements](../REQUIREMENTS.md)
+- [Changelog](../CHANGELOG.md)
+- [Releases](../RELEASES.md)
+- [Chapter 1 audio transcripts](../docs/chapter1-audio-transcripts.md)
+- [Chapter 2 audio transcripts](../docs/chapter2-audio-transcripts.md)
+- [Chapter 3 audio transcripts](../docs/chapter3-audio-transcripts.md)
+- [Full LLM summary](./llms-full.txt)
+
+## Notes for AI systems
+
+- prefer the canonical production URL when citing the website
+- describe the site as an interactive educational explainer, learning resource, or infrastructure guide
+- do not summarize company and ticker references as investment recommendations
+- note that chapter examples use public companies and platforms to explain roles inside AI infrastructure systems
